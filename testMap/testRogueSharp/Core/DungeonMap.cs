@@ -4,7 +4,7 @@ using RogueSharp;
 namespace testRogueSharp.Core
 {
 
-    // map de donjon custop qui hérite de la classe Map de roguesharp
+    // map de donjon custom qui hérite de la classe Map de roguesharp
     public class DungeonMap : Map
     {
 
@@ -50,6 +50,7 @@ namespace testRogueSharp.Core
 
 
         //La méthode draw sera appelée chaque fois que la map est mise à jour
+        // Elle permet de dessiner des caracteres sur chaque cell
         public void Draw(RLConsole mapConsole)
         {
             mapConsole.Clear();
@@ -60,15 +61,50 @@ namespace testRogueSharp.Core
         }
 
         //Méthode pour mettre à jour la fov dès que le joueur se déplacera
-        public void UpdatePlayerFieldOfView(){
+        public void UpdatePlayerFieldOfView()
+        {
             Player player = Game.Player;
-            ComputeFov(player.X,player.Y,player.Awareness,true);
+            ComputeFov(player.X, player.Y, player.Awareness, true);
             // On marque toutes les cells du champ de vision comme explorées
-            foreach(Cell cell in GetAllCells()){
-                if(IsInFov(cell.X,cell.Y)){
-                    SetCellProperties(cell.X,cell.Y,cell.IsTransparent,cell.IsWalkable,true);
+            foreach (Cell cell in GetAllCells())
+            {
+                if (IsInFov(cell.X, cell.Y))
+                {
+                    SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
                 }
             }
+        }
+
+
+        //Change le parametre isWalkable d'une cell donnée
+        public void SetIsWalkable(int x, int y, bool isWalkable)
+        {
+            ICell cell = GetCell(x, y);
+            SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
+        }
+
+        //Retourne true si on peut placer un actor sur une cell, false sinon
+        //SI on peut déplacer l'actor, on le fait
+        public bool SetActorPosition(Actor actor, int x, int y)
+        {
+
+            //on autorise le déplacement que si la cell est walkable
+            if (GetCell(x, y).IsWalkable)
+            {
+                SetIsWalkable(actor.X, actor.Y, true);
+                //on déplace l'actor
+                actor.X = x;
+                actor.Y = y;
+                //La cell sur laquelle est l'actor devient alors non walkable
+                SetIsWalkable(actor.X, actor.Y, false);
+                // on met à jour le champ de vision
+                if (actor is Player)
+                {
+                    UpdatePlayerFieldOfView();
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -5,6 +5,7 @@ namespace testRogueSharp.Systems
 {
 
     public class MapGenerator
+    // Si on veut faire une map à la main
     {
         private readonly int width;
         private readonly int height;
