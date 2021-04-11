@@ -1,7 +1,7 @@
 ﻿using System;
 using RLNET;
 using RogueSharp;
-using RogueSharp.MapCreation;
+
 using testRogueSharp.Core;
 using testRogueSharp.Systems;
 
@@ -38,28 +38,31 @@ namespace testRogueSharp
         private static bool renderRequired = true;
         // pour ne redessiner la map que si c'est necessaire
 
+        public static Random Random { get; private set; }
+
         // Les éléments du jeu
-        public static Player Player { get; private set; }
+        public static Player Player { get; set; }
         public static DungeonMap DungeonMap { get; private set; }
         public static CommandSystem CommandSystem { get; private set; }
+        public static MessageLog MessageLog{get;private set;}
 
 
         static void Main(string[] args)
         {
+            Random = new Random();
 
-            //MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
 
-            IMapCreationStrategy<Map> mapCreationStrategy = new CaveMapCreationStrategy<Map>(mapWidth, mapHeight, 45, 4, 2);
-            Map map = Map.Create(mapCreationStrategy); // on créé une map de type cave
-            DungeonMap = new DungeonMap(); 
-            DungeonMap.Initialize(mapWidth,mapHeight);
-            DungeonMap.Copy(map); //on copie la map cave dans notre map dungeon
-           
+            DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
             
-            Player = new Player();
+
             DungeonMap.UpdatePlayerFieldOfView();
 
             CommandSystem = new CommandSystem();
+
+            MessageLog = new MessageLog();
+            MessageLog.Add("Rogue énorme");
+            MessageLog.Add("Message de log");
 
             rootConsole = new RLRootConsole("terminal16x16.png", screenWidth, screenHeight, 16, 16, 1f, "Test rogueSharp");
 
@@ -74,15 +77,10 @@ namespace testRogueSharp
             // +=  appelle la méthode add de l'event
             rootConsole.Render += OnRootConsoleRender; // pareil avec le Render event
 
-            //on affiche des trucs sur chaque console pour voir si ça marche bien
-            //On met de la couleur sur toutes les consoles
-            mapConsole.SetBackColor(0, 0, mapWidth, mapHeight, Colors.FloorBackground);
-            messageConsole.SetBackColor(0, 0, messageWidth, messageHeight, Palette.DbDeepWater);
-            statConsole.SetBackColor(0, 0, statWidth, statHeight, Palette.DbOldStone);
             inventoryConsole.SetBackColor(0, 0, inventoryWidth, inventoryHeight, Palette.DbWood);
 
-            messageConsole.Print(1, 1, "Messages", RLColor.White);
-            statConsole.Print(1, 1, "Stats", RLColor.White);
+           
+          
             inventoryConsole.Print(1, 1, "Inventory", RLColor.White);
 
             // Puis on démarre le loop de RLNET
@@ -110,6 +108,7 @@ namespace testRogueSharp
             if (didPlayerAct)
             {
                 renderRequired = true;
+                MessageLog.Add("mouvement du joueur");
             }
         }
 
@@ -117,14 +116,18 @@ namespace testRogueSharp
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
 
-            if (renderRequired)
+            if (true) // à remplacer par renderRequired
             {
+                mapConsole.Clear();
+                statConsole.Clear();
+                messageConsole.Clear();
 
                 //On fait le render de la map
-                DungeonMap.Draw(mapConsole);
+                DungeonMap.Draw(mapConsole,statConsole);
                 Player.Draw(mapConsole, DungeonMap);
-
-
+                Player.DrawStats(statConsole);
+                MessageLog.Draw(messageConsole);
+                
                 // On place les 4 consoles dans la rootConsole
                 //Blit(RLConsole srcConsole, int srcX, int srcY, int srcWidth, int srcHeight, RLConsole destConsole, int destX, int destY)
                 RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, inventoryHeight);

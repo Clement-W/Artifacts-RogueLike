@@ -1,5 +1,6 @@
 using RLNET;
 using RogueSharp;
+using System.Collections.Generic;
 
 namespace testRogueSharp.Core
 {
@@ -7,6 +8,12 @@ namespace testRogueSharp.Core
     // map de donjon custom qui hérite de la classe Map de roguesharp
     public class DungeonMap : Map
     {
+
+        private readonly List<Monster> monsters;
+
+        public DungeonMap(){
+            monsters = new List<Monster>();
+        }
 
         // Permet de créer un affichage sur une cell de la map
         private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
@@ -51,12 +58,21 @@ namespace testRogueSharp.Core
 
         //La méthode draw sera appelée chaque fois que la map est mise à jour
         // Elle permet de dessiner des caracteres sur chaque cell
-        public void Draw(RLConsole mapConsole)
+        public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
-            mapConsole.Clear();
             foreach (Cell cell in GetAllCells())
             {
                 SetConsoleSymbolForCell(mapConsole, cell);
+            }
+
+            int indexMonster=0;
+
+            foreach(Monster monster in monsters){
+                monster.Draw(mapConsole,this);
+                if(IsInFov(monster.X,monster.Y)){
+                    monster.DrawStats(statConsole,indexMonster);
+                    indexMonster++;
+                }
             }
         }
 
@@ -106,5 +122,18 @@ namespace testRogueSharp.Core
             }
             return false;
         }
+
+        public void AddPlayer(Player player){
+            Game.Player = player;
+            SetIsWalkable(player.X,player.Y,false);
+            UpdatePlayerFieldOfView();
+        }
+
+        public void AddMonster(Monster monster){
+            monsters.Add(monster);
+            SetIsWalkable(monster.X, monster.Y,false);
+        }
+
+        
     }
 }
