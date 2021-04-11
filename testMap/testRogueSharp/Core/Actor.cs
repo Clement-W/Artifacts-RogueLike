@@ -5,7 +5,7 @@ using testRogueSharp.Interfaces;
 namespace testRogueSharp.Core
 {
 
-    public class Actor : IActor, IDrawable
+    public class Actor : IActor, IDrawable, IScheduleable
     {
 
         // On ne fait pas des auto prorpiétés pour les infos de IActor parce qu'on veut pouvoir personnaliser
@@ -138,6 +138,14 @@ namespace testRogueSharp.Core
 
         public int X { get; set; }
         public int Y { get; set; }
+
+
+        // IBehavior
+        public int Time{
+            get{
+                return Speed;
+            }
+        }
 
         public void Draw(RLConsole console, IMap map)
         {

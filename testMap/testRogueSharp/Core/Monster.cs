@@ -1,9 +1,14 @@
 using RLNET;
 using System;
+using testRogueSharp.Systems;
+using testRogueSharp.Behaviors;
 
 namespace testRogueSharp.Core{
 
     public class Monster : Actor{
+
+        public int? TurnsAlerted{get;set;} //le nombre de tour que le monstre est alerté
+        // le ? permet de rendre nullable la propriété
 
         public void DrawStats(RLConsole statConsole, int position){
             //on commence en dessous des stats du joueur soit y=13
@@ -23,6 +28,16 @@ namespace testRogueSharp.Core{
             // On print le nom du monstre dans la barre de vie
             statConsole.Print(2,yPosition,$": {Name}",Colors.Text);
         }
+
+
+        // on donne un comportement de base aux monstres mais on met en virtual pour
+        // que ce soit facilement réécri par les sous classes de monstre qui ont un comportement
+        // un peu plus élaboré 
+        public virtual void PerformAction(CommandSystem commandSystem){
+            StandardMoveAndAttack behavior = new StandardMoveAndAttack();
+            behavior.Act(this,commandSystem);
+        }
+        
 
     }
 }

@@ -1,6 +1,7 @@
 using RLNET;
 using RogueSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace testRogueSharp.Core
 {
@@ -127,11 +128,23 @@ namespace testRogueSharp.Core
             Game.Player = player;
             SetIsWalkable(player.X,player.Y,false);
             UpdatePlayerFieldOfView();
+            Game.SchedulingSystem.Add(player); // pour l'ajouter au schedulling system
         }
 
         public void AddMonster(Monster monster){
             monsters.Add(monster);
             SetIsWalkable(monster.X, monster.Y,false);
+            Game.SchedulingSystem.Add(monster);
+        }
+
+        public void RemoveMonster(Monster monster){
+            monsters.Remove(monster);
+            SetIsWalkable(monster.X,monster.Y,true);
+            Game.SchedulingSystem.Remove(monster);
+        }
+
+        public Monster GetMonsterAt(int x, int y){
+            return monsters.FirstOrDefault(m=> m.X == x && m.Y == y); // on prend le monstre à ces coordonnées
         }
 
         

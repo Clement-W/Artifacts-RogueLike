@@ -12,14 +12,17 @@ Doc complète roguesharp: https://bitbucket.org/FaronBracy/roguesharp/wiki/Home
 
 textures ascii : https://dwarffortresswiki.org/Tileset_repository
 
-Pour le tuto, j'en suis à Message Log (10/18)
+
 TODO : 
-* Finir le tuto
+* pousser le tuto plus loin en testant un inventaire
 * Trouver un moyen d'avoir une caméra qui bouge en fonction du personnage (personnage tout le temps centré) -> scrolling map
 * Trouver un moyen pour que la map soit plus grande que la console (genre console 100x70 et map en 200x200) pour rendre plus intéressant le jeu
 * Trouver un moyen d'avoir la taille de l'écran pour adapter la fenêtre à cette taille
 * Tester actions liées au clic souris
+* En se basant sur le scheduling system actuel, chercher des alternatives pour rendre cela plus intéressant (https://www.reddit.com/r/roguelikedev/comments/4pk2k6/faq_friday_41_time_systems/)
 
+Une fois que tout ça est fait on peut commencer à Implémanter nos idées de jeu
 
 REMINDER:
 * Faire la doc avec les balises xml de la doc csharp
+

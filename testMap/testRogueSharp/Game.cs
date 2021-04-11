@@ -44,17 +44,21 @@ namespace testRogueSharp
         public static Player Player { get; set; }
         public static DungeonMap DungeonMap { get; private set; }
         public static CommandSystem CommandSystem { get; private set; }
-        public static MessageLog MessageLog{get;private set;}
+        public static MessageLog MessageLog { get; private set; }
+
+        public static SchedulingSystem SchedulingSystem { get; private set; }
 
 
         static void Main(string[] args)
         {
             Random = new Random();
 
+            SchedulingSystem = new SchedulingSystem();
+
             MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
 
             DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
-            
+
 
             DungeonMap.UpdatePlayerFieldOfView();
 
@@ -79,8 +83,8 @@ namespace testRogueSharp
 
             inventoryConsole.SetBackColor(0, 0, inventoryWidth, inventoryHeight, Palette.DbWood);
 
-           
-          
+
+
             inventoryConsole.Print(1, 1, "Inventory", RLColor.White);
 
             // Puis on démarre le loop de RLNET
@@ -92,24 +96,33 @@ namespace testRogueSharp
         {
             bool didPlayerAct = false;
             RLKeyPress keyPress = rootConsole.Keyboard.GetKeyPress();
-
-            if (keyPress != null)
+            
+            if (CommandSystem.IsPlayerTurn)
             {
-                switch (keyPress.Key)
+                if (keyPress != null)
                 {
-                    case RLKey.Up: didPlayerAct = CommandSystem.MovePlayer(Direction.Up); break;
-                    case RLKey.Down: didPlayerAct = CommandSystem.MovePlayer(Direction.Down); break;
-                    case RLKey.Left: didPlayerAct = CommandSystem.MovePlayer(Direction.Left); break;
-                    case RLKey.Right: didPlayerAct = CommandSystem.MovePlayer(Direction.Right); break;
-                    case RLKey.Escape: rootConsole.Close(); break;
+                    switch (keyPress.Key)
+                    {
+                        case RLKey.Up: didPlayerAct = CommandSystem.MovePlayer(Direction.Up); break;
+                        case RLKey.Down: didPlayerAct = CommandSystem.MovePlayer(Direction.Down); break;
+                        case RLKey.Left: didPlayerAct = CommandSystem.MovePlayer(Direction.Left); break;
+                        case RLKey.Right: didPlayerAct = CommandSystem.MovePlayer(Direction.Right); break;
+                        case RLKey.Escape: rootConsole.Close(); break;
+                    }
                 }
+                if (didPlayerAct)
+                {
+                    renderRequired = true;
+                    CommandSystem.EndPlayerTurn();
+                    //Console.WriteLine(SchedulingSystem);
+
+                }
+            }else{
+                CommandSystem.ActivateMonsters();
+                renderRequired=true;
             }
 
-            if (didPlayerAct)
-            {
-                renderRequired = true;
-                MessageLog.Add("mouvement du joueur");
-            }
+
         }
 
         // Event handler pour le render event de rootConsole
@@ -123,11 +136,11 @@ namespace testRogueSharp
                 messageConsole.Clear();
 
                 //On fait le render de la map
-                DungeonMap.Draw(mapConsole,statConsole);
+                DungeonMap.Draw(mapConsole, statConsole);
                 Player.Draw(mapConsole, DungeonMap);
                 Player.DrawStats(statConsole);
                 MessageLog.Draw(messageConsole);
-                
+
                 // On place les 4 consoles dans la rootConsole
                 //Blit(RLConsole srcConsole, int srcX, int srcY, int srcWidth, int srcHeight, RLConsole destConsole, int destX, int destY)
                 RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, inventoryHeight);
