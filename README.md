@@ -14,6 +14,7 @@ textures ascii : https://dwarffortresswiki.org/Tileset_repository
 
 
 TODO : 
+* Faire la partie "stairs" du tuto pour s'en inspirer plus tard avec la téléportation	
 * pousser le tuto plus loin en testant un inventaire
 * Trouver un moyen d'avoir une caméra qui bouge en fonction du personnage (personnage tout le temps centré) -> scrolling map
 * Trouver un moyen pour que la map soit plus grande que la console (genre console 100x70 et map en 200x200) pour rendre plus intéressant le jeu
