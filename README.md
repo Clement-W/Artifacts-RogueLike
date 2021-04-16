@@ -14,13 +14,11 @@ textures ascii : https://dwarffortresswiki.org/Tileset_repository
 
 
 TODO : 
-* Faire la partie "stairs" du tuto pour s'en inspirer plus tard avec la téléportation	
 * pousser le tuto plus loin en testant un inventaire
-* Trouver un moyen d'avoir une caméra qui bouge en fonction du personnage (personnage tout le temps centré) -> scrolling map
-* Trouver un moyen pour que la map soit plus grande que la console (genre console 100x70 et map en 200x200) pour rendre plus intéressant le jeu
 * Trouver un moyen d'avoir la taille de l'écran pour adapter la fenêtre à cette taille
+* Créer une classe static Dimensions comme pour les couleurs
 * Tester actions liées au clic souris
-* En se basant sur le scheduling system actuel, chercher des alternatives pour rendre cela plus intéressant (https://www.reddit.com/r/roguelikedev/comments/4pk2k6/faq_friday_41_time_systems/)
+* En se basant sur le scheduling system actuel, chercher des alternatives pour rendre cela plus intéressant (https://www.reddit.com/r/roguelikedev/comments/4pk2k6/faq_friday_41_time_systems/) Idée : energy based scheduling system : http://www.roguebasin.com/index.php?title=An_elegant_time-management_system_for_roguelikes et http://www.roguebasin.com/index.php?title=Time_Systems
 
 Une fois que tout ça est fait on peut commencer à Implémanter nos idées de jeu
 
