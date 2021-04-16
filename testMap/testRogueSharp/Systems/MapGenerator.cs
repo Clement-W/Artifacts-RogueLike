@@ -15,7 +15,7 @@ namespace testRogueSharp.Systems
 
         private readonly DungeonMap map;
 
-        public MapGenerator(int w, int h)
+        public MapGenerator(int w, int h,int mapLevel)
         {
             width = w;
             height = h;
@@ -53,6 +53,7 @@ namespace testRogueSharp.Systems
             map.Initialize(width, height);
             map.Copy(caveMap); //on copie la map cave dans notre map dungeon
             PlacePlayer(); // POUR PLACER le joueur dans une case walkable, on le fait ici
+            CreateStairs(); //pour placer les escaliers
             return map;
         }
 
@@ -105,6 +106,32 @@ namespace testRogueSharp.Systems
 
                 }
             }
+        }
+
+        private void CreateStairs()
+        {
+            int xUp = Game.Player.X;
+            int yUp = Game.Player.Y;
+            map.StairsUp = new Stairs(xUp, yUp, true);
+
+            /*idée pour placer l'autre stairs qui va plus loin :
+            on fait un cercle qui part de la position du joueur
+            et on cherche un point qui appartient au cercle dont le rayon a la longueur max qui reste dans la map
+            pour trouver ce rayon il faut donc chercher pour toutes les tiles qui sont sur le bord 
+            du cercle et on part du maximum possible (longueur map - pos joueur par exemple) et on cherche puis s'il n'y a pas on
+            diminue le rayon et ainsi de suite. */
+
+            // solution provisoire : aléatoire
+            int xDown;
+            int yDown;
+            do
+            {
+                xDown = Game.Random.Next(0, width);
+                yDown = Game.Random.Next(0, height);
+            } while (!map.IsWalkable(xDown, yDown));
+            map.StairsDown = new Stairs(xDown, yDown, false);
+
+
         }
 
     }

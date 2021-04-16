@@ -48,6 +48,8 @@ namespace testRogueSharp
 
         public static SchedulingSystem SchedulingSystem { get; private set; }
 
+        private static int mapLevel = 1;
+
 
         static void Main(string[] args)
         {
@@ -55,7 +57,7 @@ namespace testRogueSharp
 
             SchedulingSystem = new SchedulingSystem();
 
-            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, mapLevel);
 
             DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
 
@@ -96,7 +98,7 @@ namespace testRogueSharp
         {
             bool didPlayerAct = false;
             RLKeyPress keyPress = rootConsole.Keyboard.GetKeyPress();
-            
+
             if (CommandSystem.IsPlayerTurn)
             {
                 if (keyPress != null)
@@ -108,6 +110,16 @@ namespace testRogueSharp
                         case RLKey.Left: didPlayerAct = CommandSystem.MovePlayer(Direction.Left); break;
                         case RLKey.Right: didPlayerAct = CommandSystem.MovePlayer(Direction.Right); break;
                         case RLKey.Escape: rootConsole.Close(); break;
+                        case RLKey.LControl:
+                            if (DungeonMap.CanMoveDownToNextLevel())
+                            {
+                                MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, ++mapLevel);
+                                DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
+                                MessageLog = new MessageLog();
+                                CommandSystem = new CommandSystem();
+                                didPlayerAct = true;
+                            }
+                            break;
                     }
                 }
                 if (didPlayerAct)
@@ -117,9 +129,11 @@ namespace testRogueSharp
                     //Console.WriteLine(SchedulingSystem);
 
                 }
-            }else{
+            }
+            else
+            {
                 CommandSystem.ActivateMonsters();
-                renderRequired=true;
+                renderRequired = true;
             }
 
 

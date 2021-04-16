@@ -12,7 +12,11 @@ namespace testRogueSharp.Core
 
         private readonly List<Monster> monsters;
 
+        public Stairs StairsUp{get;set;}
+        public Stairs StairsDown{get;set;}
+
         public DungeonMap(){
+            Game.SchedulingSystem.Clear();
             monsters = new List<Monster>();
         }
 
@@ -75,6 +79,9 @@ namespace testRogueSharp.Core
                     indexMonster++;
                 }
             }
+
+            StairsUp.Draw(mapConsole,this);
+            StairsDown.Draw(mapConsole,this);
         }
 
         //Méthode pour mettre à jour la fov dès que le joueur se déplacera
@@ -145,6 +152,11 @@ namespace testRogueSharp.Core
 
         public Monster GetMonsterAt(int x, int y){
             return monsters.FirstOrDefault(m=> m.X == x && m.Y == y); // on prend le monstre à ces coordonnées
+        }
+
+        public bool CanMoveDownToNextLevel(){
+            Player player = Game.Player;
+            return StairsDown.X == player.X && StairsDown.Y == player.Y; 
         }
 
         
