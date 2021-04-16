@@ -27,3 +27,9 @@ Une fois que tout ça est fait on peut commencer à Implémanter nos idées de j
 REMINDER:
 * Faire la doc avec les balises xml de la doc csharp
 
+
+Idées :
+* Menu au début qui permet de lancer ou quitter le jeu et qui donne le lore et les commandes pour  pouvoir jouer
+
+
+
