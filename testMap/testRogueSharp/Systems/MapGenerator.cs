@@ -86,7 +86,7 @@ namespace testRogueSharp.Systems
         {
             //Le nombre de monstre est décidé aléatoirement en fonction de la taille de la map 
             // ( on veut au moins 1 monstre tous les 100 pixels carrés)
-            int nbMonstresPotentiels = (width * height) / 100;
+            int nbMonstresPotentiels = (width * height) / 200;
             for (int i = 0; i < nbMonstresPotentiels; i++)
             {
                 if (Dice.Roll("1D6") > 3)
