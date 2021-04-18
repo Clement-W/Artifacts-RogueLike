@@ -85,7 +85,7 @@ namespace testRogueSharp
 
             rootConsole = new RLRootConsole("terminal16x16.png", screenWidth, screenHeight, 16, 16, 1f, "Test rogueSharp");
 
-            mapConsole = new RLConsole(worldWidth, worldWidth);
+            mapConsole = new RLConsole(worldWidth, worldHeight);
             messageConsole = new RLConsole(messageWidth, messageHeight);
             statConsole = new RLConsole(statWidth, statHeight);
             inventoryConsole = new RLConsole(inventoryWidth, inventoryHeight);
