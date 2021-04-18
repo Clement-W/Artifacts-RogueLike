@@ -29,6 +29,7 @@ REMINDER:
 Idées :
 * Menu au début qui permet de lancer ou quitter le jeu et qui donne le lore et les commandes pour  pouvoir jouer
 * Faire des couleurs de sol différentes selon les planètes 
+* Ajouter une barre de faim
 
 
 

@@ -1,6 +1,7 @@
 using RogueLike.Core;
 using RLNET;
-using System;   
+using System;
+using RogueLike.Systems;
 
 namespace RogueLike.View
 {
@@ -28,19 +29,32 @@ namespace RogueLike.View
 
         private void OnGameRender(object sender, UpdateEventArgs e)
         {
-            //provisoire
+
             if (RenderRequired)
             {
-                Console.Clear();
+                mapConsole.Clear();
+                statConsole.Clear();
+                messageConsole.Clear();
+                inventoryConsole.Clear();
 
-                Console.Print(
-                    (int)(Console.Width * 0.1),
-                    (int)(Console.Height * 0.25) - 4,
-                    "En plein dans le jeu",
-                    Colors.Wall
-                );
+
+                Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
+                Game.Player.Draw(mapConsole, Game.Map);
+                Game.Player.DrawStats(statConsole);
+                //messagelog draw
+
+                CameraSystem.CenterCamera(Game.Player);
+
+
+                // Blit the 4 consoles in the root console
+                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, Console, 0, Dimensions.inventoryConsoleHeight);
+                RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, Console, Dimensions.mapConsoleWidth, 0);
+                RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, Console, 0, Dimensions.screenConsoleHeight - Dimensions.messageConsoleHeight);
+                RLConsole.Blit(inventoryConsole, 0, 0, Dimensions.inventoryConsoleWidth, Dimensions.inventoryConsoleHeight, Console, 0, 0);
 
                 Console.Draw();
+                RenderRequired=false;
+
             }
         }
 

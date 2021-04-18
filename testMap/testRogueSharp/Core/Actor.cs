@@ -140,7 +140,7 @@ namespace testRogueSharp.Core
         public int Y { get; set; }
 
 
-        // IBehavior
+        // ISchedulable
         public int Time{
             get{
                 return Speed;

@@ -12,10 +12,11 @@ namespace testRogueSharp.Core
 
         private readonly List<Monster> monsters;
 
-        public Stairs StairsUp{get;set;}
-        public Stairs StairsDown{get;set;}
+        public Stairs StairsUp { get; set; }
+        public Stairs StairsDown { get; set; }
 
-        public DungeonMap(){
+        public DungeonMap()
+        {
             Game.SchedulingSystem.Clear();
             monsters = new List<Monster>();
         }
@@ -70,32 +71,33 @@ namespace testRogueSharp.Core
                 SetConsoleSymbolForCell(mapConsole, cell);
             }
 
-            int indexMonster=0;
+            int indexMonster = 0;
 
-            foreach(Monster monster in monsters){
-                monster.Draw(mapConsole,this);
-                if(IsInFov(monster.X,monster.Y)){
-                    monster.DrawStats(statConsole,indexMonster);
+            foreach (Monster monster in monsters)
+            {
+                monster.Draw(mapConsole, this);
+                if (IsInFov(monster.X, monster.Y))
+                {
+                    monster.DrawStats(statConsole, indexMonster);
                     indexMonster++;
                 }
             }
 
-            StairsUp.Draw(mapConsole,this);
-            StairsDown.Draw(mapConsole,this);
+            StairsUp.Draw(mapConsole, this);
+            StairsDown.Draw(mapConsole, this);
         }
 
         //Méthode pour mettre à jour la fov dès que le joueur se déplacera
         public void UpdatePlayerFieldOfView()
         {
             Player player = Game.Player;
-            ComputeFov(player.X, player.Y, player.Awareness, true);
+            var cells = ComputeFov(player.X, player.Y, player.Awareness, true);
             // On marque toutes les cells du champ de vision comme explorées
-            foreach (Cell cell in GetAllCells())
+            foreach (Cell cell in cells)
             {
-                if (IsInFov(cell.X, cell.Y))
-                {
-                    SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
-                }
+
+                SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
+
             }
         }
 
@@ -131,34 +133,39 @@ namespace testRogueSharp.Core
             return false;
         }
 
-        public void AddPlayer(Player player){
+        public void AddPlayer(Player player)
+        {
             Game.Player = player;
-            SetIsWalkable(player.X,player.Y,false);
+            SetIsWalkable(player.X, player.Y, false);
             UpdatePlayerFieldOfView();
             Game.SchedulingSystem.Add(player); // pour l'ajouter au schedulling system
         }
 
-        public void AddMonster(Monster monster){
+        public void AddMonster(Monster monster)
+        {
             monsters.Add(monster);
-            SetIsWalkable(monster.X, monster.Y,false);
+            SetIsWalkable(monster.X, monster.Y, false);
             Game.SchedulingSystem.Add(monster);
         }
 
-        public void RemoveMonster(Monster monster){
+        public void RemoveMonster(Monster monster)
+        {
             monsters.Remove(monster);
-            SetIsWalkable(monster.X,monster.Y,true);
+            SetIsWalkable(monster.X, monster.Y, true);
             Game.SchedulingSystem.Remove(monster);
         }
 
-        public Monster GetMonsterAt(int x, int y){
-            return monsters.FirstOrDefault(m=> m.X == x && m.Y == y); // on prend le monstre à ces coordonnées
+        public Monster GetMonsterAt(int x, int y)
+        {
+            return monsters.FirstOrDefault(m => m.X == x && m.Y == y); // on prend le monstre à ces coordonnées
         }
 
-        public bool CanMoveDownToNextLevel(){
+        public bool CanMoveDownToNextLevel()
+        {
             Player player = Game.Player;
-            return StairsDown.X == player.X && StairsDown.Y == player.Y; 
+            return StairsDown.X == player.X && StairsDown.Y == player.Y;
         }
 
-        
+
     }
 }
