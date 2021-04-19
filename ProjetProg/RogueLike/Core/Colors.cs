@@ -21,7 +21,13 @@ namespace RogueLike.Core
         public static RLColor Text = Palette.DbLight;
         public static RLColor Gold = Palette.DbSun;
 
-        public static RLColor KoboldColor = Palette.DbBrightWood;
+        
+        public static RLColor HealthBar = Palette.Primary;
+
+        public static RLColor HealthBarDamage = Palette.PrimaryDarkest;
+
+
+        public static RLColor Zombie = Palette.DbVegetation;
 
     }
 }

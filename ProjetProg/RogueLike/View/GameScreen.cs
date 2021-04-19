@@ -41,9 +41,8 @@ namespace RogueLike.View
                 Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
                 Game.Player.Draw(mapConsole, Game.Map);
                 Game.Player.DrawStats(statConsole);
-                //messagelog draw
-
-                CameraSystem.CenterCamera(Game.Player);
+                Game.MessageLog.Draw(messageConsole);
+                Game.CameraSystem.CenterCamera(Game.Player);
 
 
                 // Blit the 4 consoles in the root console
@@ -53,7 +52,7 @@ namespace RogueLike.View
                 RLConsole.Blit(inventoryConsole, 0, 0, Dimensions.inventoryConsoleWidth, Dimensions.inventoryConsoleHeight, Console, 0, 0);
 
                 Console.Draw();
-                RenderRequired=false;
+                RenderRequired = false;
 
             }
         }
@@ -67,12 +66,17 @@ namespace RogueLike.View
 
                 switch (KeyPress.Key)
                 {
-                    case RLKey.Escape:
-                        Console.Close();
-                        break;
-
+                    case RLKey.Escape: Console.Close(); break;
+                    case RLKey.Up: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
+                    case RLKey.Down: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
+                    case RLKey.Left: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
+                    case RLKey.Right: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
                 }
 
+            }
+
+            if(DidPlayerAct==true){
+                RenderRequired = true;
             }
         }
 

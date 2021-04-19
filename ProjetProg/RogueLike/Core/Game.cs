@@ -16,6 +16,9 @@ namespace RogueLike.Core
 
         public MapGenerator MapGenerator{get; private set;}
         public CameraSystem CameraSystem{get;private set;}
+        public CommandSystem CommandSystem{get;private set;}
+
+        public MessageLog MessageLog{get;private set;}
 
         public CurrentMap Map{get;set;}
 
@@ -25,7 +28,12 @@ namespace RogueLike.Core
         public void StartGame(){
             GameScreen gameScreen = new GameScreen("oui",this);
 
-            MapGenerator = new MapGenerator(Dimensions.worldWidth,Dimensions.worldHeight);
+            CommandSystem = new CommandSystem();
+            CameraSystem = new CameraSystem();
+            MessageLog = new MessageLog();
+            MessageLog.AddMessage("C'est parti !");
+
+            MapGenerator = new MapGenerator(Dimensions.worldWidth,Dimensions.worldHeight,difficultyLevel);
             Player = new Player();
             Map = MapGenerator.CreateCaveMap(Player);
             Map.UpdatePlayerFieldOfView(Player);

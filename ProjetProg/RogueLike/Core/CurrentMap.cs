@@ -1,6 +1,7 @@
 using RLNET;
 using RogueSharp;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RogueLike.Core
@@ -9,6 +10,12 @@ namespace RogueLike.Core
     public class CurrentMap : Map
     {
 
+        private readonly List<Enemy> enemies;
+
+        public CurrentMap(){
+            enemies = new List<Enemy>();
+        } 
+
         // Called when the map is updated
         // Draw the characters on each cell
         public void Draw(RLConsole mapConsole, RLConsole statConsole)
@@ -16,6 +23,16 @@ namespace RogueLike.Core
             foreach (Cell cell in GetAllCells())
             {
                 DrawCell(mapConsole, cell);
+            }
+
+            int cptMonsterFov = 0;
+
+            foreach(Enemy enemy in enemies){
+                enemy.Draw(mapConsole,this);
+                if(IsInFov(enemy.PosX,enemy.PosY)){
+                    enemy.DrawStats(statConsole,cptMonsterFov);
+                    cptMonsterFov++;
+                }
             }
         }
 
@@ -79,7 +96,7 @@ namespace RogueLike.Core
             {
 
                 // The actual position of the character is now walkable
-                SetCellWalkability(posX, posY, true);
+                SetCellWalkability(character.PosX, character.PosY, true);
 
                 // Set the new position of the character
                 character.PosX = posX;
@@ -101,6 +118,20 @@ namespace RogueLike.Core
         public void AddPlayerOnTheMap(Player player){
             SetCellWalkability(player.PosX,player.PosY,false);
             UpdatePlayerFieldOfView(player);
+        }
+
+        public void AddEnemy(Enemy enemy){
+            enemies.Add(enemy);
+            SetCellWalkability(enemy.PosX,enemy.PosY,false);
+        }
+
+        public void RemoveEnemy(Enemy enemy){
+            enemies.Remove(enemy);
+            SetCellWalkability(enemy.PosX,enemy.PosY,true);
+        }
+
+        public Enemy GetEnemyAt(int posX, int posY){
+            return enemies.FirstOrDefault(enemy => (enemy.PosX==posX && enemy.PosY==posY));
         }
     }
 }

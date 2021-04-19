@@ -18,11 +18,15 @@ namespace RogueLike.Systems
 
         private readonly CurrentMap map;
 
-        public MapGenerator(int width, int height)
+        private Random random;
+
+        public MapGenerator(int width, int height, int difficultyLevel)
         {
             mapWidth = width;
             mapHeight = height;
+            this.difficultyLevel = difficultyLevel;
             map = new CurrentMap();
+            random = new Random();
 
         }
 
@@ -38,17 +42,43 @@ namespace RogueLike.Systems
 
         private void PlacePlayerInMap(Player player)
         {
-            Random random = new Random();
             int posX;
             int posY;
 
-            do{
-                posX = random.Next(0,mapWidth);
-                posY = random.Next(0,mapHeight);
-            } while(!map.IsWalkable(posX,posY));
+            do
+            {
+                posX = random.Next(0, mapWidth);
+                posY = random.Next(0, mapHeight);
+            } while (!map.IsWalkable(posX, posY));
 
-            player.Move(posX,posY);
+            player.Move(posX, posY);
             map.AddPlayerOnTheMap(player);
+            PlaceEnemyInMap();
+        }
+
+        private void PlaceEnemyInMap()
+        {
+
+            int nbMaxEnemy = ((mapWidth * mapHeight) / 200) * (difficultyLevel);
+            for (int i = 0; i < nbMaxEnemy; i++)
+            {
+                if (random.Next(0, 2) == 1)
+                { // 50% to create an enemy
+                    int x;
+                    int y;
+                    do
+                    {
+                        x = random.Next(0, mapWidth);
+                        y = random.Next(0, mapHeight);
+                    } while (!map.IsWalkable(x, y));
+
+                    Enemy enemy = new Zombie(difficultyLevel);
+                    enemy.PosX = x;
+                    enemy.PosY = y;
+                    map.AddEnemy(enemy);
+
+                }
+            }
         }
     }
 }

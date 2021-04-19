@@ -59,7 +59,7 @@ namespace testRogueSharp
 
         public static SchedulingSystem SchedulingSystem { get; private set; }
 
-        public static CameraSystem CameraSystem{get;private set;}
+        public static CameraSystem CameraSystem { get; private set; }
 
         private static int mapLevel = 1;
 
