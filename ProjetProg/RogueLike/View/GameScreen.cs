@@ -59,6 +59,7 @@ namespace RogueLike.View
 
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
+            DidPlayerAct = false;
             KeyPress = Console.Keyboard.GetKeyPress();
 
             if (KeyPress != null)
@@ -75,8 +76,11 @@ namespace RogueLike.View
 
             }
 
-            if(DidPlayerAct==true){
+            if (DidPlayerAct == true)
+            {
                 RenderRequired = true;
+                // Provisoire avant qu'on fasse un scheduling system
+                Game.CommandSystem.MoveEnemies(Game);
             }
         }
 

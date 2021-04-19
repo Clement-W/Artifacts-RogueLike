@@ -9,8 +9,6 @@ namespace RogueLike.View
     public class LaunchScreen : ScreenView
     {
 
-
-
         public LaunchScreen(Game game) : base(game)
         {
             Console.Update += OnLaunchUpdate;
@@ -29,8 +27,8 @@ namespace RogueLike.View
                 Console.Print(
                     (int)(Console.Width * 0.1),
                     (int)(Console.Height * 0.25) - 4,
-                    "Afficher des trucs pour lancer le jeu, quitter, avoir les commandes",
-                    Colors.Wall
+                    "Afficher des trucs pour lancer le jeu, quitter, avoir les commandes : N",
+                    Colors.Text
                 );
 
                 Console.Draw();

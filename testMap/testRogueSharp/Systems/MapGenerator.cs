@@ -106,6 +106,7 @@ namespace testRogueSharp.Systems
 
                 }
             }
+            Console.WriteLine(map.monsters.Count);
         }
 
         private void CreateStairs()

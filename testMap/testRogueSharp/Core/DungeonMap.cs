@@ -10,7 +10,7 @@ namespace testRogueSharp.Core
     public class DungeonMap : Map
     {
 
-        private readonly List<Monster> monsters;
+        public readonly List<Monster> monsters;
 
         public Stairs StairsUp { get; set; }
         public Stairs StairsDown { get; set; }

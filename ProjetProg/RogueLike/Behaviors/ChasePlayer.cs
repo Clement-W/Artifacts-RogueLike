@@ -1,6 +1,7 @@
 using RogueLike.Interfaces;
 using RogueLike.Core;
 using RogueLike.Systems;
+using System;
 
 using RogueSharp;
 
@@ -16,18 +17,25 @@ namespace RogueLike.Behaviors
             FieldOfView enemyFov = new FieldOfView(map);
 
             // Check if the player is in the monster fov
+
+
+
             if (enemy.NbTurnsAlerted == null)
             {
+               
                 enemyFov.ComputeFov(enemy.PosX, enemy.PosY, enemy.Awareness, true);
-                if (enemyFov.IsInFov(enemy.PosX, enemy.PosY))
+                if (enemyFov.IsInFov(player.PosX, player.PosY))
                 {
                     game.MessageLog.AddMessage($"Un {enemy.Name} vous a vu.");
                     enemy.NbTurnsAlerted = 1;
                 }
+         
             }
+
             else
             { // The enemy is already alerted : move or attack
 
+               
                 // To use the roguesharp findPath, the origin and the targeted cell needs to be walkable
                 map.SetCellWalkability(enemy.PosX, enemy.PosY, true);
                 map.SetCellWalkability(game.Player.PosX, game.Player.PosY, true);
@@ -63,6 +71,7 @@ namespace RogueLike.Behaviors
                 {
                     enemy.NbTurnsAlerted = null;
                 }
+             
             }
 
             return true;

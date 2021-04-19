@@ -17,13 +17,10 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 
 
 TODO : 
-* pousser le tuto plus loin en testant un inventaire
-* Trouver un moyen d'avoir la taille de l'écran pour adapter la fenêtre à cette taille
-* Créer une classe static Dimensions comme pour les couleurs
+* Faire un energy based schedulling system : http://nadako.github.io/rants/posts/2013-03-26_roguelike-turn-based-time-scheduling.html (pour l'instant il y a un truc provisoire qui fait bouger uniquement les monstres dès que le joueur se déplace)
 * Tester actions liées au clic souris
-* Passer sur un energy based schedulling system : http://nadako.github.io/rants/posts/2013-03-26_roguelike-turn-based-time-scheduling.html
+* Trouver un moyen d'avoir la taille de l'écran pour adapter la fenêtre à cette taille
 
-Une fois que tout ça est fait on peut commencer à Implémanter nos idées de jeu
 
 REMINDER:
 * Faire la doc avec les balises xml de la doc csharp

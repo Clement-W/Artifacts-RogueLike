@@ -16,6 +16,10 @@ namespace RogueLike.Core
             enemies = new List<Enemy>();
         } 
 
+        public List<Enemy> GetEnemies(){
+            return enemies;
+        }
+
         // Called when the map is updated
         // Draw the characters on each cell
         public void Draw(RLConsole mapConsole, RLConsole statConsole)
