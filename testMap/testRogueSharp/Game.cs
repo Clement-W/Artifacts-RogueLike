@@ -48,6 +48,9 @@ namespace testRogueSharp
 
         public static SchedulingSystem SchedulingSystem { get; private set; }
 
+        // Pour la selection à la souris
+        private static bool _highlightWalls;
+
 
         static void Main(string[] args)
         {
@@ -109,6 +112,9 @@ namespace testRogueSharp
                         case RLKey.Right: didPlayerAct = CommandSystem.MovePlayer(Direction.Right); break;
                         case RLKey.Escape: rootConsole.Close(); break;
                     }
+                    if (rootConsole.Mouse.GetLeftClick()) {
+                        highlightWalls = !highlightWalls;
+                    }
                 }
                 if (didPlayerAct)
                 {
@@ -117,7 +123,8 @@ namespace testRogueSharp
                     //Console.WriteLine(SchedulingSystem);
 
                 }
-            }else{
+
+            } else{
                 CommandSystem.ActivateMonsters();
                 renderRequired=true;
             }
