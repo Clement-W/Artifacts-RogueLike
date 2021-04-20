@@ -3,6 +3,7 @@ using RogueSharp.MapCreation;
 using System;
 
 using RogueLike.Core;
+using System.Collections.Generic;
 
 namespace RogueLike.Systems
 {
@@ -39,6 +40,62 @@ namespace RogueLike.Systems
             PlacePlayerInMap(player); // Place the player into the map
             return map;
         }
+
+
+        // Create a map that looks like a spaceship 
+        public CurrentMap CreateSpaceship(Player player){
+            map.Initialize(mapWidth,mapHeight);
+            foreach (Cell cell in map.GetAllCells())
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+        
+            //create the middle part of the spaceship
+            foreach (Cell cell in map.GetCellsInSquare((mapWidth/2),(mapHeight/2),8))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth/2),(mapHeight/2),8))
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+
+            // The left part of the spaceship
+            foreach (Cell cell in map.GetBorderCellsInSquare(mapWidth/2-4,mapHeight/2,7))
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetCellsInSquare(mapWidth/2-4,mapHeight/2,7))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+            
+            // The right part of the spaceship
+            foreach (Cell cell in map.GetBorderCellsInDiamond(mapWidth/2+8,mapHeight/2,7))
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetCellsInDiamond(mapWidth/2+8,mapHeight/2,7))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+            //TODO : ajouter les portails de téléportation
+            //TODO : ajouter les pnj
+
+            
+
+            player.Move(mapWidth/2, mapHeight/2);
+            map.AddPlayerOnTheMap(player);
+            return map;
+
+        }
+
+
+        
 
         private void PlacePlayerInMap(Player player)
         {

@@ -35,7 +35,7 @@ namespace RogueLike.Core
 
             MapGenerator = new MapGenerator(Dimensions.worldWidth,Dimensions.worldHeight,difficultyLevel);
             Player = new Player();
-            Map = MapGenerator.CreateCaveMap(Player);
+            Map = MapGenerator.CreateSpaceship(Player);
             Map.UpdatePlayerFieldOfView(Player);
 
             
