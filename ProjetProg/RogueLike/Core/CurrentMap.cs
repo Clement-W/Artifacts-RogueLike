@@ -12,6 +12,8 @@ namespace RogueLike.Core
 
         private readonly List<Enemy> enemies;
 
+        public Staircase Staircase{get;set;} // To go deeper in the map
+
         public CurrentMap(){
             enemies = new List<Enemy>();
         } 
@@ -38,6 +40,8 @@ namespace RogueLike.Core
                     cptMonsterFov++;
                 }
             }
+
+            Staircase.Draw(mapConsole,this);
         }
 
         //TODO : Ajouter d'autres couleurs sur certains murs pour changer
@@ -137,5 +141,11 @@ namespace RogueLike.Core
         public Enemy GetEnemyAt(int posX, int posY){
             return enemies.FirstOrDefault(enemy => (enemy.PosX==posX && enemy.PosY==posY));
         }
+
+        public bool CanMoveToNextLevel(Player player){
+            return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;   
+        }
+
+        
     }
 }

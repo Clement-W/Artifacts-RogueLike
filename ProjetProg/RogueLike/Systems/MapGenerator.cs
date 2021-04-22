@@ -3,7 +3,7 @@ using RogueSharp.MapCreation;
 using System;
 
 using RogueLike.Core;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace RogueLike.Systems
 {
@@ -37,48 +37,50 @@ namespace RogueLike.Systems
             Map caveMap = Map.Create(mapCreationStrategy); // Create a cave style map
             map.Initialize(mapWidth, mapHeight);
             map.Copy(caveMap); // Copy the cave map into the current map
+            CreateStairs(player);
             PlacePlayerInMap(player); // Place the player into the map
             return map;
         }
 
 
         // Create a map that looks like a spaceship 
-        public CurrentMap CreateSpaceship(Player player){
-            map.Initialize(mapWidth,mapHeight);
+        public CurrentMap CreateSpaceship(Player player)
+        {
+            map.Initialize(mapWidth, mapHeight);
             foreach (Cell cell in map.GetAllCells())
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-        
+
             //create the middle part of the spaceship
-            foreach (Cell cell in map.GetCellsInSquare((mapWidth/2),(mapHeight/2),8))
+            foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 8))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth/2),(mapHeight/2),8))
+            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth / 2), (mapHeight / 2), 8))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
 
             // The left part of the spaceship
-            foreach (Cell cell in map.GetBorderCellsInSquare(mapWidth/2-4,mapHeight/2,7))
+            foreach (Cell cell in map.GetBorderCellsInSquare(mapWidth / 2 - 4, mapHeight / 2, 7))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInSquare(mapWidth/2-4,mapHeight/2,7))
+            foreach (Cell cell in map.GetCellsInSquare(mapWidth / 2 - 4, mapHeight / 2, 7))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-            
+
             // The right part of the spaceship
-            foreach (Cell cell in map.GetBorderCellsInDiamond(mapWidth/2+8,mapHeight/2,7))
+            foreach (Cell cell in map.GetBorderCellsInDiamond(mapWidth / 2 + 8, mapHeight / 2, 7))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(mapWidth/2+8,mapHeight/2,7))
+            foreach (Cell cell in map.GetCellsInDiamond(mapWidth / 2 + 8, mapHeight / 2, 7))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
@@ -86,16 +88,16 @@ namespace RogueLike.Systems
             //TODO : ajouter les portails de téléportation
             //TODO : ajouter les pnj
 
-            
 
-            player.Move(mapWidth/2, mapHeight/2);
+
+            player.Move(mapWidth / 2, mapHeight / 2);
             map.AddPlayerOnTheMap(player);
             return map;
 
         }
 
 
-        
+
 
         private void PlacePlayerInMap(Player player)
         {
@@ -129,13 +131,76 @@ namespace RogueLike.Systems
                         y = random.Next(0, mapHeight);
                     } while (!map.IsWalkable(x, y));
 
-                    Enemy enemy = new Zombie(difficultyLevel);
-                    enemy.PosX = x;
-                    enemy.PosY = y;
+                    Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel,x,y);
                     map.AddEnemy(enemy);
-
                 }
             }
+        }
+
+        // Place the stairs as far as possible of the player, to go deeper in the map 
+        private void CreateStairs(Player player)
+        {
+            Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            map.Staircase = new Staircase(farthestCellFromPlayer.X,farthestCellFromPlayer.Y);
+        }
+
+        private Cell FindFarthestPointFromPlayer(Player player)
+        {
+            Cell farthestCell = null;
+
+            // Euclidian distance between the player and the 4 corners
+            double distanceTopLeft = Math.Sqrt((player.PosX) ^ 2 + (player.PosY) ^ 2);
+            double distanceTopRight = Math.Sqrt((player.PosX - mapWidth) ^ 2 + (player.PosY) ^ 2);
+            double distanceBottomLeft = Math.Sqrt((player.PosX) ^ 2 + (player.PosY - mapHeight) ^ 2);
+            double distanceBottomRight = Math.Sqrt((player.PosX - mapWidth) ^ 2 + (player.PosY - mapHeight) ^ 2);
+
+            // Get the farthest corner 
+            double maxDistance = new double[4] { distanceTopLeft, distanceTopRight, distanceBottomLeft, distanceBottomRight }.Max();
+
+            // Get a walkable cell around the farthest corner
+            if (maxDistance == distanceTopLeft)
+            {
+                farthestCell = FindWalkableCellAroundPoint(0, 0); // Coordinates of the top left corner
+            }
+            else if (maxDistance == distanceTopRight)
+            {
+                farthestCell = FindWalkableCellAroundPoint(mapWidth, 0);
+            }
+            else if (maxDistance == distanceBottomLeft)
+            {
+                farthestCell = FindWalkableCellAroundPoint(0, mapHeight);
+            }
+            else if (maxDistance == distanceBottomRight)
+            {
+                farthestCell = FindWalkableCellAroundPoint(mapWidth, mapHeight);
+            }
+
+            return farthestCell;
+        }
+
+
+
+
+        // Iterate over the cells in a circle starting from the corner
+        private Cell FindWalkableCellAroundPoint(int cornerX, int cornerY)
+        {
+            int radius = 2;
+            bool found = false;
+            Cell farthestCell = null;
+            while (!found)
+            {
+                foreach (Cell cell in map.GetCellsInCircle(cornerX, cornerY, radius))
+                {
+                    if (cell.IsWalkable)
+                    {
+                        farthestCell = cell;
+                        found = true;
+                        break;
+                    }
+                }
+                radius++;
+            }
+            return farthestCell;
         }
     }
 }

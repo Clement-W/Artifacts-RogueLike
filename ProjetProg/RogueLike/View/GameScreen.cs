@@ -22,6 +22,8 @@ namespace RogueLike.View
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             inventoryConsole = new RLConsole(Dimensions.inventoryConsoleWidth, Dimensions.inventoryConsoleHeight);
 
+            Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+
             Console.Update += OnGameUpdate;
             Console.Render += OnGameRender;
 
@@ -72,6 +74,16 @@ namespace RogueLike.View
                     case RLKey.Down: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
                     case RLKey.Left: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
                     case RLKey.Right: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
+                    case RLKey.LControl:
+                        if(Game.Map.CanMoveToNextLevel(Game.Player)){
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth,Dimensions.worldHeight,++Game.DifficultyLevel);
+                            Game.Map = mapGenerator.CreateCaveMap(Game.Player);
+                            Game.MessageLog = new MessageLog();
+                            Game.CommandSystem = new CommandSystem();
+                            DidPlayerAct = true;
+                            Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+                        }
+                        break;
                 }
 
             }
