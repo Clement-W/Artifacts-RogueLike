@@ -1,6 +1,6 @@
 namespace RogueLike.Core{
 
-    public class ActiveCharacter : Character{
+    public abstract class ActiveCharacter : Character{
 
         private int attack;
         private int defense;
@@ -44,6 +44,13 @@ namespace RogueLike.Core{
             get{return speed;}
             set{speed = value;}
         }
+
+        // The 4 next symbols corresponds to the 4 direction sprites of the active character
+
+        public char DownSymbol{get;set;}
+        public char UpSymbol{get;set;}
+        public char LeftSymbol{get;set;}
+        public char RightSymbol{get;set;}
 
                
 

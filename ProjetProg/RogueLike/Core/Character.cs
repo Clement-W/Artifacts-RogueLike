@@ -5,7 +5,7 @@ using RogueSharp;
 namespace RogueLike.Core
 {
 
-    public class Character : IDrawable
+    public abstract class Character : IDrawable
     {
 
         public string Name { get; set; }
@@ -13,7 +13,7 @@ namespace RogueLike.Core
         public RLColor Color { get; set; }
 
 
-        public char Symbol { get; set; }
+        public char Symbol { get; set; } // The displayed symbol on the console
 
         public int PosX { get; set; }
 

@@ -14,7 +14,12 @@ namespace RogueLike.Core
             MaxHealth = Health;
             Name = "Zombie";
             Speed = 14;
-            Symbol = '&';   
+            UpSymbol = '&';
+            DownSymbol = '&';
+            LeftSymbol = '&';
+            RightSymbol = '&';
+
+            Symbol = DownSymbol; 
         }
     }
 }

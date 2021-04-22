@@ -16,7 +16,12 @@ namespace RogueLike.Core{
             Speed = 10;
             Name = "Adventurer";
             Color = Colors.Player;
-            Symbol = '@';
+            UpSymbol = '@';
+            DownSymbol = '@';
+            LeftSymbol = '@';
+            RightSymbol = '@';
+
+            Symbol = DownSymbol;
         }
 
         public void DrawStats(RLConsole statConsole){

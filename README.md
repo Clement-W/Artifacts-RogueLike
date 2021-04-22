@@ -47,5 +47,6 @@ REMINDER:
 Idées :
 * Faire des couleurs de sol différentes selon les planètes 
 * Pour les comportements d'ennemis, pathfinding normal et pourquoi pas un monstre qui fuit mais qui a beaucoup de gold sur lui et il serait assez rare.
+* Pour justifier le fait qu'on va deeper dans la map, on peut dire qu'on va dans des vieux temples pour récuperer les artefacts
 
 

@@ -19,10 +19,10 @@ namespace RogueLike.Systems
             switch (direction)
             {
                 default: return false;
-                case Direction.Up: y--; break;
-                case Direction.Down: y++; break;
-                case Direction.Right: x++; break;
-                case Direction.Left: x--; break;
+                case Direction.Up: y--; player.Symbol = player.UpSymbol; break;
+                case Direction.Down: y++; player.Symbol = player.DownSymbol; break;
+                case Direction.Right: x++; player.Symbol = player.RightSymbol; break;
+                case Direction.Left: x--; player.Symbol = player.LeftSymbol; break;
             }
 
             // return true if the player move
@@ -43,6 +43,10 @@ namespace RogueLike.Systems
 
         public void MoveEnemy(Enemy enemy, ICell cell, CurrentMap map, Player player)
         {
+
+            // Change the symbol of the enemy according to it's moving direction
+            enemy.ChangeDirectionSymbol(enemy.PosX,enemy.PosY,cell.X,cell.Y);
+                
             // Try to move the enemy, if the enemy don't move and if the player is on the desired cell, attack the player
             if (!map.SetCharacterPosition(enemy, cell.X, cell.Y))
             {
