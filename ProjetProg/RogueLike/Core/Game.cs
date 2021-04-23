@@ -36,8 +36,7 @@ namespace RogueLike.Core
             Map = mapGenerator.CreateCaveMap(Player);
             Map.UpdatePlayerFieldOfView(Player);
 
-            
-
+        
             
 
             //créé command system, la map,...

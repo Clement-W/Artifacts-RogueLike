@@ -10,7 +10,7 @@ namespace RogueLike.Core
 
         public string Name { get; set; }
 
-        public RLColor Color { get; set; }
+        public RLColor PrintedColor { get; set; }
 
 
         public char Symbol { get; set; } // The displayed symbol on the console
@@ -32,12 +32,12 @@ namespace RogueLike.Core
                 if (map.IsInFov(PosX, PosY))
                 {
                     // Draw it with the floor fov background color
-                    console.Set(PosX, PosY, Color, Colors.FloorBackgroundFov, Symbol);
+                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackgroundFov, Symbol);
                 }
                 else
                 {
                     // Draw it with the floor background and a '.' symbol
-                    console.Set(PosX, PosY, Color, Colors.FloorBackground, '.');
+                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackground, '.');
                 }
             }
         }

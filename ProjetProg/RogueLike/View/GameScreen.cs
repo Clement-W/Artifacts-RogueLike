@@ -9,6 +9,9 @@ namespace RogueLike.View
     public class GameScreen : ScreenView
     {
 
+        //TODO refaire l'écran comme sur le screen de jb  (modifier directions.cs et le blit)
+    
+
         private static RLConsole mapConsole;
         private static RLConsole messageConsole;
         private static RLConsole statConsole;
