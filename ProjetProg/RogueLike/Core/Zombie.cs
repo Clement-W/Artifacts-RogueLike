@@ -8,13 +8,21 @@ namespace RogueLike.Core
             Attack = 2 * diffifultyLevel;
             Defense = diffifultyLevel;
             Awareness = 10;
-            Color = Colors.Zombie;
+            PrintedColor = Colors.Zombie;
+            BaseColor = PrintedColor;
+            ColorAfterHit = Colors.ZombieHit;
+
             Gold= (int)(diffifultyLevel/2) * random.Next(0,11);
             Health = random.Next(0,50) * diffifultyLevel;
             MaxHealth = Health;
             Name = "Zombie";
             Speed = 14;
-            Symbol = '&';   
+            UpSymbol = '&';
+            DownSymbol = '&';
+            LeftSymbol = '&';
+            RightSymbol = '&';
+
+            Symbol = DownSymbol; 
         }
     }
 }

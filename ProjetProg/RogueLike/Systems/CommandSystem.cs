@@ -3,6 +3,7 @@ using RogueSharp;
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace RogueLike.Systems
 {
@@ -16,13 +17,14 @@ namespace RogueLike.Systems
             int x = player.PosX;
             int y = player.PosY;
 
+
             switch (direction)
             {
                 default: return false;
-                case Direction.Up: y--; break;
-                case Direction.Down: y++; break;
-                case Direction.Right: x++; break;
-                case Direction.Left: x--; break;
+                case Direction.Up: y--; player.Symbol = player.UpSymbol; break;
+                case Direction.Down: y++; player.Symbol = player.DownSymbol; break;
+                case Direction.Right: x++; player.Symbol = player.RightSymbol; break;
+                case Direction.Left: x--; player.Symbol = player.LeftSymbol; break;
             }
 
             // return true if the player move
@@ -43,6 +45,12 @@ namespace RogueLike.Systems
 
         public void MoveEnemy(Enemy enemy, ICell cell, CurrentMap map, Player player)
         {
+
+            // Change the symbol of the enemy according to it's moving direction
+            enemy.ChangeDirectionSymbol(enemy.PosX, enemy.PosY, cell.X, cell.Y);
+
+
+
             // Try to move the enemy, if the enemy don't move and if the player is on the desired cell, attack the player
             if (!map.SetCharacterPosition(enemy, cell.X, cell.Y))
             {
@@ -56,6 +64,13 @@ namespace RogueLike.Systems
         public void Attack(ActiveCharacter attacker, ActiveCharacter defender)
         {
             //TODO: trouver un mecanisme d'attaque en s'inspirant du système des tests et en prenant en compte la défense
+            // Fait clignoter l'enemi s'il se prend des degats
+            
+            Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
+            // Put the change color method in a thread to let the game continue during the color changement
+            // Without a thread runing in background, the color changement is not visible
+            FlashThread.Start();
+
         }
 
 

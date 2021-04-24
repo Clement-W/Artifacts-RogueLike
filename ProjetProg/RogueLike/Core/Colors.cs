@@ -29,5 +29,14 @@ namespace RogueLike.Core
 
         public static RLColor Zombie = Palette.DbVegetation;
 
+
+        public static RLColor StairsFov = Palette.DbLight;
+
+        public static RLColor Stairs = Floor;
+
+        public static RLColor PlayerHit = Palette.DbDarkLight;
+
+        public static RLColor ZombieHit = Palette.DbVegetationLight;
+
     }
 }

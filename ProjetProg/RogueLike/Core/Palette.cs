@@ -38,6 +38,7 @@ namespace RogueLike.Core{
         public static RLColor DbOldStone = new RLColor(78, 74, 78);
         public static RLColor DbWood = new RLColor(133, 76, 48);
         public static RLColor DbVegetation = new RLColor(52, 101, 36);
+        public static RLColor DbVegetationLight = new RLColor(  122, 165, 108 );
         public static RLColor DbBlood = new RLColor(208, 70, 72);
         public static RLColor DbStone = new RLColor(117, 113, 97);
         public static RLColor DbWater = new RLColor(89, 125, 206);
@@ -48,6 +49,9 @@ namespace RogueLike.Core{
         public static RLColor DbSky = new RLColor(109, 194, 202);
         public static RLColor DbSun = new RLColor(218, 212, 94);
         public static RLColor DbLight = new RLColor(222, 238, 214);
+
+        public static RLColor DbDarkLight = new RLColor(  127, 136, 123  );
+
 
 
     }

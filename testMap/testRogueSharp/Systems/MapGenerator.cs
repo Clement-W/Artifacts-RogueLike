@@ -23,7 +23,7 @@ namespace testRogueSharp.Systems
         }
 
         //Generation d'une map qui est juste une grande pièce
-        /*public DungeonMap CreateMap()
+        /*public DungeonMap CreateCustomMap()
         {
             //Initialisation des cell de la map, elles sont toutes walkables, transparentes et visitées.
             map.Initialize(width, height);
