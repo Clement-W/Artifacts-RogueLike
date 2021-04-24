@@ -8,16 +8,27 @@ using testRogueSharp.Systems;
 namespace testRogueSharp
 {
     class Game
+
     {
+
+        /*
+        TODO : plus tard on donnera juste screenw et screenh puis le reste se 
+        calculera automatiquement ce sera plus simple
+        */
+
         // La console de la fenêtre
         private static readonly int screenWidth = 80;
         private static readonly int screenHeight = 35;
         private static RLRootConsole rootConsole; // console principale
 
         // La console de la map
-        private static readonly int mapWidth = 64;
-        private static readonly int mapHeight = 24;
+        public static readonly int mapWidth = 64;
+        public static readonly int mapHeight = 24;
         private static RLConsole mapConsole;
+
+        //taille de la map (!= de la console)
+        public static readonly int worldWidth = mapWidth * 3;
+        public static readonly int worldHeight = mapHeight * 3;
 
         // La console des messages
         private static readonly int messageWidth = 64;
@@ -51,6 +62,10 @@ namespace testRogueSharp
         // Pour la selection à la souris
         private static bool _highlightWalls;
 
+        public static CameraSystem CameraSystem { get; private set; }
+
+        private static int mapLevel = 1;
+
 
         static void Main(string[] args)
         {
@@ -58,7 +73,7 @@ namespace testRogueSharp
 
             SchedulingSystem = new SchedulingSystem();
 
-            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(worldWidth, worldHeight, mapLevel);
 
             DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
 
@@ -73,7 +88,7 @@ namespace testRogueSharp
 
             rootConsole = new RLRootConsole("terminal16x16.png", screenWidth, screenHeight, 16, 16, 1f, "Test rogueSharp");
 
-            mapConsole = new RLConsole(mapWidth, mapHeight);
+            mapConsole = new RLConsole(worldWidth, worldHeight);
             messageConsole = new RLConsole(messageWidth, messageHeight);
             statConsole = new RLConsole(statWidth, statHeight);
             inventoryConsole = new RLConsole(inventoryWidth, inventoryHeight);
@@ -99,7 +114,7 @@ namespace testRogueSharp
         {
             bool didPlayerAct = false;
             RLKeyPress keyPress = rootConsole.Keyboard.GetKeyPress();
-            
+
             if (CommandSystem.IsPlayerTurn)
             {
                 if (keyPress != null)
@@ -111,6 +126,16 @@ namespace testRogueSharp
                         case RLKey.Left: didPlayerAct = CommandSystem.MovePlayer(Direction.Left); break;
                         case RLKey.Right: didPlayerAct = CommandSystem.MovePlayer(Direction.Right); break;
                         case RLKey.Escape: rootConsole.Close(); break;
+                        case RLKey.LControl:
+                            if (DungeonMap.CanMoveDownToNextLevel())
+                            {
+                                MapGenerator mapGenerator = new MapGenerator(worldWidth, worldHeight, ++mapLevel);
+                                DungeonMap = mapGenerator.CreateCaveMap(); // créé la map et créé et place le joueur
+                                MessageLog = new MessageLog();
+                                CommandSystem = new CommandSystem();
+                                didPlayerAct = true;
+                            }
+                            break;
                     }
                     if (rootConsole.Mouse.GetLeftClick()) {
                         highlightWalls = !highlightWalls;
@@ -125,8 +150,12 @@ namespace testRogueSharp
                 }
 
             } else{
+
+            }
+            else
+            {
                 CommandSystem.ActivateMonsters();
-                renderRequired=true;
+                renderRequired = true;
             }
 
 
@@ -148,9 +177,11 @@ namespace testRogueSharp
                 Player.DrawStats(statConsole);
                 MessageLog.Draw(messageConsole);
 
+                CameraSystem.ReCenterCamera();
+
                 // On place les 4 consoles dans la rootConsole
                 //Blit(RLConsole srcConsole, int srcX, int srcY, int srcWidth, int srcHeight, RLConsole destConsole, int destX, int destY)
-                RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, inventoryHeight);
+                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, mapWidth, mapHeight, rootConsole, 0, inventoryHeight);
                 RLConsole.Blit(statConsole, 0, 0, statWidth, statHeight, rootConsole, mapWidth, 0);
                 RLConsole.Blit(messageConsole, 0, 0, messageWidth, messageHeight, rootConsole, 0, screenHeight - messageHeight);
                 RLConsole.Blit(inventoryConsole, 0, 0, inventoryWidth, inventoryHeight, rootConsole, 0, 0);

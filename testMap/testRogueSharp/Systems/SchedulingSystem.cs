@@ -57,7 +57,6 @@ namespace testRogueSharp.Systems{
             IScheduleable firstScheduleable = firstScheduleableGroup.Value.First(); // On recupere le premier élément qui doit agir
             Remove(firstScheduleable); // on le supprime 
             time=firstScheduleableGroup.Key; // on avance le temps au moment ou on a le premier scheduleable
-            Console.WriteLine(this);
             return firstScheduleable;
         }
 
