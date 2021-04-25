@@ -6,7 +6,7 @@ namespace RogueLike.Systems{
     
     public class MessageLog{
 
-        private static readonly int maxLines = 4;
+        private static readonly int maxLines = 10;
 
         private readonly Queue<string> messages;
 
@@ -25,6 +25,7 @@ namespace RogueLike.Systems{
             int cptMessage=0;
             foreach(string message in messages){
                 console.Print(1,cptMessage+1,message,Colors.Text);
+                cptMessage++;
             }
         }
     }

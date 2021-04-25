@@ -19,30 +19,33 @@ namespace RogueLike.Systems
             int x = player.PosX;
             int y = player.PosY;
 
+            bool didPlayerAct = false;
+
 
             switch (direction)
             {
-                default: return false;
                 case Direction.Up: y--; player.Symbol = player.UpSymbol; break;
                 case Direction.Down: y++; player.Symbol = player.DownSymbol; break;
                 case Direction.Right: x++; player.Symbol = player.RightSymbol; break;
                 case Direction.Left: x--; player.Symbol = player.LeftSymbol; break;
             }
 
-            // return true if the player move
-            if (map.SetCharacterPosition(player, x, y))
-            { // move the player if possible
-                return true;
-            }
 
-            Enemy enemy = map.GetEnemyAt(x, y);
-            if (enemy != null)
+            // here, the condition == true if the player don't move
+            if (!map.SetCharacterPosition(player, x, y)) //move the player if possible
             {
-                Attack(player, enemy);
-                return true;
+                Enemy enemy = map.GetEnemyAt(x, y);
+                if (enemy != null)
+                {
+                    Attack(player, enemy);
+                    didPlayerAct = true;
+                }
+
+            }else{
+                didPlayerAct = true;
             }
 
-            return false;
+            return didPlayerAct;
         }
 
         public void MoveEnemy(Enemy enemy, ICell cell, CurrentMap map, Player player)
@@ -67,11 +70,14 @@ namespace RogueLike.Systems
         {
             //TODO: trouver un mecanisme d'attaque en s'inspirant du système des tests et en prenant en compte la défense
             // Fait clignoter l'enemi s'il se prend des degats
-            
+            defender.Health -=attacker.Attack; // provisoire
+
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
             // Put the change color method in a thread to let the game continue during the color changement
             // Without a thread runing in background, the color changement is not visible
             FlashThread.Start();
+
+
 
         }
 

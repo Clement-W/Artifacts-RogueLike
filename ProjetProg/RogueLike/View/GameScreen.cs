@@ -10,12 +10,15 @@ namespace RogueLike.View
     {
 
         //TODO refaire l'écran comme sur le screen de jb  (modifier directions.cs et le blit)
-    
+
 
         private static RLConsole mapConsole;
         private static RLConsole messageConsole;
         private static RLConsole statConsole;
-        private static RLConsole inventoryConsole;
+
+        private static RLConsole equipmentsConsole; //armor, weapons
+
+        private static RLConsole itemsConsole; //food, potions,...
 
         public GameScreen(string title, Game game) : base(title, game)
         {
@@ -23,7 +26,9 @@ namespace RogueLike.View
             mapConsole = new RLConsole(Dimensions.worldWidth, Dimensions.worldHeight);  //mapConsole needs to be as big as the world, but only a part of it will be rendered
             messageConsole = new RLConsole(Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight);
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
-            inventoryConsole = new RLConsole(Dimensions.inventoryConsoleWidth, Dimensions.inventoryConsoleHeight);
+            equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
+            itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
+
 
             Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
 
@@ -40,7 +45,8 @@ namespace RogueLike.View
                 mapConsole.Clear();
                 statConsole.Clear();
                 messageConsole.Clear();
-                inventoryConsole.Clear();
+                equipmentsConsole.Clear();
+                itemsConsole.Clear();
 
 
                 Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
@@ -48,13 +54,22 @@ namespace RogueLike.View
                 Game.Player.DrawStats(statConsole);
                 Game.MessageLog.Draw(messageConsole);
                 Game.CameraSystem.CenterCamera(Game.Player);
+                //draw inventory
+
+                /*statConsole.SetBackColor( 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, RLColor.Green );
+                equipmentsConsole.SetBackColor( 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, RLColor.Yellow );
+                itemsConsole.SetBackColor( 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, RLColor.Gray );
+                */
 
 
-                // Blit the 4 consoles in the root console
-                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, Console, 0, Dimensions.inventoryConsoleHeight);
-                RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, Console, Dimensions.mapConsoleWidth, 0);
-                RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, Console, 0, Dimensions.screenConsoleHeight - Dimensions.messageConsoleHeight);
-                RLConsole.Blit(inventoryConsole, 0, 0, Dimensions.inventoryConsoleWidth, Dimensions.inventoryConsoleHeight, Console, 0, 0);
+                // Blit the consoles in the root console
+                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, Console, 0, 0);
+                RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, Console, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight);
+                RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, Console, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight + Dimensions.statConsoleHeight);
+                RLConsole.Blit(equipmentsConsole, 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, Console, 0, Dimensions.mapConsoleHeight);
+                RLConsole.Blit(itemsConsole, 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, Console, Dimensions.equipmentsConsoleWidth + Dimensions.messageConsoleWidth, Dimensions.mapConsoleHeight);
+
+
 
                 Console.Draw();
                 RenderRequired = false;
@@ -78,8 +93,9 @@ namespace RogueLike.View
                     case RLKey.Left: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
                     case RLKey.Right: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
                     case RLKey.LControl:
-                        if(Game.Map.CanMoveToNextLevel(Game.Player)){
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth,Dimensions.worldHeight,++Game.DifficultyLevel);
+                        if (Game.Map.CanMoveToNextLevel(Game.Player))
+                        {
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.DifficultyLevel);
                             Game.Map = mapGenerator.CreateCaveMap(Game.Player);
                             Game.MessageLog = new MessageLog();
                             Game.CommandSystem = new CommandSystem();

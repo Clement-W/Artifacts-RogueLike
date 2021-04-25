@@ -28,11 +28,19 @@ namespace RogueLike.Core{
         }
 
         public void DrawStats(RLConsole statConsole){
-            statConsole.Print(1,1,$"Name: {Name}", Colors.Text);
-            statConsole.Print(1,3,$"Health: {Health}/{MaxHealth}",Colors.Text);
-            statConsole.Print(1,5,$"Attack: {Attack}",Colors.Text);
-            statConsole.Print(1,7,$"Defense: {Defense}",Colors.Text);
-            statConsole.Print(1,9,$"Gold: {Gold}",Colors.Gold);
+
+            int healthBarWidth = Dimensions.statConsoleWidth-2; 
+            int remaningHealth = (int)(((double)Health/(double)MaxHealth)*healthBarWidth);
+
+            // Create the health bar thanks to the background color
+            statConsole.SetBackColor(1, 2,remaningHealth,1,Colors.HealthBar);
+            statConsole.SetBackColor(1+remaningHealth, 2,healthBarWidth - remaningHealth,1,Colors.HealthBarDamage);
+
+            statConsole.Print(((int)(healthBarWidth/2)),2,"PV",Colors.Text);
+
+            statConsole.Print(3,3,$"Attack: {Attack}",Colors.GrayText);
+            statConsole.Print(3+(int)(Dimensions.statConsoleWidth/3),3,$"Defense: {Defense}",Colors.GrayText);
+            statConsole.Print(3+(int)(2*Dimensions.statConsoleWidth/3),3,$"Gold: {Gold}",Colors.Gold);
         }
 
         public void Move(int x, int y){

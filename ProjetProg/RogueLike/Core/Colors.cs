@@ -19,10 +19,12 @@ namespace RogueLike.Core
 
         public static RLColor Player = Palette.DbLight;
         public static RLColor Text = Palette.DbLight;
+
+        public static RLColor GrayText = Palette.DbDarkLight;
         public static RLColor Gold = Palette.DbSun;
 
         
-        public static RLColor HealthBar = Palette.Primary;
+        public static RLColor HealthBar = RLColor.Red;
 
         public static RLColor HealthBarDamage = Palette.PrimaryDarkest;
 
@@ -34,9 +36,9 @@ namespace RogueLike.Core
 
         public static RLColor Stairs = Floor;
 
-        public static RLColor PlayerHit = Palette.DbDarkLight;
+        public static RLColor PlayerHit = RLColor.Red;
 
-        public static RLColor ZombieHit = Palette.DbVegetationLight;
+        public static RLColor ZombieHit = RLColor.Red;
 
     }
 }

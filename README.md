@@ -46,7 +46,8 @@ TODO bonus :
 * animations
 * Attaque en appuyant sur une touche?
 * minimap
-
+* tableau des scores accessible sur le menu
+* Lampe torche 
 
 REMINDER:
 * Faire la doc avec les balises xml de la doc csharp

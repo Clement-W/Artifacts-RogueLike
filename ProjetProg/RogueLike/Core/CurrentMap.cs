@@ -31,14 +31,9 @@ namespace RogueLike.Core
                 DrawCell(mapConsole, cell);
             }
 
-            int cptMonsterFov = 0;
 
             foreach(Enemy enemy in enemies){
                 enemy.Draw(mapConsole,this);
-                if(IsInFov(enemy.PosX,enemy.PosY)){
-                    enemy.DrawStats(statConsole,cptMonsterFov);
-                    cptMonsterFov++;
-                }
             }
 
             Staircase.Draw(mapConsole,this);
