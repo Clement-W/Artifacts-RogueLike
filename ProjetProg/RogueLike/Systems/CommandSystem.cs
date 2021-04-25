@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+// deal with interactions between the game and the actors
+
 namespace RogueLike.Systems
 {
 
