@@ -40,5 +40,7 @@ namespace RogueLike.Core
 
         public static RLColor ZombieHit = RLColor.Red;
 
+        public static RLColor Equipment = Palette.DbLight;
+
     }
 }

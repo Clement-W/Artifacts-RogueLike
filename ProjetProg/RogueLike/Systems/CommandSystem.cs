@@ -78,6 +78,8 @@ namespace RogueLike.Systems
             FlashThread.Start();
 
 
+            //proba de faire un coup critique
+
 
         }
 

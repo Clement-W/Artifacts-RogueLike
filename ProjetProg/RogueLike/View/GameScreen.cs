@@ -52,6 +52,7 @@ namespace RogueLike.View
                 Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
                 Game.Player.Draw(mapConsole, Game.Map);
                 Game.Player.DrawStats(statConsole);
+                Game.Player.DrawEquipmentInventory(equipmentsConsole);
                 Game.MessageLog.Draw(messageConsole);
                 Game.CameraSystem.CenterCamera(Game.Player);
                 //draw inventory
