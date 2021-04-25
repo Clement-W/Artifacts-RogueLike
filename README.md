@@ -34,7 +34,6 @@ TODO (pas ordonné) :
 * Ajouter des aspects graphiques aux maps et les différencier en fonction de la planète
 * Ajouter des items dans les maps + des chest qui peuvent contenir des items, de la nourriture
 * Faire la page de lancement du jeu avec launch, help, lore et tout
-* Ajouter une barre de faim
 * Ajouter différents types de monstres en fonction des planètes avec des stats différentes 
 * Faire des couleurs de sol différentes selon les planètes 
 * Pour les comportements d'ennemis, pathfinding normal et pourquoi pas un monstre qui fuit mais qui a beaucoup de gold sur lui et il serait assez rare.
@@ -48,6 +47,8 @@ TODO bonus :
 * minimap
 * tableau des scores accessible sur le menu
 * Lampe torche 
+* Ajouter une barre de faim
+
 
 REMINDER:
 * Faire la doc avec les balises xml de la doc csharp
