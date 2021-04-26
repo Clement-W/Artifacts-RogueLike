@@ -12,11 +12,15 @@ namespace RogueLike.Core
 
         private readonly List<Enemy> enemies;
 
+        private readonly List<Equipment> equipments;
+
         public Staircase Staircase{get;set;} // To go deeper in the map
 
         public CurrentMap(){
             enemies = new List<Enemy>();
+            equipments = new List<Equipment>();
         } 
+
 
         public List<Enemy> GetEnemies(){
             return enemies;
@@ -131,7 +135,7 @@ namespace RogueLike.Core
         public void RemoveEnemy(Enemy enemy){
             enemies.Remove(enemy);
             SetCellWalkability(enemy.PosX,enemy.PosY,true);
-        }
+        }     
 
         public Enemy GetEnemyAt(int posX, int posY){
             return enemies.FirstOrDefault(enemy => (enemy.PosX==posX && enemy.PosY==posY));

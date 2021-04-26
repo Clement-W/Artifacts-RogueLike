@@ -137,6 +137,28 @@ namespace RogueLike.Systems
             }
         }
 
+        /*private void PlaceEquipmentInMap()
+        {
+
+            int nbMaxEquipment = 3;
+            for (int i = 0; i < nbMaxEquipment; i++)
+            {
+                if (random.Next(0, 2) == 1)
+                { // 50% to create an equipment
+                    int x;
+                    int y;
+                    do
+                    {
+                        x = random.Next(0, mapWidth);
+                        y = random.Next(0, mapHeight);
+                    } while (!map.IsWalkable(x, y));
+
+                    Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel,x,y);
+                    //map.AddEquipment(equipment); // TODO : à modifier en faisant le ILoot (avec methode pickup())avec liste de loot dans la map 
+                }
+            }
+        }*/
+
         // Place the stairs as far as possible of the player, to go deeper in the map 
         private void CreateStairs(Player player)
         {
