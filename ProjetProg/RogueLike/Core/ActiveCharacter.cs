@@ -16,13 +16,29 @@ namespace RogueLike.Core
 
         public int Attack
         {
-            get { return attack; }
+            get
+            {
+                if (this is Player)
+                {
+                    Player p = this as Player;
+                    return attack + p.Weapon.AttackBonus;
+                }
+                return attack;
+            }
             set { attack = value; }
         }
 
         public int Defense
         {
-            get { return defense; }
+            get
+            {
+                if (this is Player)
+                {
+                    Player p = this as Player;
+                    return defense + p.Head.DefenseBonus + p.Chest.DefenseBonus + p.Legs.DefenseBonus + p.Feet.DefenseBonus;
+                }
+                return defense;
+            }
             set { defense = value; }
         }
 

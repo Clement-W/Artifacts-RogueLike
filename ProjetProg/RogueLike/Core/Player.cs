@@ -4,6 +4,14 @@ namespace RogueLike.Core{
 
     public class Player : ActiveCharacter{
 
+        public Helmet Head{get;set;}
+        public Chestplate Chest{get;set;}
+        public Leggins Legs{get;set;}
+        public Boots Feet{get;set;}
+
+        public AttackEquipment Weapon{get;set;}
+
+
         public Player(){
             //create a player with the initial stats
 
@@ -17,28 +25,53 @@ namespace RogueLike.Core{
             Name = "Adventurer";
             PrintedColor = Colors.Player;
             BaseColor = PrintedColor;
-            ColorAfterHit = Colors.PlayerHit; // TODO changer ça
+            ColorAfterHit = Colors.PlayerHit; 
 
             UpSymbol = '@';
             DownSymbol = '@';
             LeftSymbol = '@';
             RightSymbol = '@';
-
             Symbol = DownSymbol;
+
+            Head = Helmet.None();
+            Chest = Chestplate.None();
+            Legs = Leggins.None();
+            Feet = Boots.None();
+
+            Weapon = Dagger.Wood();
         }
 
+
         public void DrawStats(RLConsole statConsole){
-            statConsole.Print(1,1,$"Name: {Name}", Colors.Text);
-            statConsole.Print(1,3,$"Health: {Health}/{MaxHealth}",Colors.Text);
-            statConsole.Print(1,5,$"Attack: {Attack}",Colors.Text);
-            statConsole.Print(1,7,$"Defense: {Defense}",Colors.Text);
-            statConsole.Print(1,9,$"Gold: {Gold}",Colors.Gold);
+
+            int healthBarWidth = Dimensions.statConsoleWidth-2; 
+            int remaningHealth = (int)(((double)Health/(double)MaxHealth)*healthBarWidth);
+
+            // Create the health bar thanks to the background color
+            statConsole.SetBackColor(1, 2,remaningHealth,1,Colors.HealthBar);
+            statConsole.SetBackColor(1+remaningHealth, 2,healthBarWidth - remaningHealth,1,Colors.HealthBarDamage);
+
+            statConsole.Print(((int)(healthBarWidth/2)),2,"PV",Colors.Text);
+
+            statConsole.Print(3,3,$"Attack: {Attack}",Colors.GrayText);
+            statConsole.Print(3+(int)(Dimensions.statConsoleWidth/3),3,$"Defense: {Defense}",Colors.GrayText);
+            statConsole.Print(3+(int)(2*Dimensions.statConsoleWidth/3),3,$"Gold: {Gold}",Colors.Gold);
+        }
+
+
+        public void DrawEquipmentInventory(RLConsole equipmentConsole){
+            equipmentConsole.Print(1,1,$"h: {Head.Name}",Colors.Text);
+            equipmentConsole.Print(1,3,$"c: {Chest.Name}",Colors.Text);
+            equipmentConsole.Print(1,5,$"l: {Legs.Name}",Colors.Text);
+            equipmentConsole.Print(1,7,$"f: {Feet.Name}",Colors.Text);
+            equipmentConsole.Print(1,9,$"w: {Weapon.Name}",Colors.Text);
         }
 
         public void Move(int x, int y){
             PosX = x;
             PosY = y;
         }
+
 
     }
 }
