@@ -17,11 +17,11 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 
 
 TODO (pas ordonné) : 
+* Transformer TOUTES les méthodes static en pattern factory
 * Tester actions liées au clic souris
 * Trouver un moyen de gérer les attaques
-* refaire l'UI
 * Faire un energy based schedulling system : http://nadako.github.io/rants/posts/2013-03-26_roguelike-turn-based-time-scheduling.html (pour l'instant il y a un truc provisoire qui fait bouger uniquement les monstres dès que le joueur se déplace)
-* Ajouter un inventaire au joueur (pour armure + objets)
+* Ajouter un inventaire au joueur pour objets
 * Faire la map vaisseau
 * Ajouter un drone qui suit le joueur
 * Ajouter des pnj (dont des vendeurs)

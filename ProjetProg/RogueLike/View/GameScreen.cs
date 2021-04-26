@@ -1,7 +1,8 @@
 using RogueLike.Core;
 using RLNET;
-using System;
 using RogueLike.Systems;
+using System.Diagnostics;
+
 
 namespace RogueLike.View
 {
@@ -20,6 +21,10 @@ namespace RogueLike.View
 
         private static RLConsole itemsConsole; //food, potions,...
 
+
+        private static Stopwatch stopwatch;
+
+
         public GameScreen(string title, Game game) : base(title, game)
         {
             // Initialize the sub consoles of the root console
@@ -28,14 +33,16 @@ namespace RogueLike.View
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-
-
             Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
 
             Console.Update += OnGameUpdate;
             Console.Render += OnGameRender;
 
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
         }
+
+
 
         private void OnGameRender(object sender, UpdateEventArgs e)
         {
@@ -80,6 +87,17 @@ namespace RogueLike.View
 
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
+
+            
+            if (stopwatch.ElapsedMilliseconds > 1000)
+            {
+            
+                stopwatch.Reset();
+                Game.CommandSystem.MoveEnemies(Game);
+                RenderRequired=true;
+                stopwatch.Start();
+            }
+
             DidPlayerAct = false;
             KeyPress = Console.Keyboard.GetKeyPress();
 
@@ -112,7 +130,7 @@ namespace RogueLike.View
             {
                 RenderRequired = true;
                 // Provisoire avant qu'on fasse un scheduling system
-                Game.CommandSystem.MoveEnemies(Game);
+                //Game.CommandSystem.MoveEnemies(Game);
             }
         }
 
