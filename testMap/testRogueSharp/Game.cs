@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using RLNET;
 using RogueSharp;
-
 using testRogueSharp.Core;
 using testRogueSharp.Systems;
 
@@ -60,7 +61,21 @@ namespace testRogueSharp
         public static SchedulingSystem SchedulingSystem { get; private set; }
 
         // Pour la selection à la souris
-        private static bool _highlightWalls;
+        private enum SelectionType {
+            Radius = 0,
+            Area = 1,
+            RadiusBorder = 2,
+            AreaBorder = 3,
+            Column = 4,
+            Row = 5,
+            ColumnAndRow = 6,
+            Cross = 7
+        }
+        //private static IEnumerable<Cell> currentSelectedCells = null;
+        private static Cell currentSelectedCell = null;
+        private static bool highlightWalls;
+
+        //
 
         public static CameraSystem CameraSystem { get; private set; }
 
@@ -69,6 +84,7 @@ namespace testRogueSharp
 
         static void Main(string[] args)
         {
+
             Random = new Random();
 
             SchedulingSystem = new SchedulingSystem();
@@ -112,11 +128,19 @@ namespace testRogueSharp
         // Event handler pour l'update event de rootConsole
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
+            
+            
             bool didPlayerAct = false;
             RLKeyPress keyPress = rootConsole.Keyboard.GetKeyPress();
-
+            
             if (CommandSystem.IsPlayerTurn)
             {
+                if (rootConsole.Mouse.GetLeftClick()) {
+                    highlightWalls = !highlightWalls;
+                    //currentSelectedCells = SelectCellsUnderMouse();
+                    currentSelectedCell = SelectCellUnderMouse();
+                    didPlayerAct = true;
+                }
                 if (keyPress != null)
                 {
                     switch (keyPress.Key)
@@ -137,9 +161,7 @@ namespace testRogueSharp
                             }
                             break;
                     }
-                    if (rootConsole.Mouse.GetLeftClick()) {
-                        highlightWalls = !highlightWalls;
-                    }
+                    
                 }
                 if (didPlayerAct)
                 {
@@ -149,15 +171,13 @@ namespace testRogueSharp
 
                 }
 
-            } else{
-
             }
             else
             {
                 CommandSystem.ActivateMonsters();
                 renderRequired = true;
             }
-
+           
 
         }
 
@@ -186,10 +206,63 @@ namespace testRogueSharp
                 RLConsole.Blit(messageConsole, 0, 0, messageWidth, messageHeight, rootConsole, 0, screenHeight - messageHeight);
                 RLConsole.Blit(inventoryConsole, 0, 0, inventoryWidth, inventoryHeight, rootConsole, 0, 0);
 
+                //surligner les cases survolées avec la souris
+                /*
+                if(currentSelectedCells != null) {
+                    foreach (var cell in currentSelectedCells) {
+                        rootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
+                    }
+                }
+                */
+                if (currentSelectedCell != null) {
+                    rootConsole.SetBackColor(currentSelectedCell.X, currentSelectedCell.Y, RLColor.Yellow);
+                    Console.WriteLine(currentSelectedCell.X + ", " + currentSelectedCell.Y);
+                }
+
                 rootConsole.Draw();
 
                 renderRequired = false;
             }
         }
+
+        //selectionner les cells sous la souris
+        /*
+        private static IEnumerable<Cell> SelectCellsUnderMouse() {
+            int x = rootConsole.Mouse.X;
+            int y = rootConsole.Mouse.Y;
+            if (x < 0 || x >= screenWidth || y < 0 || y >= screenHeight) {
+                return new List<Cell>();
+            }
+            IEnumerable<Cell> selectedCells;
+            //possibilité de faire un switch pour changer la forme de la zone selectionné
+            //pour l'instant on focus une case
+
+            selectedCells = DungeonMap.GetCell(x, y) as IEnumerable<Cell>;
+
+            return selectedCells;
+
+        }
+        */
+
+        //selectionner les cells sous la souris
+        private static Cell SelectCellUnderMouse() {
+            int x = rootConsole.Mouse.X;
+            int y = rootConsole.Mouse.Y;
+
+            Cell selectedCell;
+            //possibilité de faire un switch pour changer la forme de la zone selectionné
+            //pour l'instant on focus une case
+
+            selectedCell = (Cell)DungeonMap.GetCell(x, y);
+
+            return selectedCell;
+
+        }
+
+        //Filtrer les murs dans les zones selectionnées à la souris
+        private static IEnumerable<Cell> FilterWalls(IEnumerable<Cell> cells) {
+            return cells.Where(c => c.IsWalkable);
+        }
+
     }
 }
