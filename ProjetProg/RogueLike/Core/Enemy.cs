@@ -6,9 +6,16 @@ namespace RogueLike.Core
     public abstract class Enemy : ActiveCharacter
     {
 
-
         // The number of turns while the enemy is alerted of the player presence
         public int? NbTurnsAlerted{get;set;}
+
+        // The number of time period needed for the enemy to move
+        // A time period is equal to 200ms
+        public int MovingTimePeriod{get;set;}
+
+        // The remaning number of period needed for the enemy to move
+        // Desincremented in the update loop, and set to MovingTimePeriod when the enemy has moved
+        public int RemainingTimePeriodToMove{get;set;}
 
 
         // base behavior of an enemy, that can be overwritten in the subclasses

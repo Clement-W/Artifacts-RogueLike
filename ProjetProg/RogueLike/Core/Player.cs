@@ -21,7 +21,6 @@ namespace RogueLike.Core{
             Gold=0;
             Health = 100;
             MaxHealth = 100;
-            Speed = 10;
             Name = "Adventurer";
             PrintedColor = Colors.Player;
             BaseColor = PrintedColor;

@@ -41,7 +41,9 @@ namespace RogueLike.Systems
                     didPlayerAct = true;
                 }
 
-            }else{
+            }
+            else
+            {
                 didPlayerAct = true;
             }
 
@@ -55,7 +57,6 @@ namespace RogueLike.Systems
             enemy.ChangeDirectionSymbol(enemy.PosX, enemy.PosY, cell.X, cell.Y);
 
 
-
             // Try to move the enemy, if the enemy don't move and if the player is on the desired cell, attack the player
             if (!map.SetCharacterPosition(enemy, cell.X, cell.Y))
             {
@@ -64,13 +65,15 @@ namespace RogueLike.Systems
                     Attack(enemy, player);
                 }
             }
+
+
         }
 
         public void Attack(ActiveCharacter attacker, ActiveCharacter defender)
         {
             //TODO: trouver un mecanisme d'attaque en s'inspirant du système des tests et en prenant en compte la défense
             // Fait clignoter l'enemi s'il se prend des degats
-            defender.Health -=attacker.Attack; // provisoire
+            defender.Health -= attacker.Attack; // provisoire
 
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
             // Put the change color method in a thread to let the game continue during the color changement
@@ -90,8 +93,15 @@ namespace RogueLike.Systems
             List<Enemy> enemies = game.Map.GetEnemies();
             foreach (Enemy enemy in enemies)
             {
-
-                enemy.PerformAction(game);
+                if (enemy.RemainingTimePeriodToMove == 0)
+                {
+                    enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;
+                    enemy.PerformAction(game);
+                }
+                else
+                {
+                    enemy.RemainingTimePeriodToMove--;
+                }
 
 
 

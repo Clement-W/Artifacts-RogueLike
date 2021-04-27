@@ -10,8 +10,6 @@ namespace RogueLike.View
     public class GameScreen : ScreenView
     {
 
-        //TODO refaire l'écran comme sur le screen de jb  (modifier directions.cs et le blit)
-
 
         private static RLConsole mapConsole;
         private static RLConsole messageConsole;
@@ -89,13 +87,14 @@ namespace RogueLike.View
         {
 
             
-            if (stopwatch.ElapsedMilliseconds > 1000)
+            // Every second, trigger the scheduling system to move the non playable characters
+            if (stopwatch.ElapsedMilliseconds > 200)
             {
-            
+                // Reset the stopwatch
                 stopwatch.Reset();
-                Game.CommandSystem.MoveEnemies(Game);
-                RenderRequired=true;
-                stopwatch.Start();
+                Game.CommandSystem.MoveEnemies(Game); // Move the enemies
+                RenderRequired=true; // Render the game screen
+                stopwatch.Start(); // Restart the stopwatch
             }
 
             DidPlayerAct = false;
