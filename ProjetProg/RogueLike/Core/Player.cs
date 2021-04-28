@@ -15,7 +15,7 @@ namespace RogueLike.Core
         public Boots Feet { get; set; }
         public AttackEquipment Weapon { get; set; }
 
-        public List<Item> Items{get;set;}
+        public List<Item> Items { get; set; }
 
 
 
@@ -81,9 +81,10 @@ namespace RogueLike.Core
         public void DrawItemsInventory(RLConsole itemsConsole)
         {
             int yPosition = 1;
-            for(int i=0;i<Items.Count;i++){
-                itemsConsole.Print(1,yPosition,$"{i+1}: {Items[i].Name}",Colors.Text);
-                yPosition+=2;
+            for (int i = 0; i < Items.Count; i++)
+            {
+                itemsConsole.Print(1, yPosition, $"{i + 1}: {Items[i].Name}", Colors.Text);
+                yPosition += 2;
             }
         }
 
@@ -142,16 +143,23 @@ namespace RogueLike.Core
 
             else if (loot is AttackEquipment)
             {
-                DropItem(map, Weapon); // Drop the current weapon
+                if (Weapon is not Fist)
+                {
+                    DropItem(map, Weapon); // Drop the current weapon
+                }
                 Weapon = loot as AttackEquipment;
                 isItemCollected = true;
             }
 
-            else if(loot is Item){
-                if(Items.Count<5){
+            else if (loot is Item)
+            {
+                if (Items.Count < 5)
+                {
                     Items.Add(loot as Item);
                     isItemCollected = true;
-                }else{
+                }
+                else
+                {
                     Game.MessageLog.AddMessage("You're carrying too many items to take that.");
                 }
             }
