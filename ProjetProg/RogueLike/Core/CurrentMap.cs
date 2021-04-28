@@ -3,6 +3,7 @@ using RogueSharp;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using RogueLike.Interfaces;
 
 namespace RogueLike.Core
 {
@@ -12,17 +13,19 @@ namespace RogueLike.Core
 
         private readonly List<Enemy> enemies;
 
-        private readonly List<Equipment> equipments;
+        private readonly List<ILoot> loots;
 
-        public Staircase Staircase{get;set;} // To go deeper in the map
+        public Staircase Staircase { get; set; } // To go deeper in the map
 
-        public CurrentMap(){
+        public CurrentMap()
+        {
             enemies = new List<Enemy>();
-            equipments = new List<Equipment>();
-        } 
+            loots = new List<ILoot>();
+        }
 
 
-        public List<Enemy> GetEnemies(){
+        public List<Enemy> GetEnemies()
+        {
             return enemies;
         }
 
@@ -35,12 +38,19 @@ namespace RogueLike.Core
                 DrawCell(mapConsole, cell);
             }
 
-
-            foreach(Enemy enemy in enemies){
-                enemy.Draw(mapConsole,this);
+            foreach (ILoot loot in loots)
+            {
+                IDrawable drawableLoot = loot as IDrawable;
+                drawableLoot.Draw(mapConsole, this);
             }
 
-            Staircase.Draw(mapConsole,this);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Draw(mapConsole, this);
+            }
+
+
+            Staircase.Draw(mapConsole, this);
         }
 
         //TODO : Ajouter d'autres couleurs sur certains murs pour changer
@@ -97,10 +107,13 @@ namespace RogueLike.Core
 
         public bool SetCharacterPosition(Character character, int posX, int posY)
         {
-
             // If the desired position is walkable
             if (GetCell(posX, posY).IsWalkable)
             {
+                if (character is Player)
+                {
+                    CollectLoot(character as Player, posX, posY);
+                }
 
                 // The actual position of the character is now walkable
                 SetCellWalkability(character.PosX, character.PosY, true);
@@ -110,10 +123,11 @@ namespace RogueLike.Core
                 character.PosY = posY;
 
                 // It's last position is now not walkable
-                SetCellWalkability(character.PosX, character.PosY,false);
+                SetCellWalkability(character.PosX, character.PosY, false);
 
                 // Update the fov if the character is the player
-                if(character is Player){
+                if (character is Player)
+                {
                     UpdatePlayerFieldOfView(character as Player);
                 }
                 return true;
@@ -122,29 +136,65 @@ namespace RogueLike.Core
             return false;
         }
 
-        public void AddPlayerOnTheMap(Player player){
-            SetCellWalkability(player.PosX,player.PosY,false);
+        public void AddPlayerOnTheMap(Player player)
+        {
+            SetCellWalkability(player.PosX, player.PosY, false);
             UpdatePlayerFieldOfView(player);
         }
 
-        public void AddEnemy(Enemy enemy){
+        public void AddEnemy(Enemy enemy)
+        {
             enemies.Add(enemy);
-            SetCellWalkability(enemy.PosX,enemy.PosY,false);
+            SetCellWalkability(enemy.PosX, enemy.PosY, false);
         }
 
-        public void RemoveEnemy(Enemy enemy){
+        public void RemoveEnemy(Enemy enemy)
+        {
             enemies.Remove(enemy);
-            SetCellWalkability(enemy.PosX,enemy.PosY,true);
-        }     
-
-        public Enemy GetEnemyAt(int posX, int posY){
-            return enemies.FirstOrDefault(enemy => (enemy.PosX==posX && enemy.PosY==posY));
+            SetCellWalkability(enemy.PosX, enemy.PosY, true);
         }
 
-        public bool CanMoveToNextLevel(Player player){
-            return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;   
+        public Enemy GetEnemyAt(int posX, int posY)
+        {
+            return enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
-        
+        public bool CanMoveToNextLevel(Player player)
+        {
+            return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
+        }
+
+        public void AddLoot(ILoot loot)
+        {
+            loots.Add(loot);
+            // On laisse bien le loot walkable
+        }
+
+        // Collect a loot if there is one
+        public void CollectLoot(Player player, int posX, int posY)
+        {
+            ILoot loot = null;
+            foreach (ILoot lootInMap in loots)
+            {
+                if (lootInMap.PosX == posX && lootInMap.PosY == posY)
+                {
+                    loot = lootInMap;
+                    break;
+                }
+            }
+
+            if (loot != null && player.Collect(loot, this))
+            {
+                //probleme ça s'affiche pas toujours, trouver pourquoi
+                if (loot is Equipment)
+                {
+                    Equipment lootEquipment = loot as Equipment;
+                    Game.MessageLog.AddMessage("Vous venez de recuperer " + lootEquipment.Name);
+                }
+                loots.Remove(loot);
+            }
+        }
+
+
     }
 }

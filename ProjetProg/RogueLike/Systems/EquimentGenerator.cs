@@ -12,7 +12,7 @@ namespace RogueLike.Systems
             Random random = new Random();
             List<Equipment> possibleEquipments = new List<Equipment>();
 
-            if (difficultyLevel <= 2)
+            if (difficultyLevel >= 0)
             {
                 possibleEquipments.Add(Boots.Leather());
                 possibleEquipments.Add(Leggins.Leather());
@@ -22,9 +22,7 @@ namespace RogueLike.Systems
                 possibleEquipments.Add(Dagger.Wood());
                 possibleEquipments.Add(Sword.Wood());
                 possibleEquipments.Add(Spear.Wood());
-            }
-            else if (difficultyLevel > 2)
-            {
+        
                 possibleEquipments.Add(Boots.Iron());
                 possibleEquipments.Add(Leggins.Iron());
                 possibleEquipments.Add(Chestplate.Iron());

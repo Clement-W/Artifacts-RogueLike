@@ -12,7 +12,7 @@ namespace RogueLike.Core
         private int gold;
         private int health;
         private int maxHealth;
-        private int speed; // For the energy based schedulling system
+        
 
         public int Attack
         {
@@ -66,11 +66,7 @@ namespace RogueLike.Core
             set { maxHealth = value; }
         }
 
-        public int Speed
-        {
-            get { return speed; }
-            set { speed = value; }
-        }
+        
 
         // The 4 next symbols corresponds to the 4 direction sprites of the active character
 

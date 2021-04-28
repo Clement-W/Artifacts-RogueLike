@@ -4,7 +4,7 @@ using RogueSharp;
 
 namespace RogueLike.Core
 {
-    public abstract class Equipment : IDrawable
+    public abstract class Equipment : IDrawable, ILoot
     {
 
         public RLColor PrintedColor { get; set; }
@@ -17,11 +17,12 @@ namespace RogueLike.Core
 
 
 
-        public string Name{get;set;}
+        public string Name { get; set; }
 
 
-        public Equipment(){
-            Symbol='[';
+        public Equipment()
+        {
+            Symbol = '[';
             PrintedColor = Palette.DbLight;
         }
 
@@ -40,9 +41,11 @@ namespace RogueLike.Core
                 else
                 {
                     // Draw it with the floor background and a '.' symbol
-                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackground, Symbol);
+                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackground, '.');
                 }
             }
         }
+
+        
     }
 }

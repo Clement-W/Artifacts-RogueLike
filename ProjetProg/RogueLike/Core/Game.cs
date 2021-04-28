@@ -17,7 +17,7 @@ namespace RogueLike.Core
         public CameraSystem CameraSystem { get; private set; }
         public CommandSystem CommandSystem { get; set; }
 
-        public MessageLog MessageLog { get; set; }
+        public static MessageLog MessageLog { get; set; }
 
         public CurrentMap Map { get; set; }
 

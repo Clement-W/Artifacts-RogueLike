@@ -39,6 +39,7 @@ namespace RogueLike.Systems
             map.Copy(caveMap); // Copy the cave map into the current map
             CreateStairs(player);
             PlacePlayerInMap(player); // Place the player into the map
+            PlaceLootsInMap();
             return map;
         }
 
@@ -112,7 +113,7 @@ namespace RogueLike.Systems
 
             player.Move(posX, posY);
             map.AddPlayerOnTheMap(player);
-            PlaceEnemyInMap();
+            //PlaceEnemyInMap();
         }
 
         private void PlaceEnemyInMap()
@@ -137,10 +138,9 @@ namespace RogueLike.Systems
             }
         }
 
-        /*private void PlaceEquipmentInMap()
+        private void PlaceEquipmentsInMap()
         {
-
-            int nbMaxEquipment = 3;
+            int nbMaxEquipment = 40;
             for (int i = 0; i < nbMaxEquipment; i++)
             {
                 if (random.Next(0, 2) == 1)
@@ -154,10 +154,19 @@ namespace RogueLike.Systems
                     } while (!map.IsWalkable(x, y));
 
                     Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel,x,y);
-                    //map.AddEquipment(equipment); // TODO : à modifier en faisant le ILoot (avec methode pickup())avec liste de loot dans la map 
+                    map.AddLoot(equipment); 
                 }
             }
-        }*/
+        }
+        
+        private void PlaceItemsInMap(){
+            //TODO
+        }
+
+        private void PlaceLootsInMap(){
+            PlaceEquipmentsInMap();
+            PlaceItemsInMap();
+        }
 
         // Place the stairs as far as possible of the player, to go deeper in the map 
         private void CreateStairs(Player player)

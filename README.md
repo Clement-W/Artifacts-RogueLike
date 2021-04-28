@@ -21,10 +21,7 @@ TODO (pas ordonné) :
 * Trouver un moyen de gérer les attaques
 * Ajouter un inventaire au joueur pour objets
 * Faire la map vaisseau
-* Ajouter un drone qui suit le joueur
-* Il nous suit
-* Quand tu cliques sur un escalier : il va dessus et attend 10s pour l'ouvrir et des enemis pop autour, il faut le défendre
-* le drone ouvre les prochains niveaux dans les escaliers (remplace la clé)
+* Gameplay avec la souris
 * Ajouter des pnj (dont des vendeurs)
 * Faire les 3 maps des 3 planètes et faire des étages dedans
 * Faire les portails de téléportation pour revenir au vaisseau à la fin des maps
@@ -48,6 +45,10 @@ TODO bonus :
 * tableau des scores accessible sur le menu
 * Lampe torche 
 * Ajouter une barre de faim
+* Ajouter un drone qui suit le joueur
+* Il nous suit
+* Quand tu cliques sur un escalier : il va dessus et attend 10s pour l'ouvrir et des enemis pop autour, il faut le défendre
+* le drone ouvre les prochains niveaux dans les escaliers (remplace la clé)
 
 
 REMINDER:
