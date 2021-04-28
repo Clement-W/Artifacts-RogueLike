@@ -189,7 +189,7 @@ namespace RogueLike.Core
                 if (loot is Equipment)
                 {
                     Equipment lootEquipment = loot as Equipment;
-                    Game.MessageLog.AddMessage("Vous venez de recuperer " + lootEquipment.Name);
+                    Game.MessageLog.AddMessage("You found " + lootEquipment.Name);
                 }
                 loots.Remove(loot);
             }

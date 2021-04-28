@@ -58,6 +58,7 @@ namespace RogueLike.View
                 Game.Player.Draw(mapConsole, Game.Map);
                 Game.Player.DrawStats(statConsole);
                 Game.Player.DrawEquipmentInventory(equipmentsConsole);
+                Game.Player.DrawItemsInventory(itemsConsole);
                 Core.Game.MessageLog.Draw(messageConsole);
                 Game.CameraSystem.CenterCamera(Game.Player);
                 //draw inventory

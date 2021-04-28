@@ -1,6 +1,7 @@
 using RLNET;
 using RogueSharp;
 using RogueLike.Interfaces;
+using System.Collections.Generic;
 
 namespace RogueLike.Core
 {
@@ -12,12 +13,16 @@ namespace RogueLike.Core
         public Chestplate Chest { get; set; }
         public Leggins Legs { get; set; }
         public Boots Feet { get; set; }
-
         public AttackEquipment Weapon { get; set; }
+
+        public List<Item> Items{get;set;}
+
+
 
 
         public Player()
         {
+            Items = new List<Item>();
             //create a player with the initial stats
 
             Attack = 10;
@@ -42,7 +47,7 @@ namespace RogueLike.Core
             Legs = Leggins.None();
             Feet = Boots.None();
 
-            Weapon = Dagger.Wood();
+            Weapon = Knife.Mk1();
         }
 
 
@@ -73,15 +78,27 @@ namespace RogueLike.Core
             equipmentConsole.Print(1, 9, $"w: {Weapon.Name}", Colors.Text);
         }
 
+        public void DrawItemsInventory(RLConsole itemsConsole)
+        {
+            int yPosition = 1;
+            for(int i=0;i<Items.Count;i++){
+                itemsConsole.Print(1,yPosition,$"{i+1}: {Items[i].Name}",Colors.Text);
+                yPosition+=2;
+            }
+        }
+
         public void Move(int x, int y)
         {
             PosX = x;
             PosY = y;
         }
 
+
+
         //Collect an item or an equipment
         public bool Collect(ILoot loot, CurrentMap map)
         {
+            bool isItemCollected = false;
             if (loot is Helmet)
             {
                 if (Head.Name != "None")
@@ -90,47 +107,56 @@ namespace RogueLike.Core
                 }
                 Head = loot as Helmet; // Equip the equipment
 
-                return true;
+                isItemCollected = true;
             }
 
-            if (loot is Chestplate)
+            else if (loot is Chestplate)
             {
                 if (Chest.Name != "None")
                 {
                     DropItem(map, Chest); // Drop the current equipment 
                 }
                 Chest = loot as Chestplate; // Equip the equipment
-                return true;
+                isItemCollected = true;
             }
 
-            if (loot is Leggins)
+            else if (loot is Leggins)
             {
                 if (Legs.Name != "None")
                 {
                     DropItem(map, Legs); // Drop the current equipment 
                 }
                 Legs = loot as Leggins; // Equip the equipment
-                return true;
+                isItemCollected = true;
             }
 
-            if (loot is Boots)
+            else if (loot is Boots)
             {
                 if (Feet.Name != "None")
                 {
                     DropItem(map, Feet);// Drop the current equipment 
                 }
                 Feet = loot as Boots; // Equip the equipment
-                return true;
+                isItemCollected = true;
             }
 
-            if (loot is AttackEquipment)
+            else if (loot is AttackEquipment)
             {
                 DropItem(map, Weapon); // Drop the current weapon
                 Weapon = loot as AttackEquipment;
-                return true;
+                isItemCollected = true;
             }
 
-            return false;
+            else if(loot is Item){
+                if(Items.Count<5){
+                    Items.Add(loot as Item);
+                    isItemCollected = true;
+                }else{
+                    Game.MessageLog.AddMessage("You're carrying too many items to take that.");
+                }
+            }
+
+            return isItemCollected;
         }
 
         // Drop an item on the ground
@@ -144,7 +170,7 @@ namespace RogueLike.Core
                 if (loot is Equipment)
                 {
                     Equipment lootEquipment = loot as Equipment;
-                    Game.MessageLog.AddMessage("Vous venez de déposer " + lootEquipment.Name);
+                    Game.MessageLog.AddMessage("You've dropped " + lootEquipment.Name);
                 }
                 map.AddLoot(loot);
             }
@@ -165,6 +191,7 @@ namespace RogueLike.Core
             }
             return null;
         }
+
 
 
     }

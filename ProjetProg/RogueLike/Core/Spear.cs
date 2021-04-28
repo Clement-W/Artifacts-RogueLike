@@ -10,24 +10,24 @@ namespace RogueLike.Core
             WideRange = 1;
         }
 
-        public static Spear Wood()
+        public static Spear Mk1()
         {
-            return new Spear("Wood Spear", 1);
+            return new Spear("Spear-Mk1", 1);
         }
 
-        public static Spear Copper()
+        public static Spear Mk2()
         {
-            return new Spear("Copper Spear", 2);
+            return new Spear("Spear-Mk2", 2);
         }
 
-        public static Spear Iron()
+        public static Spear Mk3()
         {
-            return new Spear("Iron Spear", 3);
+            return new Spear("Spear-Mk3", 3);
         }
 
-        public static Spear Titanium()
+        public static Spear Mk4()
         {
-            return new Spear("Titanium Spear", 5);
+            return new Spear("Spear-Mk4", 5);
         }
 
     }

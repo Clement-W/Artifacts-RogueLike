@@ -6,23 +6,24 @@ namespace RogueLike.Core
             Name = name;
             AttackBonus = attBonus;
             DepthRange = 1;
-            WideRange = 2;
+            WideRange = 3;
         }
 
-        public static Sword Wood(){
-            return new Sword("Wood Sword",1);
+        // TODO : expliquer Mk dans le rapport
+        public static Sword Mk1(){
+            return new Sword("Sword-Mk1",1);
         }
 
-        public static Sword Copper(){
-            return new Sword("Copper Sword",3);
+        public static Sword Mk2(){
+            return new Sword("Sword-Mk2",3);
         }
 
-        public static Sword Iron(){
-            return new Sword("Iron Sword",4);
+        public static Sword Mk3(){
+            return new Sword("Sword-Mk3",4);
         }
 
-        public static Sword Titanium(){
-            return new Sword("Titanium Sword",6);
+        public static Sword Mk4(){
+            return new Sword("Sword-Mk4",6);
         }
 
     }

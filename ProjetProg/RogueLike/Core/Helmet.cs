@@ -11,20 +11,20 @@ namespace RogueLike.Core
             return new Helmet("None",0);  
         }
 
-        public static Helmet Leather(){
-            return new Helmet("Leather Helmet", 1);
+        public static Helmet Polymer(){
+            return new Helmet("Polymer Helmet", 1);
         }
 
-        public static Helmet Iron(){
-            return new Helmet("Iron Helmet",2);
+        public static Helmet Carbon(){
+            return new Helmet("Carbon Helmet",2);
         }
 
-        public static Helmet Steel(){
-            return new Helmet("Steel Helmet",3);
+        public static Helmet Platinum(){
+            return new Helmet("Platinum Helmet",3);
         }
 
-        public static Helmet Obsidian(){
-            return new Helmet("Obsidian Helmet",4);
+        public static Helmet Titanium(){
+            return new Helmet("Titanium Helmet",4);
         }
     }
 }

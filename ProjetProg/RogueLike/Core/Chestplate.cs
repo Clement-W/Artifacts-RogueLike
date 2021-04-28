@@ -13,24 +13,24 @@ namespace RogueLike.Core
             return new Chestplate("None", 0);
         }
 
-        public static Chestplate Leather()
+        public static Chestplate Polymer()
         {
-            return new Chestplate("Leather Chestplate", 1);
+            return new Chestplate("Polymer Chestplate", 1);
         }
 
-        public static Chestplate Iron()
+        public static Chestplate Carbon()
         {
-            return new Chestplate("Iron Chestplate", 2);
+            return new Chestplate("Carbon Chestplate", 2);
         }
 
-        public static Chestplate Steel()
+        public static Chestplate Platinum()
         {
-            return new Chestplate("Steel Chestplate", 3);
+            return new Chestplate("Platinum Chestplate", 3);
         }
 
-        public static Chestplate Obsidian()
+        public static Chestplate Titanium()
         {
-            return new Chestplate("Obsidian Chestplate", 4);
+            return new Chestplate("Titanium Chestplate", 4);
         }
     }
 }

@@ -13,24 +13,24 @@ namespace RogueLike.Core
             return new Boots("None", 0);
         }
 
-        public static Boots Leather()
+        public static Boots Polymer()
         {
-            return new Boots("Leather Boots", 1);
+            return new Boots("Polymer Boots", 1);
         }
 
-        public static Boots Iron()
+        public static Boots Carbon()
         {
-            return new Boots("Iron Boots", 2);
+            return new Boots("Carbon Boots", 2);
         }
 
-        public static Boots Steel()
+        public static Boots Platinum()
         {
-            return new Boots("Steel Boots", 3);
+            return new Boots("Platinum Boots", 3);
         }
 
-        public static Boots Obsidian()
+        public static Boots Titanium()
         {
-            return new Boots("Obsidian Boots", 4);
+            return new Boots("Titanium Boots", 4); 
         }
     }
 }

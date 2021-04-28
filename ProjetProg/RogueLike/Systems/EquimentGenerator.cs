@@ -14,23 +14,23 @@ namespace RogueLike.Systems
 
             if (difficultyLevel >= 0)
             {
-                possibleEquipments.Add(Boots.Leather());
-                possibleEquipments.Add(Leggins.Leather());
-                possibleEquipments.Add(Chestplate.Leather());
-                possibleEquipments.Add(Helmet.Leather());
+                possibleEquipments.Add(Boots.Polymer());
+                possibleEquipments.Add(Leggins.Polymer());
+                possibleEquipments.Add(Chestplate.Polymer());
+                possibleEquipments.Add(Helmet.Polymer());
 
-                possibleEquipments.Add(Dagger.Wood());
-                possibleEquipments.Add(Sword.Wood());
-                possibleEquipments.Add(Spear.Wood());
+                possibleEquipments.Add(Knife.Mk1());
+                possibleEquipments.Add(Sword.Mk1());
+                possibleEquipments.Add(Spear.Mk1());
         
-                possibleEquipments.Add(Boots.Iron());
-                possibleEquipments.Add(Leggins.Iron());
-                possibleEquipments.Add(Chestplate.Iron());
-                possibleEquipments.Add(Helmet.Iron());
+                possibleEquipments.Add(Boots.Carbon());
+                possibleEquipments.Add(Leggins.Carbon());
+                possibleEquipments.Add(Chestplate.Carbon());
+                possibleEquipments.Add(Helmet.Carbon());
 
-                possibleEquipments.Add(Dagger.Iron());
-                possibleEquipments.Add(Sword.Iron());
-                possibleEquipments.Add(Spear.Iron());
+                possibleEquipments.Add(Knife.Mk3());
+                possibleEquipments.Add(Sword.Mk3());
+                possibleEquipments.Add(Spear.Mk3());
             }
 
             Equipment equipment = possibleEquipments[random.Next(0, possibleEquipments.Count)];

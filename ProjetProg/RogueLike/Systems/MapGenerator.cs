@@ -102,18 +102,11 @@ namespace RogueLike.Systems
 
         private void PlacePlayerInMap(Player player)
         {
-            int posX;
-            int posY;
+            ICell cell= FindRandomWalkableCell();
 
-            do
-            {
-                posX = random.Next(0, mapWidth);
-                posY = random.Next(0, mapHeight);
-            } while (!map.IsWalkable(posX, posY));
-
-            player.Move(posX, posY);
+            player.Move(cell.X, cell.Y);
             map.AddPlayerOnTheMap(player);
-            //PlaceEnemyInMap();
+            PlaceEnemyInMap();
         }
 
         private void PlaceEnemyInMap()
@@ -124,15 +117,10 @@ namespace RogueLike.Systems
             {
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an enemy
-                    int x;
-                    int y;
-                    do
-                    {
-                        x = random.Next(0, mapWidth);
-                        y = random.Next(0, mapHeight);
-                    } while (!map.IsWalkable(x, y));
 
-                    Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel,x,y);
+                    ICell cell = FindRandomWalkableCell();
+
+                    Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel, cell.X, cell.Y);
                     map.AddEnemy(enemy);
                 }
             }
@@ -140,30 +128,48 @@ namespace RogueLike.Systems
 
         private void PlaceEquipmentsInMap()
         {
-            int nbMaxEquipment = 40;
+            int nbMaxEquipment = 10;
             for (int i = 0; i < nbMaxEquipment; i++)
             {
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an equipment
-                    int x;
-                    int y;
-                    do
-                    {
-                        x = random.Next(0, mapWidth);
-                        y = random.Next(0, mapHeight);
-                    } while (!map.IsWalkable(x, y));
 
-                    Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel,x,y);
-                    map.AddLoot(equipment); 
+                    ICell cell = FindRandomWalkableCell();
+
+                    Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel, cell.X, cell.Y);
+                    map.AddLoot(equipment);
                 }
             }
         }
-        
-        private void PlaceItemsInMap(){
-            //TODO
+
+        private void PlaceItemsInMap()
+        {
+            int nbMaxItem = 10;
+            for (int i = 0; i < nbMaxItem; i++)
+            {
+                if (random.Next(0, 2) == 1)
+                { // 50% to create an item
+                    ICell cell = FindRandomWalkableCell();
+                    Item item = ItemGenerator.CreateItem(cell.X, cell.Y);
+                    map.AddLoot(item);
+                }
+            }
         }
 
-        private void PlaceLootsInMap(){
+        private ICell FindRandomWalkableCell()
+        {
+            int x;
+            int y;
+            do
+            {
+                x = random.Next(0, mapWidth);
+                y = random.Next(0, mapHeight);
+            } while (!map.IsWalkable(x, y));
+            return map.GetCell(x, y);
+        }
+
+        private void PlaceLootsInMap()
+        {
             PlaceEquipmentsInMap();
             PlaceItemsInMap();
         }
@@ -172,7 +178,7 @@ namespace RogueLike.Systems
         private void CreateStairs(Player player)
         {
             Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
-            map.Staircase = new Staircase(farthestCellFromPlayer.X,farthestCellFromPlayer.Y);
+            map.Staircase = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 
         private Cell FindFarthestPointFromPlayer(Player player)
