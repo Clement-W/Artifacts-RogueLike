@@ -47,7 +47,7 @@ namespace RogueLike.Core
             Legs = Leggins.None();
             Feet = Boots.None();
 
-            Weapon = Knife.Mk1();
+            Weapon = new Fist();
         }
 
 

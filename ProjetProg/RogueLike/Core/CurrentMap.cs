@@ -159,6 +159,11 @@ namespace RogueLike.Core
             return enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
+        public ILoot GetLootAt(int posX, int posY)
+        {
+            return loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
+        }
+
         public bool CanMoveToNextLevel(Player player)
         {
             return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
@@ -173,15 +178,8 @@ namespace RogueLike.Core
         // Collect a loot if there is one
         public void CollectLoot(Player player, int posX, int posY)
         {
-            ILoot loot = null;
-            foreach (ILoot lootInMap in loots)
-            {
-                if (lootInMap.PosX == posX && lootInMap.PosY == posY)
-                {
-                    loot = lootInMap;
-                    break;
-                }
-            }
+            ILoot loot = GetLootAt(posX,posY);
+            
 
             if (loot != null && player.Collect(loot, this))
             {
