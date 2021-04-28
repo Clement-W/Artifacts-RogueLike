@@ -18,15 +18,15 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 
 TODO (pas ordonné) : 
 * Transformer TOUTES les méthodes static en pattern factory
-* Tester actions liées au clic souris
 * Trouver un moyen de gérer les attaques
-* Faire un energy based schedulling system : http://nadako.github.io/rants/posts/2013-03-26_roguelike-turn-based-time-scheduling.html (pour l'instant il y a un truc provisoire qui fait bouger uniquement les monstres dès que le joueur se déplace)
 * Ajouter un inventaire au joueur pour objets
 * Faire la map vaisseau
 * Ajouter un drone qui suit le joueur
+* Il nous suit
+* Quand tu cliques sur un escalier : il va dessus et attend 10s pour l'ouvrir et des enemis pop autour, il faut le défendre
+* le drone ouvre les prochains niveaux dans les escaliers (remplace la clé)
 * Ajouter des pnj (dont des vendeurs)
-* Faire les 4 maps des 4 planètes et faire des étages dedans
-* Ajouter une clé à chaque étage pour débloquer la sortie (on peut changer ça par un code que le drone doit scanner pour ouvrir la porte qui enmene à la suite)
+* Faire les 3 maps des 3 planètes et faire des étages dedans
 * Faire les portails de téléportation pour revenir au vaisseau à la fin des maps
 * Ajouter l'artefact au dernier étage de chacune des 4 maps planètes
 * Trouver un moyen d'ajouter des enigmes au sein des maps (peut être une énigme pour débloquer l'artefact de chacune des 4 planètes ?)
