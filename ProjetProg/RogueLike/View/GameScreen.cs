@@ -2,10 +2,10 @@ using RogueLike.Core;
 using RLNET;
 using RogueLike.Systems;
 using System.Diagnostics;
+using System;
+using RogueSharp;
 
-
-namespace RogueLike.View
-{
+namespace RogueLike.View {
 
     public class GameScreen : ScreenView
     {
@@ -85,8 +85,8 @@ namespace RogueLike.View
 
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
+            UpdateOrientation();
 
-            
             // Every second, trigger the scheduling system to move the non playable characters
             if (stopwatch.ElapsedMilliseconds > 200)
             {
@@ -133,8 +133,70 @@ namespace RogueLike.View
             }
         }
 
+        private static Cell SelectCellUnderMouse(int x, int y) {
+            
+            Cell selectedCell;
+            //possibilité de faire un switch pour changer la forme de la zone selectionné
+            //pour l'instant on focus une case
+
+            selectedCell = Game.Map.CellFor(Game.Map.IndexFor(x, y)) as Cell;
+            /*
+            if (x < 0 || x >= Console.Width || y < 0 || y >= Console.Height) {
+
+                return (Cell)Game.Map.GetCell(Game.Player.PosX, Game.Player.PosY);
+            }*/
+
+            return selectedCell;
+
+        }
 
 
+        private void UpdateOrientation() {
+
+            int mouseX = Console.Mouse.X;
+            int mouseY = Console.Mouse.Y;
+
+            if (mouseX >= 0 && mouseX < Console.Width && mouseY >= 0 && mouseY < Console.Height) {
+
+                int absoluteX = mouseX + CameraSystem.viewPortStartX;
+                int absoluteY = mouseY + CameraSystem.viewPortStartY;
+
+                Cell currentMouseCell = SelectCellUnderMouse(absoluteX, absoluteY);
+
+                int x = currentMouseCell.X;
+                int y = currentMouseCell.Y;
+
+                System.Console.WriteLine(x + ", " + y);
+                System.Console.WriteLine("p: " + Game.Player.PosX + ", " + Game.Player.PosY);
+
+                double diffX = Math.Abs(x - Game.Player.PosX);
+                double diffY = Math.Abs(y - Game.Player.PosY);
+
+                if (x > Game.Player.PosX) {
+                    if (diffX > diffY) {
+                        Game.Player.Symbol = Game.Player.RightSymbol;
+                    } else {
+                        if (y > Game.Player.PosY) {
+                            Game.Player.Symbol = Game.Player.UpSymbol;
+                        } else {
+                            Game.Player.Symbol = Game.Player.DownSymbol;
+                        }
+                    }
+                } else {
+                    if (diffX > diffY) {
+                        Game.Player.Symbol = Game.Player.LeftSymbol;
+                    } else {
+                        if (y > Game.Player.PosY) {
+                            Game.Player.Symbol = Game.Player.UpSymbol;
+                        } else {
+                            Game.Player.Symbol = Game.Player.DownSymbol;
+                        }
+                    }
+                }
+            }
+
+            
+        }
 
 
 

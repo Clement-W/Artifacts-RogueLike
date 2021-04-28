@@ -15,7 +15,7 @@ namespace RogueLike.View
 
         public bool DidPlayerAct { get; set; }
 
-        public Game Game { get; set; }
+        public static Game Game { get; set; }
 
         public ScreenView(string consoleTitle, Game game)
         {
