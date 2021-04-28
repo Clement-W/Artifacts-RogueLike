@@ -25,10 +25,14 @@ namespace RogueLike.Systems
 
             switch (direction)
             {
-                case Direction.Up: y--; player.Symbol = player.UpSymbol; break;
-                case Direction.Down: y++; player.Symbol = player.DownSymbol; break;
-                case Direction.Right: x++; player.Symbol = player.RightSymbol; break;
-                case Direction.Left: x--; player.Symbol = player.LeftSymbol; break;
+                case Direction.Up: y--; //player.Symbol = player.UpSymbol; 
+                    break;
+                case Direction.Down: y++; //player.Symbol = player.DownSymbol; 
+                    break;
+                case Direction.Right: x++; //player.Symbol = player.RightSymbol; 
+                    break;
+                case Direction.Left: x--; //player.Symbol = player.LeftSymbol; 
+                    break;
             }
 
 

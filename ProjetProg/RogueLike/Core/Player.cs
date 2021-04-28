@@ -36,10 +36,10 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.PlayerHit;
 
-            UpSymbol = '@';
-            DownSymbol = '@';
-            LeftSymbol = '@';
-            RightSymbol = '@';
+            UpSymbol = 'z';
+            DownSymbol = 's';
+            LeftSymbol = 'q';
+            RightSymbol = 'd';
             Symbol = DownSymbol;
 
             Head = Helmet.None();

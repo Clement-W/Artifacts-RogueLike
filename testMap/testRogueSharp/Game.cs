@@ -217,6 +217,7 @@ namespace testRogueSharp
                 if (currentSelectedCell != null) {
                     rootConsole.SetBackColor(currentSelectedCell.X, currentSelectedCell.Y, RLColor.Yellow);
                     Console.WriteLine(currentSelectedCell.X + ", " + currentSelectedCell.Y);
+                    Console.WriteLine("P :" + Player.X + ", " + Player.Y);
                 }
 
                 rootConsole.Draw();
@@ -246,8 +247,8 @@ namespace testRogueSharp
 
         //selectionner les cells sous la souris
         private static Cell SelectCellUnderMouse() {
-            int x = rootConsole.Mouse.X;
-            int y = rootConsole.Mouse.Y;
+            int x = mapConsole.Mouse.X;
+            int y = mapConsole.Mouse.Y;
 
             Cell selectedCell;
             //possibilité de faire un switch pour changer la forme de la zone selectionné
