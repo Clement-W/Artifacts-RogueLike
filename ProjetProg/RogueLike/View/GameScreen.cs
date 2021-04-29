@@ -4,6 +4,7 @@ using RogueLike.Systems;
 using System.Diagnostics;
 using System;
 using RogueSharp;
+using System.Threading;
 
 namespace RogueLike.View {
 
@@ -150,7 +151,7 @@ namespace RogueLike.View {
             
             Cell selectedCell;
             //possibilit� de faire un switch pour changer la forme de la zone selectionn�
-            //pour l'instant on focus une case
+            //pour l'instant on focus une case TODO
 
             
             if (x >= 0 && x < Game.Map.Width && y >= 0 && y < Game.Map.Height) {
@@ -210,6 +211,15 @@ namespace RogueLike.View {
                 }
             }
 
+            
+        }
+
+        public static void ChangeBackColor(ICell cell) {
+
+            //RootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
+            
+            ///////////Game.Map.SetCellWalkability(cell.X, cell.Y, false);
+            mapConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
             
         }
 

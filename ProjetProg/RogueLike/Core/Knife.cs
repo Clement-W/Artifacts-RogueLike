@@ -5,8 +5,8 @@ namespace RogueLike.Core
         public Knife(string name, int attBonus){
             Name = name;
             AttackBonus = attBonus;
-            DepthRange = 1;
-            WideRange = 1;
+            RangeDepth = 1;
+            RangeWidth = 1;
         }
 
         public static Knife Mk1(){
@@ -25,10 +25,6 @@ namespace RogueLike.Core
             return new Knife("Knife-Mk4",7);
         }
 
-        public override void Attack(CurrentMap map)
-        {
-            throw new System.NotImplementedException();
-        }
 
 
 

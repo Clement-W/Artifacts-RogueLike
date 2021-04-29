@@ -5,8 +5,8 @@ namespace RogueLike.Core
         public Sword(string name, int attBonus){
             Name = name;
             AttackBonus = attBonus;
-            DepthRange = 1;
-            WideRange = 3;
+            RangeDepth = 1;
+            RangeWidth = 3;
         }
 
         // TODO : expliquer Mk dans le rapport
@@ -26,10 +26,6 @@ namespace RogueLike.Core
             return new Sword("Sword-Mk4",6);
         }
 
-        public override void Attack(CurrentMap map)
-        {
-            throw new System.NotImplementedException();
-        }
 
     }
 }

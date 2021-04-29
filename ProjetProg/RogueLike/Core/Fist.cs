@@ -5,13 +5,9 @@ namespace RogueLike.Core
         public Fist(){
             Name = "Fist";
             AttackBonus=0;
-            DepthRange = 1;
-            WideRange = 1;
+            RangeDepth = 1;
+            RangeWidth = 1;
         }
 
-        public override void Attack(CurrentMap map)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
