@@ -209,19 +209,8 @@ namespace RogueLike.View {
                         }
                     }
                 }
-            }
-
-            
-        }
-
-        public static void ChangeBackColor(ICell cell) {
-
-            //RootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-            
-            ///////////Game.Map.SetCellWalkability(cell.X, cell.Y, false);
-            mapConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-            
-        }
+            }      
+        } 
 
 
 

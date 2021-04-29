@@ -44,5 +44,7 @@ namespace RogueLike.Core
 
         public static RLColor Seller = Palette.DbLight;
 
+        public static RLColor AttackedCell = Palette.DbLight;
+
     }
 }

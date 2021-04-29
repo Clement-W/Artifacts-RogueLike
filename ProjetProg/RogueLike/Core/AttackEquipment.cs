@@ -58,8 +58,13 @@ namespace RogueLike.Core
             {
                 Console.WriteLine("c :" + cell.X + ", " + cell.Y);
                 Enemy enemy = map.GetEnemyAt(cell.X, cell.Y);
-                //ScreenView.RootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-                GameScreen.ChangeBackColor(cell);
+
+
+                Thread changeColorThread = new Thread(() => ChangeColorOfAttackedCells(cell, map));
+                changeColorThread.Start(); // Change the color of the attacked cells during a short period of time (100ms)
+
+
+
                 if (enemy != null)
                 {
                     Console.WriteLine("BAM");
@@ -71,6 +76,21 @@ namespace RogueLike.Core
                     }
                 }
             }
+        }
+
+        public void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
+        {
+            lock (map.AttackedCells) // Lock the list while w'ere modifying it to avoid multi-threading errors 
+            {
+                map.AttackedCells.Add(cell); 
+            }
+
+            Thread.Sleep(100); // Wait 100ms
+            lock (map.AttackedCells) // Lock the list while we're modfying it
+            {
+                map.AttackedCells.Remove(cell);
+            }
+
         }
 
 
