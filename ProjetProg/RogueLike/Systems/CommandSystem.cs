@@ -85,7 +85,9 @@ namespace RogueLike.Systems
             //TODO
             //Get l'orientation du joueur
             //On switch sur l'arme et appelle la méthode spécifique dédiée à l'arme player.weapon.attack()
-            //if weapon is Knife
+            //if weapon is Knife 
+
+            player.Weapon.Attack(map, player);
         
         }
 

@@ -7,8 +7,8 @@ namespace RogueLike.Core
         {
             Name = name;
             AttackBonus = attBonus;
-            DepthRange = 2;
-            WideRange = 1;
+            RangeDepth = 2;
+            RangeWidth = 1;
         }
         public Spear(string name, int attBonus) : base(name, attBonus) { }
 
@@ -32,10 +32,6 @@ namespace RogueLike.Core
             return new Spear("Spear-Mk4", 5,100);
         }
 
-        public override void Attack(CurrentMap map)
-        {
-            throw new System.NotImplementedException();
-        }
 
     }
 }
