@@ -55,9 +55,6 @@ namespace RogueLike.Systems
             return didPlayerAct;
         }
 
-        public void UseItem(Player player, CurrentMap map){
-            ILoot loot = map.GetLootAt(player.PosX,player.PosY);
-        }
 
 
         public void MoveEnemy(Enemy enemy, ICell cell, CurrentMap map, Player player)
