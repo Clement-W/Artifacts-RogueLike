@@ -8,5 +8,10 @@ namespace RogueLike.Core
             DepthRange = 1;
             WideRange = 1;
         }
+
+        public override void Attack(CurrentMap map)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

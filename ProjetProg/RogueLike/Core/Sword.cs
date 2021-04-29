@@ -26,5 +26,10 @@ namespace RogueLike.Core
             return new Sword("Sword-Mk4",6);
         }
 
+        public override void Attack(CurrentMap map)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

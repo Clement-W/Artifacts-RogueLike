@@ -36,21 +36,12 @@ namespace RogueLike.Systems
             }
 
 
-            // here, the condition == true if the player don't move
-            if (!map.SetCharacterPosition(player, x, y)) //move the player if possible
-            {
-                Enemy enemy = map.GetEnemyAt(x, y);
-                if (enemy != null)
-                {
-                    Attack(player, enemy);
-                    didPlayerAct = true;
-                }
 
-            }
-            else
+            if (map.SetCharacterPosition(player, x, y)) //move the player if possible
             {
                 didPlayerAct = true;
             }
+ 
 
             return didPlayerAct;
         }
@@ -69,15 +60,14 @@ namespace RogueLike.Systems
             {
                 if (player.PosX == cell.X && player.PosY == cell.Y)
                 {
-                    Attack(enemy, player);
+                    EnemyAttack(enemy, player);
                 }
             }
         }
 
-        public void Attack(ActiveCharacter attacker, ActiveCharacter defender)
+        public void EnemyAttack(Enemy attacker, Player defender)
         {
-            //TODO: trouver un mecanisme d'attaque en s'inspirant du système des tests et en prenant en compte la défense
-            // Fait clignoter l'enemi s'il se prend des degats
+      
             defender.Health -= attacker.Attack; // provisoire
 
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
@@ -86,10 +76,21 @@ namespace RogueLike.Systems
             FlashThread.Start();
 
 
-            //proba de faire un coup critique
-
+            //proba de faire un coup critique 5%
+            //TODO
 
         }
+
+        public void PlayerAttack(Player player, CurrentMap map){
+            //TODO
+            //Get l'orientation du joueur
+            //On switch sur l'arme et appelle la méthode spécifique dédiée à l'arme player.weapon.attack()
+            //if weapon is Knife
+        
+        }
+
+
+
 
 
         //provisoire

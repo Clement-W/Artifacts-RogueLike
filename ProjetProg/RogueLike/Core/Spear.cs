@@ -30,5 +30,10 @@ namespace RogueLike.Core
             return new Spear("Spear-Mk4", 5);
         }
 
+        public override void Attack(CurrentMap map)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

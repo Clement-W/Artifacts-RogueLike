@@ -103,6 +103,7 @@ namespace RogueLike.View {
 
             if (RootConsole.Mouse.GetLeftClick()) {
                 UpdateOrientation();
+                Game.CommandSystem.PlayerAttack(Game.Player,Game.Map);
                 RenderRequired = true;
             }
 

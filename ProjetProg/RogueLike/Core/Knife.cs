@@ -18,11 +18,16 @@ namespace RogueLike.Core
         }
 
         public static Knife Mk3(){
-            return new Knife("Knife-Dagger",4);
+            return new Knife("Knife-Mk3",4);
         }
 
         public static Knife Mk4(){
-            return new Knife("Knife-Dagger",7);
+            return new Knife("Knife-Mk4",7);
+        }
+
+        public override void Attack(CurrentMap map)
+        {
+            throw new System.NotImplementedException();
         }
 
 
