@@ -127,6 +127,12 @@ namespace RogueLike.View {
                             Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
                         }
                         break;
+
+                    case RLKey.Number1: DidPlayerAct = true; Game.Player.UseItem(0); break;
+                    case RLKey.Number2: DidPlayerAct = true; Game.Player.UseItem(1); break;
+                    case RLKey.Number3: DidPlayerAct = true; Game.Player.UseItem(2); break;
+                    case RLKey.Number4: DidPlayerAct = true; Game.Player.UseItem(3); break;
+                    case RLKey.Number5: DidPlayerAct = true; Game.Player.UseItem(4); break;
                 }
 
             }
@@ -142,7 +148,7 @@ namespace RogueLike.View {
         private static Cell SelectCell(int x, int y) {
             
             Cell selectedCell;
-            //possibilité de faire un switch pour changer la forme de la zone selectionné
+            //possibilitï¿½ de faire un switch pour changer la forme de la zone selectionnï¿½
             //pour l'instant on focus une case
 
             

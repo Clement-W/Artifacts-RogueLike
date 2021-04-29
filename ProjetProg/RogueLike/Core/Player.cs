@@ -2,6 +2,7 @@ using RLNET;
 using RogueSharp;
 using RogueLike.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RogueLike.Core
 {
@@ -198,6 +199,12 @@ namespace RogueLike.Core
                 }
             }
             return null;
+        }
+
+        public void UseItem(int index){
+            Item item = Items[index];
+            item.Use(this);
+            Items.RemoveAt(index);
         }
 
 

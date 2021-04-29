@@ -19,7 +19,6 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 TODO (pas ordonné) : 
 * Transformer TOUTES les méthodes static en pattern factory
 * Trouver un moyen de gérer les attaques
-* Ajouter un inventaire au joueur pour objets
 * Faire la map vaisseau
 * Gameplay avec la souris
 * Ajouter des pnj (dont des vendeurs)

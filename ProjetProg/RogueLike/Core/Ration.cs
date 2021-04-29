@@ -6,7 +6,7 @@ namespace RogueLike.Core
             Name = "Ration";
         }
 
-        public override void UseItem(Player player){
+        public override void Use(Player player){
             player.Health+=50;
             if(player.Health>player.MaxHealth){
                 player.Health = player.MaxHealth;   
