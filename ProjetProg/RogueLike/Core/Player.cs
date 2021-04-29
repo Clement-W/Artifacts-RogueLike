@@ -101,7 +101,7 @@ namespace RogueLike.Core
         //Collect an item or an equipment
         public bool Collect(ILoot loot, CurrentMap map)
         {
-            bool isItemCollected = false;
+            bool isLootCollected = false;
             if (loot is Helmet)
             {
                 if (Head.Name != "None")
@@ -110,7 +110,7 @@ namespace RogueLike.Core
                 }
                 Head = loot as Helmet; // Equip the equipment
 
-                isItemCollected = true;
+                isLootCollected = true;
             }
 
             else if (loot is Chestplate)
@@ -120,7 +120,7 @@ namespace RogueLike.Core
                     DropItem(map, Chest); // Drop the current equipment 
                 }
                 Chest = loot as Chestplate; // Equip the equipment
-                isItemCollected = true;
+                isLootCollected = true;
             }
 
             else if (loot is Leggins)
@@ -130,7 +130,7 @@ namespace RogueLike.Core
                     DropItem(map, Legs); // Drop the current equipment 
                 }
                 Legs = loot as Leggins; // Equip the equipment
-                isItemCollected = true;
+                isLootCollected = true;
             }
 
             else if (loot is Boots)
@@ -140,7 +140,7 @@ namespace RogueLike.Core
                     DropItem(map, Feet);// Drop the current equipment 
                 }
                 Feet = loot as Boots; // Equip the equipment
-                isItemCollected = true;
+                isLootCollected = true;
             }
 
             else if (loot is AttackEquipment)
@@ -150,7 +150,7 @@ namespace RogueLike.Core
                     DropItem(map, Weapon); // Drop the current weapon
                 }
                 Weapon = loot as AttackEquipment;
-                isItemCollected = true;
+                isLootCollected = true;
             }
 
             else if (loot is Item)
@@ -158,15 +158,21 @@ namespace RogueLike.Core
                 if (Items.Count < 5)
                 {
                     Items.Add(loot as Item);
-                    isItemCollected = true;
+                    isLootCollected = true;
                 }
                 else
                 {
                     Game.MessageLog.AddMessage("You're carrying too many items to take that.");
                 }
             }
+            
+            else if(loot is Gold){
+                Gold goldLoot = loot as Gold;
+                Gold+=goldLoot.Amount;
+                isLootCollected=true;
+            }
 
-            return isItemCollected;
+            return isLootCollected;
         }
 
         // Drop an item on the ground

@@ -42,5 +42,7 @@ namespace RogueLike.Core
 
         public static RLColor Equipment = Palette.DbLight;
 
+        public static RLColor Seller = Palette.DbLight;
+
     }
 }

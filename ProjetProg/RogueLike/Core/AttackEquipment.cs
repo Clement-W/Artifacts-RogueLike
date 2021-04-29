@@ -14,10 +14,17 @@ namespace RogueLike.Core
         public int RangeDepth{get;set;}
 
         public int RangeWidth{get;set;} // must be an odd number
+        
+        public AttackEquipment(string name, int attackBonus){
+            Name= name;
+            AttackBonus = attackBonus;
+        }
+        public AttackEquipment(){}
 
         public void Attack(CurrentMap map, Player player) {
             int sideSpace = (int)(RangeWidth - 1) / 2; // space on each side of the adjacent cell of the attacked direction
             List<ICell> targetedCells = new List<ICell>();
+
 
             for (int i = 1; i <= RangeDepth; i++) {
                 IEnumerable<ICell> targetedCellInOneDepth = null ;
@@ -57,7 +64,8 @@ namespace RogueLike.Core
         public void KillEnemy(Enemy enemy, CurrentMap map){
             map.RemoveEnemy(enemy);
             Game.MessageLog.AddMessage( enemy.Name + " is defeated");
-        }
+        }  
+
 
         public void DealDamage(Player player, Enemy enemy) {
             int damageValue = player.Attack + AttackBonus - enemy.Defense;

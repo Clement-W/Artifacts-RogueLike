@@ -33,6 +33,7 @@ TODO (pas ordonné) :
 * Ajouter différents types de monstres en fonction des planètes avec des stats différentes 
 * Faire des couleurs de sol différentes selon les planètes 
 * Pour les comportements d'ennemis, pathfinding normal et pourquoi pas un monstre qui fuit mais qui a beaucoup de gold sur lui et il serait assez rare.
+* Faire une classe Drawable qui contient la métode draw
 
 
 TODO bonus :
