@@ -6,7 +6,7 @@ namespace RogueLike.Core
             Name = "Medicinal Herb";
         }
 
-        public override void UseItem(Player player){
+        public override void Use(Player player){
             player.Health+=30;
             if(player.Health>player.MaxHealth){
                 player.Health = player.MaxHealth;   

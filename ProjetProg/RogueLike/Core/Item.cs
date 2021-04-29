@@ -40,7 +40,7 @@ namespace RogueLike.Core
             }
         }
 
-        public abstract void UseItem(Player player);
+        public abstract void Use(Player player);
 
 
 
