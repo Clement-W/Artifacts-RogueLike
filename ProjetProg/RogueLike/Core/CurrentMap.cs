@@ -183,12 +183,17 @@ namespace RogueLike.Core
 
             if (loot != null && player.Collect(loot, this))
             {
-                //probleme ça s'affiche pas toujours, trouver pourquoi
                 if (loot is Equipment)
                 {
                     Equipment lootEquipment = loot as Equipment;
                     Game.MessageLog.AddMessage("You found " + lootEquipment.Name);
                 }
+
+                if(loot is Gold){
+                    Gold gold = loot as Gold;
+                    Game.MessageLog.AddMessage("You found " + gold.Amount + " $");
+                }
+
                 loots.Remove(loot);
             }
         }

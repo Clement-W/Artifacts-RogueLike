@@ -4,6 +4,7 @@ namespace RogueLike.Core
     {
         public OldSandwich() : base(){
             Name = "Old Sandwich";
+            Cost = 10;
         }
 
         public override void Use(Player player){

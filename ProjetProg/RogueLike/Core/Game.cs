@@ -22,10 +22,14 @@ namespace RogueLike.Core
         public CurrentMap Map { get; set; }
 
 
+        public int NbArtefactsCollected{get;set;}
+
+
 
 
         public void StartGame()
         {
+            NbArtefactsCollected = 0;
             GameScreen gameScreen = new GameScreen("oui", this);
 
             CommandSystem = new CommandSystem();

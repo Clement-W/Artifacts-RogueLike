@@ -4,5 +4,10 @@ namespace RogueLike.Core
     {
         public int DefenseBonus{get;set;}
 
+        public DefenseEquipment(string name, int defBonus){
+            Name= name;
+            DefenseBonus = defBonus;
+        }
+
     }
 }

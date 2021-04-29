@@ -4,6 +4,7 @@ namespace RogueLike.Core
     {
         public Ration() : base(){
             Name = "Ration";
+            Cost = 40;
         }
 
         public override void Use(Player player){

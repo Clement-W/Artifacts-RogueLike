@@ -2,11 +2,11 @@ namespace RogueLike.Core
 {
     public class Boots : DefenseEquipment
     {
-        public Boots(string name, int defBonus)
+        public Boots(string name, int defBonus, int cost) : this(name, defBonus)
         {
-            Name = name;
-            DefenseBonus = defBonus;
+            Cost = cost;
         }
+        public Boots(string name, int defBonus) : base(name, defBonus) { }
 
         public static Boots None()
         {
@@ -15,22 +15,22 @@ namespace RogueLike.Core
 
         public static Boots Polymer()
         {
-            return new Boots("Polymer Boots", 1);
+            return new Boots("Polymer Boots", 1,30);
         }
 
         public static Boots Carbon()
         {
-            return new Boots("Carbon Boots", 2);
+            return new Boots("Carbon Boots", 2,50);
         }
 
         public static Boots Platinum()
         {
-            return new Boots("Platinum Boots", 3);
+            return new Boots("Platinum Boots", 3,70);
         }
 
         public static Boots Titanium()
         {
-            return new Boots("Titanium Boots", 4); 
+            return new Boots("Titanium Boots", 4,90);
         }
     }
 }

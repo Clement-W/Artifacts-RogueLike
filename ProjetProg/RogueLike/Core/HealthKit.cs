@@ -4,6 +4,7 @@ namespace RogueLike.Core
     {
         public HealthKit() : base(){
             Name = "Health kit";
+            Cost = 50;
         }
 
         public override void Use(Player player){

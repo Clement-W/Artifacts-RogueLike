@@ -4,32 +4,23 @@ using RogueSharp;
 
 namespace RogueLike.Core
 {
-    public abstract class Equipment : IDrawable, ILoot, ISellable
+    public class Gold : ILoot, IDrawable
     {
+        public int PosX{get;set;}
+        public int PosY{get;set;}
 
-        public RLColor PrintedColor { get; set; }
+        public char Symbol{get;set;}
 
-        public char Symbol { get; set; }
+        public RLColor PrintedColor{get;set;}
 
-        public int PosX { get; set; }
+        public int Amount{get;set;}
 
-        public int PosY { get; set; }
-
-
-        public bool InMerchantStall{get;set;}
-
-
-        public string Name { get; set; }
-
-        public int Cost{get;set;}
-
-
-        public Equipment()
-        {
-            Symbol = '[';
-            PrintedColor = Palette.DbLight;
-            InMerchantStall=false;
+        public Gold(int amount){
+            Symbol='$';
+            PrintedColor = Colors.Gold;
+            Amount = amount;
         }
+
 
         public void Draw(RLConsole console, IMap map)
         {
@@ -50,7 +41,5 @@ namespace RogueLike.Core
                 }
             }
         }
-
-        
     }
 }

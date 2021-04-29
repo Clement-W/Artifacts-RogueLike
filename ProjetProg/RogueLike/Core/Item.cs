@@ -4,7 +4,7 @@ using RogueSharp;
 
 namespace RogueLike.Core
 {
-    public abstract class Item : IDrawable, ILoot
+    public abstract class Item : IDrawable, ILoot, ISellable
     {
         public RLColor PrintedColor { get; set; }
 
@@ -15,9 +15,14 @@ namespace RogueLike.Core
         public int PosY { get; set; }
         public string Name { get; set; }
 
+        public bool InMerchantStall{get;set;}
+
+        public int Cost{get;set;}
+
         public Item(){
             Symbol = '!';
             PrintedColor = RLColor.Yellow;
+            InMerchantStall = false;
         }
 
         public void Draw(RLConsole console, IMap map)

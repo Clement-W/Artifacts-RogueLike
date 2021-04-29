@@ -2,11 +2,11 @@ namespace RogueLike.Core
 {
     public class Chestplate : DefenseEquipment
     {
-        public Chestplate(string name, int defBonus)
+        public Chestplate(string name, int defBonus, int cost) : this(name, defBonus)
         {
-            Name = name;
-            DefenseBonus = defBonus;
+            Cost = cost;
         }
+        public Chestplate(string name, int defBonus) : base(name, defBonus) { }
 
         public static Chestplate None()
         {
@@ -15,22 +15,22 @@ namespace RogueLike.Core
 
         public static Chestplate Polymer()
         {
-            return new Chestplate("Polymer Chestplate", 1);
+            return new Chestplate("Polymer Chestplate", 30);
         }
 
         public static Chestplate Carbon()
         {
-            return new Chestplate("Carbon Chestplate", 2);
+            return new Chestplate("Carbon Chestplate", 2,50);
         }
 
         public static Chestplate Platinum()
         {
-            return new Chestplate("Platinum Chestplate", 3);
+            return new Chestplate("Platinum Chestplate", 3,70);
         }
 
         public static Chestplate Titanium()
         {
-            return new Chestplate("Titanium Chestplate", 4);
+            return new Chestplate("Titanium Chestplate", 4,90);
         }
     }
 }
