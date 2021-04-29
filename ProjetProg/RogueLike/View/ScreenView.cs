@@ -7,7 +7,7 @@ namespace RogueLike.View
     public class ScreenView
     {
 
-        public static RLRootConsole Console { get; private set; }
+        public static RLRootConsole RootConsole { get; private set; }
 
         public static RLKeyPress KeyPress { get; set; }
 
@@ -19,7 +19,7 @@ namespace RogueLike.View
 
         public ScreenView(string consoleTitle, Game game)
         {
-            if (Console == null) // First time that the static root console is created
+            if (RootConsole == null) // First time that the static root console is created
             {
                 InitializeRootConsole(consoleTitle);
             }else{
@@ -40,7 +40,7 @@ namespace RogueLike.View
 
         public void ChangeTitle(string consoleTitle)
         {
-            Console.Title = consoleTitle;
+            RootConsole.Title = consoleTitle;
         }
 
         private void InitializeRootConsole(string consoleTitle)
@@ -48,7 +48,7 @@ namespace RogueLike.View
             string fontFileName = "terminal16x16.png";
             int fontSize = 16;
             float scale = 1f;
-            Console = new RLRootConsole(fontFileName, Dimensions.screenConsoleWidth, Dimensions.screenConsoleHeight, fontSize, fontSize, scale, consoleTitle);
+            RootConsole = new RLRootConsole(fontFileName, Dimensions.screenConsoleWidth, Dimensions.screenConsoleHeight, fontSize, fontSize, scale, consoleTitle);
         }
 
 

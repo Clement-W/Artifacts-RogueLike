@@ -31,10 +31,10 @@ namespace RogueLike.View {
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-            Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+            RootConsole.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
 
-            Console.Update += OnGameUpdate;
-            Console.Render += OnGameRender;
+            RootConsole.Update += OnGameUpdate;
+            RootConsole.Render += OnGameRender;
 
             stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -70,15 +70,15 @@ namespace RogueLike.View {
 
 
                 // Blit the consoles in the root console
-                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, Console, 0, 0);
-                RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, Console, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight);
-                RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, Console, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight + Dimensions.statConsoleHeight);
-                RLConsole.Blit(equipmentsConsole, 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, Console, 0, Dimensions.mapConsoleHeight);
-                RLConsole.Blit(itemsConsole, 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, Console, Dimensions.equipmentsConsoleWidth + Dimensions.messageConsoleWidth, Dimensions.mapConsoleHeight);
+                RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, RootConsole, 0, 0);
+                RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight);
+                RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight + Dimensions.statConsoleHeight);
+                RLConsole.Blit(equipmentsConsole, 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, RootConsole, 0, Dimensions.mapConsoleHeight);
+                RLConsole.Blit(itemsConsole, 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth + Dimensions.messageConsoleWidth, Dimensions.mapConsoleHeight);
 
 
 
-                Console.Draw();
+                RootConsole.Draw();
                 RenderRequired = false;
 
             }
@@ -86,7 +86,7 @@ namespace RogueLike.View {
 
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
-            //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-être (TODO)
+            //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-ï¿½tre (TODO)
 
             // Every second, trigger the scheduling system to move the non playable characters
             if (stopwatch.ElapsedMilliseconds > 200)
@@ -99,9 +99,9 @@ namespace RogueLike.View {
             }
 
             DidPlayerAct = false;
-            KeyPress = Console.Keyboard.GetKeyPress();
+            KeyPress = RootConsole.Keyboard.GetKeyPress();
 
-            if (Console.Mouse.GetLeftClick()) {
+            if (RootConsole.Mouse.GetLeftClick()) {
                 UpdateOrientation();
                 RenderRequired = true;
             }
@@ -111,7 +111,7 @@ namespace RogueLike.View {
 
                 switch (KeyPress.Key)
                 {
-                    case RLKey.Escape: Console.Close(); break;
+                    case RLKey.Escape: RootConsole.Close(); break;
                     case RLKey.Up: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
                     case RLKey.Down: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
                     case RLKey.Left: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
@@ -124,7 +124,7 @@ namespace RogueLike.View {
                             Game.MessageLog = new MessageLog();
                             Game.CommandSystem = new CommandSystem();
                             DidPlayerAct = true;
-                            Console.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+                            RootConsole.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
                         }
                         break;
 
@@ -167,10 +167,10 @@ namespace RogueLike.View {
 
         private void UpdateOrientation() {
 
-            int mouseX = Console.Mouse.X;
-            int mouseY = Console.Mouse.Y;
+            int mouseX = RootConsole.Mouse.X;
+            int mouseY = RootConsole.Mouse.Y;
 
-            if (mouseX >= 0 && mouseX < Console.Width && mouseY >= 0 && mouseY < Console.Height) {
+            if (mouseX >= 0 && mouseX < RootConsole.Width && mouseY >= 0 && mouseY < RootConsole.Height) {
 
                 int absoluteX = mouseX + CameraSystem.viewPortStartX;
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;

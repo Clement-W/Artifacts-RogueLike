@@ -11,33 +11,33 @@ namespace RogueLike.View
 
         public LaunchScreen(Game game) : base(game)
         {
-            Console.Update += OnLaunchUpdate;
-            Console.Render += OnLaunchRender;
+            RootConsole.Update += OnLaunchUpdate;
+            RootConsole.Render += OnLaunchRender;
             // += Allows to add a new event handler to the rootConsole.Update event
             // += Call the add method of the event.
-            Console.Run();
+            RootConsole.Run();
         }
 
         private void OnLaunchRender(object sender, UpdateEventArgs e)
         {
             if (RenderRequired)
             {
-                Console.Clear();
+                RootConsole.Clear();
 
-                Console.Print(
-                    (int)(Console.Width * 0.1),
-                    (int)(Console.Height * 0.25) - 4,
+                RootConsole.Print(
+                    (int)(RootConsole.Width * 0.1),
+                    (int)(RootConsole.Height * 0.25) - 4,
                     "Afficher des trucs pour lancer le jeu, quitter, avoir les commandes : N",
                     Colors.Text
                 );
 
-                Console.Draw();
+                RootConsole.Draw();
             }
         }
 
         private void OnLaunchUpdate(object sender, UpdateEventArgs e)
         {
-            KeyPress = Console.Keyboard.GetKeyPress();
+            KeyPress = RootConsole.Keyboard.GetKeyPress();
 
             if (KeyPress != null)
             {
@@ -46,14 +46,14 @@ namespace RogueLike.View
                 {
                     case RLKey.N: // N for new game
                         // Remove the unneeded event handlers
-                        Console.Update -= OnLaunchUpdate;
-                        Console.Render -= OnLaunchRender;
+                        RootConsole.Update -= OnLaunchUpdate;
+                        RootConsole.Render -= OnLaunchRender;
                         StartGame();                     
 
                         break;
 
                     case RLKey.Escape:
-                        Console.Close();
+                        RootConsole.Close();
                         break;
 
                 }
