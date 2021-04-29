@@ -247,8 +247,8 @@ namespace testRogueSharp
 
         //selectionner les cells sous la souris
         private static Cell SelectCellUnderMouse() {
-            int x = mapConsole.Mouse.X;
-            int y = mapConsole.Mouse.Y;
+            int x = rootConsole.Mouse.X;
+            int y = rootConsole.Mouse.Y;
 
             Cell selectedCell;
             //possibilité de faire un switch pour changer la forme de la zone selectionné

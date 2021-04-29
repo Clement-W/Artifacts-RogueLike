@@ -86,7 +86,7 @@ namespace RogueLike.View {
 
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
-            UpdateOrientation();
+            //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-être (TODO)
 
             // Every second, trigger the scheduling system to move the non playable characters
             if (stopwatch.ElapsedMilliseconds > 200)
@@ -100,6 +100,11 @@ namespace RogueLike.View {
 
             DidPlayerAct = false;
             KeyPress = Console.Keyboard.GetKeyPress();
+
+            if (Console.Mouse.GetLeftClick()) {
+                UpdateOrientation();
+                RenderRequired = true;
+            }
 
             if (KeyPress != null)
             {
@@ -140,18 +145,20 @@ namespace RogueLike.View {
             }
         }
 
-        private static Cell SelectCellUnderMouse(int x, int y) {
+        private static Cell SelectCell(int x, int y) {
             
             Cell selectedCell;
             //possibilitï¿½ de faire un switch pour changer la forme de la zone selectionnï¿½
             //pour l'instant on focus une case
 
-            selectedCell = Game.Map.CellFor(Game.Map.IndexFor(x, y)) as Cell;
-            /*
-            if (x < 0 || x >= Console.Width || y < 0 || y >= Console.Height) {
+            
+            if (x >= 0 && x < Game.Map.Width && y >= 0 && y < Game.Map.Height) {
 
+                selectedCell = Game.Map.CellFor(Game.Map.IndexFor(x, y)) as Cell;
+
+            } else {
                 return (Cell)Game.Map.GetCell(Game.Player.PosX, Game.Player.PosY);
-            }*/
+            }
 
             return selectedCell;
 
@@ -168,7 +175,7 @@ namespace RogueLike.View {
                 int absoluteX = mouseX + CameraSystem.viewPortStartX;
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
-                Cell currentMouseCell = SelectCellUnderMouse(absoluteX, absoluteY);
+                Cell currentMouseCell = SelectCell(absoluteX, absoluteY);
 
                 int x = currentMouseCell.X;
                 int y = currentMouseCell.Y;
@@ -183,7 +190,7 @@ namespace RogueLike.View {
                     if (diffX > diffY) {
                         Game.Player.Symbol = Game.Player.RightSymbol;
                     } else {
-                        if (y > Game.Player.PosY) {
+                        if (y < Game.Player.PosY) {
                             Game.Player.Symbol = Game.Player.UpSymbol;
                         } else {
                             Game.Player.Symbol = Game.Player.DownSymbol;
@@ -193,7 +200,7 @@ namespace RogueLike.View {
                     if (diffX > diffY) {
                         Game.Player.Symbol = Game.Player.LeftSymbol;
                     } else {
-                        if (y > Game.Player.PosY) {
+                        if (y < Game.Player.PosY) {
                             Game.Player.Symbol = Game.Player.UpSymbol;
                         } else {
                             Game.Player.Symbol = Game.Player.DownSymbol;
