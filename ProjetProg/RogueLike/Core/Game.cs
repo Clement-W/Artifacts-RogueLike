@@ -56,6 +56,8 @@ namespace RogueLike.Core
             //créé le player et le passe en paramètre au map generator
         }
 
+        
+
 
 
 
