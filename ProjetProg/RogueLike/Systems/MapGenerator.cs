@@ -21,11 +21,11 @@ namespace RogueLike.Systems
 
         private Random random;
 
-        public MapGenerator(int width, int height, int difficultyLevel)
+        public MapGenerator(int width, int height, int level,int nbArtefactsCollected)
         {
             mapWidth = width;
             mapHeight = height;
-            this.difficultyLevel = difficultyLevel;
+            this.difficultyLevel = nbArtefactsCollected + level;
             map = new CurrentMap();
             random = new Random();
 

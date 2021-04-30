@@ -17,8 +17,8 @@ namespace RogueLike.Core
 
         public Staircase Staircase { get; set; } // To go deeper in the map
 
-        public List<ICell> AttackedCells{get;set;} // To save which cells are attacked by the player (used to change the appearance of those cells)
-        
+        public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
+
         public CurrentMap()
         {
             enemies = new List<Enemy>();
@@ -36,7 +36,7 @@ namespace RogueLike.Core
         private bool IsCellAtacked(ICell cell)
         {
             lock (AttackedCells) // Lock the list to avoid that another thread access or modify it at the same time to avoid multi-threading errors
-        
+
             {
                 foreach (Cell attCell in AttackedCells)
                 {
@@ -127,7 +127,9 @@ namespace RogueLike.Core
             if (cell.IsWalkable)
             {
                 mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Colors.FloorBackgroundFov, '.');
-            }else{
+            }
+            else
+            {
                 mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#');
             }
         }
@@ -214,7 +216,19 @@ namespace RogueLike.Core
 
         public void AddLoot(ILoot loot)
         {
-            loots.Add(loot);
+            if (loot is Gold)
+            {
+                Gold goldLoot = loot as Gold;
+                if (goldLoot.Amount > 0)
+                {
+                    loots.Add(loot);
+                }
+            }
+            else
+            {
+                loots.Add(loot);
+            }
+
             // On laisse bien le loot walkable
         }
 

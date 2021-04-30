@@ -10,7 +10,7 @@ namespace RogueLike.Core
     public class Game
     {
 
-        public static int DifficultyLevel { get; set; } = 1;
+        public static int Level { get; set; }
 
 
         public Player Player { get; private set; }
@@ -29,6 +29,7 @@ namespace RogueLike.Core
 
         public void StartGame()
         {
+            Level = 1;
             NbArtefactsCollected = 0;
             GameScreen gameScreen = new GameScreen("oui", this);
 
@@ -37,7 +38,7 @@ namespace RogueLike.Core
             MessageLog = new MessageLog();
             MessageLog.AddMessage("C'est parti !");
 
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, DifficultyLevel);
+            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Level,NbArtefactsCollected);
             Player = new Player();
             Map = mapGenerator.CreateCaveMap(Player);
             Map.UpdatePlayerFieldOfView(Player);

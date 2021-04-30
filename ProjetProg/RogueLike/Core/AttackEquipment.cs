@@ -97,6 +97,7 @@ namespace RogueLike.Core
         public void KillEnemy(Enemy enemy, CurrentMap map)
         {
             map.RemoveEnemy(enemy);
+            map.AddLoot(new Gold(enemy.Gold,enemy.PosX,enemy.PosY));
             Game.MessageLog.AddMessage(enemy.Name + " is defeated");
         }
 
