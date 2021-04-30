@@ -53,7 +53,7 @@ namespace RogueLike.Core
 
             foreach (ICell cell in targetedCells) // for each targeted cell, check for enemies to damage/kill
             {
-                Console.WriteLine("c :" + cell.X + ", " + cell.Y);
+            
                 Enemy enemy = map.GetEnemyAt(cell.X, cell.Y);
 
 
@@ -65,7 +65,7 @@ namespace RogueLike.Core
                 if (enemy != null)
                 {
                     DealDamage(player, enemy);
-                    Console.WriteLine(enemy.Health);
+              
                     if (enemy.Health <= 0)
                     {
                         KillEnemy(enemy, map);
