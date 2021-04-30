@@ -49,7 +49,7 @@ namespace RogueLike.Core
             Feet = Boots.None();
 
             //Weapon = new Fist();
-            Weapon = Sword.Mk1();
+            Weapon = new Fist();
         }
 
 
@@ -165,11 +165,12 @@ namespace RogueLike.Core
                     Game.MessageLog.AddMessage("You're carrying too many items to take that.");
                 }
             }
-            
-            else if(loot is Gold){
+
+            else if (loot is Gold)
+            {
                 Gold goldLoot = loot as Gold;
-                Gold+=goldLoot.Amount;
-                isLootCollected=true;
+                Gold += goldLoot.Amount;
+                isLootCollected = true;
             }
 
             return isLootCollected;
@@ -208,10 +209,14 @@ namespace RogueLike.Core
             return null;
         }
 
-        public void UseItem(int index){
-            Item item = Items[index];
-            item.Use(this);
-            Items.RemoveAt(index);
+        public void UseItem(int index)
+        {
+            if (Items.Count > index) // To avoid accessing the list at a outbound index
+            {
+                Item item = Items[index];
+                item.Use(this);
+                Items.RemoveAt(index);
+            }
         }
 
 

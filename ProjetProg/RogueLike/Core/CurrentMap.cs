@@ -17,10 +17,13 @@ namespace RogueLike.Core
 
         public Staircase Staircase { get; set; } // To go deeper in the map
 
+        public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
+
         public CurrentMap()
         {
             enemies = new List<Enemy>();
             loots = new List<ILoot>();
+            AttackedCells = new List<ICell>();
         }
 
 
@@ -29,13 +32,42 @@ namespace RogueLike.Core
             return enemies;
         }
 
+        // check if the given cell is in the list of the attacked cells
+        private bool IsCellAtacked(ICell cell)
+        {
+            lock (AttackedCells) // Lock the list to avoid that another thread access or modify it at the same time to avoid multi-threading errors
+
+            {
+                foreach (Cell attCell in AttackedCells)
+                {
+                    if (cell.X == attCell.X && cell.Y == attCell.Y)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         // Called when the map is updated
         // Draw the characters on each cell
         public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
             foreach (Cell cell in GetAllCells())
             {
-                DrawCell(mapConsole, cell);
+
+                if (!IsCellAtacked(cell))
+                {
+                    DrawCell(mapConsole, cell);
+                }
+                else
+                {
+                    lock (AttackedCells) // Lock the list while we're drawing a cell of this list
+                    {
+                        DrawCellWithColor(mapConsole, cell, Colors.AttackedCell);
+                    }
+                }
+
             }
 
             foreach (ILoot loot in loots)
@@ -86,6 +118,19 @@ namespace RogueLike.Core
                         console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
                     }
                 }
+            }
+        }
+
+        // Draw the cell with the specified color (used when a cell is attacked by the player)
+        private void DrawCellWithColor(RLConsole mapConsole, Cell cell, RLColor color)
+        {
+            if (cell.IsWalkable)
+            {
+                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Colors.FloorBackgroundFov, '.');
+            }
+            else
+            {
+                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#');
             }
         }
 
@@ -171,15 +216,27 @@ namespace RogueLike.Core
 
         public void AddLoot(ILoot loot)
         {
-            loots.Add(loot);
+            if (loot is Gold)
+            {
+                Gold goldLoot = loot as Gold;
+                if (goldLoot.Amount > 0)
+                {
+                    loots.Add(loot);
+                }
+            }
+            else
+            {
+                loots.Add(loot);
+            }
+
             // On laisse bien le loot walkable
         }
 
         // Collect a loot if there is one
         public void CollectLoot(Player player, int posX, int posY)
         {
-            ILoot loot = GetLootAt(posX,posY);
-            
+            ILoot loot = GetLootAt(posX, posY);
+
 
             if (loot != null && player.Collect(loot, this))
             {
@@ -189,7 +246,8 @@ namespace RogueLike.Core
                     Game.MessageLog.AddMessage("You found " + lootEquipment.Name);
                 }
 
-                if(loot is Gold){
+                if (loot is Gold)
+                {
                     Gold gold = loot as Gold;
                     Game.MessageLog.AddMessage("You found " + gold.Amount + " $");
                 }

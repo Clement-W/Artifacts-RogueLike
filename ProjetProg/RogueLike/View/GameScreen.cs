@@ -32,7 +32,7 @@ namespace RogueLike.View {
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-            RootConsole.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+            RootConsole.Title = $"Nom du Rogue Like - Level {Game.Level}";
 
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
@@ -121,12 +121,12 @@ namespace RogueLike.View {
                     case RLKey.LControl:
                         if (Game.Map.CanMoveToNextLevel(Game.Player))
                         {
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.DifficultyLevel);
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.Level,Game.NbArtefactsCollected);
                             Game.Map = mapGenerator.CreateCaveMap(Game.Player);
                             Game.MessageLog = new MessageLog();
                             Game.CommandSystem = new CommandSystem();
                             DidPlayerAct = true;
-                            RootConsole.Title = $"Nom du Rogue Like - Level {Game.DifficultyLevel}";
+                            RootConsole.Title = $"Nom du Rogue Like - Level {Game.Level}";
                         }
                         break;
 
@@ -215,19 +215,8 @@ namespace RogueLike.View {
                         }
                     }
                 }
-            }
-
-            
-        }
-
-        public static void ChangeBackColor(ICell cell) {
-
-            //RootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-            
-            ///////////Game.Map.SetCellWalkability(cell.X, cell.Y, false);
-            mapConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-            
-        }
+            }      
+        } 
 
         public void EndGame(Game game) {
             GameOverScreen gameOverScreen = new GameOverScreen(game);

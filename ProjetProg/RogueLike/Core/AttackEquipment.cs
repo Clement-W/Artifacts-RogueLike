@@ -55,6 +55,13 @@ namespace RogueLike.Core
             {
                 Console.WriteLine("c :" + cell.X + ", " + cell.Y);
                 Enemy enemy = map.GetEnemyAt(cell.X, cell.Y);
+
+
+                Thread changeColorThread = new Thread(() => ChangeColorOfAttackedCells(cell, map));
+                changeColorThread.Start(); // Change the color of the attacked cells during a short period of time (100ms)
+
+
+
                 if (enemy != null)
                 {
                     DealDamage(player, enemy);
@@ -67,10 +74,26 @@ namespace RogueLike.Core
             }
         }
 
+        public void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
+        {
+            lock (map.AttackedCells) // Lock the list while w'ere modifying it to avoid multi-threading errors 
+            {
+                map.AttackedCells.Add(cell); 
+            }
+
+            Thread.Sleep(100); // Wait 100ms
+            lock (map.AttackedCells) // Lock the list while we're modfying it
+            {
+                map.AttackedCells.Remove(cell);
+            }
+
+        }
+
 
         public void KillEnemy(Enemy enemy, CurrentMap map) // Destroy an enemy
         {
             map.RemoveEnemy(enemy);
+            map.AddLoot(new Gold(enemy.Gold,enemy.PosX,enemy.PosY));
             Game.MessageLog.AddMessage(enemy.Name + " is defeated");
         }
 

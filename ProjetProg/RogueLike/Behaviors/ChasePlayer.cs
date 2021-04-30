@@ -26,7 +26,7 @@ namespace RogueLike.Behaviors
                 enemyFov.ComputeFov(enemy.PosX, enemy.PosY, enemy.Awareness, true);
                 if (enemyFov.IsInFov(player.PosX, player.PosY))
                 {
-                    Game.MessageLog.AddMessage($"Un {enemy.Name} vous a vu.");
+                    Game.MessageLog.AddMessage($"A {enemy.Name} saw you.");
                     enemy.NbTurnsAlerted = 1;
                 }
          
@@ -67,7 +67,8 @@ namespace RogueLike.Behaviors
                 enemy.NbTurnsAlerted++;
 
                 // The enemy stops to chase the player after 10 turns 
-                if (enemy.NbTurnsAlerted > 10)
+                enemyFov.ComputeFov(enemy.PosX, enemy.PosY, enemy.Awareness, true);
+                if (enemy.NbTurnsAlerted > 10 && !enemyFov.IsInFov(player.PosX, player.PosY))
                 {
                     enemy.NbTurnsAlerted = null;
                 }

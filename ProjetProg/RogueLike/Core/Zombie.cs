@@ -12,7 +12,7 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold= (int)(diffifultyLevel/2) * random.Next(0,11);
+            Gold= (int)(diffifultyLevel) * random.Next(0,5);
             Health = random.Next(0,30) * diffifultyLevel;
             MaxHealth = Health;
             Name = "Zombie";
