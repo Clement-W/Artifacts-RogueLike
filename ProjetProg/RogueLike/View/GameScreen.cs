@@ -188,9 +188,7 @@ namespace RogueLike.View {
                 int x = currentMouseCell.X;
                 int y = currentMouseCell.Y;
 
-                System.Console.WriteLine(x + ", " + y);
-                System.Console.WriteLine("p: " + Game.Player.PosX + ", " + Game.Player.PosY);
-
+                
                 double diffX = Math.Abs(x - Game.Player.PosX);
                 double diffY = Math.Abs(y - Game.Player.PosY);
 
