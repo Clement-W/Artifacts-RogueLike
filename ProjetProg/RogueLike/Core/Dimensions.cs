@@ -5,8 +5,8 @@ namespace RogueLike.Core
     public static class Dimensions
     {
         
-        public static readonly int screenConsoleWidth = 80;
-        public static readonly int screenConsoleHeight = 40;
+        public static readonly int screenConsoleWidth = 45;
+        public static readonly int screenConsoleHeight = 25;
 
         //The w and h of every parts of the screen is computed according to the screen size.
 
