@@ -145,6 +145,12 @@ namespace RogueLike.View {
                 // Provisoire avant qu'on fasse un scheduling system
                 //Game.CommandSystem.MoveEnemies(Game);
             }
+
+            if (Game.Player.Health <= 0) {
+                RootConsole.Update -= OnGameUpdate;
+                RootConsole.Render -= OnGameRender;
+                EndGame(Game);
+            }
         }
 
         private static Cell SelectCell(int x, int y) {
@@ -221,6 +227,10 @@ namespace RogueLike.View {
             ///////////Game.Map.SetCellWalkability(cell.X, cell.Y, false);
             mapConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
             
+        }
+
+        public void EndGame(Game game) {
+            GameOverScreen gameOverScreen = new GameOverScreen(game);
         }
 
 

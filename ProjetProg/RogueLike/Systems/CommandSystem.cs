@@ -67,8 +67,10 @@ namespace RogueLike.Systems
 
         public void EnemyAttack(Enemy attacker, Player defender)
         {
-      
-            defender.Health -= attacker.Attack; // provisoire
+
+            int damageValue = attacker.Attack - defender.Defense;
+
+            defender.Health -= (damageValue <= 0) ? 1 : damageValue;
 
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
             // Put the change color method in a thread to let the game continue during the color changement

@@ -24,18 +24,17 @@ namespace RogueLike.Core
 
         public void Attack(CurrentMap map, Player player)
         {
-            int sideSpace = (int)(RangeWidth - 1) / 2; // space on each side of the adjacent cell of the attacked direction
-            List<ICell> targetedCells = new List<ICell>();
+            // a wide attack is composed of the adjacent attacked cell and two halves of attack width on each side of that cell
+            int sideSpace = (int)(RangeWidth - 1) / 2; // this is the attacked space added on each side of the adjacent cell
+            List<ICell> targetedCells = new List<ICell>(); // list of the sells targeted by the attack
 
 
-            for (int i = 1; i <= RangeDepth; i++)
+            for (int i = 1; i <= RangeDepth; i++) // for each cell further away from the player, in the attack length
             {
-                IEnumerable<ICell> targetedCellInOneDepth = null;
-                if (player.Symbol == player.UpSymbol)
+                IEnumerable<ICell> targetedCellInOneDepth = null; // enumerable to collect the targeted perpendicular cell(s) in this part of the length
+                if (player.Symbol == player.UpSymbol) // ifs to check the direction of the attack and call a method that gets the cells perpendicular to the faced direction
                 {
-                    targetedCellInOneDepth = map.GetCellsAlongLine(player.PosX - sideSpace, player.PosY - i, player.PosX + sideSpace, player.PosY - i);
-                    //targetedCells.AddRange(map.GetCellsAlongLine(player.PosX - sideSpace, player.PosY - i, player.PosX + sideSpace, player.PosY - i));
-                    Console.WriteLine("Up");
+                    targetedCellInOneDepth = map.GetCellsAlongLine(player.PosX - sideSpace, player.PosY - i, player.PosX + sideSpace, player.PosY - i); // get cells from start and end of attacked width
                 }
                 else if (player.Symbol == player.DownSymbol)
                 {
@@ -44,25 +43,20 @@ namespace RogueLike.Core
                 else if (player.Symbol == player.LeftSymbol)
                 {
                     targetedCellInOneDepth = map.GetCellsAlongLine(player.PosX - i, player.PosY - sideSpace, player.PosX - i, player.PosY + sideSpace);
-                    Console.WriteLine("Left");
                 }
                 else if (player.Symbol == player.RightSymbol)
                 {
                     targetedCellInOneDepth = map.GetCellsAlongLine(player.PosX + i, player.PosY - sideSpace, player.PosX + i, player.PosY + sideSpace);
-                    Console.WriteLine("Right");
                 }
-                targetedCells.AddRange(targetedCellInOneDepth);
+                targetedCells.AddRange(targetedCellInOneDepth); // add widths targeted at all parts of the length to the list of targeted cells
             }
 
-            foreach (ICell cell in targetedCells)
+            foreach (ICell cell in targetedCells) // for each targeted cell, check for enemies to damage/kill
             {
                 Console.WriteLine("c :" + cell.X + ", " + cell.Y);
                 Enemy enemy = map.GetEnemyAt(cell.X, cell.Y);
-                //ScreenView.RootConsole.SetBackColor(cell.X, cell.Y, RLColor.Yellow);
-                GameScreen.ChangeBackColor(cell);
                 if (enemy != null)
                 {
-                    Console.WriteLine("BAM");
                     DealDamage(player, enemy);
                     Console.WriteLine(enemy.Health);
                     if (enemy.Health <= 0)
@@ -74,17 +68,17 @@ namespace RogueLike.Core
         }
 
 
-        public void KillEnemy(Enemy enemy, CurrentMap map)
+        public void KillEnemy(Enemy enemy, CurrentMap map) // Destroy an enemy
         {
             map.RemoveEnemy(enemy);
             Game.MessageLog.AddMessage(enemy.Name + " is defeated");
         }
 
 
-        public void DealDamage(Player player, Enemy enemy)
+        public void DealDamage(Player player, Enemy enemy) // Deal damage to an enemy with the players attack stat and enemy defense stat, and animate the damage
         {
             int damageValue = player.Attack + AttackBonus - enemy.Defense;
-            enemy.Health -= (damageValue <= 0) ? 1 : damageValue;
+            enemy.Health -= (damageValue <= 0) ? 1 : damageValue; // deal at least one damage if damage is negative or nullified
             if (damageValue <= 0)
             {
                 Game.MessageLog.AddMessage("That wasn't very effective...");
