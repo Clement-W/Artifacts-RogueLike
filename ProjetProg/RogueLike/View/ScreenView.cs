@@ -11,7 +11,7 @@ namespace RogueLike.View
 
         public static RLKeyPress KeyPress { get; set; }
 
-        public bool RenderRequired { get; set; }
+        public static bool RenderRequired { get; set; }
 
         public bool DidPlayerAct { get; set; }
 

@@ -15,12 +15,15 @@ namespace RogueLike.Core
 
         public int Amount{get;set;}
 
+        public string Name{get;set;}
+
         public Gold(int amount,int posX, int posY){
             Symbol='$';
             PrintedColor = Colors.Gold;
             Amount = amount;
             PosX = posX;
             PosY = posY;
+            Name="Gold";
         }
 
 

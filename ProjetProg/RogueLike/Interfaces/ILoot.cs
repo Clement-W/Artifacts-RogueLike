@@ -8,5 +8,7 @@ namespace RogueLike.Interfaces
 
         int PosY { get; set; }
 
+        string Name {get;set;}
+
     }
 }

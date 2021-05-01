@@ -22,7 +22,9 @@ namespace RogueLike.View
         private static RLConsole itemsConsole; //food, potions,...
 
 
-        private static Stopwatch stopwatch;
+        private static Stopwatch schedulingStopWatch;
+
+        private static Stopwatch animationStopWatch;
 
 
         public GameScreen(string title, Game game) : base(title, game)
@@ -38,8 +40,11 @@ namespace RogueLike.View
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
 
-            stopwatch = new Stopwatch();
-            stopwatch.Start();
+            schedulingStopWatch = new Stopwatch();
+            schedulingStopWatch.Start();
+
+            animationStopWatch = new Stopwatch();
+            animationStopWatch.Start();
         }
 
 
@@ -49,6 +54,8 @@ namespace RogueLike.View
 
             if (RenderRequired)
             {
+                AnimateMerchantsOnMap();
+
                 mapConsole.Clear();
                 statConsole.Clear();
                 messageConsole.Clear();
@@ -91,22 +98,23 @@ namespace RogueLike.View
             //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-�tre (TODO)
 
             // Every second, trigger the scheduling system to move the non playable characters
-            if (stopwatch.ElapsedMilliseconds > 200)
+            if (schedulingStopWatch.ElapsedMilliseconds > 200)
             {
                 // Reset the stopwatch
-                stopwatch.Reset();
+                schedulingStopWatch.Reset();
                 Game.CommandSystem.MoveEnemies(Game); // Move the enemies
                 RenderRequired = true; // Render the game screen
-                stopwatch.Start(); // Restart the stopwatch
-            }
+                schedulingStopWatch.Start(); // Restart the stopwatch
+            } // TODO classe scheduling system qui contient ça
+
 
             DidPlayerAct = false;
             KeyPress = RootConsole.Keyboard.GetKeyPress();
 
             if (RootConsole.Mouse.GetLeftClick())
             {
-                UpdateOrientation();
-                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map);
+                UpdateOrientation(); // The player looks on the click direction
+                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map); // Attack the cells
                 RenderRequired = true;
             }
 
@@ -257,6 +265,23 @@ namespace RogueLike.View
         public void EndGame(Game game)
         {
             GameOverScreen gameOverScreen = new GameOverScreen(game);
+        }
+
+
+        public void AnimateMerchantsOnMap()
+        {
+
+            if (animationStopWatch.ElapsedMilliseconds > 1000)
+            {
+                animationStopWatch.Reset();
+                foreach (Merchant merchant in Game.Map.Merchants)
+                {
+                    merchant.ChangeSymbolAlternative();
+                }
+                View.GameScreen.RenderRequired = true;
+                animationStopWatch.Start();
+            }
+
         }
 
 

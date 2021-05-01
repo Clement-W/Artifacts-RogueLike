@@ -32,7 +32,7 @@ namespace RogueLike.Core
             Attack = 10;
             Defense = 5;
             Awareness = 15;
-            Gold = 1000;
+            Gold = 100;
             Health = 100;
             MaxHealth = 100;
             Name = "Adventurer";
@@ -210,7 +210,7 @@ namespace RogueLike.Core
             {
                 foreach (Cell cell in map.GetBorderCellsInSquare(PosX, PosY, i))
                 {
-                    if (cell.IsWalkable)
+                    if (cell.IsWalkable && map.GetLootAt(cell.X,cell.Y)==null) // To avoid item superposition if the cell is walkable but an item is on it
                     {
                         return cell;
                     }

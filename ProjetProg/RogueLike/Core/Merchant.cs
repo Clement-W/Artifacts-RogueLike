@@ -20,11 +20,11 @@ namespace RogueLike.Core
         {
             Stall = new Dictionary<int, ISellable>();
             MerchantLevel = merchantLevel;
-            
             GenerateStall();
         }
 
-        public void ChangeSymbol()
+        // called perdiodically to animate the merchants
+        public void ChangeSymbolAlternative()
         {
             Symbol = (Symbol == AlternateSymbol1) ? AlternateSymbol2 : AlternateSymbol1;
         }
@@ -58,10 +58,11 @@ namespace RogueLike.Core
                 {
                     Stall.Remove(sellableInStall.Key);
                     sellable.SoldByMerchant = null;
-                    Game.MessageLog.AddMessage("Thanks for buying this, you won't regret it.");
+                    //Game.MessageLog.AddMessage("Thanks for buying this.");
                     break;
                 }
             }
+
 
 
         }

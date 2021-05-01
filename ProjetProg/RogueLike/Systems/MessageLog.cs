@@ -19,6 +19,7 @@ namespace RogueLike.Systems{
             if(messages.Count > maxLines){
                 messages.Dequeue();
             }
+            View.GameScreen.RenderRequired = true;
         }
 
         public void Draw(RLConsole console){

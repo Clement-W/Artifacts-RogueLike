@@ -8,7 +8,9 @@ namespace RogueLike.Core
         {
             Name = "Equipment Seller";
             PrintedColor = Colors.Seller;
-            Symbol = '~';
+            AlternateSymbol1 = '(';
+            AlternateSymbol2 = ')';
+            Symbol = AlternateSymbol1;
             PosX = posX;
             PosY = posY;
         }
@@ -18,13 +20,13 @@ namespace RogueLike.Core
         {
             Random random = new Random();
             List<Equipment> possibleEquipment = null;
-            switch (MerchantLevel) 
+            switch (MerchantLevel)
             {
                 case 0:
                     possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Polymer(), Leggins.Polymer(), Chestplate.Polymer(), Helmet.Polymer(), Sword.Mk1(), Spear.Mk1(), Knife.Mk1() });
                     break;
                 case 1:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Carbon(), Leggins.Carbon(), Chestplate.Carbon(), Helmet.Carbon(), Boots.Platinum(), Leggins.Platinum(), Chestplate.Platinum(), Helmet.Platinum(), Sword.Mk2(), Spear.Mk2(), Knife.Mk2(), Sword.Mk2(), Spear.Mk3(), Knife.Mk3() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Carbon(), Leggins.Carbon(), Chestplate.Carbon(), Helmet.Carbon(), Boots.Platinum(), Leggins.Platinum(), Chestplate.Platinum(), Helmet.Platinum(), Sword.Mk2(), Spear.Mk2(), Knife.Mk2(), Sword.Mk3(), Spear.Mk3(), Knife.Mk3() });
                     break;
                 case 2:
                     possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Titanium(), Leggins.Titanium(), Chestplate.Titanium(), Helmet.Titanium(), Sword.Mk4(), Spear.Mk4(), Knife.Mk4() });
@@ -38,14 +40,14 @@ namespace RogueLike.Core
                 possibleEquipment.Remove(equipment1); // Remove it to avoid selling the same item
 
                 Equipment equipment2 = possibleEquipment[random.Next(0, possibleEquipment.Count)];
-                possibleEquipment.Remove(equipment1);
+                possibleEquipment.Remove(equipment2);
 
                 Equipment equipment3 = possibleEquipment[random.Next(0, possibleEquipment.Count)];
-                possibleEquipment.Remove(equipment1);
+                possibleEquipment.Remove(equipment3);
 
-                Stall.Add(0,equipment1);
-                Stall.Add(1,equipment2);
-                Stall.Add(2,equipment3); 
+                Stall.Add(0, equipment1);
+                Stall.Add(1, equipment2);
+                Stall.Add(2, equipment3);
             }
 
         }

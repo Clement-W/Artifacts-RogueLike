@@ -4,18 +4,19 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using RogueLike.Interfaces;
-
+using System.Threading;
+using System.Diagnostics;
 namespace RogueLike.Core
 {
 
     public class CurrentMap : Map
     {
 
-        private readonly List<Enemy> enemies;
+        public List<Enemy> Enemies{get;private set;}
 
-        private readonly List<ILoot> loots;
+        public List<ILoot> Loots{get;private set;}
 
-        private readonly List<Merchant> merchants;
+        public List<Merchant> Merchants{get; private set;}
 
         public Staircase Staircase { get; set; } // To go deeper in the map
 
@@ -23,18 +24,20 @@ namespace RogueLike.Core
 
         public MapType MapType { get; set; }
 
+
         public CurrentMap()
         {
-            enemies = new List<Enemy>();
-            loots = new List<ILoot>();
+            Enemies = new List<Enemy>();
+            Loots = new List<ILoot>();
             AttackedCells = new List<ICell>();
-            merchants = new List<Merchant>();
+            Merchants = new List<Merchant>();
+
         }
 
 
         public List<Enemy> GetEnemies()
         {
-            return enemies;
+            return Enemies;
         }
 
         // check if the given cell is in the list of the attacked cells
@@ -75,18 +78,18 @@ namespace RogueLike.Core
 
             }
 
-            foreach (ILoot loot in loots)
+            foreach (ILoot loot in Loots)
             {
                 IDrawable drawableLoot = loot as IDrawable;
                 drawableLoot.Draw(mapConsole, this);
             }
 
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in Enemies)
             {
                 enemy.Draw(mapConsole, this);
             }
 
-            foreach (Merchant merchant in merchants)
+            foreach (Merchant merchant in Merchants)
             {
                 merchant.Draw(mapConsole, this);
                 merchant.DrawStall(mapConsole, this);
@@ -97,6 +100,7 @@ namespace RogueLike.Core
                 Staircase.Draw(mapConsole, this);
             }
         }
+
 
         //TODO : Ajouter d'autres couleurs sur certains murs pour changer
         //TODO : Différencier cette méthode en fonction du type de planète (la couleur du background change par exemple )
@@ -134,6 +138,7 @@ namespace RogueLike.Core
             }
         }
 
+    
         // Draw the cell with the specified color (used when a cell is attacked by the player)
         private void DrawCellWithColor(RLConsole mapConsole, Cell cell, RLColor color)
         {
@@ -185,7 +190,7 @@ namespace RogueLike.Core
                 {
                     if (player.Gold >= sellable.Cost)
                     { // if the player have enough moneyf (
-                        
+
                         if (CollectLoot(player, posX, posY)) // collect the item if possible
                         {
                             player.Gold -= sellable.Cost;
@@ -198,7 +203,8 @@ namespace RogueLike.Core
                     }
                     else
                     {
-                        Game.MessageLog.AddMessage("You don't have enough gold !");
+                        Game.MessageLog.AddMessage("You don't have enough gold");
+                        Game.MessageLog.AddMessage($"You need {sellable.Cost - player.Gold} more");
                         lootCanBeWalkedOn = false;
                     }
                 }
@@ -260,31 +266,31 @@ namespace RogueLike.Core
 
         public void AddEnemy(Enemy enemy)
         {
-            enemies.Add(enemy);
+            Enemies.Add(enemy);
             SetCellWalkability(enemy.PosX, enemy.PosY, false);
         }
 
         public void RemoveEnemy(Enemy enemy)
         {
-            enemies.Remove(enemy);
+            Enemies.Remove(enemy);
             SetCellWalkability(enemy.PosX, enemy.PosY, true);
         }
 
         public void AddMerchant(Merchant merchant)
         {
-            merchants.Add(merchant);
+            Merchants.Add(merchant);
             SetCellWalkability(merchant.PosX, merchant.PosY, false);
         }
 
 
         public Enemy GetEnemyAt(int posX, int posY)
         {
-            return enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
+            return Enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
         public ILoot GetLootAt(int posX, int posY)
         {
-            return loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
+            return Loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
         }
 
         public bool PlayerIsOnStairCase(Player player)
@@ -299,12 +305,12 @@ namespace RogueLike.Core
                 Gold goldLoot = loot as Gold;
                 if (goldLoot.Amount > 0)
                 {
-                    loots.Add(loot);
+                    Loots.Add(loot);
                 }
             }
             else
             {
-                loots.Add(loot);
+                Loots.Add(loot);
             }
 
             // On laisse bien le loot walkable
@@ -314,29 +320,30 @@ namespace RogueLike.Core
         public bool CollectLoot(Player player, int posX, int posY)
         {
             ILoot loot = GetLootAt(posX, posY);
+            ISellable sellableLoot = loot as ISellable; // To check if it's on a merchant's stall
 
 
             if (loot != null && player.Collect(loot, this))
             {
-                if (loot is Equipment)
+
+                if (sellableLoot.SoldByMerchant == null)
                 {
-                    Equipment lootEquipment = loot as Equipment;
-                    Game.MessageLog.AddMessage("You found " + lootEquipment.Name);
+                    if (loot is Gold)
+                    {
+                        Gold gold = loot as Gold;
+                        Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
+                    }
+                    else
+                    {
+                        Game.MessageLog.AddMessage("You found " + loot.Name);
+                    }
+                }
+                else
+                {
+                    Game.MessageLog.AddMessage("You bought " + loot.Name);
                 }
 
-                if (loot is Item)
-                {
-                    Item lootItem = loot as Item;
-                    Game.MessageLog.AddMessage("You found " + lootItem.Name);
-                }
-
-                if (loot is Gold)
-                {
-                    Gold gold = loot as Gold;
-                    Game.MessageLog.AddMessage("You found " + gold.Amount + " $");
-                }
-
-                loots.Remove(loot);
+                Loots.Remove(loot);
                 return true;
             }
             return false;
