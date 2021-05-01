@@ -59,7 +59,7 @@ namespace RogueLike.Core
         public void DrawStats(RLConsole statConsole)
         {
 
-            int healthBarWidth = Dimensions.statConsoleWidth - 2;
+            int healthBarWidth = Dimensions.statConsoleWidth;
             int remainingHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
 
             // Create the health bar thanks to the background color
