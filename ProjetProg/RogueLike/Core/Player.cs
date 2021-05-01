@@ -63,33 +63,33 @@ namespace RogueLike.Core
             int remainingHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
 
             // Create the health bar thanks to the background color
-            statConsole.SetBackColor(1, 2, remainingHealth, 1, Colors.HealthBar);
-            statConsole.SetBackColor(1 + remainingHealth, 2, healthBarWidth - remainingHealth, 1, Colors.HealthBarDamage);
+            statConsole.SetBackColor(1, 1, remainingHealth, 1, Colors.HealthBar);
+            statConsole.SetBackColor(1 + remainingHealth, 1, healthBarWidth - remainingHealth, 1, Colors.HealthBarDamage);
 
-            statConsole.Print(((int)(healthBarWidth / 2)), 2, "PV", Colors.Text);
+            statConsole.Print(((int)(healthBarWidth / 2)), 1, "PV", Colors.Text);
 
-            statConsole.Print(1, 3, $"Att: {Attack}", Colors.GrayText);
-            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 3, $"Def: {Defense}", Colors.GrayText);
-            statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 3, $"Gold: {Gold}", Colors.Gold);
+            statConsole.Print(1, 2, $"Att: {Attack}", Colors.GrayText);
+            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"Def: {Defense}", Colors.GrayText);
+            statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {Gold}", Colors.Gold);
         }
 
 
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
-            equipmentConsole.Print(1, 1, $"{Icons.headSlotSymbol}: {Head.Symbol}", Colors.Text);
-            equipmentConsole.Print(1, 2, $"{Icons.chestSlotSymbol}: {Chest.Symbol}", Colors.Text);
-            equipmentConsole.Print(1, 3, $"{Icons.legsSlotSymbol}: {Legs.Symbol}", Colors.Text);
-            equipmentConsole.Print(1, 4, $"{Icons.footSlotSymbol}: {Feet.Symbol}", Colors.Text);
-            equipmentConsole.Print(1, 5, $"{Icons.weaponSlotSymbol}: {Weapon.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: {Head.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: {Chest.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: {Legs.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: {Feet.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 6, $"{Icons.weaponSlotSymbol}: {Weapon.Symbol}", Colors.Text);
         }
 
         public void DrawItemsInventory(RLConsole itemsConsole)
         {
-            int yPosition = 1;
+            int yPosition = 2;
             for (int i = 0; i < Items.Count; i++)
             {
-                itemsConsole.Print(1, yPosition, $"{i + 1}: {Items[i].Symbol}", Colors.Text);
-                yPosition += 1;
+                itemsConsole.Print(3, yPosition, $"{i + 1}: {Items[i].Symbol}", Colors.Text);
+                yPosition++;
             }
         }
 

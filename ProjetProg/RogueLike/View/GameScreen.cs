@@ -55,7 +55,6 @@ namespace RogueLike.View
                 equipmentsConsole.Clear();
                 itemsConsole.Clear();
 
-
                 Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
                 Game.Player.Draw(mapConsole, Game.Map);
                 Game.Player.DrawStats(statConsole);
@@ -69,6 +68,7 @@ namespace RogueLike.View
                 equipmentsConsole.SetBackColor( 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, RLColor.Yellow );
                 itemsConsole.SetBackColor( 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, RLColor.Gray );
                 */
+
 
 
                 // Blit the consoles in the root console

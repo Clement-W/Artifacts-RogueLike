@@ -188,11 +188,11 @@ namespace RogueLike.Systems
         private void PlaceSellersInSpaceship()
         {
             // Those coordinates are computed graphically in the game console
-            int itemSellerPosX = 63;
-            int itemSellerPosY = 6;
+            int itemSellerPosX = 75;
+            int itemSellerPosY = 9;
 
-            int equipmentSellerPosX = 69;
-            int equipmentSellerPosY = 6;
+            int equipmentSellerPosX = 81;
+            int equipmentSellerPosY = 9;
 
             ItemSeller itemSeller = new ItemSeller(itemSellerPosX, itemSellerPosY, nbArtifactsCollected);
             EquipmentSeller equipmentSeller = new EquipmentSeller(equipmentSellerPosX, equipmentSellerPosY, nbArtifactsCollected);
