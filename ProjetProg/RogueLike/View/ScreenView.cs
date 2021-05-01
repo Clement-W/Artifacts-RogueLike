@@ -47,7 +47,7 @@ namespace RogueLike.View
         {
             string fontFileName = "terminal16x16.png";
             int fontSize = 16;
-            float scale = 2f;
+            float scale = 1.6f;
             RootConsole = new RLRootConsole(fontFileName, Dimensions.screenConsoleWidth, Dimensions.screenConsoleHeight, fontSize, fontSize, scale, consoleTitle);
         }
 

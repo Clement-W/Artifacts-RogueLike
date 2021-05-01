@@ -25,7 +25,7 @@ namespace RogueLike.Systems{
             console.Clear();
             int cptMessage=0;
             foreach(string message in messages){
-                console.Print(1,cptMessage+1,message,Colors.Text);
+                console.Print(1,cptMessage,message,Colors.Text);
                 cptMessage++;
             }
         }

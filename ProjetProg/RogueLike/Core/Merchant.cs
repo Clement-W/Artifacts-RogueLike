@@ -20,6 +20,7 @@ namespace RogueLike.Core
         {
             Stall = new Dictionary<int, ISellable>();
             MerchantLevel = merchantLevel;
+            
             GenerateStall();
         }
 
