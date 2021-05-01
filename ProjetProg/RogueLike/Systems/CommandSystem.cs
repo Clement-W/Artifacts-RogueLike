@@ -22,6 +22,8 @@ namespace RogueLike.Systems
 
             bool didPlayerAct = false;
 
+            System.Console.WriteLine(x + " " + y);
+
 
             switch (direction)
             {

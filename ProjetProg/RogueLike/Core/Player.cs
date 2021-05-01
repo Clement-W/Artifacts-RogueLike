@@ -40,10 +40,10 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.PlayerHit;
 
-            UpSymbol = 'ü';
-            DownSymbol = 'û';
-            LeftSymbol = 'ù';
-            RightSymbol = 'ú';
+            UpSymbol = 'Ã¼';
+            DownSymbol = 'Ã»';
+            LeftSymbol = 'Ã¹';
+            RightSymbol = 'Ãº';
             Symbol = DownSymbol;
 
             Head = Helmet.None();
