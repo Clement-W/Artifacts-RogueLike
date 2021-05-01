@@ -40,10 +40,10 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.PlayerHit;
 
-            UpSymbol = 'ü';
-            DownSymbol = 'û';
-            LeftSymbol = 'ù';
-            RightSymbol = 'ú';
+            UpSymbol = Icons.playerUpSymbol;
+            DownSymbol = Icons.playerDownSymbol;
+            LeftSymbol = Icons.playerLeftSymbol;
+            RightSymbol = Icons.playerRightSymbol;
             Symbol = DownSymbol;
 
             Head = Helmet.None();
@@ -76,11 +76,11 @@ namespace RogueLike.Core
 
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
-            equipmentConsole.Print(3, 2, $"{Icons.headStatusSymbol}: {Head.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 3, $"{Icons.chestStatusSymbol}: {Chest.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 4, $"{Icons.legsStatusSymbol}: {Legs.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 5, $"{Icons.footStatusSymbol}: {Feet.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 6, $"{Icons.weaponStatusSymbol}: {Weapon.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: {Head.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: {Chest.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: {Legs.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: {Feet.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 6, $"{Icons.weaponSlotSymbol}: {Weapon.Symbol}", Colors.Text);
         }
 
         public void DrawItemsInventory(RLConsole itemsConsole)

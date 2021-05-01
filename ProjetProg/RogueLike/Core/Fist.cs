@@ -8,7 +8,7 @@ namespace RogueLike.Core
             AttackBonus=0;
             RangeDepth = 1;
             RangeWidth = 1;
-            Symbol = 'Ï';
+            Symbol = Icons.fistSymbol;
         }
 
     }

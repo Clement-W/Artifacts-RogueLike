@@ -6,7 +6,7 @@ namespace RogueLike.Core
         {
             RangeDepth = 1;
             RangeWidth = 3;
-            Symbol = 'Í';
+            Symbol = Icons.swordSymbol;
         }
 
         
