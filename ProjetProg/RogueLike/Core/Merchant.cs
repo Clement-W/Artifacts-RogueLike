@@ -45,9 +45,6 @@ namespace RogueLike.Core
                 // At index 2, the item is displayed on bottom right of the merchant (posX+(2-1))
 
                 sellableLoot.PosY = PosY + 1;
-
-                sellableLoot.SoldByMerchant = this;
-                map.AddLoot(sellableLoot as ILoot);
             }
 
         }

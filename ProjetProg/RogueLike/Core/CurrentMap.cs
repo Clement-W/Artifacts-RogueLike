@@ -186,10 +186,6 @@ namespace RogueLike.Core
                     if (player.Gold >= sellable.Cost)
                     { // if the player have enough moneyf (
                         
-                        System.Console.WriteLine(player.Gold + " " + sellable.Cost);
-                        Equipment e = sellable as Equipment;
-                        System.Console.WriteLine(e.Name);
-                        
                         if (CollectLoot(player, posX, posY)) // collect the item if possible
                         {
                             player.Gold -= sellable.Cost;

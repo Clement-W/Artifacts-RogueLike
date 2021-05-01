@@ -1,7 +1,7 @@
 using RogueSharp;
 using RogueSharp.MapCreation;
 using System;
-
+using RogueLike.Interfaces;
 using RogueLike.Core;
 using System.Linq;
 
@@ -19,7 +19,7 @@ namespace RogueLike.Systems
 
         private int mapLevel;
 
-        private int nbArtifactsCollected; 
+        private int nbArtifactsCollected;
 
         private readonly CurrentMap map;
 
@@ -151,23 +151,23 @@ namespace RogueLike.Systems
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true);
             }
-            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX-1, minY, startCorridorX-1, endCorridorY))
+            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX - 1, minY, startCorridorX - 1, endCorridorY))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true);
             }
-            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX+1, minY, startCorridorX+1, endCorridorY))
+            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX + 1, minY, startCorridorX + 1, endCorridorY))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true);
             }
-            
+
 
             // Add the sellers spaceship
             int spaceShipSize = 7;
-            foreach (Cell cell in map.GetBorderCellsInDiamond(startCorridorX, endCorridorY-spaceShipSize, spaceShipSize))
+            foreach (Cell cell in map.GetBorderCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(startCorridorX, endCorridorY-spaceShipSize, spaceShipSize))
+            foreach (Cell cell in map.GetCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
@@ -185,7 +185,8 @@ namespace RogueLike.Systems
             return map;
         }
 
-        private void PlaceSellersInSpaceship(){
+        private void PlaceSellersInSpaceship()
+        {
             // Those coordinates are computed graphically in the game console
             int itemSellerPosX = 117;
             int itemSellerPosY = 26;
@@ -193,9 +194,21 @@ namespace RogueLike.Systems
             int equipmentSellerPosX = 123;
             int equipmentSellerPosY = 26;
 
-            ItemSeller itemSeller= new ItemSeller(itemSellerPosX,itemSellerPosY,nbArtifactsCollected);
-            EquipmentSeller equipmentSeller= new EquipmentSeller(equipmentSellerPosX,equipmentSellerPosY,nbArtifactsCollected);
-            
+            ItemSeller itemSeller = new ItemSeller(itemSellerPosX, itemSellerPosY, nbArtifactsCollected);
+            EquipmentSeller equipmentSeller = new EquipmentSeller(equipmentSellerPosX, equipmentSellerPosY, nbArtifactsCollected);
+
+            foreach (ISellable sellable in itemSeller.Stall.Values)
+            {
+                sellable.SoldByMerchant = itemSeller;
+                map.AddLoot(sellable as ILoot);
+            }
+
+            foreach (ISellable sellable in equipmentSeller.Stall.Values)
+            {
+                sellable.SoldByMerchant = equipmentSeller;
+                map.AddLoot(sellable as ILoot);
+            }
+
             map.AddMerchant(itemSeller);
             map.AddMerchant(equipmentSeller);
 
