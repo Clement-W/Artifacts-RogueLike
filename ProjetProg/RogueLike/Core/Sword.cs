@@ -8,6 +8,7 @@ namespace RogueLike.Core
             AttackBonus = attBonus;
             RangeDepth = 1;
             RangeWidth = 3;
+            Symbol = 'Í';
         }
         public Sword(string name, int attBonus) : base(name, attBonus) { }
 

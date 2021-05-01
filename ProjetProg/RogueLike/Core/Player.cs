@@ -37,10 +37,10 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.PlayerHit;
 
-            UpSymbol = 'z';
-            DownSymbol = 's';
-            LeftSymbol = 'q';
-            RightSymbol = 'd';
+            UpSymbol = 'ü';
+            DownSymbol = 'û';
+            LeftSymbol = 'ù';
+            RightSymbol = 'ú';
             Symbol = DownSymbol;
 
             Head = Helmet.None();
@@ -57,27 +57,27 @@ namespace RogueLike.Core
         {
 
             int healthBarWidth = Dimensions.statConsoleWidth - 2;
-            int remaningHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
+            int remainingHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
 
             // Create the health bar thanks to the background color
-            statConsole.SetBackColor(1, 2, remaningHealth, 1, Colors.HealthBar);
-            statConsole.SetBackColor(1 + remaningHealth, 2, healthBarWidth - remaningHealth, 1, Colors.HealthBarDamage);
+            statConsole.SetBackColor(1, 2, remainingHealth, 1, Colors.HealthBar);
+            statConsole.SetBackColor(1 + remainingHealth, 2, healthBarWidth - remainingHealth, 1, Colors.HealthBarDamage);
 
             statConsole.Print(((int)(healthBarWidth / 2)), 2, "PV", Colors.Text);
 
-            statConsole.Print(3, 3, $"Attack: {Attack}", Colors.GrayText);
-            statConsole.Print(3 + (int)(Dimensions.statConsoleWidth / 3), 3, $"Defense: {Defense}", Colors.GrayText);
-            statConsole.Print(3 + (int)(2 * Dimensions.statConsoleWidth / 3), 3, $"Gold: {Gold}", Colors.Gold);
+            statConsole.Print(1, 3, $"Att: {Attack}", Colors.GrayText);
+            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 3, $"Def: {Defense}", Colors.GrayText);
+            statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 3, $"Gold: {Gold}", Colors.Gold);
         }
 
 
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
-            equipmentConsole.Print(1, 1, $"h: {Head.Name}", Colors.Text);
-            equipmentConsole.Print(1, 3, $"c: {Chest.Name}", Colors.Text);
-            equipmentConsole.Print(1, 5, $"l: {Legs.Name}", Colors.Text);
-            equipmentConsole.Print(1, 7, $"f: {Feet.Name}", Colors.Text);
-            equipmentConsole.Print(1, 9, $"w: {Weapon.Name}", Colors.Text);
+            equipmentConsole.Print(1, 1, $"{Icons.headStatusSymbol}: {Head.Symbol}", Colors.Text);
+            equipmentConsole.Print(1, 2, $"{Icons.chestStatusSymbol}: {Chest.Symbol}", Colors.Text);
+            equipmentConsole.Print(1, 3, $"{Icons.legsStatusSymbol}: {Legs.Symbol}", Colors.Text);
+            equipmentConsole.Print(1, 4, $"{Icons.footStatusSymbol}: {Feet.Symbol}", Colors.Text);
+            equipmentConsole.Print(1, 5, $"{Icons.weaponStatusSymbol}: {Weapon.Symbol}", Colors.Text);
         }
 
         public void DrawItemsInventory(RLConsole itemsConsole)
@@ -85,8 +85,8 @@ namespace RogueLike.Core
             int yPosition = 1;
             for (int i = 0; i < Items.Count; i++)
             {
-                itemsConsole.Print(1, yPosition, $"{i + 1}: {Items[i].Name}", Colors.Text);
-                yPosition += 2;
+                itemsConsole.Print(1, yPosition, $"{i + 1}: {Items[i].Symbol}", Colors.Text);
+                yPosition += 1;
             }
         }
 

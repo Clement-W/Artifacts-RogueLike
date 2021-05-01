@@ -9,6 +9,7 @@ namespace RogueLike.Core
             AttackBonus = attBonus;
             RangeDepth = 2;
             RangeWidth = 1;
+            Symbol = 'Ì';
         }
         public Spear(string name, int attBonus) : base(name, attBonus) { }
 
