@@ -17,6 +17,8 @@ namespace RogueLike.Core
         public AttackEquipment Weapon { get; set; }
 
         public List<Item> Items { get; set; }
+        
+        public List<Artifact> ArtifactsCollected{get;set;}
 
 
 
@@ -24,12 +26,13 @@ namespace RogueLike.Core
         public Player()
         {
             Items = new List<Item>();
+            ArtifactsCollected = new List<Artifact>();
             //create a player with the initial stats
 
             Attack = 10;
             Defense = 5;
             Awareness = 15;
-            Gold = 0;
+            Gold = 1000;
             Health = 100;
             MaxHealth = 100;
             Name = "Adventurer";
@@ -90,10 +93,11 @@ namespace RogueLike.Core
             }
         }
 
-        public void Move(int x, int y)
+        public void SetPosition(int x, int y)
         {
             PosX = x;
             PosY = y;
+            
         }
 
 
@@ -170,6 +174,12 @@ namespace RogueLike.Core
             {
                 Gold goldLoot = loot as Gold;
                 Gold += goldLoot.Amount;
+                isLootCollected = true;
+            }
+
+            else if(loot is Artifact){
+                Artifact artifact = loot as Artifact;
+                ArtifactsCollected.Add(artifact);
                 isLootCollected = true;
             }
 

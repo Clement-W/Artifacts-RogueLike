@@ -2,11 +2,11 @@ namespace RogueLike.Core
 {
     public class Boots : DefenseEquipment
     {
-        public Boots(string name, int defBonus, int cost) : this(name, defBonus)
+        public Boots(string name, int defBonus, int cost) : base(name, defBonus,cost)
         {
-            Cost = cost;
         }
-        public Boots(string name, int defBonus) : base(name, defBonus) { }
+
+        public Boots(string name,int defBonus) : base(name,defBonus,0){}
 
         public static Boots None()
         {

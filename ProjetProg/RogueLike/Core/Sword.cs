@@ -2,15 +2,12 @@ namespace RogueLike.Core
 {
     public class Sword : AttackEquipment
     {
-        public Sword(string name, int attBonus, int cost) : this(name, attBonus)
+        public Sword(string name, int attBonus, int cost): base(name,attBonus,cost)
         {
-            Name = name;
-            AttackBonus = attBonus;
             RangeDepth = 1;
             RangeWidth = 3;
             Symbol = 'Í';
         }
-        public Sword(string name, int attBonus) : base(name, attBonus) { }
 
         
 

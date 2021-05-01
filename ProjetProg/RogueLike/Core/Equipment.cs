@@ -16,7 +16,7 @@ namespace RogueLike.Core
         public int PosY { get; set; }
 
 
-        public bool InMerchantStall{get;set;}
+        public Merchant SoldByMerchant{get;set;}
 
 
         public string Name { get; set; }
@@ -24,11 +24,12 @@ namespace RogueLike.Core
         public int Cost{get;set;}
 
 
+        // Implicitly called
         public Equipment()
         {
             Symbol = '[';
             PrintedColor = Palette.DbLight;
-            InMerchantStall=false;
+            SoldByMerchant=null;
         }
 
         public void Draw(RLConsole console, IMap map)

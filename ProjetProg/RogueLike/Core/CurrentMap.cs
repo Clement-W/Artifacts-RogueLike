@@ -15,15 +15,20 @@ namespace RogueLike.Core
 
         private readonly List<ILoot> loots;
 
+        private readonly List<Merchant> merchants;
+
         public Staircase Staircase { get; set; } // To go deeper in the map
 
         public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
+
+        public MapType MapType { get; set; }
 
         public CurrentMap()
         {
             enemies = new List<Enemy>();
             loots = new List<ILoot>();
             AttackedCells = new List<ICell>();
+            merchants = new List<Merchant>();
         }
 
 
@@ -81,8 +86,16 @@ namespace RogueLike.Core
                 enemy.Draw(mapConsole, this);
             }
 
+            foreach (Merchant merchant in merchants)
+            {
+                merchant.Draw(mapConsole, this);
+                merchant.DrawStall(mapConsole, this);
+            }
 
-            Staircase.Draw(mapConsole, this);
+            if (Staircase != null)
+            {
+                Staircase.Draw(mapConsole, this);
+            }
         }
 
         //TODO : Ajouter d'autres couleurs sur certains murs pour changer
@@ -137,7 +150,16 @@ namespace RogueLike.Core
         // Set the field of view of the player according to it's awareness ()
         public void UpdatePlayerFieldOfView(Player player)
         {
-            ReadOnlyCollection<ICell> cellsFov = ComputeFov(player.PosX, player.PosY, player.Awareness, true); // Get the cells in the player fov
+            int radius;
+            if (MapType == MapType.BossRoom || MapType == MapType.Spaceship)
+            {
+                radius = Width;
+            }
+            else
+            {
+                radius = player.Awareness;
+            }
+            ReadOnlyCollection<ICell> cellsFov = ComputeFov(player.PosX, player.PosY, radius, true); // Get the cells in the player fov
             foreach (Cell cell in cellsFov)
             {
                 SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
@@ -150,32 +172,81 @@ namespace RogueLike.Core
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
         }
 
+        public bool CheckLootCollectability(Player player, int posX, int posY)
+        {
+            bool lootCanBeWalkedOn = true;
+            //Before moving and collect the item, check if it's in a merchant stall
+            ILoot loot = GetLootAt(posX, posY);
+
+            if (loot != null && loot is ISellable)
+            {
+                ISellable sellable = loot as ISellable;
+                if (sellable.SoldByMerchant != null) // If the item is in a merchant stall
+                {
+                    if (player.Gold >= sellable.Cost)
+                    { // if the player have enough moneyf (
+                        
+                        if (CollectLoot(player, posX, posY)) // collect the item if possible
+                        {
+                            player.Gold -= sellable.Cost;
+                            sellable.SoldByMerchant.SellItem(sellable);
+                        }
+                        else
+                        {
+                            lootCanBeWalkedOn = false;
+                        }
+                    }
+                    else
+                    {
+                        Game.MessageLog.AddMessage("You don't have enough gold !");
+                        lootCanBeWalkedOn = false;
+                    }
+                }
+                else
+                {
+                    CollectLoot(player, posX, posY);
+                }
+            }
+            else
+            {
+                CollectLoot(player, posX, posY);
+            }
+            return lootCanBeWalkedOn;
+        }
+
+
         public bool SetCharacterPosition(Character character, int posX, int posY)
         {
             // If the desired position is walkable
             if (GetCell(posX, posY).IsWalkable)
             {
+                bool canMove = true;
                 if (character is Player)
                 {
-                    CollectLoot(character as Player, posX, posY);
+                    // If there's a loot, check if it's collectible by the player
+                    canMove = CheckLootCollectability(character as Player, posX, posY);
+
                 }
 
-                // The actual position of the character is now walkable
-                SetCellWalkability(character.PosX, character.PosY, true);
-
-                // Set the new position of the character
-                character.PosX = posX;
-                character.PosY = posY;
-
-                // It's last position is now not walkable
-                SetCellWalkability(character.PosX, character.PosY, false);
-
-                // Update the fov if the character is the player
-                if (character is Player)
+                if (canMove)
                 {
-                    UpdatePlayerFieldOfView(character as Player);
+                    // The actual position of the character is now walkable
+                    SetCellWalkability(character.PosX, character.PosY, true);
+
+                    // Set the new position of the character
+                    character.PosX = posX;
+                    character.PosY = posY;
+
+                    // It's last position is now not walkable
+                    SetCellWalkability(character.PosX, character.PosY, false);
+
+                    // Update the fov if the character is the player
+                    if (character is Player)
+                    {
+                        UpdatePlayerFieldOfView(character as Player);
+                    }
+                    return true;
                 }
-                return true;
             }
 
             return false;
@@ -199,6 +270,13 @@ namespace RogueLike.Core
             SetCellWalkability(enemy.PosX, enemy.PosY, true);
         }
 
+        public void AddMerchant(Merchant merchant)
+        {
+            merchants.Add(merchant);
+            SetCellWalkability(merchant.PosX, merchant.PosY, false);
+        }
+
+
         public Enemy GetEnemyAt(int posX, int posY)
         {
             return enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
@@ -209,7 +287,7 @@ namespace RogueLike.Core
             return loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
         }
 
-        public bool CanMoveToNextLevel(Player player)
+        public bool PlayerIsOnStairCase(Player player)
         {
             return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
         }
@@ -233,7 +311,7 @@ namespace RogueLike.Core
         }
 
         // Collect a loot if there is one
-        public void CollectLoot(Player player, int posX, int posY)
+        public bool CollectLoot(Player player, int posX, int posY)
         {
             ILoot loot = GetLootAt(posX, posY);
 
@@ -246,6 +324,12 @@ namespace RogueLike.Core
                     Game.MessageLog.AddMessage("You found " + lootEquipment.Name);
                 }
 
+                if (loot is Item)
+                {
+                    Item lootItem = loot as Item;
+                    Game.MessageLog.AddMessage("You found " + lootItem.Name);
+                }
+
                 if (loot is Gold)
                 {
                     Gold gold = loot as Gold;
@@ -253,8 +337,11 @@ namespace RogueLike.Core
                 }
 
                 loots.Remove(loot);
+                return true;
             }
+            return false;
         }
+
 
 
     }

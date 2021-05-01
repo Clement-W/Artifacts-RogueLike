@@ -43,9 +43,9 @@ namespace RogueLike.Core
                 Equipment equipment3 = possibleEquipment[random.Next(0, possibleEquipment.Count)];
                 possibleEquipment.Remove(equipment1);
 
-                Stall.Add(equipment1);
-                Stall.Add(equipment2);
-                Stall.Add(equipment3); 
+                Stall.Add(0,equipment1);
+                Stall.Add(1,equipment2);
+                Stall.Add(2,equipment3); 
             }
 
         }

@@ -1,29 +1,21 @@
 using RogueLike.Interfaces;
 using RLNET;
 using RogueSharp;
-
 namespace RogueLike.Core
 {
-    public abstract class Item : IDrawable, ILoot, ISellable
+    public class Artifact : IDrawable, ILoot
     {
+        public string Name { get; set; }
+
         public RLColor PrintedColor { get; set; }
 
-        public char Symbol { get; set; }
+        public char Symbol { get; set; } // The displayed symbol on the console
 
         public int PosX { get; set; }
 
         public int PosY { get; set; }
-        public string Name { get; set; }
 
-        public Merchant SoldByMerchant{get;set;}
-
-        public int Cost{get;set;}
-
-        public Item(){
-            Symbol = '!';
-            PrintedColor = RLColor.Yellow;
-            SoldByMerchant = null;
-        }
+        public MapType ComesFrom{get;set;} // The map from which the artifact comes from
 
         public void Draw(RLConsole console, IMap map)
         {
@@ -44,13 +36,5 @@ namespace RogueLike.Core
                 }
             }
         }
-
-        public abstract void Use(Player player);
-
-
-
-
-
-
     }
 }
