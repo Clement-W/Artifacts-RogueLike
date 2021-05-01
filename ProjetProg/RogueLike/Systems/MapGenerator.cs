@@ -17,18 +17,28 @@ namespace RogueLike.Systems
 
         private int difficultyLevel;
 
+        private int mapLevel;
+
+        private int nbArtifactsCollected; 
+
         private readonly CurrentMap map;
 
         private Random random;
 
-        public MapGenerator(int width, int height, int level,int nbArtefactsCollected)
+        public MapGenerator(int width, int height, int level, int nbArtifacts)
         {
             mapWidth = width;
             mapHeight = height;
-            this.difficultyLevel = nbArtefactsCollected + level;
+            mapLevel = level;
+            nbArtifactsCollected = nbArtifacts;
+            difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
+        }
 
+        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected)
+        {
+            map.MapType = mapType;
         }
 
         public CurrentMap CreateCaveMap(Player player)
@@ -37,16 +47,48 @@ namespace RogueLike.Systems
             Map caveMap = Map.Create(mapCreationStrategy); // Create a cave style map
             map.Initialize(mapWidth, mapHeight);
             map.Copy(caveMap); // Copy the cave map into the current map
-            CreateStairs(player);
+
             PlacePlayerInMap(player); // Place the player into the map
             PlaceLootsInMap();
+            CreateStairs(player);
+
             return map;
         }
+
+        public CurrentMap CreateBossRoom(Player player)
+        {
+            map.MapType = MapType.BossRoom;
+            map.Initialize(mapWidth, mapHeight);
+            foreach (Cell cell in map.GetAllCells())
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+            //create the middle part of the spaceship
+            foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+
+            player.SetPosition(mapWidth / 2, mapHeight / 2);
+            map.AddPlayerOnTheMap(player);
+            return map;
+
+
+        }
+
+
 
 
         // Create a map that looks like a spaceship 
         public CurrentMap CreateSpaceship(Player player)
         {
+            map.MapType = MapType.Spaceship;
             map.Initialize(mapWidth, mapHeight);
             foreach (Cell cell in map.GetAllCells())
             {
@@ -86,14 +128,76 @@ namespace RogueLike.Systems
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
+            int minX = mapWidth / 2 - 4 - 7; // left border of the spaceship 
+            //mapWidth/2 -4 is the x origin of the left square and -7 because the square's border are 14
+            int maxY = (mapHeight / 2 + 8); // top border of the spaceship
+            int minY = (mapHeight / 2 - 8);
+
+            //Add the reactors
+            foreach (Cell cell in map.GetBorderCellsInSquare(minX - 2, mapHeight / 2 + 4, 1))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, false, true);
+            }
+
+            foreach (Cell cell in map.GetBorderCellsInSquare(minX - 2, mapHeight / 2 - 4, 1))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, false, true);
+            }
+
+            //Add the corridor to the sellers spaceship
+            int startCorridorX = mapWidth / 2;
+            int endCorridorY = minY - 2;
+            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX, minY, startCorridorX, endCorridorY))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true);
+            }
+            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX-1, minY, startCorridorX-1, endCorridorY))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true);
+            }
+            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX+1, minY, startCorridorX+1, endCorridorY))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true);
+            }
+            
+
+            // Add the sellers spaceship
+            int spaceShipSize = 7;
+            foreach (Cell cell in map.GetBorderCellsInDiamond(startCorridorX, endCorridorY-spaceShipSize, spaceShipSize))
+            {
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetCellsInDiamond(startCorridorX, endCorridorY-spaceShipSize, spaceShipSize))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+
+
             //TODO : ajouter les portails de téléportation
             //TODO : ajouter les pnj
+            PlaceSellersInSpaceship();
 
 
 
-            player.Move(mapWidth / 2, mapHeight / 2);
+            player.SetPosition(mapWidth / 2, mapHeight / 2);
             map.AddPlayerOnTheMap(player);
             return map;
+        }
+
+        private void PlaceSellersInSpaceship(){
+            // Those coordinates are computed graphically in the game console
+            int itemSellerPosX = 117;
+            int itemSellerPosY = 26;
+
+            int equipmentSellerPosX = 123;
+            int equipmentSellerPosY = 26;
+
+            ItemSeller itemSeller= new ItemSeller(itemSellerPosX,itemSellerPosY,nbArtifactsCollected);
+            EquipmentSeller equipmentSeller= new EquipmentSeller(equipmentSellerPosX,equipmentSellerPosY,nbArtifactsCollected);
+            
+            map.AddMerchant(itemSeller);
+            map.AddMerchant(equipmentSeller);
 
         }
 
@@ -102,9 +206,9 @@ namespace RogueLike.Systems
 
         private void PlacePlayerInMap(Player player)
         {
-            ICell cell= FindRandomWalkableCell();
+            ICell cell = FindRandomWalkableCell();
 
-            player.Move(cell.X, cell.Y);
+            player.SetPosition(cell.X, cell.Y);
             map.AddPlayerOnTheMap(player);
             PlaceEnemyInMap();
         }

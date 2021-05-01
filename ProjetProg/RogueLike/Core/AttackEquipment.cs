@@ -15,10 +15,11 @@ namespace RogueLike.Core
 
         public int RangeWidth { get; set; } // must be an odd number
 
-        public AttackEquipment(string name, int attackBonus)
+        public AttackEquipment(string name, int attackBonus,int cost)
         {
             Name = name;
             AttackBonus = attackBonus;
+            Cost = cost;
         }
         public AttackEquipment() { }
 

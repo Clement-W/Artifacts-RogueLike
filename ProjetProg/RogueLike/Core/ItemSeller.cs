@@ -21,14 +21,11 @@ namespace RogueLike.Core
             List<Item> possibleItem = null;
             switch (MerchantLevel)
             {
-                case 0:
-                    possibleItem = new List<Item>(new Item[] {new OldSandwich(), new MedicinaHerb() });
-                    break;
-                case 1:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(), new MedicinaHerb(), new Bandage(), new Ration() });
+                default:
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage()});
                     break;
                 case 2:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb()});
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage(), new HealthKit()});
                     break;
 
             }
@@ -36,17 +33,18 @@ namespace RogueLike.Core
             if (possibleItem != null)
             {
                 Item item1 = possibleItem[random.Next(0, possibleItem.Count)];
-                //Here, it's possible to have 2 equal items on the stall
-
+                possibleItem.Remove(item1);
+               
                 Item item2 = possibleItem[random.Next(0, possibleItem.Count)];
-   
+                possibleItem.Remove(item2);
 
                 Item item3 = possibleItem[random.Next(0, possibleItem.Count)];
-              
+                possibleItem.Remove(item3);
 
-                Stall.Add(item1);
-                Stall.Add(item2);
-                Stall.Add(item3);
+
+                Stall.Add(0,item1);
+                Stall.Add(1,item2);
+                Stall.Add(2,item3);
             }
 
         }

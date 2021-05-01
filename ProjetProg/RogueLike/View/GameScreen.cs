@@ -6,7 +6,8 @@ using System;
 using RogueSharp;
 using System.Threading;
 
-namespace RogueLike.View {
+namespace RogueLike.View
+{
 
     public class GameScreen : ScreenView
     {
@@ -32,7 +33,7 @@ namespace RogueLike.View {
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-            RootConsole.Title = $"Nom du Rogue Like - Level {Game.Level}";
+            RootConsole.Title = $"Nom du Rogue Like - Level {Game.CurrentLevel}";
 
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
@@ -95,16 +96,17 @@ namespace RogueLike.View {
                 // Reset the stopwatch
                 stopwatch.Reset();
                 Game.CommandSystem.MoveEnemies(Game); // Move the enemies
-                RenderRequired=true; // Render the game screen
+                RenderRequired = true; // Render the game screen
                 stopwatch.Start(); // Restart the stopwatch
             }
 
             DidPlayerAct = false;
             KeyPress = RootConsole.Keyboard.GetKeyPress();
 
-            if (RootConsole.Mouse.GetLeftClick()) {
+            if (RootConsole.Mouse.GetLeftClick())
+            {
                 UpdateOrientation();
-                Game.CommandSystem.PlayerAttack(Game.Player,Game.Map);
+                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map);
                 RenderRequired = true;
             }
 
@@ -119,14 +121,28 @@ namespace RogueLike.View {
                     case RLKey.Left: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
                     case RLKey.Right: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
                     case RLKey.LControl:
-                        if (Game.Map.CanMoveToNextLevel(Game.Player))
+                        if (Game.Map.PlayerIsOnStairCase(Game.Player))
                         {
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.Level,Game.NbArtefactsCollected);
-                            Game.Map = mapGenerator.CreateCaveMap(Game.Player);
-                            Game.MessageLog = new MessageLog();
-                            Game.CommandSystem = new CommandSystem();
-                            DidPlayerAct = true;
-                            RootConsole.Title = $"Nom du Rogue Like - Level {Game.Level}";
+
+                            if (Game.CurrentLevel < 3)
+                            {
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.MapType);
+                                Game.Map = mapGenerator.CreateCaveMap(Game.Player);
+                                Game.MessageLog = new MessageLog();
+                                Game.CommandSystem = new CommandSystem();
+                                DidPlayerAct = true;
+                                RootConsole.Title = $"Nom du Rogue Like - Level {Game.CurrentLevel}";
+                            }
+                            else
+                            { // Create the boss room
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count);
+                                Game.Map = mapGenerator.CreateBossRoom(Game.Player);
+                                Game.MessageLog = new MessageLog();
+                                Game.CommandSystem = new CommandSystem();
+                                DidPlayerAct = true;
+                                RootConsole.Title = $"Nom du Rogue Like - Boss n°{Game.Player.ArtifactsCollected.Count + 1}";
+
+                            }
                         }
                         break;
 
@@ -146,25 +162,30 @@ namespace RogueLike.View {
                 //Game.CommandSystem.MoveEnemies(Game);
             }
 
-            if (Game.Player.Health <= 0) {
+            if (Game.Player.Health <= 0)
+            {
                 RootConsole.Update -= OnGameUpdate;
                 RootConsole.Render -= OnGameRender;
                 EndGame(Game);
             }
         }
 
-        private static Cell SelectCell(int x, int y) {
-            
+        private static Cell SelectCell(int x, int y)
+        {
+
             Cell selectedCell;
             //possibilit� de faire un switch pour changer la forme de la zone selectionn�
             //pour l'instant on focus une case TODO
 
-            
-            if (x >= 0 && x < Game.Map.Width && y >= 0 && y < Game.Map.Height) {
+
+            if (x >= 0 && x < Game.Map.Width && y >= 0 && y < Game.Map.Height)
+            {
 
                 selectedCell = Game.Map.CellFor(Game.Map.IndexFor(x, y)) as Cell;
 
-            } else {
+            }
+            else
+            {
                 return (Cell)Game.Map.GetCell(Game.Player.PosX, Game.Player.PosY);
             }
 
@@ -173,12 +194,14 @@ namespace RogueLike.View {
         }
 
 
-        private void UpdateOrientation() {
+        private void UpdateOrientation()
+        {
 
             int mouseX = RootConsole.Mouse.X;
             int mouseY = RootConsole.Mouse.Y;
 
-            if (mouseX >= 0 && mouseX < RootConsole.Width && mouseY >= 0 && mouseY < RootConsole.Height) {
+            if (mouseX >= 0 && mouseX < RootConsole.Width && mouseY >= 0 && mouseY < RootConsole.Height)
+            {
 
                 int absoluteX = mouseX + CameraSystem.viewPortStartX;
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
@@ -188,35 +211,51 @@ namespace RogueLike.View {
                 int x = currentMouseCell.X;
                 int y = currentMouseCell.Y;
 
-                
+
                 double diffX = Math.Abs(x - Game.Player.PosX);
                 double diffY = Math.Abs(y - Game.Player.PosY);
 
-                if (x > Game.Player.PosX) {
-                    if (diffX > diffY) {
+                if (x > Game.Player.PosX)
+                {
+                    if (diffX > diffY)
+                    {
                         Game.Player.Symbol = Game.Player.RightSymbol;
-                    } else {
-                        if (y < Game.Player.PosY) {
-                            Game.Player.Symbol = Game.Player.UpSymbol;
-                        } else {
-                            Game.Player.Symbol = Game.Player.DownSymbol;
-                        }
                     }
-                } else {
-                    if (diffX > diffY) {
-                        Game.Player.Symbol = Game.Player.LeftSymbol;
-                    } else {
-                        if (y < Game.Player.PosY) {
+                    else
+                    {
+                        if (y < Game.Player.PosY)
+                        {
                             Game.Player.Symbol = Game.Player.UpSymbol;
-                        } else {
+                        }
+                        else
+                        {
                             Game.Player.Symbol = Game.Player.DownSymbol;
                         }
                     }
                 }
-            }      
-        } 
+                else
+                {
+                    if (diffX > diffY)
+                    {
+                        Game.Player.Symbol = Game.Player.LeftSymbol;
+                    }
+                    else
+                    {
+                        if (y < Game.Player.PosY)
+                        {
+                            Game.Player.Symbol = Game.Player.UpSymbol;
+                        }
+                        else
+                        {
+                            Game.Player.Symbol = Game.Player.DownSymbol;
+                        }
+                    }
+                }
+            }
+        }
 
-        public void EndGame(Game game) {
+        public void EndGame(Game game)
+        {
             GameOverScreen gameOverScreen = new GameOverScreen(game);
         }
 

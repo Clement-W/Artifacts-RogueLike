@@ -10,7 +10,7 @@ namespace RogueLike.Core
     public class Game
     {
 
-        public static int Level { get; set; }
+
 
 
         public Player Player { get; private set; }
@@ -20,31 +20,32 @@ namespace RogueLike.Core
         public static MessageLog MessageLog { get; set; }
 
         public CurrentMap Map { get; set; }
-
-
-        public int NbArtefactsCollected{get;set;}
+        public static int CurrentLevel { get; set; }
+        public static MapType CurrentMapType{get;set;}
 
 
 
 
         public void StartGame()
         {
-            Level = 1;
-            NbArtefactsCollected = 0;
+            CurrentLevel = 1;
             GameScreen gameScreen = new GameScreen("oui", this);
 
             CommandSystem = new CommandSystem();
             CameraSystem = new CameraSystem();
             MessageLog = new MessageLog();
             MessageLog.AddMessage("C'est parti !");
-
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Level,NbArtefactsCollected);
             Player = new Player();
-            Map = mapGenerator.CreateCaveMap(Player);
+            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count);
+            //Map = mapGenerator.CreateCaveMap(Player);
+            Map = mapGenerator.CreateSpaceship(Player);
             Map.UpdatePlayerFieldOfView(Player);
 
+            // créé la map vaisseau
+            // dans le vaisseau il y a les portails, quand on va dans un portail, ça TP dans la map donc ça set l'attribut currentMapType et level
 
-            
+
+
 
 
 
@@ -56,7 +57,7 @@ namespace RogueLike.Core
             //créé le player et le passe en paramètre au map generator
         }
 
-        
+
 
 
 

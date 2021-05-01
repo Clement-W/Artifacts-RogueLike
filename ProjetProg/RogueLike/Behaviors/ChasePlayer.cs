@@ -26,7 +26,6 @@ namespace RogueLike.Behaviors
                 enemyFov.ComputeFov(enemy.PosX, enemy.PosY, enemy.Awareness, true);
                 if (enemyFov.IsInFov(player.PosX, player.PosY))
                 {
-                    Game.MessageLog.AddMessage($"A {enemy.Name} saw you.");
                     enemy.NbTurnsAlerted = 1;
                 }
          

@@ -18,9 +18,9 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 
 TODO (pas ordonné) : 
 * Transformer TOUTES les méthodes static en pattern factory
-* Trouver un moyen de gérer les attaques
+
 * Faire la map vaisseau
-* Gameplay avec la souris
+
 * Ajouter des pnj (dont des vendeurs)
 * Faire les 3 maps des 3 planètes et faire des étages dedans
 * Faire les portails de téléportation pour revenir au vaisseau à la fin des maps
@@ -28,12 +28,14 @@ TODO (pas ordonné) :
 * Trouver un moyen d'ajouter des enigmes au sein des maps (peut être une énigme pour débloquer l'artefact de chacune des 4 planètes ?)
 * Modifier le fichier ascii pour les graphismes
 * Ajouter des aspects graphiques aux maps et les différencier en fonction de la planète
-* Ajouter des items dans les maps + des chest qui peuvent contenir des items, de la nourriture
 * Faire la page de lancement du jeu avec launch, help, lore et tout
+* Faire page game over
 * Ajouter différents types de monstres en fonction des planètes avec des stats différentes 
 * Faire des couleurs de sol différentes selon les planètes 
 * Pour les comportements d'ennemis, pathfinding normal et pourquoi pas un monstre qui fuit mais qui a beaucoup de gold sur lui et il serait assez rare.
 * Faire une classe Drawable qui contient la métode draw
+* changer nom du rogue like dans titre console
+* Faire tous les todo dans le code
 
 
 TODO bonus :
