@@ -6,6 +6,7 @@ namespace RogueLike.Core
         {
             RangeDepth = 1;
             RangeWidth = 1;
+            Symbol = 'Î';
         }
 
         public static Knife Mk1()
