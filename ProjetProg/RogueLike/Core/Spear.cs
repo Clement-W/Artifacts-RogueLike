@@ -7,7 +7,7 @@ namespace RogueLike.Core
         {
             RangeDepth = 2;
             RangeWidth = 1;
-            Symbol = 'Ì';
+            Symbol = Icons.spearSymbol;
         }
 
         public static Spear Mk1()
