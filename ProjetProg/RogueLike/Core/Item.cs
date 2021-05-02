@@ -21,7 +21,7 @@ namespace RogueLike.Core
 
         public Item(){
             Symbol = '!';
-            PrintedColor = RLColor.Yellow;
+            PrintedColor = RLColor.White;
             SoldByMerchant = null;
         }
 

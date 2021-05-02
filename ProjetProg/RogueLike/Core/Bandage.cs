@@ -5,6 +5,7 @@ namespace RogueLike.Core
         public Bandage() : base(){
             Name = "Bandage";
             Cost = 20;
+            Symbol = Icons.bandageSymbol;
         }
 
         public override void Use(Player player){
