@@ -296,7 +296,7 @@ namespace RogueLike.View
         public void AnimateMerchantsOnMap()
         {
 
-            if (animationStopWatch.ElapsedMilliseconds > 1000)
+            if (animationStopWatch.ElapsedMilliseconds > 500)
             {
                 animationStopWatch.Reset();
                 foreach (Merchant merchant in Game.Map.Merchants)

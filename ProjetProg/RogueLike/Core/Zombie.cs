@@ -18,10 +18,10 @@ namespace RogueLike.Core
             Name = "Zombie";
             MovingTimePeriod = 1;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = '&';
-            DownSymbol = '&';
-            LeftSymbol = '&';
-            RightSymbol = '&';
+            UpSymbol = 'À';
+            DownSymbol = 'À';
+            LeftSymbol = 'À';
+            RightSymbol = 'À';
 
             Symbol = DownSymbol; 
         }
