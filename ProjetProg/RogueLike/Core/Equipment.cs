@@ -27,7 +27,6 @@ namespace RogueLike.Core
         // Implicitly called
         public Equipment()
         {
-            Symbol = '[';
             PrintedColor = Palette.DbLight;
             SoldByMerchant=null;
         }
