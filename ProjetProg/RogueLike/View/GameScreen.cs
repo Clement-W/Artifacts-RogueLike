@@ -98,14 +98,14 @@ namespace RogueLike.View
             //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-�tre (TODO)
 
             // Every second, trigger the scheduling system to move the non playable characters
-            if (schedulingStopWatch.ElapsedMilliseconds > 200)
+            if (schedulingStopWatch.ElapsedMilliseconds > 100)
             {
                 // Reset the stopwatch
                 schedulingStopWatch.Reset();
                 Game.CommandSystem.MoveEnemies(Game); // Move the enemies
                 RenderRequired = true; // Render the game screen
                 schedulingStopWatch.Start(); // Restart the stopwatch
-            } // TODO classe scheduling system qui contient ça
+            } // TODO: classe scheduling system qui contient ça
 
 
             DidPlayerAct = false;
@@ -200,6 +200,10 @@ namespace RogueLike.View
                 RootConsole.Update -= OnGameUpdate;
                 RootConsole.Render -= OnGameRender;
                 EndGame(Game);
+            }
+            
+            if(Game.Player.ArtifactsCollected.Count==3){
+                // TODO: écran de victoire avec stats et tout
             }
         }
 

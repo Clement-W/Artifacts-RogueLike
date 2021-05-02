@@ -21,21 +21,19 @@ TODO (pas ordonné) :
 
 * Faire la map vaisseau
 
-* Ajouter des pnj (dont des vendeurs)
-* Faire les 3 maps des 3 planètes et faire des étages dedans
-* Faire les portails de téléportation pour revenir au vaisseau à la fin des maps
-* Ajouter l'artefact au dernier étage de chacune des 4 maps planètes
+
 * Trouver un moyen d'ajouter des enigmes au sein des maps (peut être une énigme pour débloquer l'artefact de chacune des 4 planètes ?)
 * Modifier le fichier ascii pour les graphismes
 * Ajouter des aspects graphiques aux maps et les différencier en fonction de la planète
 * Faire la page de lancement du jeu avec launch, help, lore et tout
+* bien dire que pour prendre un nportial ou un escalier il faut appuier sur control
 * Faire page game over
 * Ajouter différents types de monstres en fonction des planètes avec des stats différentes 
 * Faire des couleurs de sol différentes selon les planètes 
 * Pour les comportements d'ennemis, pathfinding normal et pourquoi pas un monstre qui fuit mais qui a beaucoup de gold sur lui et il serait assez rare.
 * Faire une classe Drawable qui contient la métode draw
-* changer nom du rogue like dans titre console
 * Faire tous les todo dans le code
+* ajouter un timer qui se lance en même temps que game screen pour pouvoir donner son temps au joueur à la fin (pour qu'il y ait un but de performance quand même)
 
 
 TODO bonus :

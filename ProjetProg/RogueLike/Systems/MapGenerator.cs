@@ -74,17 +74,17 @@ namespace RogueLike.Systems
             }
 
             //create the middle part of the boss room
-            foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            foreach (Cell cell in map.GetCellsInDiamond((mapWidth / 2), (mapHeight / 2), 10))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            foreach (Cell cell in map.GetBorderCellsInDiamond((mapWidth / 2), (mapHeight / 2),10))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
 
-            player.SetPosition(mapWidth / 2, mapHeight / 2);
+            player.SetPosition(mapWidth / 2, mapHeight / 2+5);
             map.AddPlayerOnTheMap(player);
             //TODO: Création du boss 
             //Dans la map qui contient le boss, si le boss est mort alors on ajoute l'artefact puis un portail de TP vers le vaisseau à la map pour retourner au vaisseau

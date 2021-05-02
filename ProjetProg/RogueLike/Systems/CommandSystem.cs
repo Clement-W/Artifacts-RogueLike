@@ -99,12 +99,15 @@ namespace RogueLike.Systems
 
 
 
-        //provisoire
+        //Each turn, we check if the enemy can move according to it's necessary time period to move
+        // If it can't move, we decrement it's counter. When the enemy can move, the remaning time period to move
+        // is set to the necessary moving time period.
         public void MoveEnemies(Game game)
         {
             List<Enemy> enemies = game.Map.GetEnemies();
             foreach (Enemy enemy in enemies)
             {
+            
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;

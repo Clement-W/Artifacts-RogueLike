@@ -16,7 +16,7 @@ namespace RogueLike.Core
             Health = random.Next(0,30) * diffifultyLevel;
             MaxHealth = Health;
             Name = "Zombie";
-            MovingTimePeriod = 1;
+            MovingTimePeriod = 2;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = '&';
             DownSymbol = '&';
