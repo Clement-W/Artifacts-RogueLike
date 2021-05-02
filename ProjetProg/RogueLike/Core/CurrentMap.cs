@@ -12,6 +12,7 @@ namespace RogueLike.Core
 
     public class CurrentMap : Map
     {
+        public List<IAnimated> AnimatedSprites { get; set; }
 
         public List<Enemy> Enemies { get; private set; }
 
@@ -32,6 +33,8 @@ namespace RogueLike.Core
 
         public CurrentMap()
         {
+
+            AnimatedSprites = new List<IAnimated>();
             Enemies = new List<Enemy>();
             Loots = new List<ILoot>();
             AttackedCells = new List<ICell>();
@@ -128,11 +131,11 @@ namespace RogueLike.Core
                     // Draw the cell differently if it's walkable or not
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, '.');
+                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
+                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
                     }
 
                 }
@@ -140,11 +143,11 @@ namespace RogueLike.Core
                 {
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, '.');
+                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, Location.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, '#');
+                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, Location.WallSymbol);
                     }
                 }
             }
@@ -156,11 +159,11 @@ namespace RogueLike.Core
         {
             if (cell.IsWalkable)
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, '.');
+                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
             }
             else
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
+                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
             }
         }
 
@@ -292,6 +295,7 @@ namespace RogueLike.Core
         {
             Merchants.Add(merchant);
             SetCellWalkability(merchant.PosX, merchant.PosY, false);
+            AnimatedSprites.Add(merchant);
         }
 
 
@@ -391,6 +395,7 @@ namespace RogueLike.Core
         public void AddTeleportationPortal(TeleportationPortal portal)
         {
             TeleportationPortals.Add(portal);
+            AnimatedSprites.Add(portal);
         }
 
         // Find a walkable cell around the active character

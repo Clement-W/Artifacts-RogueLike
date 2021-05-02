@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System;
 using RogueSharp;
 using System.Threading;
+using RogueLike.Interfaces;
+
 
 namespace RogueLike.View
 {
@@ -320,9 +322,9 @@ namespace RogueLike.View
             if (animationStopWatch.ElapsedMilliseconds > 500)
             {
                 animationStopWatch.Reset();
-                foreach (Merchant merchant in Game.Map.Merchants)
+                foreach (IAnimated animated in Game.Map.AnimatedSprites)
                 {
-                    merchant.ChangeSymbolAlternative();
+                    animated.ChangeSymbolAlternative();
                 }
                 View.GameScreen.RenderRequired = true;
                 animationStopWatch.Start();

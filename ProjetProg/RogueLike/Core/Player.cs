@@ -80,7 +80,7 @@ namespace RogueLike.Core
             equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 2, $"{Head.Symbol}", Head.PrintedColor);
             equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: ", Colors.Text);
-            equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Legs.PrintedColor);
+            equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Chest.PrintedColor);
             equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 4, $"{Legs.Symbol}", Legs.PrintedColor);
             equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: ", Colors.Text);

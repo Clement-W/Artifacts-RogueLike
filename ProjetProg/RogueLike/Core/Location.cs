@@ -15,8 +15,17 @@ namespace RogueLike.Core
         public RLColor WallBackgroundColor { get; set; }
         public RLColor WallBackgroundColorInFov { get; set; }
 
+        public char FloorSymbol { get; set; }
+        public char WallSymbol { get; set; }
 
-        public void SetColors()
+
+        public void InitializeSprites()
+        {
+            SetColors();
+            SetSymbol();
+        }
+
+        private void SetColors()
         {
             //TODO: set les couleurs planet 2
             switch (Planet)
@@ -47,6 +56,23 @@ namespace RogueLike.Core
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
                     WallBackgroundColor = Colors.WallBackground;
                     WallBackgroundColorInFov = Colors.WallBackgroundFov;
+                    break;
+            }
+        }
+
+
+        private void SetSymbol() {
+
+            WallSymbol = '#';
+            switch (MapType) {
+                case MapType.BossRoom:
+                    FloorSymbol = '.';//'Û';
+                    break;
+                case MapType.Spaceship:
+                    FloorSymbol = '.';
+                    break;
+                case MapType.Planet:
+                    FloorSymbol = '.';
                     break;
             }
         }

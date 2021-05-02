@@ -5,7 +5,7 @@ using RogueSharp;
 using System.Linq;
 namespace RogueLike.Core
 {
-    public abstract class Merchant : Character
+    public abstract class Merchant : Character, IAnimated
     {
         public char AlternateSymbol1 { get; set; }
         public char AlternateSymbol2 { get; set; }

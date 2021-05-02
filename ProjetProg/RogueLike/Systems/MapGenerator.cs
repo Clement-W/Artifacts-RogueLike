@@ -41,7 +41,8 @@ namespace RogueLike.Systems
         {
             map.Location.MapType = mapType;
             map.Location.Planet = planet;
-            map.Location.SetColors();
+            map.Location.InitializeSprites();
+            Console.WriteLine("bbb");
 
         }
 
@@ -259,6 +260,7 @@ namespace RogueLike.Systems
             map.AddMerchant(itemSeller);
             map.AddMerchant(equipmentSeller);
 
+            
         }
 
         private void PlaceTeleportationPortalsInSpaceship(Player player)
