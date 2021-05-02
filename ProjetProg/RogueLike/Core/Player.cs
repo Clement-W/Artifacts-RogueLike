@@ -14,7 +14,7 @@ namespace RogueLike.Core
         public Chestplate Chest { get; set; }
         public Leggins Legs { get; set; }
         public Boots Feet { get; set; }
-        public AttackEquipment Weapon { get; set; }
+        
 
         public List<Item> Items { get; set; }
         

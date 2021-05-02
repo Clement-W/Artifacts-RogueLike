@@ -254,15 +254,15 @@ namespace RogueLike.Systems
                 visitedPlanets.Add(artifact.ComesFrom);
             }
 
-            if (!visitedPlanets.Contains(PlanetName.Planet1))
+            if (!visitedPlanets.Contains(PlanetName.Alleo))
             {
                 map.AddTeleportationPortal(new PortalToPlanet1(middlePortalX - 5, middlePortalY));
             }
-            if (!visitedPlanets.Contains(PlanetName.Planet2))
+            if (!visitedPlanets.Contains(PlanetName.Damari))
             {
                 map.AddTeleportationPortal(new PortalToPlanet2(middlePortalX, middlePortalY));
             }
-            if (!visitedPlanets.Contains(PlanetName.Planet3))
+            if (!visitedPlanets.Contains(PlanetName.Thaadd))
             {
                 map.AddTeleportationPortal(new PortalToPlanet3(middlePortalX + 5, middlePortalY));
             }

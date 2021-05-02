@@ -17,6 +17,10 @@ namespace RogueLike.Core
         // Desincremented in the update loop, and set to MovingTimePeriod when the enemy has moved
         public int RemainingTimePeriodToMove{get;set;}
 
+        public Enemy(){
+            Weapon = new Fist();
+        }
+
 
         // base behavior of an enemy, that can be overwritten in the subclasses
         public virtual void PerformAction(Game game){

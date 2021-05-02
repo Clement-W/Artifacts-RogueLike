@@ -79,6 +79,8 @@ namespace RogueLike.Core
 
         public RLColor ColorAfterHit { get; set; }
 
+        public AttackEquipment Weapon { get; set; }
+
 
         public void ChangeColorAfterHit()
         {

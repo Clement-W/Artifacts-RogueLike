@@ -21,21 +21,21 @@ namespace RogueLike.Core
             //TODO: set les couleurs planet 2
             switch (Planet)
             {
-                case PlanetName.Planet1:
+                case PlanetName.Alleo:
                     FloorBackgroundColor = Colors.FloorBackground;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
                     WallBackgroundColor = Colors.WallBackground;
                     WallBackgroundColorInFov = Colors.WallBackgroundFov;
                     break;
 
-                case PlanetName.Planet2:
+                case PlanetName.Damari:
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet2;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet2;
                     WallBackgroundColor = Colors.WallBackgroundPlanet2;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet2;
                     break;
 
-                case PlanetName.Planet3: //TODO: set lels couleurs planet 3
+                case PlanetName.Thaadd: //TODO: set lels couleurs planet 3
                     FloorBackgroundColor = Colors.FloorBackground;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
                     WallBackgroundColor = Colors.WallBackground;

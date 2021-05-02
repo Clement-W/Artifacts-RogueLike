@@ -1,8 +1,10 @@
 ﻿using RLNET;
 
-namespace RogueLike.Core {
+namespace RogueLike.Core
+{
     // Contains the colors used in the rogue like
-    public static class Icons {
+    public static class Icons
+    {
 
 
         // player icons
@@ -50,7 +52,5 @@ namespace RogueLike.Core {
         public static char itemSellerSymbol2 = '½';
         public static char equipementSellerSymbol1 = '¾';
         public static char equipementSellerSymbol2 = '¿';
-
-
     }
 }

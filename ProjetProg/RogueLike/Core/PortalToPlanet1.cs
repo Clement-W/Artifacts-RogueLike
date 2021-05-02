@@ -5,7 +5,7 @@ namespace RogueLike.Core
     {
         public PortalToPlanet1(int posX, int posY){
             DestinationMap = MapType.Planet;
-            PlanetDestination = PlanetName.Planet1;
+            PlanetDestination = PlanetName.Alleo;
             Symbol = '*';
             PosX = posX;
             PosY = posY;
