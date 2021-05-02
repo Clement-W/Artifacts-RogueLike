@@ -7,10 +7,7 @@ namespace RogueLike.Core
             Symbol = Icons.chestplateSymbol;
         }
 
-        public Chestplate(string name,int defBonus) : base(name,defBonus,0)
-        {
-            Symbol = Icons.chestplateSymbol;
-        }
+        public Chestplate(string name,int defBonus) : base(name,defBonus,0) {}
 
         public static Chestplate None()
         {

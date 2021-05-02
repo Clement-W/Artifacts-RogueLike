@@ -46,11 +46,13 @@ namespace RogueLike.Core
         public static char healthKitSymbol = 'Ë';
 
 
-
-        // merchant icon(s?) 
+        // merchant icons 
         public static char itemSellerSymbol1 = '¼';
         public static char itemSellerSymbol2 = '½';
         public static char equipementSellerSymbol1 = '¾';
         public static char equipementSellerSymbol2 = '¿';
+
+        // enemy icons
+        public static char zombieSymbol = 'À';
     }
 }

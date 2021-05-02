@@ -9,7 +9,6 @@ namespace RogueLike.Core
 
         public Helmet(string name, int defBonus) : base(name, defBonus, 0)
         {
-            Symbol = Icons.helmetSymbol;
         }
 
         public static Helmet None()
