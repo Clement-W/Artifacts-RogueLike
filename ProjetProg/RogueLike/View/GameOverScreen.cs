@@ -17,6 +17,7 @@ namespace RogueLike.View {
             // += Allows to add a new event handler to the rootConsole.Update event
             // += Call the add method of the event.
             RootConsole.Run();
+            ChangeTitle("Game over");
         }
 
         private void OnGameOverRender(object sender, UpdateEventArgs e) {

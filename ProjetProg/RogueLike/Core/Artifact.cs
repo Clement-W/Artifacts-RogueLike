@@ -15,7 +15,17 @@ namespace RogueLike.Core
 
         public int PosY { get; set; }
 
-        public MapType ComesFrom{get;set;} // The map from which the artifact comes from
+        public PlanetName ComesFrom { get; set; } // The map from which the artifact comes from
+
+        public Artifact(PlanetName comesFrom, int posX, int posY)
+        {
+            ComesFrom = comesFrom;
+            PosX = posX;
+            PosY = posY;
+            Name = comesFrom.ToString() + "'s Artifact";
+            Symbol = '%';
+            PrintedColor = RLColor.White; //TODO : changer ça
+        }
 
         public void Draw(RLConsole console, IMap map)
         {
@@ -36,5 +46,7 @@ namespace RogueLike.Core
                 }
             }
         }
+
+      
     }
 }

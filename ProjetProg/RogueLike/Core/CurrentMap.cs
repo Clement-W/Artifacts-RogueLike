@@ -12,17 +12,23 @@ namespace RogueLike.Core
     public class CurrentMap : Map
     {
 
-        public List<Enemy> Enemies{get;private set;}
+        public List<Enemy> Enemies { get; private set; }
 
-        public List<ILoot> Loots{get;private set;}
+        public List<ILoot> Loots { get; private set; }
 
-        public List<Merchant> Merchants{get; private set;}
+        public List<Merchant> Merchants { get; private set; }
 
         public Staircase Staircase { get; set; } // To go deeper in the map
+
+        public List<TeleportationPortal> TeleportationPortals { get; private set; }
 
         public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
 
         public MapType MapType { get; set; }
+
+        public PlanetName Planet{get;set;}
+
+
 
 
         public CurrentMap()
@@ -31,6 +37,7 @@ namespace RogueLike.Core
             Loots = new List<ILoot>();
             AttackedCells = new List<ICell>();
             Merchants = new List<Merchant>();
+            TeleportationPortals = new List<TeleportationPortal>();
 
         }
 
@@ -95,6 +102,11 @@ namespace RogueLike.Core
                 merchant.DrawStall(mapConsole, this);
             }
 
+            foreach (TeleportationPortal portal in TeleportationPortals)
+            {
+                portal.Draw(mapConsole, this);
+            }
+
             if (Staircase != null)
             {
                 Staircase.Draw(mapConsole, this);
@@ -138,7 +150,7 @@ namespace RogueLike.Core
             }
         }
 
-    
+
         // Draw the cell with the specified color (used when a cell is attacked by the player)
         private void DrawCellWithColor(RLConsole mapConsole, Cell cell, RLColor color)
         {
@@ -288,6 +300,11 @@ namespace RogueLike.Core
             return Enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
+        public TeleportationPortal GetTeleportationPortalAt(int posX, int posY)
+        {
+            return TeleportationPortals.FirstOrDefault(portal => (portal.PosX == posX && portal.PosY == posY));
+        }
+
         public ILoot GetLootAt(int posX, int posY)
         {
             return Loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
@@ -295,7 +312,26 @@ namespace RogueLike.Core
 
         public bool PlayerIsOnStairCase(Player player)
         {
-            return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
+            if (Staircase != null)
+            {
+                return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool PlayerIsOnTeleportationPortal(Player player)
+        {
+            foreach (TeleportationPortal portal in TeleportationPortals)
+            {
+                if (portal.PosX == player.PosX && portal.PosY == player.PosY)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void AddLoot(ILoot loot)
@@ -326,28 +362,36 @@ namespace RogueLike.Core
             if (loot != null && player.Collect(loot, this))
             {
 
-                if (sellableLoot.SoldByMerchant == null)
+                if (loot is Gold)
                 {
-                    if (loot is Gold)
-                    {
-                        Gold gold = loot as Gold;
-                        Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
-                    }
-                    else
-                    {
-                        Game.MessageLog.AddMessage("You found " + loot.Name);
-                    }
+                    Gold gold = loot as Gold;
+                    Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
+                }
+                else if (loot is Artifact)
+                {   
+                    Game.MessageLog.AddMessage("You've collected " + loot.Name);
+                }
+                else if (sellableLoot.SoldByMerchant == null)
+                {
+                    Game.MessageLog.AddMessage("You found " + loot.Name);
                 }
                 else
                 {
                     Game.MessageLog.AddMessage("You bought " + loot.Name);
                 }
-
                 Loots.Remove(loot);
                 return true;
+
             }
             return false;
         }
+
+
+        public void AddTeleportationPortal(TeleportationPortal portal)
+        {
+            TeleportationPortals.Add(portal);
+        }
+
 
 
 

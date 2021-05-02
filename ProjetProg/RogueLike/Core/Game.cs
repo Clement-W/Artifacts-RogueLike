@@ -20,10 +20,8 @@ namespace RogueLike.Core
         public static MessageLog MessageLog { get; set; }
 
         public CurrentMap Map { get; set; }
-        public static int CurrentLevel { get; set; }
-        public static MapType CurrentMapType { get; set; }
 
-
+        public static int CurrentLevel { get; set; } // the level in the map 
 
 
         public void StartGame()
@@ -48,10 +46,10 @@ namespace RogueLike.Core
 
         private void InitializeMap()
         {
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count);
-            //Map = mapGenerator.CreateCaveMap(Player);
-            Map = mapGenerator.CreateSpaceship(Player);
-            Map.UpdatePlayerFieldOfView(Player);
+            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count,MapType.Spaceship);
+           
+            Map = mapGenerator.CreateMap(Player);
+            //Spaceship.UpdatePlayerFieldOfView(Player);
         }
 
 

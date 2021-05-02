@@ -46,5 +46,7 @@ namespace RogueLike.Core
 
         public static RLColor AttackedCell = Palette.DbLight;
 
+        public static RLColor TeleportationPortal = Palette.DbLight;
+
     }
 }

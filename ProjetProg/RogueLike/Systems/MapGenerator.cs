@@ -4,6 +4,7 @@ using System;
 using RogueLike.Interfaces;
 using RogueLike.Core;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace RogueLike.Systems
 {
@@ -36,6 +37,13 @@ namespace RogueLike.Systems
             random = new Random();
         }
 
+        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
+        {
+            map.MapType = mapType;
+            map.Planet = planet;
+
+        }
+
         public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected)
         {
             map.MapType = mapType;
@@ -57,14 +65,13 @@ namespace RogueLike.Systems
 
         public CurrentMap CreateBossRoom(Player player)
         {
-            map.MapType = MapType.BossRoom;
             map.Initialize(mapWidth, mapHeight);
             foreach (Cell cell in map.GetAllCells())
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-            //create the middle part of the spaceship
+            //create the middle part of the boss room
             foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
@@ -77,9 +84,28 @@ namespace RogueLike.Systems
 
             player.SetPosition(mapWidth / 2, mapHeight / 2);
             map.AddPlayerOnTheMap(player);
+            //TODO: Création du boss 
+            //Dans la map qui contient le boss, si le boss est mort alors on ajoute l'artefact puis un portail de TP vers le vaisseau à la map pour retourner au vaisseau
+
+            //FIXME:provisoire :
+            map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
+            map.AddLoot(new Artifact(map.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
             return map;
 
+        }
 
+
+        public CurrentMap CreateMap(Player player)
+        {
+            switch (map.MapType)
+            {
+                case MapType.Spaceship:
+                    return CreateSpaceship(player);
+                case MapType.BossRoom:
+                    return CreateBossRoom(player);
+                default:
+                    return CreateCaveMap(player);
+            }
         }
 
 
@@ -88,7 +114,6 @@ namespace RogueLike.Systems
         // Create a map that looks like a spaceship 
         public CurrentMap CreateSpaceship(Player player)
         {
-            map.MapType = MapType.Spaceship;
             map.Initialize(mapWidth, mapHeight);
             foreach (Cell cell in map.GetAllCells())
             {
@@ -178,6 +203,7 @@ namespace RogueLike.Systems
             //TODO : ajouter les pnj
             PlaceSellersInSpaceship();
 
+            PlaceTeleportationPortalsInSpaceship(player);
 
 
             player.SetPosition(mapWidth / 2, mapHeight / 2);
@@ -213,6 +239,34 @@ namespace RogueLike.Systems
             map.AddMerchant(equipmentSeller);
 
         }
+
+        private void PlaceTeleportationPortalsInSpaceship(Player player)
+        {
+
+            int middlePortalX = mapWidth / 2;
+            int middlePortalY = mapHeight / 2 + 5;
+
+            List<PlanetName> visitedPlanets = new List<PlanetName>();
+            // If an artifact has already been collected by te player, don't put the teleportation portal that teleport to this planet
+            foreach (Artifact artifact in player.ArtifactsCollected)
+            {
+                visitedPlanets.Add(artifact.ComesFrom);
+            }
+
+            if (!visitedPlanets.Contains(PlanetName.Planet1))
+            {
+                map.AddTeleportationPortal(new PortalToPlanet1(middlePortalX - 5, middlePortalY));
+            }
+            if (!visitedPlanets.Contains(PlanetName.Planet2))
+            {
+                map.AddTeleportationPortal(new PortalToPlanet2(middlePortalX, middlePortalY));
+            }
+            if (!visitedPlanets.Contains(PlanetName.Planet3))
+            {
+                map.AddTeleportationPortal(new PortalToPlanet3(middlePortalX + 5, middlePortalY));
+            }
+        }
+
 
 
 

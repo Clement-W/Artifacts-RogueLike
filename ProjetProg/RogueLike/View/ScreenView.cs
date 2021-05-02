@@ -31,7 +31,7 @@ namespace RogueLike.View
             Game = game;
         }
 
-        public ScreenView(Game game) : this("Nom du Rogue Like", game)
+        public ScreenView(Game game) : this("Nom du rogue like", game)
         {
         }
 

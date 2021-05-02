@@ -35,7 +35,7 @@ namespace RogueLike.View
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-            RootConsole.Title = $"Nom du Rogue Like - Level {Game.CurrentLevel}";
+            ChangeTitle("Spaceship");
 
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
@@ -132,26 +132,51 @@ namespace RogueLike.View
                         if (Game.Map.PlayerIsOnStairCase(Game.Player))
                         {
 
-                            if (Game.CurrentLevel < 3)
+                            if (Game.CurrentLevel < 1)
                             {
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.MapType);
-                                Game.Map = mapGenerator.CreateCaveMap(Game.Player);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.MapType,Game.Map.Planet);
+                                // Increase game current level
+                                Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
                                 Game.CommandSystem = new CommandSystem();
                                 DidPlayerAct = true;
-                                RootConsole.Title = $"Nom du Rogue Like - Level {Game.CurrentLevel}";
+                                string mapName = Game.Map.Planet.ToString();
+                                ChangeTitle($"{mapName} - Level {Game.CurrentLevel}");
                             }
                             else
                             { // Create the boss room
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count);
-                                Game.Map = mapGenerator.CreateBossRoom(Game.Player);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom,Game.Map.Planet);
+                                Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
                                 Game.CommandSystem = new CommandSystem();
                                 DidPlayerAct = true;
-                                RootConsole.Title = $"Nom du Rogue Like - Boss n°{Game.Player.ArtifactsCollected.Count + 1}";
+                                string mapName = Game.Map.Planet.ToString();
+                                ChangeTitle($"{mapName} - Boss Room");
 
                             }
                         }
+                        else if (Game.Map.PlayerIsOnTeleportationPortal(Game.Player))
+                        {
+                            TeleportationPortal portal = Game.Map.GetTeleportationPortalAt(Game.Player.PosX, Game.Player.PosY);
+                            if (portal.DestinationMap == MapType.Spaceship)
+                            {
+                                Game.CurrentLevel = 1;
+
+                            }
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap);
+                            // Create a map generator with the portal destination map type in argument
+                            Game.Map = mapGenerator.CreateMap(Game.Player);
+                            Game.MessageLog = new MessageLog();
+                            Game.CommandSystem = new CommandSystem();
+                            DidPlayerAct = true;
+                            string mapType = Game.Map.MapType.ToString();
+                            string title = (Game.Map.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Planet.ToString()} - Level {Game.CurrentLevel}";
+                            ChangeTitle(title);
+                        }
+
+
+
+
                         break;
 
                     case RLKey.Number1: DidPlayerAct = true; Game.Player.UseItem(0); break;
