@@ -134,23 +134,23 @@ namespace RogueLike.View
 
                             if (Game.CurrentLevel < 1)
                             {
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.MapType,Game.Map.Planet);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType,Game.Map.Location.Planet);
                                 // Increase game current level
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
-                                Game.CommandSystem = new CommandSystem();
+                               
                                 DidPlayerAct = true;
-                                string mapName = Game.Map.Planet.ToString();
+                                string mapName = Game.Map.Location.Planet.ToString();
                                 ChangeTitle($"{mapName} - Level {Game.CurrentLevel}");
                             }
                             else
                             { // Create the boss room
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom,Game.Map.Planet);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom,Game.Map.Location.Planet);
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
-                                Game.CommandSystem = new CommandSystem();
+                               
                                 DidPlayerAct = true;
-                                string mapName = Game.Map.Planet.ToString();
+                                string mapName = Game.Map.Location.Planet.ToString();
                                 ChangeTitle($"{mapName} - Boss Room");
 
                             }
@@ -158,19 +158,19 @@ namespace RogueLike.View
                         else if (Game.Map.PlayerIsOnTeleportationPortal(Game.Player))
                         {
                             TeleportationPortal portal = Game.Map.GetTeleportationPortalAt(Game.Player.PosX, Game.Player.PosY);
-                            if (portal.DestinationMap == MapType.Spaceship)
+                            if (portal.DestinationMap == MapType.Spaceship) // The player has beaten the boss and want to go back to the spaceship
                             {
                                 Game.CurrentLevel = 1;
 
                             }
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap);
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap,portal.PlanetDestination);
                             // Create a map generator with the portal destination map type in argument
                             Game.Map = mapGenerator.CreateMap(Game.Player);
                             Game.MessageLog = new MessageLog();
-                            Game.CommandSystem = new CommandSystem();
+                     
                             DidPlayerAct = true;
-                            string mapType = Game.Map.MapType.ToString();
-                            string title = (Game.Map.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Planet.ToString()} - Level {Game.CurrentLevel}";
+                            string mapType = Game.Map.Location.MapType.ToString();
+                            string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
                             ChangeTitle(title);
                         }
 
@@ -191,10 +191,10 @@ namespace RogueLike.View
             if (DidPlayerAct == true)
             {
                 RenderRequired = true;
-                // Provisoire avant qu'on fasse un scheduling system
-                //Game.CommandSystem.MoveEnemies(Game);
             }
 
+            
+            // If the player die, switch to the game over screen
             if (Game.Player.Health <= 0)
             {
                 RootConsole.Update -= OnGameUpdate;

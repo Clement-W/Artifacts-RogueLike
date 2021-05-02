@@ -27,7 +27,7 @@ namespace RogueLike.Core
         }
 
 
-        public void Draw(RLConsole console, IMap map)
+        public void Draw(RLConsole console, CurrentMap map)
         {
             // If it has never been explored, don't draw it
             if (map.GetCell(PosX, PosY).IsExplored)
@@ -37,12 +37,12 @@ namespace RogueLike.Core
                 if (map.IsInFov(PosX, PosY))
                 {
                     // Draw it with the floor fov background color
-                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackgroundFov, Symbol);
+                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColorInFov, Symbol);
                 }
                 else
                 {
                     // Draw it with the floor background and a '.' symbol
-                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackground, '.');
+                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, '.');
                 }
             }
         }

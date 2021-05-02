@@ -21,7 +21,7 @@ namespace RogueLike.Core
             PrintedColor = Colors.TeleportationPortal;
         }
 
-        public void Draw(RLConsole console, IMap map){
+        public void Draw(RLConsole console, CurrentMap map){
             if(map.GetCell(PosX,PosY).IsExplored){ // Draw it only if the cell has been explored by the player
 
                 PrintedColor = map.IsInFov(PosX,PosY) ? Colors.StairsFov : Colors.Stairs; // TODO : changer les couleurs

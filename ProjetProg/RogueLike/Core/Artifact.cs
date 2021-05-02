@@ -15,7 +15,7 @@ namespace RogueLike.Core
 
         public int PosY { get; set; }
 
-        public PlanetName ComesFrom { get; set; } // The map from which the artifact comes from
+        public PlanetName ComesFrom { get; set; } // The planet from which the artifact comes from
 
         public Artifact(PlanetName comesFrom, int posX, int posY)
         {
@@ -24,10 +24,10 @@ namespace RogueLike.Core
             PosY = posY;
             Name = comesFrom.ToString() + "'s Artifact";
             Symbol = '%';
-            PrintedColor = RLColor.White; //TODO : changer ça
+            PrintedColor = RLColor.White; //TODO: changer ça
         }
 
-        public void Draw(RLConsole console, IMap map)
+        public void Draw(RLConsole console, CurrentMap map)
         {
             // If it has never been explored, don't draw it
             if (map.GetCell(PosX, PosY).IsExplored)
@@ -37,12 +37,12 @@ namespace RogueLike.Core
                 if (map.IsInFov(PosX, PosY))
                 {
                     // Draw it with the floor fov background color
-                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackgroundFov, Symbol);
+                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColorInFov, Symbol);
                 }
                 else
                 {
                     // Draw it with the floor background and a '.' symbol
-                    console.Set(PosX, PosY, PrintedColor, Colors.FloorBackground, '.');
+                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, '.');
                 }
             }
         }
