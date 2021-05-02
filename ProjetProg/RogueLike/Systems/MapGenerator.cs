@@ -35,18 +35,20 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
+            Console.WriteLine("aaa");
         }
 
         public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
         {
-            map.MapType = mapType;
-            map.Planet = planet;
+            map.Location.MapType = mapType;
+            map.Location.Planet = planet;
+            map.Location.SetColors();
+            Console.WriteLine("bbb");
 
         }
 
-        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected)
+        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected,mapType,PlanetName.None)
         {
-            map.MapType = mapType;
         }
 
         public CurrentMap CreateCaveMap(Player player)
@@ -89,7 +91,7 @@ namespace RogueLike.Systems
 
             //FIXME:provisoire :
             map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
-            map.AddLoot(new Artifact(map.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
+            map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
             return map;
 
         }
@@ -97,7 +99,7 @@ namespace RogueLike.Systems
 
         public CurrentMap CreateMap(Player player)
         {
-            switch (map.MapType)
+            switch (map.Location.MapType)
             {
                 case MapType.Spaceship:
                     return CreateSpaceship(player);
@@ -201,7 +203,7 @@ namespace RogueLike.Systems
 
             //TODO : ajouter les portails de téléportation
             //TODO : ajouter les pnj
-            PlaceSellersInSpaceship();
+            PlaceSellersInSpaceship(startCorridorX,endCorridorY - spaceShipSize);
 
             PlaceTeleportationPortalsInSpaceship(player);
 
@@ -211,14 +213,13 @@ namespace RogueLike.Systems
             return map;
         }
 
-        private void PlaceSellersInSpaceship()
+        private void PlaceSellersInSpaceship(int sellerSpaceshipCenterX, int sellerSpaceshipCenterY)
         {
-            // Those coordinates are computed graphically in the game console
-            int itemSellerPosX = 75;
-            int itemSellerPosY = 9;
+            int itemSellerPosX = sellerSpaceshipCenterX-3;
+            int itemSellerPosY = sellerSpaceshipCenterY-1;
 
-            int equipmentSellerPosX = 81;
-            int equipmentSellerPosY = 9;
+            int equipmentSellerPosX = sellerSpaceshipCenterX+3;
+            int equipmentSellerPosY = sellerSpaceshipCenterY-1;
 
             ItemSeller itemSeller = new ItemSeller(itemSellerPosX, itemSellerPosY, nbArtifactsCollected);
             EquipmentSeller equipmentSeller = new EquipmentSeller(equipmentSellerPosX, equipmentSellerPosY, nbArtifactsCollected);

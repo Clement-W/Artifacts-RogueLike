@@ -1,6 +1,5 @@
 using RLNET;
-using RogueSharp;
-
+using RogueLike.Core;
 namespace RogueLike.Interfaces
 {
 
@@ -14,7 +13,7 @@ namespace RogueLike.Interfaces
 
         int PosY { get; set; }
 
-        void Draw(RLConsole console, IMap map);
+        void Draw(RLConsole console, CurrentMap map);
 
     }
 }

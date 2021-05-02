@@ -24,9 +24,7 @@ namespace RogueLike.Core
 
         public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
 
-        public MapType MapType { get; set; }
-
-        public PlanetName Planet{get;set;}
+        public Location Location{get;set;}
 
 
 
@@ -38,6 +36,7 @@ namespace RogueLike.Core
             AttackedCells = new List<ICell>();
             Merchants = new List<Merchant>();
             TeleportationPortals = new List<TeleportationPortal>();
+            Location = new Location();
 
         }
 
@@ -128,11 +127,11 @@ namespace RogueLike.Core
                     // Draw the cell differently if it's walkable or not
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.FloorFov, Colors.FloorBackgroundFov, '.');
+                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, '.');
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#');
+                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
                     }
 
                 }
@@ -140,11 +139,11 @@ namespace RogueLike.Core
                 {
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
+                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, '.');
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
+                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, '#');
                     }
                 }
             }
@@ -156,11 +155,11 @@ namespace RogueLike.Core
         {
             if (cell.IsWalkable)
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Colors.FloorBackgroundFov, '.');
+                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, '.');
             }
             else
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#');
+                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
             }
         }
 
@@ -168,7 +167,7 @@ namespace RogueLike.Core
         public void UpdatePlayerFieldOfView(Player player)
         {
             int radius;
-            if (MapType == MapType.BossRoom || MapType == MapType.Spaceship)
+            if (Location.MapType == MapType.BossRoom || Location.MapType == MapType.Spaceship)
             {
                 radius = Width;
             }
