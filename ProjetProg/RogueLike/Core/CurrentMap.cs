@@ -6,6 +6,7 @@ using System.Linq;
 using RogueLike.Interfaces;
 using System.Threading;
 using System.Diagnostics;
+using System;
 namespace RogueLike.Core
 {
 
@@ -407,6 +408,19 @@ namespace RogueLike.Core
                 }
             }
             return null;
+        }
+
+        public ICell FindRandomWalkableCell()
+        {
+            Random random = new Random();
+            int x;
+            int y;
+            do
+            {
+                x = random.Next(0, Width);
+                y = random.Next(0, Height);
+            } while (!IsWalkable(x, y));
+            return GetCell(x, y);
         }
 
 

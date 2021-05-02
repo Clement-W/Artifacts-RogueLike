@@ -8,7 +8,7 @@ namespace RogueLike.Core
             AttackRange.Add(2,1);
             AttackRange.Add(3,3);
             // Attack with a T form
-            Symbol = Icons.swordSymbol;
+            Symbol = Icons.swordSymbol; //TODO: changer le symbol
         }
     }
 }

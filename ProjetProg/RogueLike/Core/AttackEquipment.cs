@@ -12,7 +12,7 @@ namespace RogueLike.Core
         public int AttackBonus { get; set; }
 
 
-        public Dictionary<int,int> AttackRange{get;set;}
+        public Dictionary<int, int> AttackRange { get; set; }
         // the key correponds to the depth range
         // the value corresponds to the width range (perpendicular to the attack direction) (odd number)
         // For example, if the dictionnary is : {<1,1>,<2,1>} 
@@ -39,7 +39,6 @@ namespace RogueLike.Core
 
         public virtual bool Attack(CurrentMap map, ActiveCharacter attacker, Player player)
         {
-            bool isSomeoneHurt = false;
 
             // a wide attack is composed of the adjacent attacked cell and two halves of attack width on each side of that cell
             int sideSpace;  // this is the attacked space added on each side of the adjacent cell
@@ -49,8 +48,8 @@ namespace RogueLike.Core
 
             foreach (int depth in AttackRange.Keys)
             {// for each cell further away from the attacker, in the attack length
-                
-                sideSpace= (int)(AttackRange[depth] - 1) / 2; 
+
+                sideSpace = (int)(AttackRange[depth] - 1) / 2;
                 IEnumerable<ICell> targetedCellInOneDepth = null; // enumerable to collect the targeted perpendicular cell(s) in this part of the length
                 if (attacker.Direction == Direction.Up) // ifs to check the direction of the attack and call a method that gets the cells perpendicular to the faced direction
                 {
@@ -70,6 +69,15 @@ namespace RogueLike.Core
                 }
                 targetedCells.AddRange(targetedCellInOneDepth); // add widths targeted at all parts of the length to the list of targeted cells
             }
+
+
+
+            return AttackTargetedCells(map,attacker,player,targetedCells);
+        }
+
+        public bool AttackTargetedCells(CurrentMap map, ActiveCharacter attacker, Player player,IEnumerable<ICell> targetedCells)
+        {
+            bool isSomeoneHurt = false;
 
             foreach (ICell cell in targetedCells) // for each targeted cell, check for enemies to damage/kill
             {
@@ -105,7 +113,11 @@ namespace RogueLike.Core
                 }
             }
             return isSomeoneHurt;
+
+
         }
+
+
 
         public void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
         {
@@ -133,7 +145,6 @@ namespace RogueLike.Core
             {
                 FinalBoss boss = enemy as FinalBoss;
                 boss.ResolveBossDeath(map);
-            
             }
         }
 

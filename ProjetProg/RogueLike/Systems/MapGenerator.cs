@@ -103,13 +103,11 @@ namespace RogueLike.Systems
                     break;
 
                 case PlanetName.Damari:
-                    //TODO:
-                    finalBoss = new AlleoBoss(difficultyLevel);
+                    finalBoss = new DamariBoss(difficultyLevel);
                     break;
 
                 case PlanetName.Thaadd:
-                    //TODO:
-                    finalBoss = new AlleoBoss(difficultyLevel);
+                    finalBoss = new ThaaddBoss(difficultyLevel);
                     break;
             }
 
@@ -296,7 +294,7 @@ namespace RogueLike.Systems
 
         private void PlacePlayerInMap(Player player)
         {
-            ICell cell = FindRandomWalkableCell();
+            ICell cell = map.FindRandomWalkableCell();
 
             player.SetPosition(cell.X, cell.Y);
             map.AddPlayerOnTheMap(player);
@@ -312,7 +310,7 @@ namespace RogueLike.Systems
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an enemy
 
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
 
                     Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel, cell.X, cell.Y);
                     map.AddEnemy(enemy);
@@ -328,7 +326,7 @@ namespace RogueLike.Systems
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an equipment
 
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
 
                     Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel, cell.X, cell.Y);
                     map.AddLoot(equipment);
@@ -343,24 +341,13 @@ namespace RogueLike.Systems
             {
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an item
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
                     Item item = ItemGenerator.CreateItem(cell.X, cell.Y);
                     map.AddLoot(item);
                 }
             }
         }
 
-        private ICell FindRandomWalkableCell()
-        {
-            int x;
-            int y;
-            do
-            {
-                x = random.Next(0, mapWidth);
-                y = random.Next(0, mapHeight);
-            } while (!map.IsWalkable(x, y));
-            return map.GetCell(x, y);
-        }
 
         private void PlaceLootsInMap()
         {

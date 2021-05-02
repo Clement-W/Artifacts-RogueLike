@@ -1,25 +1,25 @@
 using System;
 namespace RogueLike.Core
 {
-    public class Zombie : Enemy
+    public class Dendroide : Enemy
     {
-        public Zombie(int difficultyLevel){
+        public Dendroide(int difficultyLevel){
             Random random = new Random();
-            Attack = 6 * difficultyLevel;
+            Attack = 8 * difficultyLevel;
             Defense = difficultyLevel;
-            Awareness = 10;
-            PrintedColor = Colors.Zombie;
+            Awareness = 20;
+            PrintedColor = Colors.Zombie; //TODO: changer les couleurs
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
             Gold= (int)(difficultyLevel) * random.Next(0,5);
-            Health = random.Next(0,30) * difficultyLevel;
+            Health = random.Next(50,100);
             MaxHealth = Health;
-            Name = "Zombie";
-            MovingTimePeriod = 2;
+            Name = "Dendroide";
+            MovingTimePeriod = 10;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Icons.zombieSymbol;
-            DownSymbol = Icons.zombieSymbol;
+            DownSymbol = Icons.zombieSymbol; // TODO: changer les symbols LE TRUC BLEU
             LeftSymbol = Icons.zombieSymbol;
             RightSymbol = Icons.zombieSymbol;
             Direction = Direction.Up;

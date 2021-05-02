@@ -5,17 +5,17 @@ namespace RogueLike.Core
 {
     public class AlleoBoss : FinalBoss
     {
-        public AlleoBoss(int diffifultyLevel){
+        public AlleoBoss(int difficultyLevel){
             Random random = new Random();
-            Attack = 1 * diffifultyLevel;
-            Defense = 3*diffifultyLevel;
+            Attack = 1 * difficultyLevel;
+            Defense = 3*difficultyLevel;
             Awareness = 100;
             PrintedColor = Colors.Zombie; //TODO: changer les couleurs
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold= (int)(diffifultyLevel) * random.Next(10,40);
-            Health = random.Next(50,100) * diffifultyLevel;
+            Gold= (int)(difficultyLevel) * random.Next(10,40);
+            Health = random.Next(50,100) * difficultyLevel;
             MaxHealth = Health;
             Name = "Alleo boss"; //TODO: trouver un nom
             MovingTimePeriod = 4;
