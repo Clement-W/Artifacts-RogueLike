@@ -5,7 +5,7 @@ namespace RogueLike.Core
     {
         public Zombie(int diffifultyLevel){
             Random random = new Random();
-            Attack = 2 * diffifultyLevel;
+            Attack = 6 * diffifultyLevel;
             Defense = diffifultyLevel;
             Awareness = 10;
             PrintedColor = Colors.Zombie;
@@ -22,7 +22,7 @@ namespace RogueLike.Core
             DownSymbol = Icons.zombieSymbol;
             LeftSymbol = Icons.zombieSymbol;
             RightSymbol = Icons.zombieSymbol;
-
+            Direction = Direction.Up;
             Symbol = DownSymbol; 
         }
     }

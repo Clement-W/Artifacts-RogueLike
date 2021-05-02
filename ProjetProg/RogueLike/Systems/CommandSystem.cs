@@ -27,13 +27,25 @@ namespace RogueLike.Systems
 
             switch (direction)
             {
-                case Direction.Up: y--; player.Symbol = player.UpSymbol; 
+                case Direction.Up:
+                    y--; 
+                    player.Symbol = player.UpSymbol; 
+                    player.Direction = Direction.Up;
                     break;
-                case Direction.Down: y++; player.Symbol = player.DownSymbol; 
+                case Direction.Down:
+                    y++; 
+                    player.Symbol = player.DownSymbol;
+                    player.Direction = Direction.Up;
                     break;
-                case Direction.Right: x++; player.Symbol = player.RightSymbol; 
+                case Direction.Right:
+                    x++; 
+                    player.Symbol = player.RightSymbol;
+                    player.Direction = Direction.Up;
                     break;
-                case Direction.Left: x--; player.Symbol = player.LeftSymbol; 
+                case Direction.Left:
+                    x--; 
+                    player.Symbol = player.LeftSymbol;
+                    player.Direction = Direction.Up;
                     break;
             }
 
@@ -43,7 +55,7 @@ namespace RogueLike.Systems
             {
                 didPlayerAct = true;
             }
- 
+
 
             return didPlayerAct;
         }
@@ -54,45 +66,28 @@ namespace RogueLike.Systems
         {
 
             // Change the symbol of the enemy according to it's moving direction
-            enemy.ChangeDirectionSymbol(enemy.PosX, enemy.PosY, cell.X, cell.Y);
+            // We don't have the other symbols of the enemies yet so it doesn't do anything
+            enemy.ChangeDirection(enemy.PosX, enemy.PosY, cell.X, cell.Y);
 
 
-            // Try to move the enemy, if the enemy don't move and if the player is on the desired cell, attack the player
-            if (!map.SetCharacterPosition(enemy, cell.X, cell.Y))
+            // If the player is reachable, attack it, else move the enemy if possible
+            if (!Attack(map, enemy, player))
             {
-                if (player.PosX == cell.X && player.PosY == cell.Y)
-                {
-                    EnemyAttack(enemy, player);
-                }
+                map.SetCharacterPosition(enemy, cell.X, cell.Y);
             }
+
         }
 
-        public void EnemyAttack(Enemy attacker, Player defender)
+
+        public bool Attack(CurrentMap map, ActiveCharacter attacker, Player player)
         {
-
-            int damageValue = attacker.Attack - defender.Defense;
-
-            defender.Health -= (damageValue <= 0) ? 1 : damageValue;
-
-            Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
-            // Put the change color method in a thread to let the game continue during the color changement
-            // Without a thread runing in background, the color changement is not visible
-            FlashThread.Start();
-
-
-            //proba de faire un coup critique 5%
-            //TODO
-
+            return attacker.Weapon.Attack(map, attacker, player);
         }
 
-        public void PlayerAttack(Player player, CurrentMap map){
-            //TODO
-            //Get l'orientation du joueur
-            //On switch sur l'arme et appelle la méthode spécifique dédiée à l'arme player.weapon.attack()
-            //if weapon is Knife 
 
-            player.Weapon.Attack(map, player);
-        
+        public void PlayerAttack(Player player, CurrentMap map)
+        {
+            player.Weapon.Attack(map, player,player);
         }
 
 
@@ -107,7 +102,7 @@ namespace RogueLike.Systems
             List<Enemy> enemies = game.Map.GetEnemies();
             foreach (Enemy enemy in enemies)
             {
-            
+
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;

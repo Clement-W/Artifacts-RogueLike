@@ -4,8 +4,7 @@ namespace RogueLike.Core
     {
         public Knife(string name, int attBonus, int cost) : base(name,attBonus,cost)
         {
-            RangeDepth = 1;
-            RangeWidth = 1;
+            AttackRange.Add(1,1);
             Symbol = Icons.knifeSymbol;
         }
 

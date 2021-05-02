@@ -257,16 +257,19 @@ namespace RogueLike.View
                     if (diffX > diffY)
                     {
                         Game.Player.Symbol = Game.Player.RightSymbol;
+                        Game.Player.Direction = Direction.Right;
                     }
                     else
                     {
                         if (y < Game.Player.PosY)
                         {
                             Game.Player.Symbol = Game.Player.UpSymbol;
+                            Game.Player.Direction = Direction.Up;
                         }
                         else
                         {
                             Game.Player.Symbol = Game.Player.DownSymbol;
+                            Game.Player.Direction = Direction.Down;
                         }
                     }
                 }
@@ -275,16 +278,19 @@ namespace RogueLike.View
                     if (diffX > diffY)
                     {
                         Game.Player.Symbol = Game.Player.LeftSymbol;
+                        Game.Player.Direction = Direction.Left;
                     }
                     else
                     {
                         if (y < Game.Player.PosY)
                         {
                             Game.Player.Symbol = Game.Player.UpSymbol;
+                            Game.Player.Direction = Direction.Up;
                         }
                         else
                         {
                             Game.Player.Symbol = Game.Player.DownSymbol;
+                            Game.Player.Direction = Direction.Down;
                         }
                     }
                 }

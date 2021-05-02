@@ -5,8 +5,8 @@ namespace RogueLike.Core
 
         public Spear(string name, int attBonus, int cost) : base(name,attBonus,cost)
         {
-            RangeDepth = 2;
-            RangeWidth = 1;
+            AttackRange.Add(1,1);
+            AttackRange.Add(2,1);
             Symbol = Icons.spearSymbol;
         }
 

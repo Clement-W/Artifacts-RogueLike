@@ -12,18 +12,13 @@ namespace RogueLike.Core
         private int gold;
         private int health;
         private int maxHealth;
-        
+
 
         public int Attack
         {
             get
             {
-                if (this is Player)
-                {
-                    Player p = this as Player;
-                    return attack + p.Weapon.AttackBonus;
-                }
-                return attack;
+                return attack + Weapon.AttackBonus;
             }
             set { attack = value; }
         }
@@ -66,14 +61,16 @@ namespace RogueLike.Core
             set { maxHealth = value; }
         }
 
-        
+
 
         // The 4 next symbols corresponds to the 4 direction sprites of the active character
-
+        // This is only used by the player at the moment, but it will be used by the enemies later
         public char DownSymbol { get; set; }
         public char UpSymbol { get; set; }
         public char LeftSymbol { get; set; }
         public char RightSymbol { get; set; }
+
+        public Direction Direction{get;set;}
 
         public RLColor BaseColor { get; set; }
 

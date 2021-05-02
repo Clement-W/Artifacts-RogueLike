@@ -34,7 +34,7 @@ TODO (pas ordonné) :
 * Faire une classe Drawable qui contient la métode draw
 * Faire tous les todo dans le code
 * ajouter un timer qui se lance en même temps que game screen pour pouvoir donner son temps au joueur à la fin (pour qu'il y ait un but de performance quand même)
-
+* CHanger tous les noms de variables égaux à un nom de type
 
 TODO bonus :
 * Tester la bulle de discission par exemple en ajoutant une console sur une autre

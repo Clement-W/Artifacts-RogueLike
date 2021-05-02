@@ -35,7 +35,6 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
-            Console.WriteLine("aaa");
         }
 
         public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
@@ -43,11 +42,10 @@ namespace RogueLike.Systems
             map.Location.MapType = mapType;
             map.Location.Planet = planet;
             map.Location.SetColors();
-            Console.WriteLine("bbb");
 
         }
 
-        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected,mapType,PlanetName.None)
+        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected, mapType, PlanetName.None)
         {
         }
 
@@ -78,22 +76,46 @@ namespace RogueLike.Systems
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetBorderCellsInDiamond((mapWidth / 2), (mapHeight / 2),10))
+            foreach (Cell cell in map.GetBorderCellsInDiamond((mapWidth / 2), (mapHeight / 2), 10))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
 
-            player.SetPosition(mapWidth / 2, mapHeight / 2+5);
+            player.SetPosition(mapWidth / 2, mapHeight / 2 + 5);
             map.AddPlayerOnTheMap(player);
-            //TODO: Création du boss 
-            //Dans la map qui contient le boss, si le boss est mort alors on ajoute l'artefact puis un portail de TP vers le vaisseau à la map pour retourner au vaisseau
 
+            CreateBoss(map);
             //FIXME:provisoire :
-            map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
-            map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
+            //map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
+            //map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
             return map;
 
+        }
+
+        private void CreateBoss(CurrentMap map)
+        {
+            Enemy finalBoss = null;
+            switch (map.Location.Planet)
+            {
+                case PlanetName.Alleo:
+                    finalBoss = new AlleoBoss(difficultyLevel);
+                    break;
+
+                case PlanetName.Damari:
+                    //TODO:
+                    finalBoss = new AlleoBoss(difficultyLevel);
+                    break;
+
+                case PlanetName.Thaadd:
+                    //TODO:
+                    finalBoss = new AlleoBoss(difficultyLevel);
+                    break;
+            }
+
+            finalBoss.PosX = mapWidth / 2;
+            finalBoss.PosY = mapHeight / 2 - 5;
+            map.AddEnemy(finalBoss);
         }
 
 
@@ -203,7 +225,7 @@ namespace RogueLike.Systems
 
             //TODO : ajouter les portails de téléportation
             //TODO : ajouter les pnj
-            PlaceSellersInSpaceship(startCorridorX,endCorridorY - spaceShipSize);
+            PlaceSellersInSpaceship(startCorridorX, endCorridorY - spaceShipSize);
 
             PlaceTeleportationPortalsInSpaceship(player);
 
@@ -215,11 +237,11 @@ namespace RogueLike.Systems
 
         private void PlaceSellersInSpaceship(int sellerSpaceshipCenterX, int sellerSpaceshipCenterY)
         {
-            int itemSellerPosX = sellerSpaceshipCenterX-3;
-            int itemSellerPosY = sellerSpaceshipCenterY-1;
+            int itemSellerPosX = sellerSpaceshipCenterX - 3;
+            int itemSellerPosY = sellerSpaceshipCenterY - 1;
 
-            int equipmentSellerPosX = sellerSpaceshipCenterX+3;
-            int equipmentSellerPosY = sellerSpaceshipCenterY-1;
+            int equipmentSellerPosX = sellerSpaceshipCenterX + 3;
+            int equipmentSellerPosY = sellerSpaceshipCenterY - 1;
 
             ItemSeller itemSeller = new ItemSeller(itemSellerPosX, itemSellerPosY, nbArtifactsCollected);
             EquipmentSeller equipmentSeller = new EquipmentSeller(equipmentSellerPosX, equipmentSellerPosY, nbArtifactsCollected);
@@ -349,7 +371,9 @@ namespace RogueLike.Systems
         // Place the stairs as far as possible of the player, to go deeper in the map 
         private void CreateStairs(Player player)
         {
-            Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            //Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            //TODO: provisoirement on met à côté:
+            Cell farthestCellFromPlayer = map.FindClosestWalkableCell(player);
             map.Staircase = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 

@@ -24,7 +24,7 @@ namespace RogueLike.Core
 
         public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
 
-        public Location Location{get;set;}
+        public Location Location { get; set; }
 
 
 
@@ -299,6 +299,7 @@ namespace RogueLike.Core
             return Enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
+
         public TeleportationPortal GetTeleportationPortalAt(int posX, int posY)
         {
             return TeleportationPortals.FirstOrDefault(portal => (portal.PosX == posX && portal.PosY == posY));
@@ -367,7 +368,7 @@ namespace RogueLike.Core
                     Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
                 }
                 else if (loot is Artifact)
-                {   
+                {
                     Game.MessageLog.AddMessage("You've collected " + loot.Name);
                 }
                 else if (sellableLoot.SoldByMerchant == null)
@@ -389,6 +390,23 @@ namespace RogueLike.Core
         public void AddTeleportationPortal(TeleportationPortal portal)
         {
             TeleportationPortals.Add(portal);
+        }
+
+        // Find a walkable cell around the active character
+        public Cell FindClosestWalkableCell(ActiveCharacter activeCharacter)
+        {
+            int distanceMax = 5; // max distance from which we search for a cell
+            for (int i = 1; i < distanceMax; i++)
+            {
+                foreach (Cell cell in GetBorderCellsInSquare(activeCharacter.PosX, activeCharacter.PosY, i))
+                {
+                    if (cell.IsWalkable && GetLootAt(cell.X,cell.Y)==null) // To avoid item superposition if the cell is walkable but an item is on it
+                    {
+                        return cell;
+                    }
+                }
+            }
+            return null;
         }
 
 
