@@ -8,8 +8,8 @@ namespace RogueLike.Core
         {
             Name = "Item Seller";
             PrintedColor = Colors.Seller;
-            AlternateSymbol1 = '(';
-            AlternateSymbol2 = ')';
+            AlternateSymbol1 = '¼';
+            AlternateSymbol2 = '½';
             Symbol = AlternateSymbol1;
             PosX = posX;
             PosY = posY;

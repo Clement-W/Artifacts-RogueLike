@@ -68,19 +68,24 @@ namespace RogueLike.Core
 
             statConsole.Print(((int)(healthBarWidth / 2)), 1, "PV", Colors.Text);
 
-            statConsole.Print(1, 2, $"Att: {Attack}", Colors.GrayText);
-            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"Def: {Defense}", Colors.GrayText);
+            statConsole.Print(1, 2, $"{Icons.attackSymbol}: {Attack}", Colors.GrayText);
+            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Icons.defenseSymbol}: {Defense}", Colors.GrayText);
             statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {Gold}", Colors.Gold);
         }
 
 
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
-            equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: {Head.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: {Chest.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: {Legs.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: {Feet.Symbol}", Colors.Text);
-            equipmentConsole.Print(3, 6, $"{Icons.weaponSlotSymbol}: {Weapon.Symbol}", Colors.Text);
+            equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(6, 2, $"{Head.Symbol}", Head.PrintedColor);
+            equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Legs.PrintedColor);
+            equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(6, 4, $"{Legs.Symbol}", Legs.PrintedColor);
+            equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(6, 5, $"{Feet.Symbol}", Feet.PrintedColor);
+            equipmentConsole.Print(3, 6, $"{Icons.weaponSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(6, 6, $"{Weapon.Symbol}", Weapon.PrintedColor);
         }
 
         public void DrawItemsInventory(RLConsole itemsConsole)

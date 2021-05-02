@@ -5,6 +5,7 @@ namespace RogueLike.Core
         public OldSandwich() : base(){
             Name = "Old Sandwich";
             Cost = 10;
+            Symbol = Icons.sandwichSymbol;
         }
 
         public override void Use(Player player){

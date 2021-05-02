@@ -4,9 +4,13 @@ namespace RogueLike.Core
     {
         public Boots(string name, int defBonus, int cost) : base(name, defBonus,cost)
         {
+            Symbol = Icons.bootsSymbol;
         }
 
-        public Boots(string name,int defBonus) : base(name,defBonus,0){}
+        public Boots(string name,int defBonus) : base(name,defBonus,0)
+        {
+            Symbol = Icons.bootsSymbol;
+        }
 
         public static Boots None()
         {

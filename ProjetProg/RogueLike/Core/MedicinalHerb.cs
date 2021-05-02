@@ -5,6 +5,7 @@ namespace RogueLike.Core
         public MedicinaHerb() : base(){
             Name = "Medicinal Herb";
             Cost = 15;
+            Symbol = Icons.medHerbSymbol;
         }
 
         public override void Use(Player player){

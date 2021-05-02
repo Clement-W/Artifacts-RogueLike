@@ -20,7 +20,7 @@ namespace RogueLike.Core
             Name = name;
             AttackBonus = attackBonus;
             Cost = cost;
-            PrintedColor = RLColor.LightRed;
+            //PrintedColor = RLColor.LightRed;
         }
         public AttackEquipment() { }
 
