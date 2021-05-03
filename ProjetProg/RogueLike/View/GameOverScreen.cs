@@ -34,7 +34,7 @@ namespace RogueLike.View
                 int centerY = RootConsole.Height / 2;
 
                 int gameOverY = (int)(RootConsole.Height * 0.3);
-                string gameOver = $"~ Game over ~"; //TODO: mettre symbol artefact
+                string gameOver = $"ý Game over ý"; //TODO: mettre symbol artefact
                 RootConsole.Print(centerX - gameOver.Length / 2, gameOverY, gameOver, RLColor.White);
 
 

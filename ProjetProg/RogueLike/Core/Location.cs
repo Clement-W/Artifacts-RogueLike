@@ -68,18 +68,24 @@ namespace RogueLike.Core
             WallSymbol = '#';
             switch (MapType) {
                 case MapType.BossRoom:
-                    FloorSymbol = '+';
+                    FloorSymbol = Icons.bossFloorSymbol;
+                    WallSymbol = Icons.bossWallSymbol;
                     break;
                 case MapType.Spaceship:
-                    FloorSymbol = 'Û';
-                    WallSymbol = 'Ü';
+                    FloorSymbol = Icons.shipFloorSymbol;
+                    WallSymbol = Icons.shipWallSymbol;
                     break;
                 case MapType.Planet:
                     switch (Planet) {
-                        case PlanetName.Alleo: FloorSymbol = '¥'; break;
-                        case PlanetName.Damari: FloorSymbol = '¢'; break;
-                        case PlanetName.Thaadd: FloorSymbol = '¤';
-                            WallSymbol = '£'; break;
+                        case PlanetName.Alleo: FloorSymbol = Icons.planet1FloorSymbol;
+                            WallSymbol = Icons.planet1WallSymbol;
+                            break;
+                        case PlanetName.Damari: FloorSymbol = Icons.planet2FloorSymbol;
+                            WallSymbol = Icons.planet2WallSymbol;
+                            break;
+                        case PlanetName.Thaadd: FloorSymbol = Icons.planet3FloorSymbol;
+                            WallSymbol = Icons.planet3WallSymbol; 
+                            break;
                     }
            
                     break;

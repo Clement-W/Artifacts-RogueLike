@@ -11,7 +11,7 @@ namespace RogueLike.Core
             Attack = 10 * difficultyLevel;
             Defense = 3 * difficultyLevel;
             Awareness = 100;
-            PrintedColor = Colors.Zombie; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
@@ -21,10 +21,10 @@ namespace RogueLike.Core
             Name = "Damari boss"; //TODO: trouver un nom
             MovingTimePeriod = 20;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.zombieSymbol; // TODO: changer les symbols LE TRUC BLEU
-            DownSymbol = Icons.zombieSymbol;
-            LeftSymbol = Icons.zombieSymbol;
-            RightSymbol = Icons.zombieSymbol;
+            UpSymbol = Icons.boss2Symbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Icons.boss2Symbol;
+            LeftSymbol = Icons.boss2Symbol;
+            RightSymbol = Icons.boss2Symbol;
             Direction = Direction.Up;
             Symbol = DownSymbol;
 

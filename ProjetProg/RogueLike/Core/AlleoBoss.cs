@@ -10,7 +10,7 @@ namespace RogueLike.Core
             Attack = 1 * difficultyLevel;
             Defense = 3*difficultyLevel;
             Awareness = 100;
-            PrintedColor = Colors.Zombie; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
@@ -20,10 +20,10 @@ namespace RogueLike.Core
             Name = "Alleo boss"; //TODO: trouver un nom
             MovingTimePeriod = 4;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.zombieSymbol; // TODO: changer les symbols LE TRUC BLEU
-            DownSymbol = Icons.zombieSymbol;
-            LeftSymbol = Icons.zombieSymbol;
-            RightSymbol = Icons.zombieSymbol;
+            UpSymbol = Icons.boss1Symbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Icons.boss1Symbol;
+            LeftSymbol = Icons.boss1Symbol;
+            RightSymbol = Icons.boss1Symbol;
             Direction = Direction.Up;
             Symbol = DownSymbol; 
 

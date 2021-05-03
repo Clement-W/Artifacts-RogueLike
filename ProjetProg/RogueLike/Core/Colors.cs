@@ -50,18 +50,18 @@ namespace RogueLike.Core
 
         public static RLColor FloorBackgroundPlanet1 = Palette.DbDeepWater;
         public static RLColor FloorBackgroundFovPlanet1 = Palette.DbWater; // Différent si c'est dans le champ de vision
-        public static RLColor WallBackgroundPlanet1 = Palette.SecondaryDarkest;
-        public static RLColor WallBackgroundFovPlanet1 = Palette.SecondaryDarker;
+        public static RLColor WallBackgroundPlanet1 = Palette.iceWallDark;
+        public static RLColor WallBackgroundFovPlanet1 = Palette.iceWall;
 
         public static RLColor FloorBackgroundPlanet2 = Palette.DbOldBlood;
         public static RLColor FloorBackgroundFovPlanet2 = Palette.purplePlanet; // Différent si c'est dans le champ de vision
-        public static RLColor WallBackgroundPlanet2 = Palette.SecondaryDarkest;
-        public static RLColor WallBackgroundFovPlanet2 = Palette.SecondaryDarker;
+        public static RLColor WallBackgroundPlanet2 = Palette.purplePlanetwallDark;
+        public static RLColor WallBackgroundFovPlanet2 = Palette.purplePlanetwall;
 
         public static RLColor FloorBackgroundPlanet3 = Palette.DbVegetation;
         public static RLColor FloorBackgroundFovPlanet3 = Palette.DbGrass; // Différent si c'est dans le champ de vision
-        public static RLColor WallBackgroundPlanet3 = Palette.SecondaryDarkest;
-        public static RLColor WallBackgroundFovPlanet3 = Palette.SecondaryDarker;
+        public static RLColor WallBackgroundPlanet3 = Palette.darkestGreen;
+        public static RLColor WallBackgroundFovPlanet3 = Palette.darkGreen;
 
         public static RLColor FloorBackgroundShip = RLColor.Gray;
         public static RLColor FloorBackgroundFovShip = RLColor.LightGray; // Différent si c'est dans le champ de vision
@@ -78,6 +78,9 @@ namespace RogueLike.Core
         public static RLColor carbonColor = RLColor.Gray;
         public static RLColor platinumColor = Palette.DbSun;
         public static RLColor titaniumColor = Palette.DbOldStone;
+
+        // basic :
+        public static RLColor basicColor = RLColor.White;
 
 
     }

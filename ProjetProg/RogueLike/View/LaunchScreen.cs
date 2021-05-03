@@ -30,11 +30,11 @@ namespace RogueLike.View
 
 
                 int yTitle = (int)(RootConsole.Height * 0.1);
-                string title = $"~ Artifacts ~"; //TODO: mettre symbol artefact
+                string title = "" + Icons.artifact4Symbol + " Artifacts " + Icons.artifact4Symbol; //TODO: mettre symbol artefact
                 RootConsole.Print(centerX - title.Length / 2, yTitle, title, RLColor.White);
 
 
-                string artifactsSymbol = $"êéè"; //TODO: mettre les artefacts
+                string artifactsSymbol = "" + Icons.artifact1Symbol + "   " + Icons.artifact2Symbol + "   " + Icons.artifact3Symbol; //TODO: mettre les artefacts
                 RootConsole.Print(centerX - artifactsSymbol.Length / 2, yTitle + 1, artifactsSymbol, RLColor.White);
 
 

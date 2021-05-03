@@ -30,6 +30,9 @@ namespace RogueLike.Core
         public static char spearSymbol = 'Ì';
         public static char knifeSymbol = 'Î';
         public static char fistSymbol = 'Ï';
+        public static char scytheSymbol = 'Þ';
+        public static char scepterSymbol = 'Ý';
+        public static char tridentSymbol = 'ß';
 
         // armor icons
         public static char helmetSymbol = 'Ó';
@@ -48,6 +51,7 @@ namespace RogueLike.Core
         public static char artifact1Symbol = 'à';
         public static char artifact2Symbol = 'Ð';
         public static char artifact3Symbol = 'ð';
+        public static char artifact4Symbol = 'ñ';
 
         // teleporter icons
         public static char shipTpSymbol1 = 'ä';
@@ -65,8 +69,33 @@ namespace RogueLike.Core
         public static char equipementSellerSymbol1 = '¾';
         public static char equipementSellerSymbol2 = '¿';
 
+        // ground icons
+        public static char bossFloorSymbol = 'Û';
+        public static char planet1FloorSymbol = '¥';
+        public static char planet2FloorSymbol = '¢';
+        public static char planet3FloorSymbol = '¤';
+        public static char shipFloorSymbol = 'Û';
+
+        // wall icons
+        public static char bossWallSymbol = 'Û';
+        public static char planet1WallSymbol = '¦';
+        public static char planet2WallSymbol = '§';
+        public static char planet3WallSymbol = '£';
+        public static char shipWallSymbol = 'Ü';
+
+
         // enemy icons
         public static char zombieSymbol = 'À';
+        public static char mecabatSymbol = 'Ä';
+        public static char dendroidSymbol = 'Ã';
+        public static char gunslingerSymbol = '³';
+
+        // boss icon
+        public static char boss1Symbol = 'Á';
+        public static char boss2Symbol = '±';
+        public static char boss3Symbol = 'Â';
+        public static char boss4Symbol = '°';
+        public static char boss5Symbol = '²';
 
     }
 }

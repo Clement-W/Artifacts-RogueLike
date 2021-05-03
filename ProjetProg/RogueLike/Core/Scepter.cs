@@ -6,7 +6,7 @@ namespace RogueLike.Core
         {
             AttackRange.Add(1,1);
             AttackRange.Add(2,1);
-            Symbol = Icons.spearSymbol; // TODO: changer le symbol
+            Symbol = Icons.scepterSymbol; // TODO: changer le symbol
         }
     }
 }
