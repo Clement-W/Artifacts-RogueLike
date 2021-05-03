@@ -14,20 +14,20 @@ namespace RogueLike.Systems
             // it includes the low level equipment
             if (difficultyLevel >=1)
             {
-                possibleEquipments.AddRange(new Equipment[]{Boots.Polymer(),Leggins.Polymer(),Chestplate.Polymer(),Helmet.Polymer()});
-                possibleEquipments.AddRange(new Equipment[]{Knife.Mk1(),Sword.Mk1(),Spear.Mk1()});
+                possibleEquipments.AddRange(new Equipment[]{Boots.CreatePolymerBoots(),Leggins.CreatePolymerLeggins(),Chestplate.CreatePolymerChestplate(),Helmet.CreatePolymerHelmet()});
+                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKifeMk1(),Sword.CreateSwordMk1(),Spear.CreateSpearMk1()});
             }
             if(difficultyLevel >= 3){
-                possibleEquipments.AddRange(new Equipment[]{Boots.Carbon(),Leggins.Carbon(),Chestplate.Carbon(),Helmet.Carbon()});
-                possibleEquipments.AddRange(new Equipment[]{Knife.Mk2(),Sword.Mk2(),Spear.Mk2()});
+                possibleEquipments.AddRange(new Equipment[]{Boots.CreateCarbonBoots(),Leggins.CreateCarbonLeggins(),Chestplate.CreateCarbonChestplate(),Helmet.CreateCarbonHelmet()});
+                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKnifeMk2(),Sword.CreateSwordMk2(),Spear.CreateSpearMk2()});
             }
             if(difficultyLevel >= 4){
-                possibleEquipments.AddRange(new Equipment[]{Boots.Platinum(),Leggins.Platinum(),Chestplate.Platinum(),Helmet.Platinum()});
-                possibleEquipments.AddRange(new Equipment[]{Knife.Mk3(),Sword.Mk3(),Spear.Mk3()});
+                possibleEquipments.AddRange(new Equipment[]{Boots.CreatePlatinumBoots(),Leggins.CreatePlatinumLeggins(),Chestplate.CreatePlatinumChestplate(),Helmet.CreatePlatinumHelmet()});
+                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKnifeMk3(),Sword.CreateSwordMk3(),Spear.CreateSpearMk3()});
             }
             if(difficultyLevel >= 5){
-                possibleEquipments.AddRange(new Equipment[]{Boots.Titanium(),Leggins.Titanium(),Chestplate.Titanium(),Helmet.Titanium()});
-                possibleEquipments.AddRange(new Equipment[]{Knife.Mk4(),Sword.Mk4(),Spear.Mk4()});
+                possibleEquipments.AddRange(new Equipment[]{Boots.CreateTitaniumBoots(),Leggins.CreateTitaniumLeggins(),Chestplate.CreateTitaniumChestplate(),Helmet.CreateTitaniumHelmet()});
+                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKnifeMk4(),Sword.CreateSwordMk4(),Spear.CreateSpearMk4()});
             }
 
             Equipment equipment = possibleEquipments[random.Next(0, possibleEquipments.Count)];

@@ -1,6 +1,7 @@
 using RogueLike.Interfaces;
 using RogueLike.Core;
 using RogueSharp;
+using RogueLike.Systems;
 namespace RogueLike.Behaviors
 {
     public class TeleportFarFromPlayer : IBehavior
@@ -8,15 +9,13 @@ namespace RogueLike.Behaviors
         // The enemy teleport itself randomly and attack on a random side when teleporting.
         // It is used by the damari's final boss that has a very high attack. If the player is 
         // hit, it can die instantly.
-        public bool Act(Enemy enemy, Game game)
+        public void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem commandSystem)
         {
-            CurrentMap map = game.Map;
-            Player player = game.Player;
+
 
             ICell randomCell = map.FindRandomWalkableCell();
-            game.CommandSystem.MoveEnemy(enemy,randomCell,map,player);
+            commandSystem.MoveEnemy(enemy,randomCell,map,player);
 
-            return true;
         }
     }
 }

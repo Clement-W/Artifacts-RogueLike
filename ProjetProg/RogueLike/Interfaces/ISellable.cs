@@ -1,14 +1,25 @@
 using RogueLike.Core;
 namespace RogueLike.Interfaces
 {
-    public interface ISellable 
+    /// <summary>
+    /// This interface is implemented by every elements that can be sold by a 
+    /// merchant.
+    /// </summary>
+    public interface ISellable
     {
-        int Cost{get;set;}
 
-        Merchant SoldByMerchant{get;set;}
+        /// <value>The cost of the element</value>
+        int Cost { get; set; }
 
+
+        /// <value> A referance to the merchant that sell the element</value>
+        Merchant SoldByMerchant { get; set; }
+
+
+        /// <value> The x position of the sellable on the map</value>
         int PosX { get; set; }
 
+        /// <value> The y position of the sellable on the map </value>
         int PosY { get; set; }
     }
 }

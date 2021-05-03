@@ -43,7 +43,7 @@ namespace RogueLike.Core
                     WallBackgroundColor = Colors.WallBackgroundPlanet2;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet2;
                     break;
-                    
+
                 case PlanetName.Thaadd: //TODO: set lels couleurs planet 3
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet3;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet3;
@@ -57,16 +57,18 @@ namespace RogueLike.Core
                     WallBackgroundColor = Colors.WallBackgroundShip;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovShip;
                     break;
-                    
+
             }
 
         }
 
 
-        private void SetSymbol() {
+        private void SetSymbol()
+        {
 
             WallSymbol = '#';
-            switch (MapType) {
+            switch (MapType)
+            {
                 case MapType.BossRoom:
                     FloorSymbol = Icons.bossFloorSymbol;
                     WallSymbol = Icons.bossWallSymbol;
@@ -87,7 +89,7 @@ namespace RogueLike.Core
                             WallSymbol = Icons.planet3WallSymbol; 
                             break;
                     }
-           
+
                     break;
             }
         }

@@ -23,13 +23,13 @@ namespace RogueLike.Core
             switch (MerchantLevel)
             {
                 case 0:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Polymer(), Leggins.Polymer(), Chestplate.Polymer(), Helmet.Polymer(), Sword.Mk1(), Spear.Mk1(), Knife.Mk1() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreatePolymerBoots(), Leggins.CreatePolymerLeggins(), Chestplate.CreatePolymerChestplate(), Helmet.CreatePolymerHelmet(), Sword.CreateSwordMk1(), Spear.CreateSpearMk1(), Knife.CreateKifeMk1() });
                     break;
                 case 1:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Carbon(), Leggins.Carbon(), Chestplate.Carbon(), Helmet.Carbon(), Boots.Platinum(), Leggins.Platinum(), Chestplate.Platinum(), Helmet.Platinum(), Sword.Mk2(), Spear.Mk2(), Knife.Mk2(), Sword.Mk3(), Spear.Mk3(), Knife.Mk3() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreateCarbonBoots(), Leggins.CreateCarbonLeggins(), Chestplate.CreateCarbonChestplate(), Helmet.CreateCarbonHelmet(), Boots.CreatePlatinumBoots(), Leggins.CreatePlatinumLeggins(), Chestplate.CreatePlatinumChestplate(), Helmet.CreatePlatinumHelmet(), Sword.CreateSwordMk2(), Spear.CreateSpearMk2(), Knife.CreateKnifeMk2(), Sword.CreateSwordMk3(), Spear.CreateSpearMk3(), Knife.CreateKnifeMk3() });
                     break;
                 case 2:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.Titanium(), Leggins.Titanium(), Chestplate.Titanium(), Helmet.Titanium(), Sword.Mk4(), Spear.Mk4(), Knife.Mk4() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreateTitaniumBoots(), Leggins.CreateTitaniumLeggins(), Chestplate.CreateTitaniumChestplate(), Helmet.CreateTitaniumHelmet(), Sword.CreateSwordMk4(), Spear.CreateSpearMk4(), Knife.CreateKnifeMk4() });
                     break;
 
             }
