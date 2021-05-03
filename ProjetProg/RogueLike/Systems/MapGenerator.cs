@@ -35,6 +35,7 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
+            Console.WriteLine(difficultyLevel);
         }
 
         public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)

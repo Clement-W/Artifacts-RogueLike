@@ -28,22 +28,22 @@ namespace RogueLike.Systems
             switch (direction)
             {
                 case Direction.Up:
-                    y--; 
-                    player.Symbol = player.UpSymbol; 
+                    y--;
+                    player.Symbol = player.UpSymbol;
                     player.Direction = Direction.Up;
                     break;
                 case Direction.Down:
-                    y++; 
+                    y++;
                     player.Symbol = player.DownSymbol;
                     player.Direction = Direction.Up;
                     break;
                 case Direction.Right:
-                    x++; 
+                    x++;
                     player.Symbol = player.RightSymbol;
                     player.Direction = Direction.Up;
                     break;
                 case Direction.Left:
-                    x--; 
+                    x--;
                     player.Symbol = player.LeftSymbol;
                     player.Direction = Direction.Up;
                     break;
@@ -87,7 +87,7 @@ namespace RogueLike.Systems
 
         public void PlayerAttack(Player player, CurrentMap map)
         {
-            player.Weapon.Attack(map, player,player);
+            player.Weapon.Attack(map, player, player);
         }
 
 
