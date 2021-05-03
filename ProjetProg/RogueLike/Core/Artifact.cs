@@ -23,7 +23,7 @@ namespace RogueLike.Core
             PosX = posX;
             PosY = posY;
             Name = comesFrom.ToString() + "'s Artifact";
-            Symbol = '%';
+            SetArtifactSymbol();
             PrintedColor = RLColor.White; //TODO: changer ça
         }
 
@@ -44,6 +44,14 @@ namespace RogueLike.Core
                     // Draw it with the floor background and a '.' symbol
                     console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, map.Location.FloorSymbol);
                 }
+            }
+        }
+
+        private void SetArtifactSymbol() {
+            switch (ComesFrom) {
+                case PlanetName.Alleo: Symbol = Icons.artifact1Symbol; break;
+                case PlanetName.Damari: Symbol = Icons.artifact2Symbol; break;
+                case PlanetName.Thaadd: Symbol = Icons.artifact3Symbol; break;
             }
         }
 

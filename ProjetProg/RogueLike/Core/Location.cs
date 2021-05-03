@@ -31,33 +31,35 @@ namespace RogueLike.Core
             switch (Planet)
             {
                 case PlanetName.Alleo:
-                    FloorBackgroundColor = Colors.FloorBackground;
-                    FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
-                    WallBackgroundColor = Colors.WallBackground;
-                    WallBackgroundColorInFov = Colors.WallBackgroundFov;
+                    FloorBackgroundColor = Colors.FloorBackgroundPlanet1;
+                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet1;
+                    WallBackgroundColor = Colors.WallBackgroundPlanet1;
+                    WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet1;
                     break;
 
                 case PlanetName.Damari:
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet2;
-                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet2;
+                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet2;//new RLColor(90,3,3);
                     WallBackgroundColor = Colors.WallBackgroundPlanet2;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet2;
                     break;
-
+                    
                 case PlanetName.Thaadd: //TODO: set lels couleurs planet 3
-                    FloorBackgroundColor = Colors.FloorBackground;
-                    FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
-                    WallBackgroundColor = Colors.WallBackground;
-                    WallBackgroundColorInFov = Colors.WallBackgroundFov;
+                    FloorBackgroundColor = Colors.FloorBackgroundPlanet3;
+                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet3;
+                    WallBackgroundColor = Colors.WallBackgroundPlanet3;
+                    WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet3;
                     break;
 
                 default: //For the spaceship 
-                    FloorBackgroundColor = Colors.FloorBackground;
-                    FloorBackgroundColorInFov = Colors.FloorBackgroundFov;
-                    WallBackgroundColor = Colors.WallBackground;
-                    WallBackgroundColorInFov = Colors.WallBackgroundFov;
+                    FloorBackgroundColor = Colors.FloorBackgroundShip;
+                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovShip;
+                    WallBackgroundColor = Colors.WallBackgroundShip;
+                    WallBackgroundColorInFov = Colors.WallBackgroundFovShip;
                     break;
+                    
             }
+
         }
 
 
@@ -66,13 +68,20 @@ namespace RogueLike.Core
             WallSymbol = '#';
             switch (MapType) {
                 case MapType.BossRoom:
-                    FloorSymbol = '.';//'Û';
+                    FloorSymbol = '+';
                     break;
                 case MapType.Spaceship:
-                    FloorSymbol = '.';
+                    FloorSymbol = 'Û';
+                    WallSymbol = 'Ü';
                     break;
                 case MapType.Planet:
-                    FloorSymbol = '.';
+                    switch (Planet) {
+                        case PlanetName.Alleo: FloorSymbol = '¥'; break;
+                        case PlanetName.Damari: FloorSymbol = '¢'; break;
+                        case PlanetName.Thaadd: FloorSymbol = '¤';
+                            WallSymbol = '£'; break;
+                    }
+           
                     break;
             }
         }
