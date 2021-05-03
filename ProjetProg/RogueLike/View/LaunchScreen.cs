@@ -41,7 +41,7 @@ namespace RogueLike.View
                 string lore1 = "A dangerous organization is looking for the 3";
                 string lore2 = "legendary artifacts. Those are hidden in some";
                 string lore3 = "forbidden ruins in 3 abandoned planets.";
-                string lore4 = "try to find them as fast as possible.";
+                string lore4 = "Try to find them as fast as possible.";
 
                 string lore5 = "You've been given a spaceship to accomplish your";
                 string lore6 = "mission. You can teleport to the planets through";
