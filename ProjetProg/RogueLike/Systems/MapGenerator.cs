@@ -144,87 +144,77 @@ namespace RogueLike.Systems
                 map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-
-            //create the middle part of the spaceship
-            foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 8))
-            {
-                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
-            }
-            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth / 2), (mapHeight / 2), 8))
-            {
-                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
-            }
+            int centerX = mapWidth/2;
+            int centerY = mapHeight/2;
 
 
-            // The left part of the spaceship
-            foreach (Cell cell in map.GetBorderCellsInSquare(mapWidth / 2 - 4, mapHeight / 2, 7))
+
+            // Add the main spaceship part
+            int spaceShipSize = 5;
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInSquare(mapWidth / 2 - 4, mapHeight / 2, 7))
+            foreach (Cell cell in map.GetCellsInDiamond(centerX, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-
-            // The right part of the spaceship
-            foreach (Cell cell in map.GetBorderCellsInDiamond(mapWidth / 2 + 8, mapHeight / 2, 7))
+            // Add the left spaceship part
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX-7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(mapWidth / 2 + 8, mapHeight / 2, 7))
+            foreach (Cell cell in map.GetCellsInDiamond(centerX-7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-            int minX = mapWidth / 2 - 4 - 7; // left border of the spaceship 
-            //mapWidth/2 -4 is the x origin of the left square and -7 because the square's border are 14
-            int maxY = (mapHeight / 2 + 8); // top border of the spaceship
-            int minY = (mapHeight / 2 - 8);
-
-            //Add the reactors
-            foreach (Cell cell in map.GetBorderCellsInSquare(minX - 2, mapHeight / 2 + 4, 1))
+            // Add the right spaceship part
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX+7, centerY, spaceShipSize))
             {
-                map.SetCellProperties(cell.X, cell.Y, true, false, true);
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+            foreach (Cell cell in map.GetCellsInDiamond(centerX+7, centerY, spaceShipSize))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-            foreach (Cell cell in map.GetBorderCellsInSquare(minX - 2, mapHeight / 2 - 4, 1))
+            // Add the down spaceship part
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX, centerY+5, spaceShipSize))
             {
-                map.SetCellProperties(cell.X, cell.Y, true, false, true);
+                map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
+            foreach (Cell cell in map.GetCellsInDiamond(centerX, centerY+5, spaceShipSize))
+            {
+                map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
+            }
+
+
 
             //Add the corridor to the sellers spaceship
             int startCorridorX = mapWidth / 2;
-            int endCorridorY = minY - 2;
+            int minY = centerY - spaceShipSize;
+            int endCorridorY = minY - 1;
             foreach (Cell cell in map.GetCellsAlongLine(startCorridorX, minY, startCorridorX, endCorridorY))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true);
             }
-            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX - 1, minY, startCorridorX - 1, endCorridorY))
-            {
-                map.SetCellProperties(cell.X, cell.Y, true, true, true);
-            }
-            foreach (Cell cell in map.GetCellsAlongLine(startCorridorX + 1, minY, startCorridorX + 1, endCorridorY))
-            {
-                map.SetCellProperties(cell.X, cell.Y, true, true, true);
-            }
+
 
 
             // Add the sellers spaceship
-            int spaceShipSize = 7;
-            foreach (Cell cell in map.GetBorderCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, spaceShipSize))
+            int sellersSpaceShipSize = 7;
+            foreach (Cell cell in map.GetBorderCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, sellersSpaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, spaceShipSize))
+            foreach (Cell cell in map.GetCellsInDiamond(startCorridorX, endCorridorY - spaceShipSize, sellersSpaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
 
-
-            //TODO : ajouter les portails de téléportation
-            //TODO : ajouter les pnj
             PlaceSellersInSpaceship(startCorridorX, endCorridorY - spaceShipSize);
 
             PlaceTeleportationPortalsInSpaceship(player);
@@ -267,8 +257,8 @@ namespace RogueLike.Systems
         private void PlaceTeleportationPortalsInSpaceship(Player player)
         {
 
-            int middlePortalX = mapWidth / 2;
-            int middlePortalY = mapHeight / 2 + 5;
+            int centerX = mapWidth / 2;
+            int centerY = mapHeight / 2;
 
             List<PlanetName> visitedPlanets = new List<PlanetName>();
             // If an artifact has already been collected by te player, don't put the teleportation portal that teleport to this planet
@@ -279,15 +269,15 @@ namespace RogueLike.Systems
 
             if (!visitedPlanets.Contains(PlanetName.Alleo))
             {
-                map.AddTeleportationPortal(new PortalToPlanet1(middlePortalX - 5, middlePortalY));
+                map.AddTeleportationPortal(new PortalToPlanet1(centerX - 8, centerY));
             }
             if (!visitedPlanets.Contains(PlanetName.Damari))
             {
-                map.AddTeleportationPortal(new PortalToPlanet2(middlePortalX, middlePortalY));
+                map.AddTeleportationPortal(new PortalToPlanet2(centerX, centerY+6));
             }
             if (!visitedPlanets.Contains(PlanetName.Thaadd))
             {
-                map.AddTeleportationPortal(new PortalToPlanet3(middlePortalX + 5, middlePortalY));
+                map.AddTeleportationPortal(new PortalToPlanet3(centerX + 8, centerY));
             }
         }
 
