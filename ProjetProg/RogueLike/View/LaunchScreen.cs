@@ -90,10 +90,8 @@ namespace RogueLike.View
                 RootConsole.Print(3*quarterX - quit.Length / 2, newGameY, quit, RLColor.Red);
 
 
-
-
-
                 RootConsole.Draw();
+                RenderRequired= false;
             }
         }
 

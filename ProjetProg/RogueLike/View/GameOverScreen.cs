@@ -28,7 +28,6 @@ namespace RogueLike.View
             {
                 RootConsole.Clear();
 
-                RootConsole.Clear();
                 RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
 
                 int centerX = RootConsole.Width / 2;
@@ -52,6 +51,7 @@ namespace RogueLike.View
 
 
                 RootConsole.Draw();
+                RenderRequired = false;
             }
         }
 

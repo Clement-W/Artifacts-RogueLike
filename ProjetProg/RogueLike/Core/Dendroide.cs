@@ -16,7 +16,7 @@ namespace RogueLike.Core
             Health = random.Next(50,100);
             MaxHealth = Health;
             Name = "Dendroide";
-            MovingTimePeriod = 10;
+            MovingTimePeriod = 5;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Icons.zombieSymbol;
             DownSymbol = Icons.zombieSymbol; // TODO: changer les symbols LE TRUC BLEU
