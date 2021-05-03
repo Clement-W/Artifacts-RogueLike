@@ -34,8 +34,8 @@ namespace RogueLike.View
         {
             if (RenderRequired)
             {
-
                 RootConsole.Clear();
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
 
                 // Compute the center of the screen that will be used later
                 int centerX = RootConsole.Width / 2;
