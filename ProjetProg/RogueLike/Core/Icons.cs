@@ -1,8 +1,10 @@
 ﻿using RLNET;
 
-namespace RogueLike.Core {
+namespace RogueLike.Core
+{
     // Contains the colors used in the rogue like
-    public static class Icons {
+    public static class Icons
+    {
 
 
         // player icons
@@ -35,7 +37,6 @@ namespace RogueLike.Core {
         public static char legginsSymbol = 'Õ';
         public static char bootsSymbol = 'Ö';
 
-
         // item icons
         public static char sandwichSymbol = 'Ç';
         public static char rationSymbol = 'È';
@@ -43,14 +44,24 @@ namespace RogueLike.Core {
         public static char medHerbSymbol = 'Ê';
         public static char healthKitSymbol = 'Ë';
 
+        // teleporter icons
+        public static char shipTpSymbol1 = 'ä';
+        public static char shipTpSymbol2 = 'å';
+        public static char planete1TpSymbol1 = 'æ';
+        public static char planete1TpSymbol2 = 'ç';
+        public static char planete2TpSymbol1 = 'è';
+        public static char planete2TpSymbol2 = 'é';
+        public static char planete3TpSymbol1 = 'ê';
+        public static char planete3TpSymbol2 = 'ë';
 
-
-        // merchant icon(s?) 
+        // merchant icons 
         public static char itemSellerSymbol1 = '¼';
         public static char itemSellerSymbol2 = '½';
         public static char equipementSellerSymbol1 = '¾';
         public static char equipementSellerSymbol2 = '¿';
 
+        // enemy icons
+        public static char zombieSymbol = 'À';
 
     }
 }

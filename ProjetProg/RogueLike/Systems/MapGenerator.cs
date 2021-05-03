@@ -35,19 +35,18 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
-            Console.WriteLine("aaa");
         }
 
         public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
         {
             map.Location.MapType = mapType;
             map.Location.Planet = planet;
-            map.Location.SetColors();
+            map.Location.InitializeSprites();
             Console.WriteLine("bbb");
 
         }
 
-        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected,mapType,PlanetName.None)
+        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected, mapType, PlanetName.None)
         {
         }
 
@@ -74,26 +73,48 @@ namespace RogueLike.Systems
             }
 
             //create the middle part of the boss room
-            foreach (Cell cell in map.GetCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            foreach (Cell cell in map.GetCellsInDiamond((mapWidth / 2), (mapHeight / 2), 10))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetBorderCellsInSquare((mapWidth / 2), (mapHeight / 2), 10))
+            foreach (Cell cell in map.GetBorderCellsInDiamond((mapWidth / 2), (mapHeight / 2), 10))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
 
-            player.SetPosition(mapWidth / 2, mapHeight / 2);
+            player.SetPosition(mapWidth / 2, mapHeight / 2 + 5);
             map.AddPlayerOnTheMap(player);
-            //TODO: Création du boss 
-            //Dans la map qui contient le boss, si le boss est mort alors on ajoute l'artefact puis un portail de TP vers le vaisseau à la map pour retourner au vaisseau
 
+            CreateBoss(map);
             //FIXME:provisoire :
-            map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
-            map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
+            //map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
+            //map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
             return map;
 
+        }
+
+        private void CreateBoss(CurrentMap map)
+        {
+            Enemy finalBoss = null;
+            switch (map.Location.Planet)
+            {
+                case PlanetName.Alleo:
+                    finalBoss = new AlleoBoss(difficultyLevel);
+                    break;
+
+                case PlanetName.Damari:
+                    finalBoss = new DamariBoss(difficultyLevel);
+                    break;
+
+                case PlanetName.Thaadd:
+                    finalBoss = new ThaaddBoss(difficultyLevel);
+                    break;
+            }
+
+            finalBoss.PosX = mapWidth / 2;
+            finalBoss.PosY = mapHeight / 2 - 5;
+            map.AddEnemy(finalBoss);
         }
 
 
@@ -203,7 +224,7 @@ namespace RogueLike.Systems
 
             //TODO : ajouter les portails de téléportation
             //TODO : ajouter les pnj
-            PlaceSellersInSpaceship(startCorridorX,endCorridorY - spaceShipSize);
+            PlaceSellersInSpaceship(startCorridorX, endCorridorY - spaceShipSize);
 
             PlaceTeleportationPortalsInSpaceship(player);
 
@@ -215,11 +236,11 @@ namespace RogueLike.Systems
 
         private void PlaceSellersInSpaceship(int sellerSpaceshipCenterX, int sellerSpaceshipCenterY)
         {
-            int itemSellerPosX = sellerSpaceshipCenterX-3;
-            int itemSellerPosY = sellerSpaceshipCenterY-1;
+            int itemSellerPosX = sellerSpaceshipCenterX - 3;
+            int itemSellerPosY = sellerSpaceshipCenterY - 1;
 
-            int equipmentSellerPosX = sellerSpaceshipCenterX+3;
-            int equipmentSellerPosY = sellerSpaceshipCenterY-1;
+            int equipmentSellerPosX = sellerSpaceshipCenterX + 3;
+            int equipmentSellerPosY = sellerSpaceshipCenterY - 1;
 
             ItemSeller itemSeller = new ItemSeller(itemSellerPosX, itemSellerPosY, nbArtifactsCollected);
             EquipmentSeller equipmentSeller = new EquipmentSeller(equipmentSellerPosX, equipmentSellerPosY, nbArtifactsCollected);
@@ -239,6 +260,7 @@ namespace RogueLike.Systems
             map.AddMerchant(itemSeller);
             map.AddMerchant(equipmentSeller);
 
+            
         }
 
         private void PlaceTeleportationPortalsInSpaceship(Player player)
@@ -254,15 +276,15 @@ namespace RogueLike.Systems
                 visitedPlanets.Add(artifact.ComesFrom);
             }
 
-            if (!visitedPlanets.Contains(PlanetName.Planet1))
+            if (!visitedPlanets.Contains(PlanetName.Alleo))
             {
                 map.AddTeleportationPortal(new PortalToPlanet1(middlePortalX - 5, middlePortalY));
             }
-            if (!visitedPlanets.Contains(PlanetName.Planet2))
+            if (!visitedPlanets.Contains(PlanetName.Damari))
             {
                 map.AddTeleportationPortal(new PortalToPlanet2(middlePortalX, middlePortalY));
             }
-            if (!visitedPlanets.Contains(PlanetName.Planet3))
+            if (!visitedPlanets.Contains(PlanetName.Thaadd))
             {
                 map.AddTeleportationPortal(new PortalToPlanet3(middlePortalX + 5, middlePortalY));
             }
@@ -274,7 +296,7 @@ namespace RogueLike.Systems
 
         private void PlacePlayerInMap(Player player)
         {
-            ICell cell = FindRandomWalkableCell();
+            ICell cell = map.FindRandomWalkableCell();
 
             player.SetPosition(cell.X, cell.Y);
             map.AddPlayerOnTheMap(player);
@@ -290,7 +312,7 @@ namespace RogueLike.Systems
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an enemy
 
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
 
                     Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel, cell.X, cell.Y);
                     map.AddEnemy(enemy);
@@ -306,7 +328,7 @@ namespace RogueLike.Systems
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an equipment
 
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
 
                     Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel, cell.X, cell.Y);
                     map.AddLoot(equipment);
@@ -321,24 +343,13 @@ namespace RogueLike.Systems
             {
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an item
-                    ICell cell = FindRandomWalkableCell();
+                    ICell cell = map.FindRandomWalkableCell();
                     Item item = ItemGenerator.CreateItem(cell.X, cell.Y);
                     map.AddLoot(item);
                 }
             }
         }
 
-        private ICell FindRandomWalkableCell()
-        {
-            int x;
-            int y;
-            do
-            {
-                x = random.Next(0, mapWidth);
-                y = random.Next(0, mapHeight);
-            } while (!map.IsWalkable(x, y));
-            return map.GetCell(x, y);
-        }
 
         private void PlaceLootsInMap()
         {
@@ -349,7 +360,9 @@ namespace RogueLike.Systems
         // Place the stairs as far as possible of the player, to go deeper in the map 
         private void CreateStairs(Player player)
         {
-            Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            //Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            //TODO: provisoirement on met à côté:
+            Cell farthestCellFromPlayer = map.FindClosestWalkableCell(player);
             map.Staircase = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 

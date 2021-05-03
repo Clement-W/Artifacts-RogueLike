@@ -14,7 +14,7 @@ namespace RogueLike.Core
         public Chestplate Chest { get; set; }
         public Leggins Legs { get; set; }
         public Boots Feet { get; set; }
-        public AttackEquipment Weapon { get; set; }
+        
 
         public List<Item> Items { get; set; }
         
@@ -45,6 +45,7 @@ namespace RogueLike.Core
             LeftSymbol = Icons.playerLeftSymbol;
             RightSymbol = Icons.playerRightSymbol;
             Symbol = DownSymbol;
+            Direction = Direction.Up;
 
             Head = Helmet.None();
             Chest = Chestplate.None();
@@ -79,7 +80,7 @@ namespace RogueLike.Core
             equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 2, $"{Head.Symbol}", Head.PrintedColor);
             equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: ", Colors.Text);
-            equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Legs.PrintedColor);
+            equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Chest.PrintedColor);
             equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 4, $"{Legs.Symbol}", Legs.PrintedColor);
             equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: ", Colors.Text);
@@ -194,7 +195,7 @@ namespace RogueLike.Core
         // Drop an item on the ground
         private void DropItem(CurrentMap map, ILoot loot)
         {
-            Cell cell = FindClosestWalkableCell(map);
+            Cell cell = map.FindClosestWalkableCell(this);
             if (cell != null)
             {
                 loot.PosX = cell.X;
@@ -207,22 +208,7 @@ namespace RogueLike.Core
                 map.AddLoot(loot);
             }
         }
-        // Find a walkable cell around the player
-        private Cell FindClosestWalkableCell(CurrentMap map)
-        {
-            int distanceMax = 5; // max distance from which we search for a cell
-            for (int i = 1; i < distanceMax; i++)
-            {
-                foreach (Cell cell in map.GetBorderCellsInSquare(PosX, PosY, i))
-                {
-                    if (cell.IsWalkable && map.GetLootAt(cell.X,cell.Y)==null) // To avoid item superposition if the cell is walkable but an item is on it
-                    {
-                        return cell;
-                    }
-                }
-            }
-            return null;
-        }
+        
 
         public void UseItem(int index)
         {

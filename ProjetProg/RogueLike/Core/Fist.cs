@@ -6,8 +6,7 @@ namespace RogueLike.Core
         public Fist(){
             Name = "Fist";
             AttackBonus=0;
-            RangeDepth = 1;
-            RangeWidth = 1;
+            AttackRange.Add(1,1);
             Symbol = Icons.fistSymbol;
         }
 

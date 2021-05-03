@@ -27,7 +27,6 @@ namespace RogueLike.Core
         // Implicitly called
         public Equipment()
         {
-            Symbol = '[';
             PrintedColor = Palette.DbLight;
             SoldByMerchant=null;
         }
@@ -47,7 +46,7 @@ namespace RogueLike.Core
                 else
                 {
                     // Draw it with the floor background and a '.' symbol
-                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, '.');
+                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, map.Location.FloorSymbol);
                 }
             }
         }

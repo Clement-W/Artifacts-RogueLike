@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System;
 using RogueSharp;
 using System.Threading;
+using RogueLike.Interfaces;
+
 
 namespace RogueLike.View
 {
@@ -98,14 +100,14 @@ namespace RogueLike.View
             //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-�tre (TODO)
 
             // Every second, trigger the scheduling system to move the non playable characters
-            if (schedulingStopWatch.ElapsedMilliseconds > 200)
+            if (schedulingStopWatch.ElapsedMilliseconds > 100)
             {
                 // Reset the stopwatch
                 schedulingStopWatch.Reset();
                 Game.CommandSystem.MoveEnemies(Game); // Move the enemies
                 RenderRequired = true; // Render the game screen
                 schedulingStopWatch.Start(); // Restart the stopwatch
-            } // TODO classe scheduling system qui contient ça
+            } // TODO: classe scheduling system qui contient ça
 
 
             DidPlayerAct = false;
@@ -134,21 +136,21 @@ namespace RogueLike.View
 
                             if (Game.CurrentLevel < 1)
                             {
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType,Game.Map.Location.Planet);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
                                 // Increase game current level
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
-                               
+
                                 DidPlayerAct = true;
                                 string mapName = Game.Map.Location.Planet.ToString();
                                 ChangeTitle($"{mapName} - Level {Game.CurrentLevel}");
                             }
                             else
                             { // Create the boss room
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom,Game.Map.Location.Planet);
+                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
                                 Game.MessageLog = new MessageLog();
-                               
+
                                 DidPlayerAct = true;
                                 string mapName = Game.Map.Location.Planet.ToString();
                                 ChangeTitle($"{mapName} - Boss Room");
@@ -163,11 +165,11 @@ namespace RogueLike.View
                                 Game.CurrentLevel = 1;
 
                             }
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap,portal.PlanetDestination);
+                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
                             // Create a map generator with the portal destination map type in argument
                             Game.Map = mapGenerator.CreateMap(Game.Player);
                             Game.MessageLog = new MessageLog();
-                     
+
                             DidPlayerAct = true;
                             string mapType = Game.Map.Location.MapType.ToString();
                             string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
@@ -193,9 +195,16 @@ namespace RogueLike.View
                 RenderRequired = true;
             }
 
-            
+
             // If the player die, switch to the game over screen
             if (Game.Player.Health <= 0)
+            {
+                RootConsole.Update -= OnGameUpdate;
+                RootConsole.Render -= OnGameRender;
+                EndGame(Game);
+            }
+
+            if (Game.Player.ArtifactsCollected.Count == 3)
             {
                 RootConsole.Update -= OnGameUpdate;
                 RootConsole.Render -= OnGameRender;
@@ -253,16 +262,19 @@ namespace RogueLike.View
                     if (diffX > diffY)
                     {
                         Game.Player.Symbol = Game.Player.RightSymbol;
+                        Game.Player.Direction = Direction.Right;
                     }
                     else
                     {
                         if (y < Game.Player.PosY)
                         {
                             Game.Player.Symbol = Game.Player.UpSymbol;
+                            Game.Player.Direction = Direction.Up;
                         }
                         else
                         {
                             Game.Player.Symbol = Game.Player.DownSymbol;
+                            Game.Player.Direction = Direction.Down;
                         }
                     }
                 }
@@ -271,16 +283,19 @@ namespace RogueLike.View
                     if (diffX > diffY)
                     {
                         Game.Player.Symbol = Game.Player.LeftSymbol;
+                        Game.Player.Direction = Direction.Left;
                     }
                     else
                     {
                         if (y < Game.Player.PosY)
                         {
                             Game.Player.Symbol = Game.Player.UpSymbol;
+                            Game.Player.Direction = Direction.Up;
                         }
                         else
                         {
                             Game.Player.Symbol = Game.Player.DownSymbol;
+                            Game.Player.Direction = Direction.Down;
                         }
                     }
                 }
@@ -289,7 +304,15 @@ namespace RogueLike.View
 
         public void EndGame(Game game)
         {
-            GameOverScreen gameOverScreen = new GameOverScreen(game);
+            if (game.Player.ArtifactsCollected.Count == 3)
+            {
+                WinScreen winScreen= new WinScreen(game);
+            }
+            else
+            {
+                GameOverScreen gameOverScreen = new GameOverScreen(game);
+            }
+
         }
 
 
@@ -299,9 +322,9 @@ namespace RogueLike.View
             if (animationStopWatch.ElapsedMilliseconds > 500)
             {
                 animationStopWatch.Reset();
-                foreach (Merchant merchant in Game.Map.Merchants)
+                foreach (IAnimated animated in Game.Map.AnimatedSprites)
                 {
-                    merchant.ChangeSymbolAlternative();
+                    animated.ChangeSymbolAlternative();
                 }
                 View.GameScreen.RenderRequired = true;
                 animationStopWatch.Start();

@@ -12,15 +12,8 @@ namespace RogueLike.Systems
         {
             Random random = new Random();
             List<Enemy> possibleEnemies = new List<Enemy>();
-            
-            if (difficultyLevel <= 2)
-            {
-                possibleEnemies.Add(new Zombie(difficultyLevel));
-            }
-            else if(difficultyLevel >2)
-            {
-                possibleEnemies.Add(new Zombie(difficultyLevel));
-            }
+
+            possibleEnemies.AddRange(new Enemy[]{new Zombie(difficultyLevel),new Mecabat(difficultyLevel), new Dendroide(difficultyLevel)});
 
             Enemy enemy = possibleEnemies[random.Next(0, possibleEnemies.Count)];
             enemy.PosX = posX;

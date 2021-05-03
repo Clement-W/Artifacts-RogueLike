@@ -1,15 +1,17 @@
+using RLNET;
+
 namespace RogueLike.Core
 {
     public class Helmet : DefenseEquipment
     {
-        public Helmet(string name, int defBonus, int cost) : base(name, defBonus, cost)
+        public Helmet(string name, int defBonus, int cost, RLColor color) : base(name, defBonus, cost)
         {
             Symbol = Icons.helmetSymbol;
+            PrintedColor = color;
         }
 
         public Helmet(string name, int defBonus) : base(name, defBonus, 0)
         {
-            Symbol = Icons.helmetSymbol;
         }
 
         public static Helmet None()
@@ -19,22 +21,22 @@ namespace RogueLike.Core
 
         public static Helmet Polymer()
         {
-            return new Helmet("Polymer Helmet", 1, 30);
+            return new Helmet("Polymer Helmet", 1, 30, Colors.polymerColor);
         }
 
         public static Helmet Carbon()
         {
-            return new Helmet("Carbon Helmet", 2, 50);
+            return new Helmet("Carbon Helmet", 2, 50, Colors.carbonColor);
         }
 
         public static Helmet Platinum()
         {
-            return new Helmet("Platinum Helmet", 3, 70);
+            return new Helmet("Platinum Helmet", 3, 70, Colors.platinumColor);
         }
 
         public static Helmet Titanium()
         {
-            return new Helmet("Titanium Helmet", 4, 90);
+            return new Helmet("Titanium Helmet", 4, 90, Colors.titaniumColor);
         }
     }
 }

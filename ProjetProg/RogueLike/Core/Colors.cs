@@ -48,11 +48,23 @@ namespace RogueLike.Core
 
         public static RLColor TeleportationPortal = Palette.DbLight;
 
-        public static RLColor FloorBackgroundPlanet2 = RLColor.Red;
-        public static RLColor FloorBackgroundFovPlanet2 = RLColor.LightRed; // Différent si c'est dans le champ de vision
+        public static RLColor FloorBackgroundPlanet2 = Palette.DbOldBlood;
+        public static RLColor FloorBackgroundFovPlanet2 = Palette.purplePlanet; // Différent si c'est dans le champ de vision
 
         public static RLColor WallBackgroundPlanet2 = Palette.SecondaryDarkest;
         public static RLColor WallBackgroundFovPlanet2 = Palette.SecondaryDarker;
+
+        // equipement colors : 
+        public static RLColor mk1Color = Palette.DbLight;
+        public static RLColor mk2Color = RLColor.Yellow;
+        public static RLColor mk3Color = RLColor.LightBlue;
+        public static RLColor mk4Color = RLColor.Magenta;
+
+        public static RLColor polymerColor = Palette.DbLight;
+        public static RLColor carbonColor = RLColor.Gray;
+        public static RLColor platinumColor = Palette.DbSun;
+        public static RLColor titaniumColor = Palette.DbOldStone;
+
 
     }
 }

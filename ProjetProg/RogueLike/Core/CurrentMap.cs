@@ -6,11 +6,13 @@ using System.Linq;
 using RogueLike.Interfaces;
 using System.Threading;
 using System.Diagnostics;
+using System;
 namespace RogueLike.Core
 {
 
     public class CurrentMap : Map
     {
+        public List<IAnimated> AnimatedSprites { get; set; }
 
         public List<Enemy> Enemies { get; private set; }
 
@@ -24,13 +26,15 @@ namespace RogueLike.Core
 
         public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
 
-        public Location Location{get;set;}
+        public Location Location { get; set; }
 
 
 
 
         public CurrentMap()
         {
+
+            AnimatedSprites = new List<IAnimated>();
             Enemies = new List<Enemy>();
             Loots = new List<ILoot>();
             AttackedCells = new List<ICell>();
@@ -127,11 +131,11 @@ namespace RogueLike.Core
                     // Draw the cell differently if it's walkable or not
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, '.');
+                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
+                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
                     }
 
                 }
@@ -139,11 +143,11 @@ namespace RogueLike.Core
                 {
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, '.');
+                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, Location.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, '#');
+                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, Location.WallSymbol);
                     }
                 }
             }
@@ -155,11 +159,11 @@ namespace RogueLike.Core
         {
             if (cell.IsWalkable)
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, '.');
+                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
             }
             else
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, '#');
+                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
             }
         }
 
@@ -291,6 +295,7 @@ namespace RogueLike.Core
         {
             Merchants.Add(merchant);
             SetCellWalkability(merchant.PosX, merchant.PosY, false);
+            AnimatedSprites.Add(merchant);
         }
 
 
@@ -298,6 +303,7 @@ namespace RogueLike.Core
         {
             return Enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
+
 
         public TeleportationPortal GetTeleportationPortalAt(int posX, int posY)
         {
@@ -367,7 +373,7 @@ namespace RogueLike.Core
                     Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
                 }
                 else if (loot is Artifact)
-                {   
+                {
                     Game.MessageLog.AddMessage("You've collected " + loot.Name);
                 }
                 else if (sellableLoot.SoldByMerchant == null)
@@ -389,6 +395,37 @@ namespace RogueLike.Core
         public void AddTeleportationPortal(TeleportationPortal portal)
         {
             TeleportationPortals.Add(portal);
+            AnimatedSprites.Add(portal);
+        }
+
+        // Find a walkable cell around the active character
+        public Cell FindClosestWalkableCell(ActiveCharacter activeCharacter)
+        {
+            int distanceMax = 5; // max distance from which we search for a cell
+            for (int i = 1; i < distanceMax; i++)
+            {
+                foreach (Cell cell in GetBorderCellsInSquare(activeCharacter.PosX, activeCharacter.PosY, i))
+                {
+                    if (cell.IsWalkable && GetLootAt(cell.X,cell.Y)==null) // To avoid item superposition if the cell is walkable but an item is on it
+                    {
+                        return cell;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public ICell FindRandomWalkableCell()
+        {
+            Random random = new Random();
+            int x;
+            int y;
+            do
+            {
+                x = random.Next(0, Width);
+                y = random.Next(0, Height);
+            } while (!IsWalkable(x, y));
+            return GetCell(x, y);
         }
 
 
