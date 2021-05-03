@@ -2,15 +2,16 @@ using RLNET;
 
 namespace RogueLike.Core
 {
+    //factory method
     public class Boots : DefenseEquipment
     {
-        public Boots(string name, int defBonus, int cost, RLColor color) : base(name, defBonus,cost)
+        private Boots(string name, int defBonus, int cost, RLColor color) : base(name, defBonus,cost)
         {
             Symbol = Icons.bootsSymbol;
             PrintedColor = color;
         }
 
-        public Boots(string name,int defBonus) : base(name,defBonus,0)
+        private Boots(string name,int defBonus) : base(name,defBonus,0)
         {
 
         }
@@ -20,22 +21,22 @@ namespace RogueLike.Core
             return new Boots("None", 0);
         }
 
-        public static Boots Polymer()
+        public static Boots CreatePolymerBoots()
         {
             return new Boots("Polymer Boots", 1,30, Colors.polymerColor);
         }
 
-        public static Boots Carbon()
+        public static Boots CreateCarbonBoots()
         {
             return new Boots("Carbon Boots", 2,50, Colors.carbonColor);
         }
 
-        public static Boots Platinum()
+        public static Boots CreatePlatinumBoots()
         {
             return new Boots("Platinum Boots", 3,70, Colors.platinumColor);
         }
 
-        public static Boots Titanium()
+        public static Boots CreateTitaniumBoots()
         {
             return new Boots("Titanium Boots", 4,90, Colors.titaniumColor);
         }
