@@ -91,7 +91,6 @@ namespace RogueLike.View
 
 
                 RootConsole.Draw();
-                RenderRequired= false;
             }
         }
 

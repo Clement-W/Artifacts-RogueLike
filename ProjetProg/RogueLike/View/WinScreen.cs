@@ -38,7 +38,7 @@ namespace RogueLike.View {
                 RootConsole.Print(centerX - congratulation.Length / 2, victoryY, congratulation, RLColor.White);
 
                 int timeY = victoryY+5;
-                string time = $"Game time : {gameTime.Hours}h : {gameTime.Minutes}m : {gameTime.Seconds}s" ;
+                string time = $"Time : {gameTime.Hours}h : {gameTime.Minutes}m : {gameTime.Seconds}s" ;
                 RootConsole.Print(centerX - time.Length / 2, timeY, time, RLColor.Green);
 
 

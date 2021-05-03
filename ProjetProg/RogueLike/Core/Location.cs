@@ -43,7 +43,7 @@ namespace RogueLike.Core
                     WallBackgroundColor = Colors.WallBackgroundPlanet2;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet2;
                     break;
-                    
+
                 case PlanetName.Thaadd: //TODO: set lels couleurs planet 3
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet3;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet3;
@@ -57,31 +57,35 @@ namespace RogueLike.Core
                     WallBackgroundColor = Colors.WallBackgroundShip;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovShip;
                     break;
-                    
+
             }
 
         }
 
 
-        private void SetSymbol() {
+        private void SetSymbol()
+        {
 
             WallSymbol = '#';
-            switch (MapType) {
+            switch (MapType)
+            {
                 case MapType.BossRoom:
                     FloorSymbol = '+';
                     break;
                 case MapType.Spaceship:
-                    FloorSymbol = 'Û';
-                    WallSymbol = 'Ü';
+                    FloorSymbol = 'Ã›';
+                    WallSymbol = 'Ãœ';
                     break;
                 case MapType.Planet:
-                    switch (Planet) {
-                        case PlanetName.Alleo: FloorSymbol = '¥'; break;
-                        case PlanetName.Damari: FloorSymbol = '¢'; break;
-                        case PlanetName.Thaadd: FloorSymbol = '¤';
-                            WallSymbol = '£'; break;
+                    switch (Planet)
+                    {
+                        case PlanetName.Alleo: FloorSymbol = 'Â¥'; break;
+                        case PlanetName.Damari: FloorSymbol = 'Â¢'; break;
+                        case PlanetName.Thaadd:
+                            FloorSymbol = 'Â¤';
+                            WallSymbol = 'Â£'; break;
                     }
-           
+
                     break;
             }
         }
