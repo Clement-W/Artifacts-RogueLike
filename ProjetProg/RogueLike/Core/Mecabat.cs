@@ -1,13 +1,15 @@
 using System;
 namespace RogueLike.Core
 {
+
+
     public class Mecabat : Enemy
     {
         public Mecabat(int difficultyLevel){
             Random random = new Random();
             Attack = 1 * difficultyLevel;
             Defense = difficultyLevel;
-            Awareness = 20;
+            Awareness = 15;
             PrintedColor = Colors.Zombie; //TODO: changer les couleurs
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
