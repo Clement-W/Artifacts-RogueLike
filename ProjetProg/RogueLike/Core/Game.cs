@@ -17,6 +17,10 @@ namespace RogueLike.Core
         public CameraSystem CameraSystem { get; private set; }
         public CommandSystem CommandSystem { get; set; }
 
+        public SchedulingSystem SchedulingSystem{get;private set;}
+
+        public AnimationSystem AnimationSystem{get;private set;}
+
         public static MessageLog MessageLog { get; set; }
 
         public CurrentMap Map { get; set; }
@@ -33,6 +37,8 @@ namespace RogueLike.Core
             CameraSystem = new CameraSystem();
             MessageLog = new MessageLog();
             Player = new Player();
+            SchedulingSystem = new SchedulingSystem();
+            AnimationSystem = new AnimationSystem();
             InitializeMap();
 
             // créé la map vaisseau

@@ -24,9 +24,9 @@ namespace RogueLike.View
         private static RLConsole itemsConsole; //food, potions,...
 
 
-        private static Stopwatch schedulingStopWatch;
+        
 
-        private static Stopwatch animationStopWatch;
+        
 
 
         public GameScreen(string title, Game game) : base(title, game)
@@ -42,11 +42,6 @@ namespace RogueLike.View
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
 
-            schedulingStopWatch = new Stopwatch();
-            schedulingStopWatch.Start();
-
-            animationStopWatch = new Stopwatch();
-            animationStopWatch.Start();
         }
 
 
@@ -56,7 +51,7 @@ namespace RogueLike.View
 
             if (RenderRequired)
             {
-                AnimateMerchantsOnMap();
+                Game.AnimationSystem.AnimateAnimatedElements(Game);
 
                 mapConsole.Clear();
                 statConsole.Clear();
@@ -99,15 +94,7 @@ namespace RogueLike.View
         {
             //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-�tre (TODO)
 
-            // Every second, trigger the scheduling system to move the non playable characters
-            if (schedulingStopWatch.ElapsedMilliseconds > 100)
-            {
-                // Reset the stopwatch
-                schedulingStopWatch.Reset();
-                Game.CommandSystem.MoveEnemies(Game); // Move the enemies
-                RenderRequired = true; // Render the game screen
-                schedulingStopWatch.Start(); // Restart the stopwatch
-            } // TODO: classe scheduling system qui contient ça
+            Game.SchedulingSystem.CheckSchedule(Game);
 
 
             DidPlayerAct = false;
@@ -314,21 +301,7 @@ namespace RogueLike.View
         }
 
 
-        public void AnimateMerchantsOnMap()
-        {
-
-            if (animationStopWatch.ElapsedMilliseconds > 500)
-            {
-                animationStopWatch.Reset();
-                foreach (IAnimated animated in Game.Map.AnimatedSprites)
-                {
-                    animated.ChangeSymbolAlternative();
-                }
-                View.GameScreen.RenderRequired = true;
-                animationStopWatch.Start();
-            }
-
-        }
+        
 
 
 
