@@ -44,6 +44,11 @@ namespace RogueLike.Core
         public static char medHerbSymbol = 'Ê';
         public static char healthKitSymbol = 'Ë';
 
+        // artifact icons
+        public static char artifact1Symbol = 'à';
+        public static char artifact2Symbol = 'Ð';
+        public static char artifact3Symbol = 'ð';
+
         // teleporter icons
         public static char shipTpSymbol1 = 'ä';
         public static char shipTpSymbol2 = 'å';

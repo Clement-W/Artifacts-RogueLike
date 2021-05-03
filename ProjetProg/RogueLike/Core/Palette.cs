@@ -53,8 +53,7 @@ namespace RogueLike.Core{
         public static RLColor DbDarkLight = new RLColor(  127, 136, 123  );
 
         // ours
-        public static RLColor purplePlanet = new RLColor(181, 80, 136);
-
+        public static RLColor purplePlanet = new RLColor(59, 0, 15);
 
 
 
