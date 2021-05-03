@@ -5,7 +5,9 @@ namespace RogueLike.Core
     {
         public PortalToSpaceship(int posX, int posY){
             DestinationMap = MapType.Spaceship;
-            Symbol = '*';
+            AlternateSymbol1 = Icons.shipTpSymbol1;
+            AlternateSymbol2 = Icons.shipTpSymbol2;
+            Symbol = AlternateSymbol1;
             PosX = posX;
             PosY = posY;
         }
