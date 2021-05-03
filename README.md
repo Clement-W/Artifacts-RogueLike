@@ -18,22 +18,17 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 
 TODO (pas ordonné) : 
 * Transformer TOUTES les méthodes static en pattern factory
-
-* Faire la map vaisseau
-
-
-
 * Modifier le fichier ascii pour les graphismes
 * Ajouter des aspects graphiques aux maps et les différencier en fonction de la planète
 * Faire la page de lancement du jeu avec launch, help, lore et tout
 * bien dire que pour prendre un nportial ou un escalier il faut appuier sur control
 * Faire page game over
 * Faire des couleurs de sol différentes selon les planètes 
-
 * Faire une classe Drawable qui contient la métode draw
 * Faire tous les todo dans le code
 * ajouter un timer qui se lance en même temps que game screen pour pouvoir donner son temps au joueur à la fin (pour qu'il y ait un but de performance quand même)
 * CHanger tous les noms de variables égaux à un nom de type
+* Dans le lore, dire qu'on va dans des ruines dans le lore pour justifier les escaliers
 
 TODO bonus :
 * Tester la bulle de discission par exemple en ajoutant une console sur une autre

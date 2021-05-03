@@ -62,7 +62,16 @@ namespace RogueLike.Systems
             PlaceLootsInMap();
             CreateStairs(player);
 
-            Game.MessageLog.AddMessage("You teleported to " + map.Location.Planet.ToString());
+            if (mapLevel == 1)
+            {
+                Game.MessageLog.AddMessage("You teleported to " + map.Location.Planet.ToString());
+                Game.MessageLog.AddMessage("at level 1");
+            }else{
+                Game.MessageLog.AddMessage("You arrive to the level " + mapLevel);
+                Game.MessageLog.AddMessage("of the planet " + map.Location.Planet.ToString());
+            }
+
+
 
             return map;
         }
