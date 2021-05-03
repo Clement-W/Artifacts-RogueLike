@@ -1,4 +1,5 @@
 using RLNET;
+using RogueLike.Systems;
 
 using RogueLike.Behaviors;
 namespace RogueLike.Core
@@ -26,10 +27,10 @@ namespace RogueLike.Core
 
 
         // base behavior of an enemy, that can be overwritten in the subclasses
-        public virtual void PerformAction(Game game)
+        public virtual void PerformAction(Player player, CurrentMap map,CommandSystem commandSystem)
         {
             ChasePlayer behavior = new ChasePlayer();
-            behavior.Act(this, game);
+            behavior.Act(this, player,map,commandSystem);
         }
 
 

@@ -9,11 +9,9 @@ namespace RogueLike.Behaviors
 {
     public class ChasePlayer : IBehavior
     {
-        public bool Act(Enemy enemy, Game game)
+        public void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem commandSystem)
         {
 
-            CurrentMap map = game.Map;
-            Player player = game.Player;
             FieldOfView enemyFov = new FieldOfView(map);
 
             // Check if the player is in the monster fov
@@ -37,7 +35,7 @@ namespace RogueLike.Behaviors
                
                 // To use the roguesharp findPath, the origin and the targeted cell needs to be walkable
                 map.SetCellWalkability(enemy.PosX, enemy.PosY, true);
-                map.SetCellWalkability(game.Player.PosX, game.Player.PosY, true);
+                map.SetCellWalkability(player.PosX, player.PosY, true);
 
                 PathFinder pathFinder = new PathFinder(map); // Create a path finder object 
 
@@ -52,13 +50,13 @@ namespace RogueLike.Behaviors
 
                 // We can now set the cells walkable
                 map.SetCellWalkability(enemy.PosX, enemy.PosY, false);
-                map.SetCellWalkability(game.Player.PosX, game.Player.PosY, false);
+                map.SetCellWalkability(player.PosX, player.PosY, false);
 
                 if (path != null)
                 {
                     try
                     {
-                        game.CommandSystem.MoveEnemy(enemy, path.StepForward(), map, player);
+                        commandSystem.MoveEnemy(enemy, path.StepForward(), map, player);
                     }
                     catch (NoMoreStepsException) { }
                 }
@@ -74,7 +72,6 @@ namespace RogueLike.Behaviors
              
             }
 
-            return true;
 
 
 

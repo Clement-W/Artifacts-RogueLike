@@ -1,6 +1,6 @@
 using System;
 using RogueLike.Behaviors;
-
+using RogueLike.Systems;
 namespace RogueLike.Core
 {
     public class DamariBoss : FinalBoss
@@ -31,10 +31,10 @@ namespace RogueLike.Core
             Weapon = new Scepter();
         }
 
-        public override void PerformAction(Game game)
+        public override void PerformAction(Player player, CurrentMap map,CommandSystem commandSystem)
         {
             TeleportFarFromPlayer behavior = new TeleportFarFromPlayer();
-            behavior.Act(this, game);
+            behavior.Act(this, player,map,commandSystem);
         }
     }
 }
