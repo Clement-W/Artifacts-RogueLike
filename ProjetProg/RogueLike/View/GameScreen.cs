@@ -24,6 +24,9 @@ namespace RogueLike.View
         private static RLConsole itemsConsole; //food, potions,...
 
 
+        private Stopwatch gameTime;
+
+
         
 
         
@@ -42,6 +45,9 @@ namespace RogueLike.View
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
 
+            gameTime = new Stopwatch();
+            gameTime.Start();
+
         }
 
 
@@ -51,6 +57,7 @@ namespace RogueLike.View
 
             if (RenderRequired)
             {
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
                 Game.AnimationSystem.AnimateAnimatedElements(Game);
 
                 mapConsole.Clear();
@@ -291,7 +298,8 @@ namespace RogueLike.View
         {
             if (game.Player.ArtifactsCollected.Count == 3)
             {
-                WinScreen winScreen= new WinScreen(game);
+                gameTime.Stop();
+                WinScreen winScreen= new WinScreen(game,gameTime.Elapsed);
             }
             else
             {

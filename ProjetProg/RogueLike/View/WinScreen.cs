@@ -10,8 +10,12 @@ namespace RogueLike.View {
     public class WinScreen: ScreenView 
     {
 
+        private TimeSpan gameTime;
 
-        public WinScreen(Game game) : base(game) {
+
+        public WinScreen(Game game,TimeSpan time) : base(game) {
+            gameTime = time;
+            
             RootConsole.Update += OnWinUpdate;
             RootConsole.Render += OnWinRender;
             // += Allows to add a new event handler to the rootConsole.Update event
