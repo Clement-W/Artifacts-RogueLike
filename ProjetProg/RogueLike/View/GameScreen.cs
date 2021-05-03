@@ -11,40 +11,65 @@ using RogueLike.Interfaces;
 namespace RogueLike.View
 {
 
+    /// <summary>
+    /// This class is the game screen when the player start or play the game
+    /// </summary>
     public class GameScreen : ScreenView
     {
 
-
+        /// <summary>
+        /// This is the console that displays the map
+        /// </summary>
         private static RLConsole mapConsole;
+
+        /// <summary>
+        /// This is the console that displays the messages
+        /// </summary>
         private static RLConsole messageConsole;
+
+        /// <summary>
+        /// This is the console that displays the player's stats
+        /// </summary>
         private static RLConsole statConsole;
 
-        private static RLConsole equipmentsConsole; //armor, weapons
+        /// <summary>
+        /// This is the console that displays the equipments (weapon, armor)
+        /// </summary>
+        private static RLConsole equipmentsConsole;
 
-        private static RLConsole itemsConsole; //food, potions,...
+        /// <summary>
+        /// This is the console that displays the items (food, health kit,...)
+        /// </summary>
+        private static RLConsole itemsConsole;
 
-
+        /// <summary>
+        /// This is the time it tooks the player to win the game 
+        /// </summary>
         private Stopwatch gameTime;
 
 
-        
-
-        
-
-
-        public GameScreen(string title, Game game) : base(title, game)
+        /// <summary>
+        /// This is the constructor of the 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        public GameScreen(Game game) : base("Spaceship", game)
         {
             // Initialize the sub consoles of the root console
-            mapConsole = new RLConsole(Dimensions.worldWidth, Dimensions.worldHeight);  //mapConsole needs to be as big as the world, but only a part of it will be rendered
+
+            //mapConsole needs to be as big as the world, but only a part of it will be rendered
+            mapConsole = new RLConsole(Dimensions.worldWidth, Dimensions.worldHeight);
             messageConsole = new RLConsole(Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight);
             statConsole = new RLConsole(Dimensions.statConsoleWidth, Dimensions.statConsoleHeight);
             equipmentsConsole = new RLConsole(Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight);
             itemsConsole = new RLConsole(Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight);
-            ChangeTitle("Spaceship");
 
             RootConsole.Update += OnGameUpdate;
             RootConsole.Render += OnGameRender;
+            // += Allows to add a new event handler to the rootConsole.Update event
 
+            // Start the stopwatch to count the time it tooks the player to win
             gameTime = new Stopwatch();
             gameTime.Start();
 
@@ -52,43 +77,42 @@ namespace RogueLike.View
 
 
 
+        /// <summary>
+        /// This is the event handler for the console rendering on the game screen
+        /// </summary>
+        /// <param name="sender">This parameter contains a reference to the object that raised the event</param>
+        /// <param name="e"> This parameter contains the event data</param>
         private void OnGameRender(object sender, UpdateEventArgs e)
         {
 
             if (RenderRequired)
             {
-                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
+                // Animate every elements that can be animated in the game
                 Game.AnimationSystem.AnimateAnimatedElements(Game);
 
+                // Clear every subconsoles
                 mapConsole.Clear();
                 statConsole.Clear();
                 messageConsole.Clear();
                 equipmentsConsole.Clear();
                 itemsConsole.Clear();
 
-                Game.Map.Draw(mapConsole, statConsole); // We need the stat console to add the monster lifebar on it if there's a monster nearby
+                // Draw every subconsoles
+                Game.Map.Draw(mapConsole);
                 Game.Player.Draw(mapConsole, Game.Map);
                 Game.Player.DrawStats(statConsole);
                 Game.Player.DrawEquipmentInventory(equipmentsConsole);
                 Game.Player.DrawItemsInventory(itemsConsole);
                 Core.Game.MessageLog.Draw(messageConsole);
                 Game.CameraSystem.CenterCamera(Game.Player);
-                //draw inventory
-
-                /*statConsole.SetBackColor( 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, RLColor.Green );
-                equipmentsConsole.SetBackColor( 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, RLColor.Yellow );
-                itemsConsole.SetBackColor( 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, RLColor.Gray );
-                */
 
 
-
-                // Blit the consoles in the root console
+                // Blit the sub consoles in the root console
                 RLConsole.Blit(mapConsole, CameraSystem.viewPortStartX, CameraSystem.viewPortStartY, Dimensions.mapConsoleWidth, Dimensions.mapConsoleHeight, RootConsole, 0, 0);
                 RLConsole.Blit(statConsole, 0, 0, Dimensions.statConsoleWidth, Dimensions.statConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight);
                 RLConsole.Blit(messageConsole, 0, 0, Dimensions.messageConsoleWidth, Dimensions.messageConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth, Dimensions.mapConsoleHeight + Dimensions.statConsoleHeight);
                 RLConsole.Blit(equipmentsConsole, 0, 0, Dimensions.equipmentsConsoleWidth, Dimensions.equipmentsConsoleHeight, RootConsole, 0, Dimensions.mapConsoleHeight);
                 RLConsole.Blit(itemsConsole, 0, 0, Dimensions.itemsConsoleWidth, Dimensions.itemsConsoleHeight, RootConsole, Dimensions.equipmentsConsoleWidth + Dimensions.messageConsoleWidth, Dimensions.mapConsoleHeight);
-
 
 
                 RootConsole.Draw();
@@ -97,53 +121,66 @@ namespace RogueLike.View
             }
         }
 
+        /// <summary>
+        /// This is the event handler for the console update for the game screen
+        /// </summary>
+        /// <param name="sender">This parameter contains a reference to the object that raised the event</param>
+        /// <param name="e"> This parameter contains the event data</param>
         private void OnGameUpdate(object sender, UpdateEventArgs e)
         {
-            //UpdateOrientation(); // pour le changement d'orientation avec la souris en continu, enlever peut-�tre (TODO)
 
+            //Check the scheduling system to move the enemies
             Game.SchedulingSystem.CheckSchedule(Game);
 
 
             DidPlayerAct = false;
             KeyPress = RootConsole.Keyboard.GetKeyPress();
 
+            // If the player licks, update it's orientation and attack
             if (RootConsole.Mouse.GetLeftClick())
             {
                 UpdateOrientation(); // The player looks on the click direction
-                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map); // Attack the cells
+                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map); // Attack the targeted cells
                 RenderRequired = true;
             }
 
             if (KeyPress != null)
             {
-
+                // If the user has pressed a key, switch frorm the possibles keys
                 switch (KeyPress.Key)
                 {
+
                     case RLKey.Escape: RootConsole.Close(); break;
+                    // RLNET works with qwerty keybords
                     case RLKey.W: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
                     case RLKey.S: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
                     case RLKey.A: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
                     case RLKey.D: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
-                    case RLKey.LControl:
+                    case RLKey.LControl: // Left control to go through staircases or teleportation portals
                         if (Game.Map.PlayerIsOnStairCase(Game.Player))
                         {
 
-                            if (Game.CurrentLevel < 1)
+                            // While the player don't access the second floor, go to the next stage
+                            if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
                             {
+                                // Create a map generator to generate the corresponding map
+                                // Increase game current level with ++Game.CurrentLevel
                                 MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
-                                // Increase game current level
+                                // Assign the new map to the current game map
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
-                                
+
 
                                 DidPlayerAct = true;
-                                string mapName = Game.Map.Location.Planet.ToString();
-                                ChangeTitle($"{mapName} - Level {Game.CurrentLevel}");
+                                // Change the title of the console according to the planet name and the level
+                                string planetName = Game.Map.Location.Planet.ToString();
+                                ChangeTitle($"{planetName} - Level {Game.CurrentLevel}");
+
                             }
                             else
-                            { // Create the boss room
+                            { // When the palyer want to access the third floor, create a boss room 
                                 MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
-                                
+
 
                                 DidPlayerAct = true;
                                 string mapName = Game.Map.Location.Planet.ToString();
@@ -151,28 +188,31 @@ namespace RogueLike.View
 
                             }
                         }
+                        // If the player is not on staircase but on a teleportation portal
                         else if (Game.Map.PlayerIsOnTeleportationPortal(Game.Player))
                         {
+                            // Get the current teleportation portal 
                             TeleportationPortal portal = Game.Map.GetTeleportationPortalAt(Game.Player.PosX, Game.Player.PosY);
-                            if (portal.DestinationMap == MapType.Spaceship) // The player has beaten the boss and want to go back to the spaceship
+                            // If the destination of the portal is the spaceship, 
+                            // the player has beaten the boss and want to go back to the spaceship
+                            if (portal.DestinationMap == MapType.Spaceship)
                             {
-                                Game.CurrentLevel = 1;
+                                Game.CurrentLevel = 1; //Set the game level to 1
 
                             }
+                            // Create a map generator with the portal's destination map type in argument 
                             MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
-                            // Create a map generator with the portal destination map type in argument
+
+                            // Change the game current map
                             Game.Map = mapGenerator.CreateMap(Game.Player);
                             DidPlayerAct = true;
                             string mapType = Game.Map.Location.MapType.ToString();
                             string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
                             ChangeTitle(title);
                         }
-
-
-
-
                         break;
 
+                    // To use the items, the player needs to press 1,2,3,4 or 5 for the 5 item slots
                     case RLKey.Number1: DidPlayerAct = true; Game.Player.UseItem(0); break;
                     case RLKey.Number2: DidPlayerAct = true; Game.Player.UseItem(1); break;
                     case RLKey.Number3: DidPlayerAct = true; Game.Player.UseItem(2); break;
@@ -188,129 +228,159 @@ namespace RogueLike.View
             }
 
 
-            // If the player die, switch to the game over screen
+            // Check if the player has died
+            CheckPlayerDeath();
+            //Check if the player has won
+            CheckPlayerWin();
+
+
+
+        }
+
+        /// <summary>
+        /// Check if the player has died
+        /// </summary>
+        private void CheckPlayerDeath()
+        {
             if (Game.Player.Health <= 0)
             {
                 RootConsole.Update -= OnGameUpdate;
                 RootConsole.Render -= OnGameRender;
-                EndGame(Game);
+                EndGame(Game.Player);
             }
+        }
 
+        /// <summary>
+        /// Check if the player has won
+        /// </summary>
+        private void CheckPlayerWin()
+        {
             if (Game.Player.ArtifactsCollected.Count == 3)
             {
                 RootConsole.Update -= OnGameUpdate;
                 RootConsole.Render -= OnGameRender;
-                EndGame(Game);
+                EndGame(Game.Player);
             }
         }
 
-        private static Cell SelectCell(int x, int y)
-        {
-
-            Cell selectedCell;
-            //possibilit� de faire un switch pour changer la forme de la zone selectionn�
-            //pour l'instant on focus une case TODO
 
 
-            if (x >= 0 && x < Game.Map.Width && y >= 0 && y < Game.Map.Height)
-            {
 
-                selectedCell = Game.Map.CellFor(Game.Map.IndexFor(x, y)) as Cell;
-
-            }
-            else
-            {
-                return (Cell)Game.Map.GetCell(Game.Player.PosX, Game.Player.PosY);
-            }
-
-            return selectedCell;
-
-        }
-
-
+        /// <summary>
+        /// Update the player orientation according to it's click position
+        /// </summary>
         private void UpdateOrientation()
         {
-
+            // Get the coordinate of teh click
             int mouseX = RootConsole.Mouse.X;
             int mouseY = RootConsole.Mouse.Y;
 
+            // Check that the click is made in the root console
             if (mouseX >= 0 && mouseX < RootConsole.Width && mouseY >= 0 && mouseY < RootConsole.Height)
             {
-
+                // Get the coordinates of the cell on the map according to the camera viewport
                 int absoluteX = mouseX + CameraSystem.viewPortStartX;
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
-                Cell currentMouseCell = SelectCell(absoluteX, absoluteY);
-
-                int x = currentMouseCell.X;
-                int y = currentMouseCell.Y;
+                // Get the clicked cell
+                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell;
 
 
-                double diffX = Math.Abs(x - Game.Player.PosX);
-                double diffY = Math.Abs(y - Game.Player.PosY);
+                // Get the difference between the cell and the player position
+                double diffX = Math.Abs(absoluteX - Game.Player.PosX);
+                double diffY = Math.Abs(absoluteY - Game.Player.PosY);
 
-                if (x > Game.Player.PosX)
+                // Compare the cell and the player position to deduce the player orientation
+                // If the clickedd cell x position was greater than the player position, the click was on the right part of the screen
+                if (absoluteX > Game.Player.PosX)
                 {
-                    if (diffX > diffY)
-                    {
-                        Game.Player.Symbol = Game.Player.RightSymbol;
-                        Game.Player.Direction = Direction.Right;
-                    }
-                    else
-                    {
-                        if (y < Game.Player.PosY)
-                        {
-                            Game.Player.Symbol = Game.Player.UpSymbol;
-                            Game.Player.Direction = Direction.Up;
-                        }
-                        else
-                        {
-                            Game.Player.Symbol = Game.Player.DownSymbol;
-                            Game.Player.Direction = Direction.Down;
-                        }
-                    }
+                    // Deduce orientation with clickOnRight = true
+                    DeduceOrientation(diffX, diffY, absoluteY, true);
                 }
+                // else, the click was on the left part of the screen
                 else
                 {
-                    if (diffX > diffY)
-                    {
-                        Game.Player.Symbol = Game.Player.LeftSymbol;
-                        Game.Player.Direction = Direction.Left;
-                    }
-                    else
-                    {
-                        if (y < Game.Player.PosY)
-                        {
-                            Game.Player.Symbol = Game.Player.UpSymbol;
-                            Game.Player.Direction = Direction.Up;
-                        }
-                        else
-                        {
-                            Game.Player.Symbol = Game.Player.DownSymbol;
-                            Game.Player.Direction = Direction.Down;
-                        }
-                    }
+                    DeduceOrientation(diffX, diffY, absoluteY, false);
                 }
             }
         }
 
-        public void EndGame(Game game)
+        /// <summary>
+        /// Deduce the player orientation
+        /// </summary>
+        /// <param name="diffX">The x difference between the clicked cell and the player position</param>
+        /// <param name="diffY">The y difference between the clicked cell and the player position</param>
+        /// <param name="absoluteY">The y coordinates of the clicked cell on the map according to the camera viewport</param>
+        /// <param name="clickOnRight">A boolean that indicates if the click was on the left part of the screen, or on the right part</param>
+        private void DeduceOrientation(double diffX, double diffY, int absoluteY, bool clickOnRight)
         {
-            if (game.Player.ArtifactsCollected.Count == 3)
+            // If the x difference is grater than the y difference, the click was closer to the horizontal axis
+            if (diffX > diffY)
             {
-                gameTime.Stop();
-                WinScreen winScreen= new WinScreen(game,gameTime.Elapsed);
+                DeduceHorizontalOrientation(clickOnRight);
             }
             else
             {
-                GameOverScreen gameOverScreen = new GameOverScreen(game);
+
+                DeduceVerticalOrientation(absoluteY);
+            }
+        }
+
+        /// <summary>
+        /// Deduce the horizontal orientation according to the boolean clickOnRiht
+        /// </summary>
+        /// <param name="clickOnRight">This boolean is true if the click was on the right part of the screen</param>
+        private void DeduceHorizontalOrientation(bool clickOnRight)
+        {
+            if (!clickOnRight)
+            {
+                Game.Player.Symbol = Game.Player.LeftSymbol;
+                Game.Player.Direction = Direction.Left;
+            }
+            else
+            {
+                Game.Player.Symbol = Game.Player.RightSymbol;
+                Game.Player.Direction = Direction.Right;
+            }
+        }
+
+        /// <summary>
+        /// Deduce the vertical orientation according to absoluteY
+        /// </summary>
+        /// <param name="absoluteY">The y coordinates of the clicked cell on the map according to the camera viewport</param>
+        private void DeduceVerticalOrientation(int absoluteY)
+        {
+            // if the click was above the player, orient the player upperward
+            if (absoluteY < Game.Player.PosY)
+            {
+                Game.Player.Symbol = Game.Player.UpSymbol;
+                Game.Player.Direction = Direction.Up;
+            }
+            // else, the click was below the player, orient the player downward
+            else
+            {
+                Game.Player.Symbol = Game.Player.DownSymbol;
+                Game.Player.Direction = Direction.Down;
+            }
+        }
+
+        /// <summary>
+        /// This method is called to create the win screen or the game over screen according to the player victory or not
+        /// </summary>
+        /// <param name="player">The player</param>
+        private void EndGame(Player player)
+        {
+            if (player.ArtifactsCollected.Count == 3)
+            {
+                gameTime.Stop();
+                WinScreen winScreen = new WinScreen(gameTime.Elapsed);
+            }
+            else
+            {
+                GameOverScreen gameOverScreen = new GameOverScreen();
             }
 
         }
-
-
-        
-
 
 
     }

@@ -31,7 +31,7 @@ namespace RogueLike.Core
         public void StartGame()
         {
             CurrentLevel = 1;
-            GameScreen gameScreen = new GameScreen("oui", this);
+            GameScreen gameScreen = new GameScreen(this);
 
             CommandSystem = new CommandSystem();
             CameraSystem = new CameraSystem();

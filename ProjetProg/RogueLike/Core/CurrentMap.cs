@@ -69,7 +69,7 @@ namespace RogueLike.Core
 
         // Called when the map is updated
         // Draw the characters on each cell
-        public void Draw(RLConsole mapConsole, RLConsole statConsole)
+        public void Draw(RLConsole mapConsole)
         {
             foreach (Cell cell in GetAllCells())
             {
