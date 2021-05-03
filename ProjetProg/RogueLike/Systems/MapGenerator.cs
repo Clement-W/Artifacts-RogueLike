@@ -62,6 +62,8 @@ namespace RogueLike.Systems
             PlaceLootsInMap();
             CreateStairs(player);
 
+            Game.MessageLog.AddMessage("You teleported to " + map.Location.Planet.ToString());
+
             return map;
         }
 
@@ -88,9 +90,7 @@ namespace RogueLike.Systems
             map.AddPlayerOnTheMap(player);
 
             CreateBoss(map);
-            //FIXME:provisoire :
-            //map.AddTeleportationPortal(new PortalToSpaceship(mapWidth / 2 + 2, mapHeight / 2 + 2));
-            //map.AddLoot(new Artifact(map.Location.Planet, mapWidth / 2 - 2, mapHeight / 2 - 2));
+
             return map;
 
         }
@@ -98,29 +98,40 @@ namespace RogueLike.Systems
         private void CreateBoss(CurrentMap map)
         {
             Enemy finalBoss = null;
+            Game.MessageLog.AddMessage("You enter the boss room");
             switch (map.Location.Planet)
             {
                 case PlanetName.Alleo:
                     finalBoss = new AlleoBoss(difficultyLevel);
+                    Game.MessageLog.AddMessage("Be careful, with it's trident,");
+                    Game.MessageLog.AddMessage("this boss has a long range!");
                     break;
 
                 case PlanetName.Damari:
                     finalBoss = new DamariBoss(difficultyLevel);
+                    Game.MessageLog.AddMessage("Be careful, this boss can");
+                    Game.MessageLog.AddMessage("teleport itself and makes");
+                    Game.MessageLog.AddMessage("heavy damages!");
                     break;
 
                 case PlanetName.Thaadd:
                     finalBoss = new ThaaddBoss(difficultyLevel);
+                    Game.MessageLog.AddMessage("Be careful, with it's death");
+                    Game.MessageLog.AddMessage("scythe, this boss can attack");
+                    Game.MessageLog.AddMessage("All around itself!");
                     break;
             }
 
             finalBoss.PosX = mapWidth / 2;
             finalBoss.PosY = mapHeight / 2 - 5;
             map.AddEnemy(finalBoss);
+
         }
 
 
         public CurrentMap CreateMap(Player player)
         {
+            Game.MessageLog = new MessageLog(); //reset the messagelog
             switch (map.Location.MapType)
             {
                 case MapType.Spaceship:
@@ -144,8 +155,9 @@ namespace RogueLike.Systems
                 map.SetCellProperties(cell.X, cell.Y, false, false, false); //(x,y,istransparent,iswalkable,isexplored)
             }
 
-            int centerX = mapWidth/2;
-            int centerY = mapHeight/2;
+            int centerX = mapWidth / 2;
+            int centerY = mapHeight / 2;
+            Game.MessageLog.AddMessage("Welcome to your spaceship!");
 
 
 
@@ -161,31 +173,31 @@ namespace RogueLike.Systems
             }
 
             // Add the left spaceship part
-            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX-7, centerY, spaceShipSize))
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX - 7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(centerX-7, centerY, spaceShipSize))
+            foreach (Cell cell in map.GetCellsInDiamond(centerX - 7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
             // Add the right spaceship part
-            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX+7, centerY, spaceShipSize))
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX + 7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(centerX+7, centerY, spaceShipSize))
+            foreach (Cell cell in map.GetCellsInDiamond(centerX + 7, centerY, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
 
             // Add the down spaceship part
-            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX, centerY+5, spaceShipSize))
+            foreach (Cell cell in map.GetBorderCellsInDiamond(centerX, centerY + 5, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, false, false, true); //(x,y,istransparent,iswalkable,isexplored)
             }
-            foreach (Cell cell in map.GetCellsInDiamond(centerX, centerY+5, spaceShipSize))
+            foreach (Cell cell in map.GetCellsInDiamond(centerX, centerY + 5, spaceShipSize))
             {
                 map.SetCellProperties(cell.X, cell.Y, true, true, true); //(x,y,istransparent,iswalkable,isexplored)
             }
@@ -251,7 +263,7 @@ namespace RogueLike.Systems
             map.AddMerchant(itemSeller);
             map.AddMerchant(equipmentSeller);
 
-            
+
         }
 
         private void PlaceTeleportationPortalsInSpaceship(Player player)
@@ -273,7 +285,7 @@ namespace RogueLike.Systems
             }
             if (!visitedPlanets.Contains(PlanetName.Damari))
             {
-                map.AddTeleportationPortal(new PortalToPlanet2(centerX, centerY+6));
+                map.AddTeleportationPortal(new PortalToPlanet2(centerX, centerY + 6));
             }
             if (!visitedPlanets.Contains(PlanetName.Thaadd))
             {

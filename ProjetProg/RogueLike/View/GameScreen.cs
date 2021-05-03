@@ -139,7 +139,7 @@ namespace RogueLike.View
                                 MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
                                 // Increase game current level
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
-                                Game.MessageLog = new MessageLog();
+                                
 
                                 DidPlayerAct = true;
                                 string mapName = Game.Map.Location.Planet.ToString();
@@ -149,7 +149,7 @@ namespace RogueLike.View
                             { // Create the boss room
                                 MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
                                 Game.Map = mapGenerator.CreateMap(Game.Player);
-                                Game.MessageLog = new MessageLog();
+                                
 
                                 DidPlayerAct = true;
                                 string mapName = Game.Map.Location.Planet.ToString();
@@ -168,8 +168,6 @@ namespace RogueLike.View
                             MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
                             // Create a map generator with the portal destination map type in argument
                             Game.Map = mapGenerator.CreateMap(Game.Player);
-                            Game.MessageLog = new MessageLog();
-
                             DidPlayerAct = true;
                             string mapType = Game.Map.Location.MapType.ToString();
                             string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";

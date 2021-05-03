@@ -94,9 +94,9 @@ namespace RogueLike.Core
                 drawableLoot.Draw(mapConsole, this);
             }
 
-            foreach (Enemy enemy in Enemies)
+            if (Staircase != null)
             {
-                enemy.Draw(mapConsole, this);
+                Staircase.Draw(mapConsole, this);
             }
 
             foreach (Merchant merchant in Merchants)
@@ -110,10 +110,14 @@ namespace RogueLike.Core
                 portal.Draw(mapConsole, this);
             }
 
-            if (Staircase != null)
+            foreach (Enemy enemy in Enemies)
             {
-                Staircase.Draw(mapConsole, this);
+                enemy.Draw(mapConsole, this);
             }
+
+            
+
+            
         }
 
 

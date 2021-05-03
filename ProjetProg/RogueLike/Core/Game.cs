@@ -32,7 +32,6 @@ namespace RogueLike.Core
             CommandSystem = new CommandSystem();
             CameraSystem = new CameraSystem();
             MessageLog = new MessageLog();
-            MessageLog.AddMessage("Let's go !");
             Player = new Player();
             InitializeMap();
 
