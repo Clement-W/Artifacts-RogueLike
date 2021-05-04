@@ -10,28 +10,28 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent the player. The player is an active character
+    /// This class represents the player. The player is an active character
     /// </summary>
     public class Player : ActiveCharacter
     {
 
         /// <value>
-        /// This is the head of the player, it can be covered by a helmet
+        /// This is the head of the player, it can be protected by a helmet
         /// </value>
         public Helmet Head { get; set; }
 
         /// <value>
-        /// This is the head of the player, it can be covered by a Chestplate
+        /// This is the head of the player, it can be protected by a Chestplate
         /// </value>
         public Chestplate Chest { get; set; }
 
         /// <value>
-        /// This is the head of the player, it can be covered by a Leggins
+        /// This is the head of the player, it can be protected by a Leggins
         /// </value>
         public Leggins Legs { get; set; }
 
         /// <value>
-        /// This is the head of the player, it can be covered by some boots
+        /// This is the head of the player, it can be protected by some boots
         /// </value>
         public Boots Feet { get; set; }
         
@@ -94,8 +94,8 @@ namespace RogueLike.Core
 
 
         /// <summary>
-        /// This method draw the player stats into the stat console
-        /// A life bar and it's attack,defense and gold amount are displayed
+        /// This method draws the player stats into the stat console
+        /// A life bar and the attack, defense and gold amount of the player are displayed
         /// </summary>
         /// <param name="statConsole">The stat console</param>
         public void DrawStats(RLConsole statConsole)
@@ -104,7 +104,7 @@ namespace RogueLike.Core
             int healthBarWidth = Dimensions.statConsoleWidth;
             int remainingHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
 
-            // Create the health bar thanks to the background color
+            // Create the health bar using the background color
             statConsole.SetBackColor(1, 1, remainingHealth, 1, Colors.HealthBar);
             statConsole.SetBackColor(1 + remainingHealth, 1, healthBarWidth - remainingHealth, 1, Colors.HealthBarDamage);
 
@@ -135,7 +135,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method draw the items of the player into the items console
+        /// This method draws the items of the player into the items console
         /// </summary>
         /// <param name="itemsConsole"></param>
         public void DrawItemsInventory(RLConsole itemsConsole)
@@ -149,7 +149,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method set the position of the player to the specified coordinates
+        /// This method sets the position of the player to the specified coordinates
         /// </summary>
         /// <param name="x">The x new position</param>
         /// <param name="y">The y new position</param>
@@ -161,10 +161,8 @@ namespace RogueLike.Core
 
 
 
-        //Collect an item or an equipment
-
         /// <summary>
-        /// This method allow the player to collect a loot and add
+        /// This method allows the player to collect a loot and add
         /// it into the inventory
         /// </summary>
         /// <param name="loot">The loot</param>
@@ -255,8 +253,8 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method allow the player to drop an item on the ground.
-        /// It is used when the player collect an equipment but already has this type
+        /// This method allows the player to drop an item on the ground.
+        /// It is used when the player collects an equipment but already has this type
         /// of equipment
         /// </summary>
         /// <param name="map">The map</param>
@@ -281,7 +279,7 @@ namespace RogueLike.Core
         
 
         /// <summary>
-        /// This allow the player to use an item at the specified index
+        /// This allows the player to use an item at the specified index
         /// </summary>
         /// <param name="index"></param>
         public void UseItem(int index)

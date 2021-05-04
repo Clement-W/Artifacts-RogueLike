@@ -13,9 +13,9 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent the current map where the player is
-    /// It inherit the Map class from RogueSharp. This allows us to use the rogue
-    /// sharp method on the map (getCellsInSquare(),ComputeFov(),...)
+    /// This class represents the current map where the player is
+    /// It inherits the Map class from RogueSharp. This allows us to use the rogue
+    /// sharp methods on the map (getCellsInSquare(),ComputeFov(),...)
     /// </summary>
     public class CurrentMap : Map
     {
@@ -45,8 +45,8 @@ namespace RogueLike.Core
 
 
         /// <value>
-        /// This is the staircase that can be on cave maps
-        /// The staircase allow to go deeper in the map
+        /// This is the staircase that can be found on cave maps
+        /// The staircase allows to go deeper in the map
         /// </value>
         public Staircase Staircase { get; set; }
 
@@ -56,8 +56,8 @@ namespace RogueLike.Core
         public List<TeleportationPortal> TeleportationPortals { get; private set; }
 
         /// <value>
-        /// This list contains  the attacked cells
-        /// This is used to save which cells are attacked by an active character
+        /// This list contains the attacked cells
+        /// This is used to save which cells are being attacked by an active character
         /// ( to change the appearance of those cells)
         /// </value>
         public List<ICell> AttackedCells { get; set; }
@@ -70,7 +70,7 @@ namespace RogueLike.Core
 
 
         /// <summary>
-        /// This constructor create the map
+        /// This constructor creates the map
         /// </summary>
         public CurrentMap()
         {
@@ -86,7 +86,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method return
+        /// This method returns the list of enemies
         /// </summary>
         /// <returns></returns>
         public List<Enemy> GetEnemies()
@@ -120,7 +120,7 @@ namespace RogueLike.Core
 
         /// <summary>
         /// This method is called when the map is updated (in the render method)
-        /// It draw the symbols on each cell
+        /// It draws the symbols on each cell
         /// </summary>
         /// <param name="mapConsole">The map console</param>
         public void Draw(RLConsole mapConsole)
@@ -180,7 +180,7 @@ namespace RogueLike.Core
 
 
         /// <summary>
-        /// This method draw a symbol on a cell, according to the location
+        /// This method draws a symbol on a cell, according to the location
         /// </summary>
         /// <param name="console">The map console</param>
         /// <param name="cell">The cell we draw on</param>
@@ -517,7 +517,7 @@ namespace RogueLike.Core
         /// <summary>
         /// Collect a loot if there's one
         /// </summary>
-        /// <param name="player">The player that collects the loot</param>
+        /// <param name="player">The player who collects the loot</param>
         /// <param name="posX">The x position of the loot</param>
         /// <param name="posY">The y position of the loot</param>
         /// <returns></returns>

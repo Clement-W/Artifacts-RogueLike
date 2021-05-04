@@ -5,7 +5,7 @@ namespace RogueLike.Core{
 
     /// <summary>
     /// This static class contains every color of the used pallet
-    /// We took the  pallet of the roguesharp tutorial
+    /// We took the pallet of the roguesharp tutorial
     /// This pallette is available here : http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X 
     /// </summary>
     public static class Palette{
@@ -54,7 +54,7 @@ namespace RogueLike.Core{
 
         public static RLColor DbDarkLight = new RLColor(  127, 136, 123  );
 
-        // ours
+        // our added colors
         public static RLColor purplePlanetwall = new RLColor(59, 0, 15);
         public static RLColor purplePlanetwallDark = new RLColor(39, 0, 10);
         public static RLColor purplePlanet = new RLColor(174, 19, 80);

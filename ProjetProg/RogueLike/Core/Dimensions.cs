@@ -11,7 +11,7 @@ namespace RogueLike.Core
         public static readonly int screenConsoleWidth = 52;
         public static readonly int screenConsoleHeight = 27;
 
-        // The w and h of every parts of the screen is computed according to the screen size.
+        // The width and height of every parts of the screen is computed according to the screen size.
 
 
         public static readonly int mapConsoleWidth = screenConsoleWidth;

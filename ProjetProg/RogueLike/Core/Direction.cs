@@ -1,6 +1,6 @@
 namespace RogueLike.Core{
     /// <summary>
-    /// This enumeration contains the possibles direction of an active character
+    /// This enumeration contains the possible directions of an active character
     /// </summary>
     public enum Direction{
         None,

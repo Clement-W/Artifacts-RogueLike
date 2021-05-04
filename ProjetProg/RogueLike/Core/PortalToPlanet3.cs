@@ -3,7 +3,7 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent the teleportation portal that goes to Thaad 
+    /// This class represents the teleportation portal that goes to Thaad 
     /// </summary>
     public class PortalToPlanet3 : TeleportationPortal
     {

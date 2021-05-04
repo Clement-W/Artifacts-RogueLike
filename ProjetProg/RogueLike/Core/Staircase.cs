@@ -5,7 +5,7 @@ using RogueSharp;
 namespace RogueLike.Core
 {
     /// <summary>
-    /// This class represent the staircase. It's a drawable element that allow the player
+    /// This class represents the staircase. It's a drawable element that allows the player
     /// to go deeper in the map
     /// </summary>
     public class Staircase : IDrawable
@@ -18,7 +18,7 @@ namespace RogueLike.Core
 
 
         /// <value>
-        /// The symbol that represent the symbol
+        /// The symbol that represents the symbol
         /// </value>
         public char Symbol { get; set; }
 
@@ -46,7 +46,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method draw the staircase on the map
+        /// This method draws the staircase on the map
         /// </summary>
         /// <param name="console">The map console</param>
         /// <param name="map">The map</param>

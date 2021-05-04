@@ -5,7 +5,7 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent a teleportation portable. It's drawable and animated
+    /// This class represents a teleportation portable. It's drawable and animated
     /// </summary>
     public abstract class TeleportationPortal : IDrawable, IAnimated
     {
@@ -37,7 +37,7 @@ namespace RogueLike.Core
 
 
         /// <value>
-        /// The symbol that represent the portal
+        /// The symbol that represents the portal
         /// </value>
         public char Symbol { get; set; }
 
@@ -60,7 +60,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method draw the teleportation portal on the map
+        /// This method draws the teleportation portal on the map
         /// </summary>
         /// <param name="console"> The map console</param>
         /// <param name="map"> The map</param>

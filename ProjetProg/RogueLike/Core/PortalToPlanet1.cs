@@ -2,7 +2,7 @@ using RLNET;
 namespace RogueLike.Core
 {
     /// <summary>
-    /// This class represent the teleportation portal that goes to Alleo 
+    /// This class represents the teleportation portal that goes to Alleo 
     /// </summary>
     public class PortalToPlanet1 : TeleportationPortal
     {

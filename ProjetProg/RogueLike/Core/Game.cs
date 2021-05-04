@@ -36,7 +36,7 @@ namespace RogueLike.Core
         public SchedulingSystem SchedulingSystem { get; private set; }
 
         /// <value>
-        /// The animation system animate the animated character periodically
+        /// The animation system animates the animated character periodically
         /// </value>
         public AnimationSystem AnimationSystem { get; private set; }
 
