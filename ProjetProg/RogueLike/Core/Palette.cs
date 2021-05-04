@@ -3,10 +3,12 @@ using RLNET;
 namespace RogueLike.Core{
 
 
-    // Every color used comes from a palette created here : http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X 
-    // And from a famous used palette : http://pixeljoint.com/forum/forum_posts.asp?TID=12795 
-
-    public class Palette{
+    /// <summary>
+    /// This static class contains every color of the used pallet
+    /// We took the  pallet of the roguesharp tutorial
+    /// This pallette is available here : http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X 
+    /// </summary>
+    public static class Palette{
 
         public static RLColor PrimaryLightest = new RLColor(110, 121, 119);
         public static RLColor PrimaryLighter = new RLColor(88, 100, 98);
@@ -60,8 +62,6 @@ namespace RogueLike.Core{
         public static RLColor darkestGreen = new RLColor(5, 36, 0);
         public static RLColor iceWall = new RLColor(19, 179, 174);
         public static RLColor iceWallDark = new RLColor(17, 151, 148);
-
-
 
 
     }

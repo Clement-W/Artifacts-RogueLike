@@ -9,27 +9,62 @@ using RogueLike.Core.Items;
 namespace RogueLike.Core
 {
 
+    /// <summary>
+    /// This class represent the player. The player is an active character
+    /// </summary>
     public class Player : ActiveCharacter
     {
 
+        /// <value>
+        /// This is the head of the player, it can be covered by a helmet
+        /// </value>
         public Helmet Head { get; set; }
+
+        /// <value>
+        /// This is the head of the player, it can be covered by a Chestplate
+        /// </value>
         public Chestplate Chest { get; set; }
+
+        /// <value>
+        /// This is the head of the player, it can be covered by a Leggins
+        /// </value>
         public Leggins Legs { get; set; }
+
+        /// <value>
+        /// This is the head of the player, it can be covered by some boots
+        /// </value>
         public Boots Feet { get; set; }
         
 
+ 
+        /// <value>
+        /// This is the list of items the player is carrying
+        /// </value>
         public List<Item> Items { get; set; }
         
+  
+        /// <value>
+        /// This is the list of artifacts collected by the player
+        /// </value>
         public List<Artifact> ArtifactsCollected{get;set;}
 
 
+        /// <summary>
+        /// The max number of items the player can carry on
+        /// </summary>
+        private const int NB_ITEM_MAX=5;
 
 
+
+        /// <summary>
+        /// This is the constructor of the player class
+        /// It initialize they stats and set the armor to None
+        /// The base weapon is the fist
+        /// </summary>
         public Player()
         {
             Items = new List<Item>();
             ArtifactsCollected = new List<Artifact>();
-            //create a player with the initial stats
 
             Attack = 10;
             Defense = 5;
@@ -54,14 +89,18 @@ namespace RogueLike.Core
             Legs = Leggins.None();
             Feet = Boots.None();
 
-            //Weapon = new Fist();
             Weapon = new Fist();
         }
 
 
+        /// <summary>
+        /// This method draw the player stats into the stat console
+        /// A life bar and it's attack,defense and gold amount are displayed
+        /// </summary>
+        /// <param name="statConsole">The stat console</param>
         public void DrawStats(RLConsole statConsole)
         {
-
+            
             int healthBarWidth = Dimensions.statConsoleWidth;
             int remainingHealth = (int)(((double)Health / (double)MaxHealth) * healthBarWidth);
 
@@ -76,7 +115,11 @@ namespace RogueLike.Core
             statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {Gold}", Colors.Gold);
         }
 
-
+        /// <summary>
+        /// This method draw the equipment (armor + weapon) of the player into the 
+        /// equipment console
+        /// </summary>
+        /// <param name="equipmentConsole"></param>
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
             equipmentConsole.Print(3, 2, $"{Symbols.headSlotSymbol}: ", Colors.Text);
@@ -91,6 +134,10 @@ namespace RogueLike.Core
             equipmentConsole.Print(6, 6, $"{Weapon.Symbol}", Weapon.PrintedColor);
         }
 
+        /// <summary>
+        /// This method draw the items of the player into the items console
+        /// </summary>
+        /// <param name="itemsConsole"></param>
         public void DrawItemsInventory(RLConsole itemsConsole)
         {
             int yPosition = 2;
@@ -101,16 +148,28 @@ namespace RogueLike.Core
             }
         }
 
+        /// <summary>
+        /// This method set the position of the player to the specified coordinates
+        /// </summary>
+        /// <param name="x">The x new position</param>
+        /// <param name="y">The y new position</param>
         public void SetPosition(int x, int y)
         {
             PosX = x;
-            PosY = y;
-            
+            PosY = y;  
         }
 
 
 
         //Collect an item or an equipment
+
+        /// <summary>
+        /// This method allow the player to collect a loot and add
+        /// it into the inventory
+        /// </summary>
+        /// <param name="loot">The loot</param>
+        /// <param name="map">The map</param>
+        /// <returns>Return true if the player collect the loot</returns>
         public bool Collect(ILoot loot, CurrentMap map)
         {
             bool isLootCollected = false;
@@ -167,7 +226,8 @@ namespace RogueLike.Core
 
             else if (loot is Item)
             {
-                if (Items.Count < 5)
+                // The player can't have more than 5 items
+                if (Items.Count < NB_ITEM_MAX)
                 {
                     Items.Add(loot as Item);
                     isLootCollected = true;
@@ -194,9 +254,16 @@ namespace RogueLike.Core
             return isLootCollected;
         }
 
-        // Drop an item on the ground
+        /// <summary>
+        /// This method allow the player to drop an item on the ground.
+        /// It is used when the player collect an equipment but already has this type
+        /// of equipment
+        /// </summary>
+        /// <param name="map">The map</param>
+        /// <param name="loot">The loot</param>
         private void DropItem(CurrentMap map, ILoot loot)
         {
+            // Drop the item on the closest walkable cell
             Cell cell = map.FindClosestWalkableCell(this);
             if (cell != null)
             {
@@ -207,22 +274,24 @@ namespace RogueLike.Core
                     Equipment lootEquipment = loot as Equipment;
                     Game.MessageLog.AddMessage("You've dropped " + lootEquipment.Name);
                 }
+                // Add the loot to the map
                 map.AddLoot(loot);
             }
         }
         
 
+        /// <summary>
+        /// This allow the player to use an item at the specified index
+        /// </summary>
+        /// <param name="index"></param>
         public void UseItem(int index)
         {
-            if (Items.Count > index) // To avoid accessing the list at a outbound index
+            if (Items.Count > index) // To avoid accessing the list at an outbound index
             {
                 Item item = Items[index];
                 item.Use(this);
                 Items.RemoveAt(index);
             }
         }
-
-
-
     }
 }

@@ -2,32 +2,69 @@ using RLNET;
 
 namespace RogueLike.Core
 {
-    // This class allows to centralize all the information about the map
+
+    /// <summary>
+    /// This class allows to centralize all the information about the map
+    /// </summary>
     public class Location
     {
+
+
+        /// <value>
+        /// The map type of the location
+        /// </value>
         public MapType MapType { get; set; }
 
+        /// <value>
+        /// The planet type of the location
+        /// </value>
         public PlanetName Planet { get; set; }
 
+        /// <value>
+        /// The background color for the floor of this location
+        /// </value>
         public RLColor FloorBackgroundColor { get; set; }
+
+        /// <value>
+        /// The background color for the floor in Fov of this location
+        /// </value>
         public RLColor FloorBackgroundColorInFov { get; set; }
 
+        /// <value>
+        /// The background color for the walll of this location
+        /// </value>
         public RLColor WallBackgroundColor { get; set; }
+
+        /// <value>
+        /// The background color for the walll in Fov of this location
+        /// </value>
         public RLColor WallBackgroundColorInFov { get; set; }
 
+        /// <value>
+        /// The symbol of the floor in this location
+        /// </value>
         public char FloorSymbol { get; set; }
+
+        /// <value>
+        /// The symbol of the walls in this location
+        /// </value>
         public char WallSymbol { get; set; }
 
 
+        /// <summary>
+        /// Initialize the sprites according to the map type and the planet
+        /// </summary>
         public void InitializeSprites()
         {
             SetColors();
             SetSymbol();
         }
 
+        /// <summary>
+        /// Set the color of the background according to the planet type
+        /// </summary>
         private void SetColors()
         {
-            //TODO: set les couleurs planet 2
             switch (Planet)
             {
                 case PlanetName.Alleo:
@@ -39,19 +76,19 @@ namespace RogueLike.Core
 
                 case PlanetName.Damari:
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet2;
-                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet2;//new RLColor(90,3,3);
+                    FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet2;
                     WallBackgroundColor = Colors.WallBackgroundPlanet2;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet2;
                     break;
 
-                case PlanetName.Thaadd: //TODO: set lels couleurs planet 3
+                case PlanetName.Thaadd: 
                     FloorBackgroundColor = Colors.FloorBackgroundPlanet3;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFovPlanet3;
                     WallBackgroundColor = Colors.WallBackgroundPlanet3;
                     WallBackgroundColorInFov = Colors.WallBackgroundFovPlanet3;
                     break;
 
-                default: //For the spaceship 
+                default: 
                     FloorBackgroundColor = Colors.FloorBackgroundShip;
                     FloorBackgroundColorInFov = Colors.FloorBackgroundFovShip;
                     WallBackgroundColor = Colors.WallBackgroundShip;
@@ -62,7 +99,9 @@ namespace RogueLike.Core
 
         }
 
-
+        /// <summary>
+        /// Set the symbol of the floor and the walls according to the map type and the planet
+        /// </summary>
         private void SetSymbol()
         {
 
@@ -78,24 +117,24 @@ namespace RogueLike.Core
                     WallSymbol = Symbols.shipWallSymbol;
                     break;
                 case MapType.Planet:
-                    switch (Planet) {
-                        case PlanetName.Alleo: FloorSymbol = Symbols.planet1FloorSymbol;
+                    switch (Planet)
+                    { //If it's a planet, the symbol change according to the planets
+                        case PlanetName.Alleo:
+                            FloorSymbol = Symbols.planet1FloorSymbol;
                             WallSymbol = Symbols.planet1WallSymbol;
                             break;
-                        case PlanetName.Damari: FloorSymbol = Symbols.planet2FloorSymbol;
+                        case PlanetName.Damari:
+                            FloorSymbol = Symbols.planet2FloorSymbol;
                             WallSymbol = Symbols.planet2WallSymbol;
                             break;
-                        case PlanetName.Thaadd: FloorSymbol = Symbols.planet3FloorSymbol;
-                            WallSymbol = Symbols.planet3WallSymbol; 
+                        case PlanetName.Thaadd:
+                            FloorSymbol = Symbols.planet3FloorSymbol;
+                            WallSymbol = Symbols.planet3WallSymbol;
                             break;
                     }
 
                     break;
             }
         }
-
-
     }
-
-
 }
