@@ -42,7 +42,7 @@ namespace RogueLike.Core.Enemies
         }
 
         /// <summary>
-        /// Perform an action accordin to a specific behavior
+        /// Perform an action according to a specific behavior
         /// </summary>
         /// <param name="player">The player is needed to attack it if needed</param>
         /// <param name="map">The map where the enemy and the player are situated</param>

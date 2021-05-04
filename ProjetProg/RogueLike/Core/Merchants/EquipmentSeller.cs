@@ -24,7 +24,7 @@ namespace RogueLike.Core.Merchants
             switch (MerchantLevel)
             {
                 case 0:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreatePolymerBoots(), Leggins.CreatePolymerLeggins(), Chestplate.CreatePolymerChestplate(), Helmet.CreatePolymerHelmet(), Sword.CreateSwordMk1(), Spear.CreateSpearMk1(), Knife.CreateKifeMk1() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreatePolymerBoots(), Leggins.CreatePolymerLeggins(), Chestplate.CreatePolymerChestplate(), Helmet.CreatePolymerHelmet(), Sword.CreateSwordMk1(), Spear.CreateSpearMk1(), Knife.CreateKnifeMk1() });
                     break;
                 case 1:
                     possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreateCarbonBoots(), Leggins.CreateCarbonLeggins(), Chestplate.CreateCarbonChestplate(), Helmet.CreateCarbonHelmet(), Boots.CreatePlatinumBoots(), Leggins.CreatePlatinumLeggins(), Chestplate.CreatePlatinumChestplate(), Helmet.CreatePlatinumHelmet(), Sword.CreateSwordMk2(), Spear.CreateSpearMk2(), Knife.CreateKnifeMk2(), Sword.CreateSwordMk3(), Spear.CreateSpearMk3(), Knife.CreateKnifeMk3() });

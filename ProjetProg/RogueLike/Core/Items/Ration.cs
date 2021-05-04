@@ -1,18 +1,22 @@
 namespace RogueLike.Core.Items
 {
-    public class Ration : Item
+
+    /// <summary>
+    /// This class represent a ration : a healing item that can heal the player
+    /// </summary>
+    public class Ration : HealingItem
     {
-        public Ration() : base(){
+
+        /// <summary>
+        /// This constructor create a ration, with a healing value of 50
+        /// </summary>
+        /// <returns></returns>
+        public Ration() : base()
+        {
             Name = "Ration";
             Cost = 40;
             Symbol = Icons.rationSymbol;
-        }
-
-        public override void Use(Player player){
-            player.Health+=50;
-            if(player.Health>player.MaxHealth){
-                player.Health = player.MaxHealth;   
-            }
+            HealingValue = 50;
         }
     }
 }

@@ -25,10 +25,10 @@ namespace RogueLike.Core.Merchants
             switch (MerchantLevel)
             {
                 default:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage()});
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinalHerb(),new Bandage()});
                     break;
                 case 2:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage(), new HealthKit()});
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinalHerb(),new Bandage(), new HealthKit()});
                     break;
 
             }

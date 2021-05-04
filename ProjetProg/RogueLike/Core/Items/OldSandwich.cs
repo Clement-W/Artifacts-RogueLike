@@ -1,18 +1,20 @@
 namespace RogueLike.Core.Items
 {
-    public class OldSandwich : Item
+    /// <summary>
+    /// This class represent a old sandwich : a healing item that can heal the player
+    /// </summary>
+    public class OldSandwich : HealingItem
     {
-        public OldSandwich() : base(){
+
+        /// <summary>
+        /// This constructor create an old sandwich, with a healing value of 20
+        /// </summary>
+        public OldSandwich() : base()
+        {
             Name = "Old Sandwich";
             Cost = 10;
             Symbol = Icons.sandwichSymbol;
-        }
-
-        public override void Use(Player player){
-            player.Health+=20;
-            if(player.Health>player.MaxHealth){
-                player.Health = player.MaxHealth;   
-            }
+            HealingValue = 20;
         }
     }
 }

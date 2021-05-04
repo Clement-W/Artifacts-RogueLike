@@ -28,7 +28,7 @@ namespace RogueLike.Systems
             if (difficultyLevel >=1)
             {
                 possibleEquipments.AddRange(new Equipment[]{Boots.CreatePolymerBoots(),Leggins.CreatePolymerLeggins(),Chestplate.CreatePolymerChestplate(),Helmet.CreatePolymerHelmet()});
-                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKifeMk1(),Sword.CreateSwordMk1(),Spear.CreateSpearMk1()});
+                possibleEquipments.AddRange(new Equipment[]{Knife.CreateKnifeMk1(),Sword.CreateSwordMk1(),Spear.CreateSpearMk1()});
             }
             if(difficultyLevel >= 3){
                 possibleEquipments.AddRange(new Equipment[]{Boots.CreateCarbonBoots(),Leggins.CreateCarbonLeggins(),Chestplate.CreateCarbonChestplate(),Helmet.CreateCarbonHelmet()});

@@ -24,7 +24,7 @@ namespace RogueLike.Systems
             Random random = new Random();
 
             // List of every possible items
-            List<Item> possibleItems = new List<Item>(new Item[] { new OldSandwich(), new Ration(), new HealthKit(), new Bandage(), new MedicinaHerb() });
+            List<Item> possibleItems = new List<Item>(new Item[] { new OldSandwich(), new Ration(), new HealthKit(), new Bandage(), new MedicinalHerb() });
 
             // Take one randomly
             Item item = possibleItems[random.Next(0, possibleItems.Count)];
