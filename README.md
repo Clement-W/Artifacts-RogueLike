@@ -23,7 +23,10 @@ TODO (pas ordonné) :
 * CHanger tous les noms de variables égaux à un nom de type
 * musique
 
+
 TODO bonus :
+* Faire un fichier de config qui contient tout et on a une classe qui s'occupe de lire ces paramètres et les envoyer aux classes qui en ont besoin. Ce fichier pourrait être un json qui cnotient les stats des enemis par exemple, le temps d'une period pour le shcedulling system ou le nombre d'enemies, d'équipmeents à faire spawner sur la map
+* faire une interface generator qui est implémentée par tous les generators
 * Tester la bulle de discission par exemple en ajoutant une console sur une autre
 * Trouver un moyen d'avoir la taille de l'écran pour adapter la fenêtre à cette taille
 * animations

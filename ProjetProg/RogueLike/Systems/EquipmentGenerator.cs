@@ -1,15 +1,27 @@
 using System;
 using System.Collections.Generic;
 using RogueLike.Core;
+using RogueLike.Interfaces;
 namespace RogueLike.Systems
 {
-    public class EquimentGenerator
+    /// <summary>
+    /// This class is used to generate random equipments in the map
+    /// </summary>
+    public class EquipmentGenerator : IDrawableGenerator
     {
-        public static Equipment CreateEquipment(int difficultyLevel, int posX, int posY)
+        /// <summary>
+        /// Create a random equipment among the possible equipments
+        /// </summary>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator</param>
+        /// <param name="posX"> The x position of the equipment</param>
+        /// <param name="posY"> The y position of the equipment</param>
+        /// <returns>Return the created equipment as a drawable</returns>
+        public IDrawable Create(int difficultyLevel, int posX, int posY)
         {
 
             Random random = new Random();
             List<Equipment> possibleEquipments = new List<Equipment>();
+
             // If the difficulty level is high, there's more equipment in the possible equipments, because
             // it includes the low level equipment
             if (difficultyLevel >=1)
@@ -30,6 +42,7 @@ namespace RogueLike.Systems
                 possibleEquipments.AddRange(new Equipment[]{Knife.CreateKnifeMk4(),Sword.CreateSwordMk4(),Spear.CreateSpearMk4()});
             }
 
+            // Take a random equipment among all the possible equipments
             Equipment equipment = possibleEquipments[random.Next(0, possibleEquipments.Count)];
             equipment.PosX = posX;
             equipment.PosY = posY;

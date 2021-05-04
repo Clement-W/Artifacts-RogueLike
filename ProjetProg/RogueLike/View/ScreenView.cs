@@ -65,7 +65,7 @@ namespace RogueLike.View
         /// This method allows to change the title of the console
         /// </summary>
         /// <param name="consoleTitle"></param>
-        public void ChangeTitle(string consoleTitle)
+        protected void ChangeTitle(string consoleTitle)
         {
             RootConsole.Title = consoleTitle;
         }

@@ -317,7 +317,7 @@ namespace RogueLike.Systems
 
         private void PlaceEnemyInMap()
         {
-
+            EnemyGenerator enemyGenerator = new EnemyGenerator();
             int nbMaxEnemy = ((mapWidth * mapHeight) / 200) * (difficultyLevel);
             for (int i = 0; i < nbMaxEnemy; i++)
             {
@@ -326,7 +326,7 @@ namespace RogueLike.Systems
 
                     ICell cell = map.FindRandomWalkableCell();
 
-                    Enemy enemy = EnemyGenerator.CreateEnemy(difficultyLevel, cell.X, cell.Y);
+                    Enemy enemy = enemyGenerator.Create(difficultyLevel, cell.X, cell.Y) as Enemy;
                     map.AddEnemy(enemy);
                 }
             }
@@ -334,6 +334,7 @@ namespace RogueLike.Systems
 
         private void PlaceEquipmentsInMap()
         {
+            EquipmentGenerator equipmentGenerator = new EquipmentGenerator();
             int nbMaxEquipment = 10;
             for (int i = 0; i < nbMaxEquipment; i++)
             {
@@ -342,7 +343,7 @@ namespace RogueLike.Systems
 
                     ICell cell = map.FindRandomWalkableCell();
 
-                    Equipment equipment = EquimentGenerator.CreateEquipment(difficultyLevel, cell.X, cell.Y);
+                    Equipment equipment = equipmentGenerator.Create(difficultyLevel, cell.X, cell.Y) as Equipment;
                     map.AddLoot(equipment);
                 }
             }
@@ -350,13 +351,14 @@ namespace RogueLike.Systems
 
         private void PlaceItemsInMap()
         {
+            ItemGenerator itemGenerator = new ItemGenerator();
             int nbMaxItem = 10;
             for (int i = 0; i < nbMaxItem; i++)
             {
                 if (random.Next(0, 2) == 1)
                 { // 50% to create an item
                     ICell cell = map.FindRandomWalkableCell();
-                    Item item = ItemGenerator.CreateItem(cell.X, cell.Y);
+                    Item item = itemGenerator.Create(difficultyLevel,cell.X, cell.Y) as Item;
                     map.AddLoot(item);
                 }
             }

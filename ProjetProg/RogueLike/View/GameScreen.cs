@@ -90,8 +90,8 @@ namespace RogueLike.View
                 RootConsole.Clear();
                 RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
 
-                // Animate every elements that can be animated in the game
-                Game.AnimationSystem.AnimateAnimatedElements(Game);
+                // Animate every elements that can be animated in the map
+                Game.AnimationSystem.AnimateAnimatedElements(Game.Map);
 
                 // Clear every subconsoles
                 mapConsole.Clear();
@@ -143,7 +143,7 @@ namespace RogueLike.View
             if (RootConsole.Mouse.GetLeftClick())
             {
                 UpdateOrientation(); // The player looks on the click direction
-                Game.CommandSystem.PlayerAttack(Game.Player, Game.Map); // Attack the targeted cells
+                Game.CommandSystem.Attack(Game.Map,Game.Player,Game.Player); // Attack the targeted cells
                 RenderRequired = true;
             }
 
@@ -162,56 +162,12 @@ namespace RogueLike.View
                     case RLKey.LControl: // Left control to go through staircases or teleportation portals
                         if (Game.Map.PlayerIsOnStairCase(Game.Player))
                         {
-
-                            // While the player don't access the second floor, go to the next stage
-                            if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
-                            {
-                                // Create a map generator to generate the corresponding map
-                                // Increase game current level with ++Game.CurrentLevel
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
-                                // Assign the new map to the current game map
-                                Game.Map = mapGenerator.CreateMap(Game.Player);
-
-
-                                DidPlayerAct = true;
-                                // Change the title of the console according to the planet name and the level
-                                string planetName = Game.Map.Location.Planet.ToString();
-                                ChangeTitle($"{planetName} - Level {Game.CurrentLevel}");
-
-                            }
-                            else
-                            { // When the palyer want to access the third floor, create a boss room 
-                                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
-                                Game.Map = mapGenerator.CreateMap(Game.Player);
-
-
-                                DidPlayerAct = true;
-                                string mapName = Game.Map.Location.Planet.ToString();
-                                ChangeTitle($"{mapName} - Boss Room");
-
-                            }
+                            CreateNextStage();
                         }
                         // If the player is not on staircase but on a teleportation portal
                         else if (Game.Map.PlayerIsOnTeleportationPortal(Game.Player))
                         {
-                            // Get the current teleportation portal 
-                            TeleportationPortal portal = Game.Map.GetTeleportationPortalAt(Game.Player.PosX, Game.Player.PosY);
-                            // If the destination of the portal is the spaceship, 
-                            // the player has beaten the boss and want to go back to the spaceship
-                            if (portal.DestinationMap == MapType.Spaceship)
-                            {
-                                Game.CurrentLevel = 1; //Set the game level to 1
-
-                            }
-                            // Create a map generator with the portal's destination map type in argument 
-                            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
-
-                            // Change the game current map
-                            Game.Map = mapGenerator.CreateMap(Game.Player);
-                            DidPlayerAct = true;
-                            string mapType = Game.Map.Location.MapType.ToString();
-                            string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
-                            ChangeTitle(title);
+                            TeleportPlayer();
                         }
                         break;
 
@@ -231,6 +187,7 @@ namespace RogueLike.View
             }
 
 
+
             // Check if the player has died
             CheckPlayerDeath();
             //Check if the player has won
@@ -238,6 +195,67 @@ namespace RogueLike.View
 
 
 
+        }
+
+        /// <summary>
+        /// Called when the player is on staircase and press Ctrl
+        /// This method create the next stage of the map, it can be a cave map or a boss room
+        /// </summary>
+        private void CreateNextStage()
+        {
+            // While the player don't access the second floor, go to the next stage
+            if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
+            {
+                // Create a map generator to generate the corresponding map
+                // Increase game current level with ++Game.CurrentLevel
+                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
+                // Assign the new map to the current game map
+                Game.Map = mapGenerator.CreateMap(Game.Player);
+
+
+                DidPlayerAct = true;
+                // Change the title of the console according to the planet name and the level
+                string planetName = Game.Map.Location.Planet.ToString();
+                ChangeTitle($"{planetName} - Level {Game.CurrentLevel}");
+
+            }
+            else
+            { // When the palyer want to access the third floor, create a boss room 
+                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
+                Game.Map = mapGenerator.CreateMap(Game.Player);
+
+
+                DidPlayerAct = true;
+                string mapName = Game.Map.Location.Planet.ToString();
+                ChangeTitle($"{mapName} - Boss Room");
+
+            }
+        }
+
+        /// <summary>
+        /// Called when te player is on a teleportation portal and press left Ctrl
+        /// This method create a new map according to the destination of the portal
+        /// </summary>
+        private void TeleportPlayer()
+        {
+            // Get the current teleportation portal 
+            TeleportationPortal portal = Game.Map.GetTeleportationPortalAt(Game.Player.PosX, Game.Player.PosY);
+            // If the destination of the portal is the spaceship, 
+            // the player has beaten the boss and want to go back to the spaceship
+            if (portal.DestinationMap == MapType.Spaceship)
+            {
+                Game.CurrentLevel = 1; //Set the game level to 1
+
+            }
+            // Create a map generator with the portal's destination map type in argument 
+            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
+
+            // Change the game current map
+            Game.Map = mapGenerator.CreateMap(Game.Player);
+            DidPlayerAct = true;
+            string mapType = Game.Map.Location.MapType.ToString();
+            string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
+            ChangeTitle(title);
         }
 
         /// <summary>
@@ -382,9 +400,6 @@ namespace RogueLike.View
             {
                 GameOverScreen gameOverScreen = new GameOverScreen();
             }
-
         }
-
-
     }
 }

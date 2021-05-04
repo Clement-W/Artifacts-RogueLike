@@ -11,26 +11,35 @@ using RogueLike.Interfaces;
 namespace RogueLike.Systems
 {
 
+    /// <summary>
+    /// This class deal with interactions between the game and the active characters
+    /// that need to take action on the map
+    /// </summary>
     public class CommandSystem
     {
 
-
+        /// <summary>
+        /// This method allows to move the player on the map
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <param name="direction">The direction that the player wants to move</param>
+        /// <param name="map">The map</param>
+        /// <returns>Return true if the player move</returns>
         public bool MovePlayer(Player player, Direction direction, CurrentMap map)
         {
+            // Get the coordinates of the player
             int x = player.PosX;
             int y = player.PosY;
 
             bool didPlayerAct = false;
 
-            System.Console.WriteLine(x + " " + y);
-
-
+            // Move the player according to the direction
             switch (direction)
             {
                 case Direction.Up:
-                    y--;
-                    player.Symbol = player.UpSymbol;
-                    player.Direction = Direction.Up;
+                    y--; // Change the saved coordinate of the player
+                    player.Symbol = player.UpSymbol; // Change the symbol of the player so it looks upward
+                    player.Direction = Direction.Up; // Change the player direction
                     break;
                 case Direction.Down:
                     y++;
@@ -50,8 +59,8 @@ namespace RogueLike.Systems
             }
 
 
-
-            if (map.SetCharacterPosition(player, x, y)) //move the player if possible
+            // Change the player position if possible with the new x and y coordinates
+            if (map.SetCharacterPosition(player, x, y))
             {
                 didPlayerAct = true;
             }
@@ -61,12 +70,19 @@ namespace RogueLike.Systems
         }
 
 
-
+        /// <summary>
+        /// Move an enemy on the map
+        /// </summary>
+        /// <param name="enemy">The moving enemy</param>
+        /// <param name="cell">The cell that the enemy wants to reach</param>
+        /// <param name="map">The map</param>
+        /// <param name="player">The player instance is needed to know if the enemy can attack it</param>
         public void MoveEnemy(Enemy enemy, ICell cell, CurrentMap map, Player player)
         {
 
             // Change the symbol of the enemy according to it's moving direction
-            // We don't have the other symbols of the enemies yet so it doesn't do anything
+            // We don't have the other symbols of the enemies in the sprites yet so it doesn't do anything
+            // With more time, the sprites would have been included in the game.
             enemy.ChangeDirection(enemy.PosX, enemy.PosY, cell.X, cell.Y);
 
 
@@ -78,43 +94,46 @@ namespace RogueLike.Systems
 
         }
 
-
+        /// <summary>
+        /// This method allows an active character to attack
+        /// </summary>
+        /// <param name="map"> The map</param>
+        /// <param name="attacker"> The attacker (could be the player or the enemy)</param>
+        /// <param name="player"> We need the player instance if the attacker is the enemy</param>
+        /// <returns></returns>
         public bool Attack(CurrentMap map, ActiveCharacter attacker, Player player)
         {
             return attacker.Weapon.Attack(map, attacker, player);
         }
 
+    
 
-        public void PlayerAttack(Player player, CurrentMap map)
-        {
-            player.Weapon.Attack(map, player, player);
-        }
-
-
-
-
-
-        //Each turn, we check if the enemy can move according to it's necessary time period to move
-        // If it can't move, we decrement it's counter. When the enemy can move, the remaning time period to move
-        // is set to the necessary moving time period.
+        /// <summary>
+        /// Each turn, we check if the enemy can move according to it's necessary time period to move
+        /// If it can't move, we decrement it's counter. When the enemy can move, the remaning time period to move
+        /// is set to the necessary moving time period. 
+        /// </summary>
+        /// <param name="game">The game instance is needed to get the player, the map, the enemies and the command system</param>
         public void MoveEnemies(Game game)
         {
+            // Get the enemies alive in the map
             List<Enemy> enemies = game.Map.GetEnemies();
+
+            // Loop into those enemies
             foreach (Enemy enemy in enemies)
             {
-
+                // If the remaining time period to move is equal to 0, move the enemy
+                // and reset it's remaining time period to it's necessary moviging time period
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;
-                    enemy.PerformAction(game.Player,game.Map,game.CommandSystem);
+                    enemy.PerformAction(game.Player, game.Map, game.CommandSystem);
                 }
                 else
                 {
+                    // else, decrements the remaining time period to move
                     enemy.RemainingTimePeriodToMove--;
                 }
-
-
-
             }
         }
     }

@@ -92,16 +92,7 @@ namespace RogueLike.View
                         break;
 
                 }
-
             }
-
-
         }
-
-
-
-
-
-
     }
 }
