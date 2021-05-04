@@ -2,25 +2,33 @@ using System;
 using RogueLike.Core.Equipments;
 namespace RogueLike.Core.Enemies
 {
+    /// <summary>
+    /// This class represent the final boss of the Thaadd planet
+    /// </summary>
     public class ThaaddBoss : FinalBoss
     {
+        /// <summary>
+        /// The constructor create the boss with it's stats based on the difficulty level
+        /// </summary>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+
         public ThaaddBoss(int difficultyLevel)
         {
             Random random = new Random();
             Attack = 1 * difficultyLevel;
             Defense = 3 * difficultyLevel;
             Awareness = 100;
-            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor;
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
             Gold = (int)(difficultyLevel) * random.Next(10, 40);
             Health = random.Next(50, 100) * difficultyLevel;
             MaxHealth = Health;
-            Name = "Thaadd boss"; //TODO: trouver un nom
+            Name = "Thaadd boss"; 
             MovingTimePeriod = 4;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.boss3Symbol; // TODO: changer les symbols LE TRUC BLEU
+            UpSymbol = Icons.boss3Symbol; 
             DownSymbol = Icons.boss3Symbol;
             LeftSymbol = Icons.boss3Symbol;
             RightSymbol = Icons.boss3Symbol;

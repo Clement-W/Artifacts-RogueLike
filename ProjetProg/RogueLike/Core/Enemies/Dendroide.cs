@@ -1,6 +1,9 @@
 using System;
 namespace RogueLike.Core.Enemies
 {
+    /// <summary>
+    /// This class represent an enemy named Dendroide. This enemy is slow but makes more damages
+    /// </summary>
     public class Dendroide : Enemy
     {
         public Dendroide(int difficultyLevel){

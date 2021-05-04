@@ -4,25 +4,34 @@ using RogueLike.Systems;
 using RogueLike.Core.Equipments;
 namespace RogueLike.Core.Enemies
 {
+
+    /// <summary>
+    /// This class represent the final boss of the Damari planet
+    /// </summary>
     public class DamariBoss : FinalBoss
     {
+
+        /// <summary>
+        /// The constructor create the boss with it's stats based on the difficulty level
+        /// </summary>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
         public DamariBoss(int difficultyLevel)
         {
             Random random = new Random();
             Attack = 10 * difficultyLevel;
             Defense = 3 * difficultyLevel;
             Awareness = 100;
-            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor; 
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
             Gold = (int)(difficultyLevel) * random.Next(10, 40);
             Health = random.Next(50, 100) * difficultyLevel;
             MaxHealth = Health;
-            Name = "Damari boss"; //TODO: trouver un nom
+            Name = "Damari boss"; 
             MovingTimePeriod = 20;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.boss2Symbol; // TODO: changer les symbols LE TRUC BLEU
+            UpSymbol = Icons.boss2Symbol; 
             DownSymbol = Icons.boss2Symbol;
             LeftSymbol = Icons.boss2Symbol;
             RightSymbol = Icons.boss2Symbol;
@@ -32,10 +41,16 @@ namespace RogueLike.Core.Enemies
             Weapon = new Scepter();
         }
 
-        public override void PerformAction(Player player, CurrentMap map,CommandSystem commandSystem)
+        /// <summary>
+        /// Perform an action accordin to a specific behavior
+        /// </summary>
+        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="map">The map where the enemy and the player are situated</param>
+        /// <param name="command">The command system is used to take an action on the game</param>
+        public override void PerformAction(Player player, CurrentMap map, CommandSystem commandSystem)
         {
             TeleportFarFromPlayer behavior = new TeleportFarFromPlayer();
-            behavior.Act(this, player,map,commandSystem);
+            behavior.Act(this, player, map, commandSystem);
         }
     }
 }

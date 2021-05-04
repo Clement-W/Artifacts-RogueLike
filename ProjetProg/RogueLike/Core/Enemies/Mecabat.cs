@@ -3,9 +3,17 @@ namespace RogueLike.Core.Enemies
 {
 
 
+    /// <summary>
+    /// This class represent an enemy named Mecabat. This enemy is really fast but makes small damages
+    /// </summary>
     public class Mecabat : Enemy
     {
-        public Mecabat(int difficultyLevel){
+        /// <summary>
+        /// The constructor create the Mecabat with it's stats based on the difficulty level
+        /// </summary>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        public Mecabat(int difficultyLevel)
+        {
             Random random = new Random();
             Attack = 1 * difficultyLevel;
             Defense = difficultyLevel;
@@ -14,8 +22,8 @@ namespace RogueLike.Core.Enemies
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold= (int)(difficultyLevel) * random.Next(0,5);
-            Health = random.Next(20,30) * difficultyLevel;
+            Gold = (int)(difficultyLevel) * random.Next(0, 5);
+            Health = random.Next(20, 30) * difficultyLevel;
             MaxHealth = Health;
             Name = "Mecabot";
             MovingTimePeriod = 1;
@@ -25,7 +33,7 @@ namespace RogueLike.Core.Enemies
             LeftSymbol = Icons.mecabatSymbol;
             RightSymbol = Icons.mecabatSymbol;
             Direction = Direction.Up;
-            Symbol = DownSymbol; 
+            Symbol = DownSymbol;
         }
     }
 }
