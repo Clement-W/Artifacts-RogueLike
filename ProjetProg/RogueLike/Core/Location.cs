@@ -70,23 +70,23 @@ namespace RogueLike.Core
             switch (MapType)
             {
                 case MapType.BossRoom:
-                    FloorSymbol = Icons.bossFloorSymbol;
-                    WallSymbol = Icons.bossWallSymbol;
+                    FloorSymbol = Symbols.bossFloorSymbol;
+                    WallSymbol = Symbols.bossWallSymbol;
                     break;
                 case MapType.Spaceship:
-                    FloorSymbol = Icons.shipFloorSymbol;
-                    WallSymbol = Icons.shipWallSymbol;
+                    FloorSymbol = Symbols.shipFloorSymbol;
+                    WallSymbol = Symbols.shipWallSymbol;
                     break;
                 case MapType.Planet:
                     switch (Planet) {
-                        case PlanetName.Alleo: FloorSymbol = Icons.planet1FloorSymbol;
-                            WallSymbol = Icons.planet1WallSymbol;
+                        case PlanetName.Alleo: FloorSymbol = Symbols.planet1FloorSymbol;
+                            WallSymbol = Symbols.planet1WallSymbol;
                             break;
-                        case PlanetName.Damari: FloorSymbol = Icons.planet2FloorSymbol;
-                            WallSymbol = Icons.planet2WallSymbol;
+                        case PlanetName.Damari: FloorSymbol = Symbols.planet2FloorSymbol;
+                            WallSymbol = Symbols.planet2WallSymbol;
                             break;
-                        case PlanetName.Thaadd: FloorSymbol = Icons.planet3FloorSymbol;
-                            WallSymbol = Icons.planet3WallSymbol; 
+                        case PlanetName.Thaadd: FloorSymbol = Symbols.planet3FloorSymbol;
+                            WallSymbol = Symbols.planet3WallSymbol; 
                             break;
                     }
 

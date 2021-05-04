@@ -12,27 +12,66 @@ using RogueLike.Core.Merchants;
 namespace RogueLike.Core
 {
 
+    /// <summary>
+    /// This class represent the current map where the player is
+    /// It inherit the Map class from RogueSharp. This allows us to use the rogue
+    /// sharp method on the map (getCellsInSquare(),ComputeFov(),...)
+    /// </summary>
     public class CurrentMap : Map
     {
+
+        /// <value>
+        /// This list contains every animated sprites
+        /// </value>
         public List<IAnimated> AnimatedSprites { get; set; }
 
+
+
+        /// <value>
+        /// This list contains every enemies
+        /// </value>
         public List<Enemy> Enemies { get; private set; }
 
+        /// <value>
+        /// This list contains the loots that are on the map
+        /// </value>
         public List<ILoot> Loots { get; private set; }
 
+
+        /// <value>
+        /// This list contains the merchants
+        /// </value>
         public List<Merchant> Merchants { get; private set; }
 
-        public Staircase Staircase { get; set; } // To go deeper in the map
 
+        /// <value>
+        /// This is the staircase that can be on cave maps
+        /// The staircase allow to go deeper in the map
+        /// </value>
+        public Staircase Staircase { get; set; }
+
+        /// <value>
+        /// This list contains every teleportation portals
+        /// </value>
         public List<TeleportationPortal> TeleportationPortals { get; private set; }
 
-        public List<ICell> AttackedCells { get; set; } // To save which cells are attacked by the player (used to change the appearance of those cells)
+        /// <value>
+        /// This list contains  the attacked cells
+        /// This is used to save which cells are attacked by an active character
+        /// ( to change the appearance of those cells)
+        /// </value>
+        public List<ICell> AttackedCells { get; set; }
 
+        /// <value>
+        /// The location contains every information on the map : the maptype, the planet, ...
+        /// </value>
         public Location Location { get; set; }
 
 
 
-
+        /// <summary>
+        /// This constructor create the map
+        /// </summary>
         public CurrentMap()
         {
 
@@ -46,20 +85,30 @@ namespace RogueLike.Core
 
         }
 
-
+        /// <summary>
+        /// This method return
+        /// </summary>
+        /// <returns></returns>
         public List<Enemy> GetEnemies()
         {
             return Enemies;
         }
 
-        // check if the given cell is in the list of the attacked cells
-        private bool IsCellAtacked(ICell cell)
-        {
-            lock (AttackedCells) // Lock the list to avoid that another thread access or modify it at the same time to avoid multi-threading errors
 
+        /// <summary>
+        /// Check if the given cell is in the list of the attacked cells
+        /// </summary>
+        /// <param name="cell">The cell to test</param>
+        /// <returns>True if this cell is in the list of attacked cells</returns>
+        private bool IsCellAttacked(ICell cell)
+        {
+            // Lock the list to avoid that another thread access or modify it at 
+            // the same time to avoid multi-threading errors
+            lock (AttackedCells)
             {
                 foreach (Cell attCell in AttackedCells)
                 {
+                    // Check if the cells are at the same position
                     if (cell.X == attCell.X && cell.Y == attCell.Y)
                     {
                         return true;
@@ -69,62 +118,72 @@ namespace RogueLike.Core
             return false;
         }
 
-        // Called when the map is updated
-        // Draw the characters on each cell
+        /// <summary>
+        /// This method is called when the map is updated (in the render method)
+        /// It draw the symbols on each cell
+        /// </summary>
+        /// <param name="mapConsole">The map console</param>
         public void Draw(RLConsole mapConsole)
         {
             foreach (Cell cell in GetAllCells())
             {
 
-                if (!IsCellAtacked(cell))
+                //Check if the cell is attacked or not to draw it differently
+                if (!IsCellAttacked(cell))
                 {
                     DrawCell(mapConsole, cell);
                 }
                 else
                 {
-                    lock (AttackedCells) // Lock the list while we're drawing a cell of this list
+                    // Lock the list while we're drawing a cell of this list
+                    lock (AttackedCells)
                     {
-                        DrawCellWithColor(mapConsole, cell, Colors.AttackedCell);
+                        DrawAttackedCellWithColor(mapConsole, cell, Colors.AttackedCell);
                     }
                 }
 
             }
 
+            // Draw the loots
             foreach (ILoot loot in Loots)
             {
                 IDrawable drawableLoot = loot as IDrawable;
                 drawableLoot.Draw(mapConsole, this);
             }
 
+            // Draw the staircase
             if (Staircase != null)
             {
                 Staircase.Draw(mapConsole, this);
             }
 
+            // Draw the merchants
             foreach (Merchant merchant in Merchants)
             {
                 merchant.Draw(mapConsole, this);
                 merchant.DrawStall(mapConsole, this);
             }
 
+            // Draw the teleportation portals
             foreach (TeleportationPortal portal in TeleportationPortals)
             {
                 portal.Draw(mapConsole, this);
             }
 
+            // Draw the enemies
             foreach (Enemy enemy in Enemies)
             {
                 enemy.Draw(mapConsole, this);
             }
 
-            
-
-            
         }
 
 
-        //TODO : Ajouter d'autres couleurs sur certains murs pour changer
-        //TODO : Différencier cette méthode en fonction du type de planète (la couleur du background change par exemple )
+        /// <summary>
+        /// This method draw a symbol on a cell, according to the location
+        /// </summary>
+        /// <param name="console">The map console</param>
+        /// <param name="cell">The cell we draw on</param>
         private void DrawCell(RLConsole console, Cell cell)
         {
             // If the cell has never been explored, don't draw anything
@@ -160,8 +219,13 @@ namespace RogueLike.Core
         }
 
 
-        // Draw the cell with the specified color (used when a cell is attacked by the player)
-        private void DrawCellWithColor(RLConsole mapConsole, Cell cell, RLColor color)
+        /// <summary>
+        ///  Draw the cell with the specified color (used when a cell is attacked by the player)
+        /// </summary>
+        /// <param name="mapConsole"> The map console</param>
+        /// <param name="cell">The attacked cell</param>
+        /// <param name="color">The color used when the cell is attacked</param>
+        private void DrawAttackedCellWithColor(RLConsole mapConsole, Cell cell, RLColor color)
         {
             if (cell.IsWalkable)
             {
@@ -173,18 +237,27 @@ namespace RogueLike.Core
             }
         }
 
-        // Set the field of view of the player according to it's awareness ()
+
+        /// <summary>
+        /// Set the field of view of the player according to it's awareness
+        /// </summary>
+        /// <param name="player">The player</param>
         public void UpdatePlayerFieldOfView(Player player)
         {
             int radius;
+            // If the location is a boss room or the spaceship, the awareness is equal to the map width (infinite)
+            // Only the walls can block the fov
             if (Location.MapType == MapType.BossRoom || Location.MapType == MapType.Spaceship)
             {
                 radius = Width;
             }
             else
             {
+                // Else, the radius is equal to the player awareness
                 radius = player.Awareness;
             }
+
+            // For each cells in the fov, draw them as explored cells
             ReadOnlyCollection<ICell> cellsFov = ComputeFov(player.PosX, player.PosY, radius, true); // Get the cells in the player fov
             foreach (Cell cell in cellsFov)
             {
@@ -192,27 +265,47 @@ namespace RogueLike.Core
             }
         }
 
+        /// <summary>
+        /// Change the walkability of the cell
+        /// </summary>
+        /// <param name="x"> The x position of the cell</param>
+        /// <param name="y"> The y position of the cell</param>
+        /// <param name="isWalkable"> A boolean that tells if the cell is walkable or not</param>
         public void SetCellWalkability(int x, int y, bool isWalkable)
         {
             ICell cell = GetCell(x, y);
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
         }
 
+        /// <summary>
+        /// Check if a loot is collectible and/or buyable
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <param name="posX">The x position of the loot</param>
+        /// <param name="posY">The y position of the loot</param>
+        /// <returns></returns>
         public bool CheckLootCollectability(Player player, int posX, int posY)
         {
+            // This boolean is used for the items that are on a merchant stall. If The player
+            // doesn't have enough money, the player can't walk on the cell. 
             bool lootCanBeWalkedOn = true;
-            //Before moving and collect the item, check if it's in a merchant stall
+
+            //Get the loot
             ILoot loot = GetLootAt(posX, posY);
 
+            //Before moving and collect the item, check if it's in a merchant stall
             if (loot != null && loot is ISellable)
             {
                 ISellable sellable = loot as ISellable;
-                if (sellable.SoldByMerchant != null) // If the item is in a merchant stall
-                {
-                    if (player.Gold >= sellable.Cost)
-                    { // if the player have enough moneyf (
 
-                        if (CollectLoot(player, posX, posY)) // collect the item if possible
+                // If the item is in a merchant stall
+                if (sellable.SoldByMerchant != null)
+                {
+                    // if the player have enough money
+                    if (player.Gold >= sellable.Cost)
+                    {
+                        // collect the item if possible
+                        if (CollectLoot(player, posX, posY))
                         {
                             player.Gold -= sellable.Cost;
                             sellable.SoldByMerchant.SellItem(sellable);
@@ -224,8 +317,10 @@ namespace RogueLike.Core
                     }
                     else
                     {
+                        // Else, the player don't have enough money, inform them.
                         Game.MessageLog.AddMessage("You don't have enough gold");
                         Game.MessageLog.AddMessage($"You need {sellable.Cost - player.Gold} more");
+                        // The player can't walk on that item
                         lootCanBeWalkedOn = false;
                     }
                 }
@@ -241,7 +336,13 @@ namespace RogueLike.Core
             return lootCanBeWalkedOn;
         }
 
-
+        /// <summary>
+        /// Set the character position on the map
+        /// </summary>
+        /// <param name="character">The character</param>
+        /// <param name="posX">The x position</param>
+        /// <param name="posY">The y position</param>
+        /// <returns>Return true if the character has moved on the specified position</returns>
         public bool SetCharacterPosition(Character character, int posX, int posY)
         {
             // If the desired position is walkable
@@ -254,7 +355,7 @@ namespace RogueLike.Core
                     canMove = CheckLootCollectability(character as Player, posX, posY);
 
                 }
-
+                // If the player can move, move them
                 if (canMove)
                 {
                     // The actual position of the character is now walkable
@@ -279,24 +380,41 @@ namespace RogueLike.Core
             return false;
         }
 
+        /// <summary>
+        /// Add the player to the map
+        /// </summary>
+        /// <param name="player">The player</param>
         public void AddPlayerOnTheMap(Player player)
         {
             SetCellWalkability(player.PosX, player.PosY, false);
             UpdatePlayerFieldOfView(player);
         }
 
+        /// <summary>
+        /// Add an enemy to the map
+        /// </summary>
+        /// <param name="enemy">An enemy</param>
         public void AddEnemy(Enemy enemy)
         {
             Enemies.Add(enemy);
             SetCellWalkability(enemy.PosX, enemy.PosY, false);
         }
 
+        /// <summary>
+        /// Remove an enemy from the map
+        /// </summary>
+        /// <param name="enemy">An enemy</param>
         public void RemoveEnemy(Enemy enemy)
         {
             Enemies.Remove(enemy);
             SetCellWalkability(enemy.PosX, enemy.PosY, true);
         }
 
+
+        /// <summary>
+        /// Add a merchant to the map
+        /// </summary>
+        /// <param name="merchant">A merchant</param>
         public void AddMerchant(Merchant merchant)
         {
             Merchants.Add(merchant);
@@ -305,23 +423,48 @@ namespace RogueLike.Core
         }
 
 
+        /// <summary>
+        /// Get the enemy at the specified position (if there's one)
+        /// </summary>
+        /// <param name="posX">The x position of the potential enemy</param>
+        /// <param name="posY">The y position of the potential enemy</param>
+        /// <returns>The enemy if there's one, else, it return null</returns>
         public Enemy GetEnemyAt(int posX, int posY)
         {
             return Enemies.FirstOrDefault(enemy => (enemy.PosX == posX && enemy.PosY == posY));
         }
 
 
+        /// <summary>
+        /// Get the teleportation portal at the specified position if there's one
+        /// </summary>
+        /// <param name="posX">The x position</param>
+        /// <param name="posY">The y position</param>
+        /// <returns>The teleportation portal if there's one, else, it return null</returns>
         public TeleportationPortal GetTeleportationPortalAt(int posX, int posY)
         {
             return TeleportationPortals.FirstOrDefault(portal => (portal.PosX == posX && portal.PosY == posY));
         }
 
+
+        /// <summary>
+        /// Get the loot at the specified position if there's one
+        /// </summary>
+        /// <param name="posX">The x position</param>
+        /// <param name="posY">The y position</param>
+        /// <returns>The loot if there's one, else, it return null</returns>
         public ILoot GetLootAt(int posX, int posY)
         {
             return Loots.FirstOrDefault(loot => (loot.PosX == posX && loot.PosY == posY));
         }
 
-        public bool PlayerIsOnStairCase(Player player)
+
+        /// <summary>
+        /// Check if the player is on staircase
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <returns>True if the player is on staircase</returns>
+        public bool IsPlayerOnStaircase(Player player)
         {
             if (Staircase != null)
             {
@@ -333,7 +476,12 @@ namespace RogueLike.Core
             }
         }
 
-        public bool PlayerIsOnTeleportationPortal(Player player)
+        /// <summary>
+        /// Check if the player is on a teleportation portal
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <returns>True if the player is on a teleportation portal</returns>
+        public bool IsPlayerOnTeleportationPortal(Player player)
         {
             foreach (TeleportationPortal portal in TeleportationPortals)
             {
@@ -345,10 +493,15 @@ namespace RogueLike.Core
             return false;
         }
 
+        /// <summary>
+        /// Add a loot to the map
+        /// </summary>
+        /// <param name="loot">A loot</param>
         public void AddLoot(ILoot loot)
         {
             if (loot is Gold)
             {
+                // Add the gold only if the amount is > to 0
                 Gold goldLoot = loot as Gold;
                 if (goldLoot.Amount > 0)
                 {
@@ -359,15 +512,21 @@ namespace RogueLike.Core
             {
                 Loots.Add(loot);
             }
-
-            // On laisse bien le loot walkable
         }
 
-        // Collect a loot if there is one
-        public bool CollectLoot(Player player, int posX, int posY)
+        /// <summary>
+        /// Collect a loot if there's one
+        /// </summary>
+        /// <param name="player">The player that collects the loot</param>
+        /// <param name="posX">The x position of the loot</param>
+        /// <param name="posY">The y position of the loot</param>
+        /// <returns></returns>
+        private bool CollectLoot(Player player, int posX, int posY)
         {
             ILoot loot = GetLootAt(posX, posY);
-            ISellable sellableLoot = loot as ISellable; // To check if it's on a merchant's stall
+
+            // Used To check if it's on a merchant's stall
+            ISellable sellableLoot = loot as ISellable;
 
 
             if (loot != null && player.Collect(loot, this))
@@ -397,14 +556,21 @@ namespace RogueLike.Core
             return false;
         }
 
-
+        /// <summary>
+        /// Add a teleportation portal to the map
+        /// </summary>
+        /// <param name="portal">A teleportation portal</param>
         public void AddTeleportationPortal(TeleportationPortal portal)
         {
             TeleportationPortals.Add(portal);
             AnimatedSprites.Add(portal);
         }
 
-        // Find a walkable cell around the active character
+        /// <summary>
+        /// Find the closest walkable cell around an active character
+        /// </summary>
+        /// <param name="activeCharacter">The active character</param>
+        /// <returns>The closest walkable cell</returns>
         public Cell FindClosestWalkableCell(ActiveCharacter activeCharacter)
         {
             int distanceMax = 5; // max distance from which we search for a cell
@@ -412,7 +578,7 @@ namespace RogueLike.Core
             {
                 foreach (Cell cell in GetBorderCellsInSquare(activeCharacter.PosX, activeCharacter.PosY, i))
                 {
-                    if (cell.IsWalkable && GetLootAt(cell.X,cell.Y)==null) // To avoid item superposition if the cell is walkable but an item is on it
+                    if (cell.IsWalkable && GetLootAt(cell.X, cell.Y) == null) // To avoid item superposition if the cell is walkable but an item is on it
                     {
                         return cell;
                     }
@@ -421,6 +587,10 @@ namespace RogueLike.Core
             return null;
         }
 
+        /// <summary>
+        /// Find a random walkable cell on the map
+        /// </summary>
+        /// <returns>The random walkable cell</returns>
         public ICell FindRandomWalkableCell()
         {
             Random random = new Random();
@@ -433,9 +603,6 @@ namespace RogueLike.Core
             } while (!IsWalkable(x, y));
             return GetCell(x, y);
         }
-
-
-
 
     }
 }

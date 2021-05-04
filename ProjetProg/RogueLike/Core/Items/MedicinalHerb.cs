@@ -12,7 +12,7 @@ namespace RogueLike.Core.Items
         {
             Name = "Medicinal Herb";
             Cost = 15;
-            Symbol = Icons.medHerbSymbol;
+            Symbol = Symbols.medHerbSymbol;
             HealingValue = 30;
         }
     }

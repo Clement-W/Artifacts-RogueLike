@@ -14,7 +14,7 @@ namespace RogueLike.Core.Equipments
             Name = "Fist";
             AttackBonus = 0;
             AttackRange.Add(1, 1);
-            Symbol = Icons.fistSymbol;
+            Symbol = Symbols.fistSymbol;
         }
 
     }

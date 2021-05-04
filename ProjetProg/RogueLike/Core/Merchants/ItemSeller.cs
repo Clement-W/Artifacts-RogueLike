@@ -18,8 +18,8 @@ namespace RogueLike.Core.Merchants
         {
             Name = "Item Seller";
             PrintedColor = Colors.Seller;
-            AlternateSymbol1 = Icons.itemSellerSymbol1;
-            AlternateSymbol2 = Icons.itemSellerSymbol2;
+            AlternateSymbol1 = Symbols.itemSellerSymbol1;
+            AlternateSymbol2 = Symbols.itemSellerSymbol2;
             Symbol = AlternateSymbol1;
             PosX = posX;
             PosY = posY;

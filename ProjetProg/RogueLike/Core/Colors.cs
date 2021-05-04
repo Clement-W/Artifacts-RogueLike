@@ -2,20 +2,21 @@ using RLNET;
 
 namespace RogueLike.Core
 {
-    // Contains the colors used in the rogue like
+    /// <summary>
+    /// This static class contains the colors used in the game
+    /// </summary>
     public static class Colors
     {
-        public static RLColor FloorBackground = RLColor.Black;
+
         public static RLColor Floor = Palette.AlternateDarkest;
-        public static RLColor FloorBackgroundFov = Palette.DbDark; // Différent si c'est dans le champ de vision
+
         public static RLColor FloorFov = Palette.Alternate;
 
-        public static RLColor WallBackground = Palette.SecondaryDarkest;
+
         public static RLColor Wall = Palette.Secondary;
-        public static RLColor WallBackgroundFov = Palette.SecondaryDarker;
+
         public static RLColor WallFov = Palette.SecondaryLighter;
 
-        public static RLColor TextHeading = Palette.DbLight;
 
         public static RLColor Player = Palette.DbLight;
         public static RLColor Text = Palette.DbLight;
@@ -40,7 +41,6 @@ namespace RogueLike.Core
 
         public static RLColor ZombieHit = RLColor.Red;
 
-        public static RLColor Equipment = Palette.DbLight;
 
         public static RLColor Seller = Palette.DbLight;
 

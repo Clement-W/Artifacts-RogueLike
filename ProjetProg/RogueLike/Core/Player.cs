@@ -42,10 +42,10 @@ namespace RogueLike.Core
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.PlayerHit;
 
-            UpSymbol = Icons.playerUpSymbol;
-            DownSymbol = Icons.playerDownSymbol;
-            LeftSymbol = Icons.playerLeftSymbol;
-            RightSymbol = Icons.playerRightSymbol;
+            UpSymbol = Symbols.playerUpSymbol;
+            DownSymbol = Symbols.playerDownSymbol;
+            LeftSymbol = Symbols.playerLeftSymbol;
+            RightSymbol = Symbols.playerRightSymbol;
             Symbol = DownSymbol;
             Direction = Direction.Up;
 
@@ -71,23 +71,23 @@ namespace RogueLike.Core
 
             statConsole.Print(((int)(healthBarWidth / 2)), 1, "PV", Colors.Text);
 
-            statConsole.Print(1, 2, $"{Icons.attackSymbol}: {Attack}", Colors.GrayText);
-            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Icons.defenseSymbol}: {Defense}", Colors.GrayText);
+            statConsole.Print(1, 2, $"{Symbols.attackSymbol}: {Attack}", Colors.GrayText);
+            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Symbols.defenseSymbol}: {Defense}", Colors.GrayText);
             statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {Gold}", Colors.Gold);
         }
 
 
         public void DrawEquipmentInventory(RLConsole equipmentConsole)
         {
-            equipmentConsole.Print(3, 2, $"{Icons.headSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(3, 2, $"{Symbols.headSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 2, $"{Head.Symbol}", Head.PrintedColor);
-            equipmentConsole.Print(3, 3, $"{Icons.chestSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(3, 3, $"{Symbols.chestSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 3, $"{Chest.Symbol}", Chest.PrintedColor);
-            equipmentConsole.Print(3, 4, $"{Icons.legsSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(3, 4, $"{Symbols.legsSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 4, $"{Legs.Symbol}", Legs.PrintedColor);
-            equipmentConsole.Print(3, 5, $"{Icons.footSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(3, 5, $"{Symbols.footSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 5, $"{Feet.Symbol}", Feet.PrintedColor);
-            equipmentConsole.Print(3, 6, $"{Icons.weaponSlotSymbol}: ", Colors.Text);
+            equipmentConsole.Print(3, 6, $"{Symbols.weaponSlotSymbol}: ", Colors.Text);
             equipmentConsole.Print(6, 6, $"{Weapon.Symbol}", Weapon.PrintedColor);
         }
 

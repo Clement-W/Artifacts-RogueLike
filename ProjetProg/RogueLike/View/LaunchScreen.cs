@@ -44,11 +44,11 @@ namespace RogueLike.View
 
                 // The y coordinate of the title string
                 int titleY = (int)(RootConsole.Height * 0.1);
-                string title = "" + Icons.artifact4Symbol + " Artifacts " + Icons.artifact4Symbol; 
+                string title = "" + Symbols.artifact4Symbol + " Artifacts " + Symbols.artifact4Symbol; //TODO: mettre symbol artefact
                 // Print this string on the console
                 RootConsole.Print(centerX - title.Length / 2, titleY, title, RLColor.White);
 
-                string artifactsSymbol = "" + Icons.artifact1Symbol + "   " + Icons.artifact2Symbol + "   " + Icons.artifact3Symbol;
+                string artifactsSymbol = "" + Symbols.artifact1Symbol + "   " + Symbols.artifact2Symbol + "   " + Symbols.artifact3Symbol; //TODO: mettre les artefacts
                 RootConsole.Print(centerX - artifactsSymbol.Length / 2, titleY + 1, artifactsSymbol, RLColor.White);
 
                 // The story of the game is called "lore" in RPGs

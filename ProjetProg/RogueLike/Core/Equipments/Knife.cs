@@ -20,7 +20,7 @@ namespace RogueLike.Core.Equipments
         private Knife(string name, int attBonus, int cost, RLColor color) : base(name, attBonus, cost)
         {
             AttackRange.Add(1, 1);
-            Symbol = Icons.knifeSymbol;
+            Symbol = Symbols.knifeSymbol;
             PrintedColor = color;
         }
 

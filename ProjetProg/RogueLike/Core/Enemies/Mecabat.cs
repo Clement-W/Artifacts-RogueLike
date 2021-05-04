@@ -28,10 +28,10 @@ namespace RogueLike.Core.Enemies
             Name = "Mecabot";
             MovingTimePeriod = 1;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.mecabatSymbol;
-            DownSymbol = Icons.mecabatSymbol; // TODO: changer les symbols LE TRUC BLEU
-            LeftSymbol = Icons.mecabatSymbol;
-            RightSymbol = Icons.mecabatSymbol;
+            UpSymbol = Symbols.mecabatSymbol;
+            DownSymbol = Symbols.mecabatSymbol; // TODO: changer les symbols LE TRUC BLEU
+            LeftSymbol = Symbols.mecabatSymbol;
+            RightSymbol = Symbols.mecabatSymbol;
             Direction = Direction.Up;
             Symbol = DownSymbol;
         }

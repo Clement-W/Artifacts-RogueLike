@@ -6,8 +6,8 @@ namespace RogueLike.Core
         public PortalToPlanet1(int posX, int posY){
             DestinationMap = MapType.Planet;
             PlanetDestination = PlanetName.Alleo;
-            AlternateSymbol1 = Icons.planete1TpSymbol1;
-            AlternateSymbol2 = Icons.planete1TpSymbol2;
+            AlternateSymbol1 = Symbols.planet1TpSymbol1;
+            AlternateSymbol2 = Symbols.planet1TpSymbol2;
             Symbol = AlternateSymbol1;
             PosX = posX;
             PosY = posY;

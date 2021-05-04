@@ -26,10 +26,10 @@ namespace RogueLike.Core.Enemies
             Name = "Dendroide";
             MovingTimePeriod = 5;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.dendroidSymbol;
-            DownSymbol = Icons.dendroidSymbol; // TODO: changer les symbols LE TRUC BLEU
-            LeftSymbol = Icons.dendroidSymbol;
-            RightSymbol = Icons.dendroidSymbol;
+            UpSymbol = Symbols.dendroidSymbol;
+            DownSymbol = Symbols.dendroidSymbol; // TODO: changer les symbols LE TRUC BLEU
+            LeftSymbol = Symbols.dendroidSymbol;
+            RightSymbol = Symbols.dendroidSymbol;
             Direction = Direction.Up;
             Symbol = DownSymbol; 
         }

@@ -17,7 +17,7 @@ namespace RogueLike.Core.Equipments
         {
             AttackRange.Add(1, 3);
             // The attackRange is not used here because the Attack method is specific, so overrided 
-            Symbol = Icons.scytheSymbol; 
+            Symbol = Symbols.scytheSymbol; 
         }
 
         /// <summary>

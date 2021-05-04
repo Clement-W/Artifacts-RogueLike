@@ -13,7 +13,7 @@ namespace RogueLike.Core.Items
         {
             Name = "Old Sandwich";
             Cost = 10;
-            Symbol = Icons.sandwichSymbol;
+            Symbol = Symbols.sandwichSymbol;
             HealingValue = 20;
         }
     }

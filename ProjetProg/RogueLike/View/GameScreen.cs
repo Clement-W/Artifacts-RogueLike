@@ -160,12 +160,12 @@ namespace RogueLike.View
                     case RLKey.A: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
                     case RLKey.D: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
                     case RLKey.LControl: // Left control to go through staircases or teleportation portals
-                        if (Game.Map.PlayerIsOnStairCase(Game.Player))
+                        if (Game.Map.IsPlayerOnStaircase(Game.Player))
                         {
                             CreateNextStage();
                         }
                         // If the player is not on staircase but on a teleportation portal
-                        else if (Game.Map.PlayerIsOnTeleportationPortal(Game.Player))
+                        else if (Game.Map.IsPlayerOnTeleportationPortal(Game.Player))
                         {
                             TeleportPlayer();
                         }

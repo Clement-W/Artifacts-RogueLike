@@ -26,10 +26,10 @@ namespace RogueLike.Core.Enemies
             Name = "Alleo boss"; 
             MovingTimePeriod = 4;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.boss1Symbol; 
-            DownSymbol = Icons.boss1Symbol;
-            LeftSymbol = Icons.boss1Symbol;
-            RightSymbol = Icons.boss1Symbol;
+            UpSymbol = Symbols.boss1Symbol; 
+            DownSymbol = Symbols.boss1Symbol;
+            LeftSymbol = Symbols.boss1Symbol;
+            RightSymbol = Symbols.boss1Symbol;
             Direction = Direction.Up;
             Symbol = DownSymbol; 
 
