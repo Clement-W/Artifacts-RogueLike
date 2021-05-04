@@ -82,7 +82,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the command title
                 int commandTitleY = lorePart2Y + loresPart2.Length + 2;
-                string commandsTitle = Icons.playerDownSymbol+ " Commands "+ Icons.playerDownSymbol;
+                string commandsTitle = Symbols.playerDownSymbol+ " Commands "+ Symbols.playerDownSymbol;
                 RootConsole.Print(centerX - commandsTitle.Length / 2, commandTitleY, commandsTitle, RLColor.White);
 
                 // The y coordinate of the first command explanation

@@ -54,7 +54,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the congratulation string
                 int congratulationY = (int)(RootConsole.Height * 0.3);
-                string congratulation = Icons.artifact4Symbol + " Congratulation ! " + Icons.artifact4Symbol; //TODO: mettre symbol artefact
+                string congratulation = Symbols.artifact4Symbol + " Congratulation ! " + Symbols.artifact4Symbol; //TODO: mettre symbol artefact
                 // Print this string on the console
                 RootConsole.Print(centerX - congratulation.Length / 2, congratulationY, congratulation, RLColor.White);
 

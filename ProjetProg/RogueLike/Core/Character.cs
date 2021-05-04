@@ -5,7 +5,7 @@ using RogueSharp;
 namespace RogueLike.Core
 {
     /// <summary>
-    /// This class represent a character. 
+    /// This class represents a character. 
     /// </summary>
     public abstract class Character : IDrawable
     {
@@ -21,7 +21,7 @@ namespace RogueLike.Core
         public RLColor PrintedColor { get; set; }
 
         /// <value>
-        /// The symbol that represent the character
+        /// The symbol that represents the character
         /// </value>
         public char Symbol { get; set; } // The displayed symbol on the console
 
@@ -39,7 +39,7 @@ namespace RogueLike.Core
 
 
         /// <summary>
-        /// This method draw the character on the map
+        /// This method draws the character on the map
         /// </summary>
         /// <param name="console">The map console</param>
         /// <param name="map">The map</param>

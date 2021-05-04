@@ -4,7 +4,7 @@ using RogueLike.Core.Equipments;
 namespace RogueLike.Core
 {
     /// <summary>
-    /// This class represent an activeCharacter. The active characters are those who can take actions on the game.
+    /// This class represents an activeCharacter. The active characters are those who can take actions on the game.
     /// For now, only the player and the enemies are active characters.
     /// </summary>
     public abstract class ActiveCharacter : Character
@@ -73,7 +73,7 @@ namespace RogueLike.Core
 
 
 
-        // The 4 next symbols corresponds to the 4 direction sprites of the active character
+        // The 4 next symbols correspond to the 4 direction sprites of the active character
         // This is only used by the player at the moment, but it will be used by the enemies later
 
 
@@ -122,12 +122,12 @@ namespace RogueLike.Core
 
 
         /// <summary>
-        /// This method change the color of the active character to show when they're hit
+        /// This method changes the color of the active character to show when they're hit
         /// </summary>
         public void ChangeColorAfterHit()
         {
             PrintedColor = ColorAfterHit;
-            Thread.Sleep(100); // Wait that the color is rendered on the game screen;
+            Thread.Sleep(100); // Wait for the color to be rendered on the game screen;
             PrintedColor = BaseColor;
         }
 

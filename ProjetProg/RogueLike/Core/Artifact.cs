@@ -5,7 +5,7 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent an artifact. It's not an item because it's not usable. 
+    /// This class represents an artifact. It's not an item because it's not usable. 
     /// But it's drawable and lootable
     /// </summary>
     public class Artifact : IDrawable, ILoot
@@ -22,7 +22,7 @@ namespace RogueLike.Core
         public RLColor PrintedColor { get; set; }
 
         /// <value>
-        /// The symbol that represent the artifact
+        /// The symbol that represents the artifact
         /// </value>
         public char Symbol { get; set; }
 
@@ -60,7 +60,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method draw the artifact on the map
+        /// This method draws the artifact on the map
         /// </summary>
         /// <param name="console">The map console</param>
         /// <param name="map">The map</param>
@@ -85,7 +85,7 @@ namespace RogueLike.Core
         }
 
         /// <summary>
-        /// This method set the artifact symbol according to the planet from where it comes from
+        /// This method sets the artifact symbol according to the planet from where it comes from
         /// </summary>
         private void SetArtifactSymbol()
         {
