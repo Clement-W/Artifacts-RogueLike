@@ -17,7 +17,6 @@ namespace RogueLike.Core.Items
 
         /// <value>
         /// The symbol that represent the item
-        /// 
         /// </value>
         public char Symbol { get; set; }
 
