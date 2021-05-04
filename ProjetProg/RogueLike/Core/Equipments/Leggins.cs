@@ -4,7 +4,7 @@ namespace RogueLike.Core.Equipments
 {
 
     /// <summary>
-    /// This class represent a part of the armor : the leggins
+    /// This class represents a part of the armor : the leggins
     /// </summary>
     public class Leggins : DefenseEquipment
     {

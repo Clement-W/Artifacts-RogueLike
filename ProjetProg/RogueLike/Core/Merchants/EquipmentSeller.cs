@@ -5,7 +5,7 @@ namespace RogueLike.Core.Merchants
 {
 
     /// <summary>
-    /// This class represent a merchant that only sells equipments
+    /// This class represents a merchant that only sells equipments
     /// </summary>
     public class EquipmentSeller : Merchant
     {
@@ -28,7 +28,7 @@ namespace RogueLike.Core.Merchants
         }
 
         /// <summary>
-        /// This method generate the merchant stall randmoly. 
+        /// This method generates the merchant stall randmoly. 
         /// </summary>
         public override void GenerateStall()
         {
@@ -47,7 +47,7 @@ namespace RogueLike.Core.Merchants
                     break;
 
             }
-            // Pick 3 piece of equipment in the list
+            // Pick 3 pieces of equipment in the list
             if (possibleEquipment != null)
             {
                 Equipment equipment1 = possibleEquipment[random.Next(0, possibleEquipment.Count)];

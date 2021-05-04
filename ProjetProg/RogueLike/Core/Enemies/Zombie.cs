@@ -2,7 +2,7 @@ using System;
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
-    /// This class represent an enemy named Zombie. It's slow and makes low damages
+    /// This class represent an enemy named Zombie. It's slow and deals low damages
     /// </summary>
     public class Zombie : Enemy
     {

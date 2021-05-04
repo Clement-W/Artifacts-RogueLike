@@ -1,7 +1,7 @@
 namespace RogueLike.Core.Equipments
 {
     /// <summary>
-    /// This class represent the initial attack equipment of the player : the fist
+    /// This class represents the initial attack equipment of the player : the fist
     /// </summary>
     public class Fist : AttackEquipment
     {

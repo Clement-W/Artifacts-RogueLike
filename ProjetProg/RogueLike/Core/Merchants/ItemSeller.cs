@@ -4,7 +4,7 @@ using RogueLike.Core.Items;
 namespace RogueLike.Core.Merchants
 {
     /// <summary>
-    /// This class represent a merchant that only sells items
+    /// This class represents a merchant that only sells items
     /// </summary>
     public class ItemSeller : Merchant
     {
@@ -27,7 +27,7 @@ namespace RogueLike.Core.Merchants
         }
 
         /// <summary>
-        /// This method generate the merchant stall randomly. 
+        /// This method generates the merchant stall randomly. 
         /// </summary>
         public override void GenerateStall()
         {
@@ -43,7 +43,7 @@ namespace RogueLike.Core.Merchants
                     break;
 
             }
-            // Pick 3 piece of Item in the list
+            // Pick 3 pieces of Item in the list
             if (possibleItem != null)
             {
                 Item item1 = possibleItem[random.Next(0, possibleItem.Count)];

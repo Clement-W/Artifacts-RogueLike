@@ -2,13 +2,13 @@ namespace RogueLike.Core.Items
 {
 
     /// <summary>
-    /// This class represent a ration : a healing item that can heal the player
+    /// This class represents a ration : a healing item that can heal the player
     /// </summary>
     public class Ration : HealingItem
     {
 
         /// <summary>
-        /// This constructor create a ration, with a healing value of 50
+        /// This constructor creates a ration, with a healing value of 50
         /// </summary>
         /// <returns></returns>
         public Ration() : base()

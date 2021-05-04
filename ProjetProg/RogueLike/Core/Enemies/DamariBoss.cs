@@ -6,7 +6,7 @@ namespace RogueLike.Core.Enemies
 {
 
     /// <summary>
-    /// This class represent the final boss of the Damari planet
+    /// This class represents the final boss of the Damari planet
     /// </summary>
     public class DamariBoss : FinalBoss
     {

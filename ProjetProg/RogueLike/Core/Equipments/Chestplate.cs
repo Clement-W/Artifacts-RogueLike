@@ -4,7 +4,7 @@ namespace RogueLike.Core.Equipments
 {
 
     /// <summary>
-    /// This class represent a part of the armor : the chestplate
+    /// This class represents a part of the armor : the chestplate
     /// </summary>
     public class Chestplate : DefenseEquipment
     {

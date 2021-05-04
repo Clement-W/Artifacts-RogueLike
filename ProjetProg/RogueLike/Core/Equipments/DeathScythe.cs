@@ -10,7 +10,7 @@ namespace RogueLike.Core.Equipments
     {
 
         /// <summary>
-        /// This constructor create the death scythe.
+        /// This constructor creates the death scythe.
         /// </summary>
         /// <returns></returns>
         public DeathScythe() : base("Death Scythe", 8, 1000)
@@ -21,8 +21,8 @@ namespace RogueLike.Core.Equipments
         }
 
         /// <summary>
-        /// The attack method is specific, the death scythe attack all around the active character that
-        /// use it. 
+        /// The attack method is specific, the death scythe attacks all around the active character that
+        /// uses it. 
         /// </summary>
         /// <param name="map"> The map</param>
         /// <param name="attacker">The active character that attack</param>

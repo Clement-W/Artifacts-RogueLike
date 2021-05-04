@@ -4,12 +4,12 @@ namespace RogueLike.Core.Enemies
 
 
     /// <summary>
-    /// This class represent an enemy named Mecabat. This enemy is really fast but makes small damages
+    /// This class represent an enemy named Mecabat. This enemy is really fast but deals small damages
     /// </summary>
     public class Mecabat : Enemy
     {
         /// <summary>
-        /// The constructor create the Mecabat with it's stats based on the difficulty level
+        /// The constructor creates the Mecabat with it's stats based on the difficulty level
         /// </summary>
         /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
         public Mecabat(int difficultyLevel)

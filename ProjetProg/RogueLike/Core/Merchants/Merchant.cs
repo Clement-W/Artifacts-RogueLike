@@ -8,7 +8,7 @@ namespace RogueLike.Core.Merchants
 {
 
     /// <summary>
-    /// This class represent a merchant. It's an animated character.
+    /// This class represents a merchant. It's an animated character.
     /// </summary>
     public abstract class Merchant : Character, IAnimated
     {
@@ -33,7 +33,7 @@ namespace RogueLike.Core.Merchants
         /// <value>
         /// The sellable items proposed by the merchant/
         /// The value of the dictionnary is the sellable, and the key is it's position on the stall
-        /// We don't use a list because the index of the element change according to the list size
+        /// We don't use a list because the index of the element changes according to the list size
         /// </value>
         public Dictionary<int, ISellable> Stall { get; set; }
 
@@ -58,13 +58,13 @@ namespace RogueLike.Core.Merchants
         }
 
         /// <summary>
-        /// This method generate the merchant stall. It's specific to the merchant type, that's wy this
+        /// This method generates the merchant stall. It's specific to the merchant type, that's wy this
         /// method is abstract.
         /// </summary>
         public abstract void GenerateStall();
 
         /// <summary>
-        /// This method draw the merchant's stall on the map
+        /// This method draws the merchant's stall on the map
         /// The items are drawn below it
         /// </summary>
         /// <param name="console">The map console</param>
@@ -88,7 +88,7 @@ namespace RogueLike.Core.Merchants
         }
 
         /// <summary>
-        /// This method allow a merchant to sell items
+        /// This method allows a merchant to sell items
         /// </summary>
         /// <param name="sellable"></param>
         public void SellItem(ISellable sellable)

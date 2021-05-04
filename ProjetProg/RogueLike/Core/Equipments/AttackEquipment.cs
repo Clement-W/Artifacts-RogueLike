@@ -28,7 +28,7 @@ namespace RogueLike.Core.Equipments
         /// For example, if the dictionnary is : {<\1,1>,<\2,1>} 
         /// the attack will impact the 2 cells in the attacker direction.
         /// If the dictionnary is {<\1,1>,<\2,1>,<\3,3>}
-        /// the attack will looks like a T, starting in the attack direction : --|
+        /// the attack will look like a T, starting in the attack direction : --|
         /// We choose to use a dictionnary even if a list would have worked, to be clearer
         /// than just using the list indexes as depth ranges.
         /// </value>
@@ -52,7 +52,7 @@ namespace RogueLike.Core.Equipments
 
 
         /// <summary>
-        /// This constructor don't takes any argument, it creates the dictionnary that represent the attack range
+        /// This constructor doesn't takes any argument, it creates the dictionnary that represents the attack range
         /// </summary>
         public AttackEquipment()
         {
@@ -60,11 +60,11 @@ namespace RogueLike.Core.Equipments
         }
 
         /// <summary>
-        /// This method allow an active character to attack with this weapon.
+        /// This method allows an active character to attack with this weapon.
         /// The basic behavior of the weapons is described here but this method can be over overwritten.
         /// </summary>
         /// <param name="map">The map</param>
-        /// <param name="attacker">The active character that attack</param>
+        /// <param name="attacker">The active character who attacks</param>
         /// <param name="player">The player</param>
         /// <returns>True if the attack hits an active character</returns>
         public virtual bool Attack(CurrentMap map, ActiveCharacter attacker, Player player)
@@ -106,7 +106,7 @@ namespace RogueLike.Core.Equipments
 
 
             // Call the method that makes the attack on the targeted cells. 
-            // This return true if the attack hits an active character
+            // This returns true if the attack hits an active character
             return AttackTargetedCells(map, attacker, player, targetedCells);
         }
 
@@ -114,7 +114,7 @@ namespace RogueLike.Core.Equipments
         /// This method makes the attack on the targeted cells
         /// </summary>
         /// <param name="map">The map</param>
-        /// <param name="attacker">The active character that attack</param>
+        /// <param name="attacker">The active character who attacks</param>
         /// <param name="player">The player</param>
         /// <param name="targetedCells">The cells that are targeted by the attack</param>
         /// <returns>True if the attack hits an active character</returns>
@@ -170,7 +170,7 @@ namespace RogueLike.Core.Equipments
         /// <param name="map"> The map</param>
         public void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
         {
-            // Lock the list while w'ere modifying it to avoid multi-threading errors 
+            // Lock the list while we are modifying it to avoid multi-threading errors 
             lock (map.AttackedCells)
             {
                 map.AttackedCells.Add(cell);
@@ -212,7 +212,7 @@ namespace RogueLike.Core.Equipments
 
         /// <summary>
         /// Deal damages between the attacker and te defender.
-        /// This method also animate the damages taken by the defender with a red flash 
+        /// This method also animates the damages taken by the defender with a red flash 
         /// </summary>
         /// <param name="attacker">The ActiveCharacter who attacks</param>
         /// <param name="defender">The ActiveCharacter who defends</param>

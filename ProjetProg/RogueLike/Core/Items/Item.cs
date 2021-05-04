@@ -6,7 +6,7 @@ using RogueLike.Core.Merchants;
 namespace RogueLike.Core.Items
 {
     /// <summary>
-    /// This class represent an item that is drawable, lootable and sellable by a merchant
+    /// This class represents an item that is drawable, lootable and sellable by a merchant
     /// </summary>
     public abstract class Item : IDrawable, ILoot, ISellable
     {
@@ -16,7 +16,7 @@ namespace RogueLike.Core.Items
         public RLColor PrintedColor { get; set; }
 
         /// <value>
-        /// The symbol that represent the item
+        /// The symbol that represents the item
         /// 
         /// </value>
         public char Symbol { get; set; }
@@ -37,7 +37,7 @@ namespace RogueLike.Core.Items
         public string Name { get; set; }
 
         /// <value> 
-        /// A reference to the merchant that sell this item
+        /// A reference to the merchant that sells this item
         /// </value>
         public Merchant SoldByMerchant { get; set; }
 
@@ -49,7 +49,7 @@ namespace RogueLike.Core.Items
 
 
         /// <summary>
-        /// This constructor set the standard print color and set the reference to the merchant to null.
+        /// This constructor sets the standard print color and sets the reference to the merchant to null.
         /// This constructor is implicitly called
         /// </summary>
         public Item()
@@ -59,7 +59,7 @@ namespace RogueLike.Core.Items
         }
 
         /// <summary>
-        /// This method draw the items when they're on the ground
+        /// This method draws the items when they're on the ground
         /// </summary>
         /// <param name="console"> The map console</param>
         /// <param name="map"> The map that contains the item</param>
@@ -84,7 +84,7 @@ namespace RogueLike.Core.Items
         }
 
         /// <summary>
-        /// This method allow the player to use the item.
+        /// This method allows the player to use the item.
         /// Every item needs to overwrite this method
         /// </summary>
         /// <param name="player">The player that uses the item</param>

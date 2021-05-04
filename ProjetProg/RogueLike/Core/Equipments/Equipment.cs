@@ -5,7 +5,7 @@ using RogueLike.Core.Merchants;
 namespace RogueLike.Core.Equipments
 {
     /// <summary>
-    /// This class represent an equipment. An equipment is a drawable, is lootable
+    /// This class represents an equipment. An equipment is a drawable, is lootable
     /// and sellable by a merchant.
     /// </summary>
     public abstract class Equipment : IDrawable, ILoot, ISellable
@@ -19,7 +19,7 @@ namespace RogueLike.Core.Equipments
 
 
         /// <value>
-        /// The symbol that represent the equipment
+        /// The symbol that represents the equipment
         /// </value>
         public char Symbol { get; set; }
 
@@ -36,7 +36,7 @@ namespace RogueLike.Core.Equipments
 
 
         /// <value> 
-        /// A reference to the merchant that sell this equipment
+        /// A reference to the merchant that sells this equipment
         /// </value>
         public Merchant SoldByMerchant { get; set; }
 
@@ -53,7 +53,7 @@ namespace RogueLike.Core.Equipments
 
 
         /// <summary>
-        /// This constructor set the standard print color and set the reference to the merchant to null.
+        /// This constructor sets the standard print color and set the reference to the merchant to null.
         /// This constructor is implicitly called
         /// </summary>
         public Equipment()
@@ -64,7 +64,7 @@ namespace RogueLike.Core.Equipments
 
 
         /// <summary>
-        /// This method draw the equipment when they're on the ground
+        /// This method draws the equipment when they're on the ground
         /// </summary>
         /// <param name="console"> The map cconsole</param>
         /// <param name="map"> The map that contains the equipments</param>

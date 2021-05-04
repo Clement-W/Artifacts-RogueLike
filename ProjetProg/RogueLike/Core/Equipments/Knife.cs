@@ -4,7 +4,7 @@ namespace RogueLike.Core.Equipments
 {
 
     /// <summary>
-    /// This class represent a weapon : the knife
+    /// This class represents a weapon : the knife
     /// </summary>
     public class Knife : AttackEquipment
     {

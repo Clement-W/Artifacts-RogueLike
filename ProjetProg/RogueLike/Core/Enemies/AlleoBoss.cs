@@ -3,12 +3,12 @@ using RogueLike.Core.Equipments;
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
-    /// This class represent the final boss of the Alleo planet
+    /// This class represents the final boss of the Alleo planet
     /// </summary>
     public class AlleoBoss : FinalBoss
     {
         /// <summary>
-        /// The constructor create the boss with it's stats based on the difficulty level
+        /// The constructor creates the boss with it's stats based on the difficulty level
         /// </summary>
         /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
         public AlleoBoss(int difficultyLevel){

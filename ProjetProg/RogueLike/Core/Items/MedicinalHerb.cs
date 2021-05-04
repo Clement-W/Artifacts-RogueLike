@@ -1,12 +1,12 @@
 namespace RogueLike.Core.Items
 {
     /// <summary>
-    /// This class represent a medicinal herb : a healing item that can heal the player
+    /// This class represents a medicinal herb : a healing item that can heal the player
     /// </summary>
     public class MedicinalHerb : HealingItem
     {
         /// <summary>
-        /// This constructor create a medicinal herb, with a healing value of 30
+        /// This constructor creates a medicinal herb, with a healing value of 30
         /// </summary>
         public MedicinalHerb() : base()
         {

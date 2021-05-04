@@ -1,13 +1,13 @@
 namespace RogueLike.Core.Items
 {
     /// <summary>
-    /// This class represent a health kit : a healing item that can heal the player
+    /// This class represents a health kit : a healing item that can heal the player
     /// </summary>
     public class HealthKit : HealingItem
     {
 
         /// <summary>
-        /// This constructor create a health kit, with a healing value of 50
+        /// This constructor creates a health kit, with a healing value of 50
         /// </summary>
         public HealthKit() : base()
         {

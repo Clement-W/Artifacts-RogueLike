@@ -2,14 +2,14 @@ using RogueSharp;
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
-    /// This class represent a specific enemy : a final boss. This enemy is different because
-    /// when it dies, it drops it's weapon
+    /// This class represent a specific enemy : a final boss. This enemy is different from the others.
+    /// It is unique, stronger and when it dies, it drops it's weapon
     /// </summary>
     public class FinalBoss : Enemy
     {
         /// <summary>
-        /// This method deals with the boss death : It drop it's weapon, the artifact
-        /// and a teleportation portal spawn to allow the player to go back to the spaceship
+        /// This method manages the boss death : It drops it's weapon, the artifact
+        /// and a teleportation portal spawns to allow the player to go back to the spaceship
         /// </summary>
         /// <param name="map"></param>
         public void ResolveBossDeath(CurrentMap map)

@@ -3,7 +3,7 @@ using RLNET;
 namespace RogueLike.Core.Equipments
 {
     /// <summary>
-    /// This class represent a weapon : the spear
+    /// This class represents a weapon : the spear
     /// </summary>
     public class Spear : AttackEquipment
     {

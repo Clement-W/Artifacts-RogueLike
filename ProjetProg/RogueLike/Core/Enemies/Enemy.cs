@@ -9,7 +9,7 @@ namespace RogueLike.Core.Enemies
     public abstract class Enemy : ActiveCharacter
     {
 
-        // The number of turns while the enemy is alerted of the player presence
+        // The number of turns during which the enemy is alerted of the player presence
         public int NbTurnsAlerted { get; set; }
 
         // The number of time period needed for the enemy to move
@@ -31,7 +31,7 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// Perform an action according to a specific behavior
         /// </summary>
-        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="player">The player to attack if encountered</param>
         /// <param name="map">The map where the enemy and the player are situated</param>
         /// <param name="command">The command system is used to take an action on the game</param>
         public virtual void PerformAction(Player player, CurrentMap map, CommandSystem commandSystem)

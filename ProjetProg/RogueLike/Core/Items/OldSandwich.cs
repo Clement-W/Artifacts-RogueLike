@@ -1,13 +1,13 @@
 namespace RogueLike.Core.Items
 {
     /// <summary>
-    /// This class represent a old sandwich : a healing item that can heal the player
+    /// This class represents a old sandwich : a healing item that can heal the player
     /// </summary>
     public class OldSandwich : HealingItem
     {
 
         /// <summary>
-        /// This constructor create an old sandwich, with a healing value of 20
+        /// This constructor creates an old sandwich, with a healing value of 20
         /// </summary>
         public OldSandwich() : base()
         {
