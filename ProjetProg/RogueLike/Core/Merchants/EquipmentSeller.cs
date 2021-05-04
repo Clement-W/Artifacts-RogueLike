@@ -3,8 +3,19 @@ using System;
 using RogueLike.Core.Equipments;
 namespace RogueLike.Core.Merchants
 {
+
+    /// <summary>
+    /// This class represent a merchant that only sells equipments
+    /// </summary>
     public class EquipmentSeller : Merchant
     {
+
+        /// <summary>
+        /// This is the constructor of the equipment seller
+        /// </summary>
+        /// <param name="posX">The x position of the seller</param>
+        /// <param name="posY">The y position of the seller</param>
+        /// <param name="merchantLevel">The level of the merchant</param>
         public EquipmentSeller(int posX, int posY, int merchantLevel) : base(merchantLevel)
         {
             Name = "Equipment Seller";
@@ -16,7 +27,9 @@ namespace RogueLike.Core.Merchants
             PosY = posY;
         }
 
-        // Called in the constructor of Merchant
+        /// <summary>
+        /// This method generate the merchant stall randmoly. 
+        /// </summary>
         public override void GenerateStall()
         {
             Random random = new Random();

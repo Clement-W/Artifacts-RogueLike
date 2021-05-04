@@ -77,12 +77,12 @@ namespace RogueLike.Core.Equipments
                 // draw it differently if it's the fov or not
                 if (map.IsInFov(PosX, PosY))
                 {
-                    // Draw it with the floor fov background color
+                    // Draw it with the floor fov background color of the map
                     console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColorInFov, Symbol);
                 }
                 else
                 {
-                    // Draw it with the floor background and a '.' symbol
+                    // Draw it with the floor background and a the floor symbol of the map
                     console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, map.Location.FloorSymbol);
                 }
             }

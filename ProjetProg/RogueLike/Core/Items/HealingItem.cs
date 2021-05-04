@@ -15,7 +15,7 @@ namespace RogueLike.Core.Items
         /// This method allow the player to use the healing item.
         /// Here, it adds the healing value to the player's health
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player">The player which uses the item</param>
         public override void Use(Player player){
             player.Health+=HealingValue;
             if(player.Health>player.MaxHealth){
