@@ -8,7 +8,7 @@ namespace RogueLike.Core
     {
 
         // The number of turns while the enemy is alerted of the player presence
-        public int? NbTurnsAlerted { get; set; }
+        public int NbTurnsAlerted { get; set; }
 
         // The number of time period needed for the enemy to move
         // A time period is equal to 200ms

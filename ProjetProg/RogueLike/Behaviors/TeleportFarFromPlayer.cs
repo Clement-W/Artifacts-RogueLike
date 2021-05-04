@@ -4,18 +4,27 @@ using RogueSharp;
 using RogueLike.Systems;
 namespace RogueLike.Behaviors
 {
+    /// <summary>
+    /// This class describes a specific behavior where the enemy will teleport itself randomly across the map
+    /// </summary>
     public class TeleportFarFromPlayer : IBehavior
     {
-        // The enemy teleport itself randomly and attack on a random side when teleporting.
-        // It is used by the damari's final boss that has a very high attack. If the player is 
-        // hit, it can die instantly.
+
+        /// <summary>
+        /// The enemy teleport itself randomly and attack on a random side when teleporting.
+        /// It is used by the damari's final boss that has a very high attack. If the player is 
+        /// hit, he can be killed instantly. (very bad accuracy but very high power)
+        /// </summary>
+        /// <param name="enemy">The enemy that need to acts</param>
+        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="map">The map where the enemy and the player are situated</param>
+        /// <param name="command">The command system is used to take an action on the game</param>
         public void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem commandSystem)
         {
-
-
+            // Find a random walkable cell
             ICell randomCell = map.FindRandomWalkableCell();
-            commandSystem.MoveEnemy(enemy,randomCell,map,player);
-
+            // Move the enemy on this cell (also attack the player if he's on the enemy's direction)
+            commandSystem.MoveEnemy(enemy, randomCell, map, player);
         }
     }
 }
