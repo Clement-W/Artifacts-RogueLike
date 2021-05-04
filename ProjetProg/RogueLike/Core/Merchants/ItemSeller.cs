@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using RogueLike.Core.Items;
 namespace RogueLike.Core.Merchants
 {
+    /// <summary>
+    /// This class represent a merchant that only sells items
+    /// </summary>
     public class ItemSeller : Merchant
     {
+        /// <summary>
+        /// This is the constructor of the item seller
+        /// </summary>
+        /// <param name="posX">The x position of the seller</param>
+        /// <param name="posY">The y position of the seller</param>
+        /// <param name="merchantLevel">The level of the merchant</param>
         public ItemSeller(int posX, int posY, int merchantLevel) : base(merchantLevel)
         {
             Name = "Item Seller";
@@ -17,18 +26,20 @@ namespace RogueLike.Core.Merchants
 
         }
 
-        // Called in the constructor of Merchant
+        /// <summary>
+        /// This method generate the merchant stall randomly. 
+        /// </summary>
         public override void GenerateStall()
         {
             Random random = new Random();
             List<Item> possibleItem = null;
             switch (MerchantLevel)
-            {
+            { // Fill the list according to the merchant level
                 default:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage()});
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinalHerb(),new Bandage()});
                     break;
                 case 2:
-                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinaHerb(),new Bandage(), new HealthKit()});
+                    possibleItem = new List<Item>(new Item[] { new OldSandwich(),new Ration(), new MedicinalHerb(),new Bandage(), new HealthKit()});
                     break;
 
             }

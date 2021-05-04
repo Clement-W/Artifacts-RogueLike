@@ -3,8 +3,19 @@ using System;
 using RogueLike.Core.Equipments;
 namespace RogueLike.Core.Merchants
 {
+
+    /// <summary>
+    /// This class represent a merchant that only sells equipments
+    /// </summary>
     public class EquipmentSeller : Merchant
     {
+
+        /// <summary>
+        /// This is the constructor of the equipment seller
+        /// </summary>
+        /// <param name="posX">The x position of the seller</param>
+        /// <param name="posY">The y position of the seller</param>
+        /// <param name="merchantLevel">The level of the merchant</param>
         public EquipmentSeller(int posX, int posY, int merchantLevel) : base(merchantLevel)
         {
             Name = "Equipment Seller";
@@ -16,7 +27,9 @@ namespace RogueLike.Core.Merchants
             PosY = posY;
         }
 
-        // Called in the constructor of Merchant
+        /// <summary>
+        /// This method generate the merchant stall randmoly. 
+        /// </summary>
         public override void GenerateStall()
         {
             Random random = new Random();
@@ -24,7 +37,7 @@ namespace RogueLike.Core.Merchants
             switch (MerchantLevel)
             {
                 case 0:
-                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreatePolymerBoots(), Leggins.CreatePolymerLeggins(), Chestplate.CreatePolymerChestplate(), Helmet.CreatePolymerHelmet(), Sword.CreateSwordMk1(), Spear.CreateSpearMk1(), Knife.CreateKifeMk1() });
+                    possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreatePolymerBoots(), Leggins.CreatePolymerLeggins(), Chestplate.CreatePolymerChestplate(), Helmet.CreatePolymerHelmet(), Sword.CreateSwordMk1(), Spear.CreateSpearMk1(), Knife.CreateKnifeMk1() });
                     break;
                 case 1:
                     possibleEquipment = new List<Equipment>(new Equipment[] { Boots.CreateCarbonBoots(), Leggins.CreateCarbonLeggins(), Chestplate.CreateCarbonChestplate(), Helmet.CreateCarbonHelmet(), Boots.CreatePlatinumBoots(), Leggins.CreatePlatinumLeggins(), Chestplate.CreatePlatinumChestplate(), Helmet.CreatePlatinumHelmet(), Sword.CreateSwordMk2(), Spear.CreateSpearMk2(), Knife.CreateKnifeMk2(), Sword.CreateSwordMk3(), Spear.CreateSpearMk3(), Knife.CreateKnifeMk3() });

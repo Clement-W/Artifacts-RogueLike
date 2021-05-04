@@ -1,18 +1,19 @@
 namespace RogueLike.Core.Items
 {
-    public class MedicinaHerb : Item
+    /// <summary>
+    /// This class represent a medicinal herb : a healing item that can heal the player
+    /// </summary>
+    public class MedicinalHerb : HealingItem
     {
-        public MedicinaHerb() : base(){
+        /// <summary>
+        /// This constructor create a medicinal herb, with a healing value of 30
+        /// </summary>
+        public MedicinalHerb() : base()
+        {
             Name = "Medicinal Herb";
             Cost = 15;
             Symbol = Icons.medHerbSymbol;
-        }
-
-        public override void Use(Player player){
-            player.Health+=30;
-            if(player.Health>player.MaxHealth){
-                player.Health = player.MaxHealth;   
-            }
+            HealingValue = 30;
         }
     }
 }

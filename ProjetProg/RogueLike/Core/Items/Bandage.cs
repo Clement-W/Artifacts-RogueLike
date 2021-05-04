@@ -1,18 +1,19 @@
 namespace RogueLike.Core.Items
 {
-    public class Bandage : Item
+    /// <summary>
+    /// This class represent a bandage : a healing item that can heal the player
+    /// </summary>
+    public class Bandage : HealingItem
     {
+        /// <summary>
+        /// This constructor create a bandage, with a healing value of 40
+        /// </summary>
         public Bandage() : base(){
             Name = "Bandage";
             Cost = 20;
             Symbol = Icons.bandageSymbol;
+            HealingValue = 40;
         }
 
-        public override void Use(Player player){
-            player.Health+=40;
-            if(player.Health>player.MaxHealth){
-                player.Health = player.MaxHealth;   
-            }
-        }
     }
 }

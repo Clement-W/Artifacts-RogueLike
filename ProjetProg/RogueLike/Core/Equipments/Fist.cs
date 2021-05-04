@@ -1,12 +1,19 @@
 namespace RogueLike.Core.Equipments
 {
+    /// <summary>
+    /// This class represent the initial attack equipment of the player : the fist
+    /// </summary>
     public class Fist : AttackEquipment
     {
 
-        public Fist(){
+        /// <summary>
+        /// Allow to create the fist attack equipment, with 0 attack bonus
+        /// </summary>
+        public Fist()
+        {
             Name = "Fist";
-            AttackBonus=0;
-            AttackRange.Add(1,1);
+            AttackBonus = 0;
+            AttackRange.Add(1, 1);
             Symbol = Icons.fistSymbol;
         }
 

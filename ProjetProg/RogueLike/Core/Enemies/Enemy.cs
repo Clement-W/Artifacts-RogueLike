@@ -28,16 +28,27 @@ namespace RogueLike.Core.Enemies
         }
 
 
-        // base behavior of an enemy, that can be overwritten in the subclasses
-        public virtual void PerformAction(Player player, CurrentMap map,CommandSystem commandSystem)
+        /// <summary>
+        /// Perform an action according to a specific behavior
+        /// </summary>
+        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="map">The map where the enemy and the player are situated</param>
+        /// <param name="command">The command system is used to take an action on the game</param>
+        public virtual void PerformAction(Player player, CurrentMap map, CommandSystem commandSystem)
         {
             ChasePlayer behavior = new ChasePlayer();
-            behavior.Act(this, player,map,commandSystem);
+            behavior.Act(this, player, map, commandSystem);
         }
 
 
-        // To change the sprite that corresponds to the moving direction of the enemy
-        // Also used to update the saved direction of the enemy
+        /// <summary>
+        /// This method is used to change the sprite that corresponds to the moving direction of the enemy
+        /// Also used to update the saved direction of the enemy
+        /// </summary>
+        /// <param name="lastX"> The last x position of the enemy</param>
+        /// <param name="lastY"> The last y position of the enemy</param>
+        /// <param name="newX"> The new x position of the enemy</param>
+        /// <param name="newY"> The new x position of the enemy</param>
         public void ChangeDirection(int lastX, int lastY, int newX, int newY)
         {
             if (newX > lastX)
