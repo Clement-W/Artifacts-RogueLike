@@ -76,7 +76,7 @@ namespace RogueLike.View
 
             if (KeyPress != null)
             {
-                // If the user has pressed a key, check if it's a 'N' to create a new
+                // If the user has pressed a key, check if it's an 'N' to create a new
                 // game or check if it's 'Esc' to quit the game.
                 switch (KeyPress.Key)
                 {

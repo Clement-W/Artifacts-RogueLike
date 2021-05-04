@@ -15,8 +15,8 @@ namespace RogueLike.Interfaces
         /// <summary>
         /// Allow an enemy to act when it has to make a move
         /// </summary>
-        /// <param name="enemy">The enemy that need to acts</param>
-        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="enemy">The enemy that needs to acts</param>
+        /// <param name="player">The player to attack if encountered</param>
         /// <param name="map">The map where the enemy and the player are situated</param>
         /// <param name="command">The command system is used to take an action on the game</param>
         void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem command);

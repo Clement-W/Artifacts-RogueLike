@@ -7,13 +7,12 @@ using System.Collections.Generic;
 using System.Threading;
 using RogueLike.Interfaces;
 
-// deal with interactions between the game and the actors
 
 namespace RogueLike.Systems
 {
 
     /// <summary>
-    /// This class deal with interactions between the game and the active characters
+    /// This class manages interactions between the game and the active characters
     /// that need to take action on the map
     /// </summary>
     public class CommandSystem
@@ -39,7 +38,7 @@ namespace RogueLike.Systems
             {
                 case Direction.Up:
                     y--; // Change the saved coordinate of the player
-                    player.Symbol = player.UpSymbol; // Change the symbol of the player so it looks upward
+                    player.Symbol = player.UpSymbol; // Change the symbol of the player so they look upward
                     player.Direction = Direction.Up; // Change the player direction
                     break;
                 case Direction.Down:
@@ -111,7 +110,7 @@ namespace RogueLike.Systems
 
         /// <summary>
         /// Each turn, we check if the enemy can move according to it's necessary time period to move
-        /// If it can't move, we decrement it's counter. When the enemy can move, the remaning time period to move
+        /// If it can't move, we decrement it's counter. When the enemy can move, the remaining time period to move
         /// is set to the necessary moving time period. 
         /// </summary>
         /// <param name="game">The game instance is needed to get the player, the map, the enemies and the command system</param>
@@ -124,7 +123,7 @@ namespace RogueLike.Systems
             foreach (Enemy enemy in enemies)
             {
                 // If the remaining time period to move is equal to 0, move the enemy
-                // and reset it's remaining time period to it's necessary moviging time period
+                // and reset it's remaining time period to it's necessary moving time period
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;

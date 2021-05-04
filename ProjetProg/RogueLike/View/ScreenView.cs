@@ -7,7 +7,7 @@ namespace RogueLike.View
     /// <summary>
     /// This class is the parent class of every consoles.
     /// It contains the root console that can be used to display multiples screens
-    /// like the game over screen, the launch screen or the game screen
+    /// like the game over screen, the launch screen or the game screen.
     /// Every screen classes inherit this class
     /// </summary>
     public class ScreenView
@@ -31,7 +31,7 @@ namespace RogueLike.View
         public static Game Game { get; set; }
 
         /// <summary>
-        /// This is the constructor of the screen view. It is called by the subclasses that inherit from this class.
+        /// This is the constructor of the screen view. It is called by the subclasses which inherit from this class.
         /// </summary>
         /// <param name="consoleTitle"> The name of the console</param>
         /// <param name="game">The game instance</param>

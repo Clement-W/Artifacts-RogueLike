@@ -23,7 +23,7 @@ namespace RogueLike.Systems
         private readonly Queue<string> messages;
 
         /// <summary>
-        /// This is the constructor of this class, that create the queue of messages
+        /// This is the constructor of this class, that creates the queue of messages
         /// </summary>
         public MessageLog()
         {
@@ -31,7 +31,7 @@ namespace RogueLike.Systems
         }
 
         /// <summary>
-        /// This method add a message into the queue, and dequeue the old messages according to the
+        /// This method adds a message into the queue, and dequeue the old messages according to the
         /// maxLines attribute;
         /// </summary>
         /// <param name="message">The message to add in the queue</param>

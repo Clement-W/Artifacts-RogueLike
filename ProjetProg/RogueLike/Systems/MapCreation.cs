@@ -12,8 +12,8 @@ using RogueLike.Core.Equipments;
 
 namespace RogueLike.Systems
 {
-
-    public class MapGenerator
+    //TODO commentaires
+    public class MapCreation
     {
 
         private readonly int mapWidth;
@@ -30,7 +30,7 @@ namespace RogueLike.Systems
 
         private Random random;
 
-        public MapGenerator(int width, int height, int level, int nbArtifacts)
+        public MapCreation(int width, int height, int level, int nbArtifacts)
         {
             mapWidth = width;
             mapHeight = height;
@@ -42,7 +42,7 @@ namespace RogueLike.Systems
             Console.WriteLine(difficultyLevel);
         }
 
-        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
+        public MapCreation(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
         {
             map.Location.MapType = mapType;
             map.Location.Planet = planet;
@@ -51,7 +51,7 @@ namespace RogueLike.Systems
 
         }
 
-        public MapGenerator(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected, mapType, PlanetName.None)
+        public MapCreation(int width, int height, int level, int nbArtifactsCollected, MapType mapType) : this(width, height, level, nbArtifactsCollected, mapType, PlanetName.None)
         {
         }
 

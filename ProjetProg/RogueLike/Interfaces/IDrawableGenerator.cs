@@ -8,7 +8,7 @@ namespace RogueLike.Interfaces
         /// <summary>
         /// Create a drawable elememnt
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator</param>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in mapCreation</param>
         /// <param name="posX"> The x position of the element</param>
         /// <param name="posY"> The y position of the element</param>
         /// <returns>Return the created drawable</returns>

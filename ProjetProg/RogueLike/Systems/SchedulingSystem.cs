@@ -7,9 +7,9 @@ namespace RogueLike.Systems
     /// </summary>
     public class SchedulingSystem
     {
-        
+
         /// <summary>
-        /// This constant is the the time that takes a period to complete in miliseconds.
+        /// This constant is the time to complete a period in miliseconds.
         /// Every enemies has a certain number of time period needed to move. 
         /// </summary>
         private const int TIME_PERIOD = 100;
@@ -20,7 +20,7 @@ namespace RogueLike.Systems
         private static Stopwatch schedulingStopWatch;
 
         /// <summary>
-        /// This is the constructor, it start the stopwatch
+        /// This is the constructor, it starts the stopwatch
         /// </summary>
         public SchedulingSystem(){
             schedulingStopWatch = new Stopwatch();
@@ -30,7 +30,7 @@ namespace RogueLike.Systems
         }
 
         /// <summary>
-        /// Every time period, this method allow to move the non playable characters (only enemies at the moment)
+        /// Every time period, this method allows to move the non playable characters (only enemies at the moment)
         /// </summary>
         /// <param name="game"></param>
         public void CheckSchedule(Game game){

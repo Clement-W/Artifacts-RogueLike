@@ -10,7 +10,7 @@ namespace RogueLike.View
 {
 
     /// <summary>
-    /// This class is the displayed screen when the player win the game.
+    /// This class manages the displayed screen when the player win the game.
     /// </summary>
     public class WinScreen : ScreenView
     {
@@ -24,7 +24,7 @@ namespace RogueLike.View
         /// <summary>
         /// This is the constructor of this screen, that calls the constructor of the base class.
         /// </summary>
-        /// <param name="time"> The tiem it tooks the player to win the game</param>
+        /// <param name="time"> The time it took the player to win the game</param>
         public WinScreen(TimeSpan time) : base("Victory!")
         {
             gameTime = time;
@@ -54,7 +54,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the congratulation string
                 int congratulationY = (int)(RootConsole.Height * 0.3);
-                string congratulation = "~ Congratulation ! ~"; //TODO: mettre symbol artefact
+                string congratulation = Icons.artifact4Symbol + " Congratulation ! " + Icons.artifact4Symbol; //TODO: mettre symbol artefact
                 // Print this string on the console
                 RootConsole.Print(centerX - congratulation.Length / 2, congratulationY, congratulation, RLColor.White);
 

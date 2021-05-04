@@ -14,7 +14,7 @@ namespace RogueLike.Systems
         /// <summary>
         /// Create a random item among the possible items
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator</param>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in mapCreation</param>
         /// <param name="posX"> The x position of the item</param>
         /// <param name="posY"> The y position of the item</param>
         /// <returns>Return the created item</returns>

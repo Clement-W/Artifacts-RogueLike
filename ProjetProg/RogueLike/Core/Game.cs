@@ -52,9 +52,9 @@ namespace RogueLike.Core
 
         private void InitializeMap()
         {
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count,MapType.Spaceship);
+            MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count,MapType.Spaceship);
            
-            Map = mapGenerator.CreateMap(Player);
+            Map = mapCreation.CreateMap(Player);
             //Spaceship.UpdatePlayerFieldOfView(Player);
         }
 

@@ -12,7 +12,7 @@ namespace RogueLike.View
 {
 
     /// <summary>
-    /// This class is the game screen when the player start or play the game
+    /// This class manages the game screen when the player start or play the game
     /// </summary>
     public class GameScreen : ScreenView
     {
@@ -43,13 +43,13 @@ namespace RogueLike.View
         private static RLConsole itemsConsole;
 
         /// <summary>
-        /// This is the time it tooks the player to win the game 
+        /// This is the time it took the player to win the game 
         /// </summary>
         private Stopwatch gameTime;
 
 
         /// <summary>
-        /// This is the constructor of the 
+        /// This is the constructor of the game screen
         /// </summary>
         /// <param name="title"></param>
         /// <param name="game"></param>
@@ -69,7 +69,7 @@ namespace RogueLike.View
             RootConsole.Render += OnGameRender;
             // += Allows to add a new event handler to the rootConsole.Update event
 
-            // Start the stopwatch to count the time it tooks the player to win
+            // Start the stopwatch to count the time it took the player to win
             gameTime = new Stopwatch();
             gameTime.Start();
 
@@ -139,10 +139,10 @@ namespace RogueLike.View
             DidPlayerAct = false;
             KeyPress = RootConsole.Keyboard.GetKeyPress();
 
-            // If the player licks, update it's orientation and attack
+            // If the player clicks, update their orientation and attack
             if (RootConsole.Mouse.GetLeftClick())
             {
-                UpdateOrientation(); // The player looks on the click direction
+                UpdateOrientation(); // The player looks toward the click direction
                 Game.CommandSystem.Attack(Game.Map,Game.Player,Game.Player); // Attack the targeted cells
                 RenderRequired = true;
             }
@@ -198,19 +198,19 @@ namespace RogueLike.View
         }
 
         /// <summary>
-        /// Called when the player is on staircase and press Ctrl
-        /// This method create the next stage of the map, it can be a cave map or a boss room
+        /// Called when the player is on staircase and presses Ctrl
+        /// This method creates the next stage of the map, it can be a cave map or a boss room
         /// </summary>
         private void CreateNextStage()
         {
-            // While the player don't access the second floor, go to the next stage
+            // While the player doesn't access the second floor, go to the next stage
             if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
             {
                 // Create a map generator to generate the corresponding map
                 // Increase game current level with ++Game.CurrentLevel
-                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
+                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
                 // Assign the new map to the current game map
-                Game.Map = mapGenerator.CreateMap(Game.Player);
+                Game.Map = mapCreation.CreateMap(Game.Player);
 
 
                 DidPlayerAct = true;
@@ -220,9 +220,9 @@ namespace RogueLike.View
 
             }
             else
-            { // When the palyer want to access the third floor, create a boss room 
-                MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
-                Game.Map = mapGenerator.CreateMap(Game.Player);
+            { // When the palyer wants to access the third floor, create a boss room 
+                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
+                Game.Map = mapCreation.CreateMap(Game.Player);
 
 
                 DidPlayerAct = true;
@@ -233,8 +233,8 @@ namespace RogueLike.View
         }
 
         /// <summary>
-        /// Called when te player is on a teleportation portal and press left Ctrl
-        /// This method create a new map according to the destination of the portal
+        /// Called when te player is on a teleportation portal and presses left Ctrl
+        /// This method creates a new map according to the destination of the portal
         /// </summary>
         private void TeleportPlayer()
         {
@@ -248,10 +248,10 @@ namespace RogueLike.View
 
             }
             // Create a map generator with the portal's destination map type in argument 
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
+            MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
 
             // Change the game current map
-            Game.Map = mapGenerator.CreateMap(Game.Player);
+            Game.Map = mapCreation.CreateMap(Game.Player);
             DidPlayerAct = true;
             string mapType = Game.Map.Location.MapType.ToString();
             string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
@@ -304,7 +304,7 @@ namespace RogueLike.View
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
                 // Get the clicked cell
-                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell;
+                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; //TODO
 
 
                 // Get the difference between the cell and the player position
@@ -342,7 +342,6 @@ namespace RogueLike.View
             }
             else
             {
-
                 DeduceVerticalOrientation(absoluteY);
             }
         }

@@ -24,7 +24,7 @@ namespace RogueLike.Interfaces
         int PosY { get; set; }
 
         /// <summary>
-        /// This method draw the drawable on the map
+        /// This method draws the drawable on the map
         /// </summary>
         /// <param name="console">The console that contains the map</param>
         /// <param name="map">The map that contains the drawable</param>

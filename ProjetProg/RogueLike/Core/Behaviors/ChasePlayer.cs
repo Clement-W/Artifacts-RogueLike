@@ -17,8 +17,8 @@ namespace RogueLike.Core.Behaviors
         /// <summary>
         /// Allow an enemy to act when it has to make a move, here it chase the player
         /// </summary>
-        /// <param name="enemy">The enemy that need to acts</param>
-        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="enemy">The enemy that needs to acts</param>
+        /// <param name="player">The player to attack if encountered</param>
         /// <param name="map">The map where the enemy and the player are situated</param>
         /// <param name="command">The command system is used to take an action on the game</param>
         public void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem commandSystem)
@@ -79,7 +79,7 @@ namespace RogueLike.Core.Behaviors
                 // Increment the number of alerted turns
                 enemy.NbTurnsAlerted++;
 
-                // The enemy stops to chase the player after 10 turns if the player is not in it's fov anymore
+                // The enemy stops chasing the player after 10 turns if the player is not in it's fov anymore
                 enemyFov.ComputeFov(enemy.PosX, enemy.PosY, enemy.Awareness, true);
                 if (enemy.NbTurnsAlerted > 10 && !enemyFov.IsInFov(player.PosX, player.PosY))
                 {

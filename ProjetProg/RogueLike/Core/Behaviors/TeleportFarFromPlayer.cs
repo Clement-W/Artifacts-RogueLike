@@ -11,12 +11,12 @@ namespace RogueLike.Core.Behaviors
     {
 
         /// <summary>
-        /// The enemy teleport itself randomly and attack on a random side when teleporting.
+        /// The enemy teleports itself randomly and attacks on a random side when teleporting.
         /// It is used by the damari's final boss that has a very high attack. If the player is 
         /// hit, he can be killed instantly. (very bad accuracy but very high power)
         /// </summary>
-        /// <param name="enemy">The enemy that need to acts</param>
-        /// <param name="player">The player is needed to attack it if needed</param>
+        /// <param name="enemy">The enemy that needs to acts</param>
+        /// <param name="player">The player to attack if encountered</param>
         /// <param name="map">The map where the enemy and the player are situated</param>
         /// <param name="command">The command system is used to take an action on the game</param>
         public void Act(Enemy enemy, Player player, CurrentMap map, CommandSystem commandSystem)

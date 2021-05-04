@@ -7,13 +7,13 @@ namespace RogueLike.View
 {
 
     /// <summary>
-    /// This class is the displayed screen when the user launch the game.
+    /// This class is the displayed screen when the user launches the game.
     /// </summary>
     public class LaunchScreen : ScreenView
     {
 
         /// <summary>
-        /// This is the constructor of the launch screen that calls the base class constructor
+        /// This is the constructor of the launch screen which calls the base class constructor
         /// </summary>
         /// <param name="game">The game instance that contains every game elements</param>
         public LaunchScreen(Game game) : base("Artifacts", game)
@@ -44,11 +44,11 @@ namespace RogueLike.View
 
                 // The y coordinate of the title string
                 int titleY = (int)(RootConsole.Height * 0.1);
-                string title = "" + Icons.artifact4Symbol + " Artifacts " + Icons.artifact4Symbol; //TODO: mettre symbol artefact
+                string title = "" + Icons.artifact4Symbol + " Artifacts " + Icons.artifact4Symbol; 
                 // Print this string on the console
                 RootConsole.Print(centerX - title.Length / 2, titleY, title, RLColor.White);
 
-                string artifactsSymbol = "" + Icons.artifact1Symbol + "   " + Icons.artifact2Symbol + "   " + Icons.artifact3Symbol; //TODO: mettre les artefacts
+                string artifactsSymbol = "" + Icons.artifact1Symbol + "   " + Icons.artifact2Symbol + "   " + Icons.artifact3Symbol;
                 RootConsole.Print(centerX - artifactsSymbol.Length / 2, titleY + 1, artifactsSymbol, RLColor.White);
 
                 // The story of the game is called "lore" in RPGs
@@ -82,7 +82,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the command title
                 int commandTitleY = lorePart2Y + loresPart2.Length + 2;
-                string commandsTitle = " ~ Commands ~";
+                string commandsTitle = Icons.playerDownSymbol+ " Commands "+ Icons.playerDownSymbol;
                 RootConsole.Print(centerX - commandsTitle.Length / 2, commandTitleY, commandsTitle, RLColor.White);
 
                 // The y coordinate of the first command explanation
@@ -127,7 +127,7 @@ namespace RogueLike.View
             if (KeyPress != null)
             {
 
-                // If the user has pressed a key, check if it's a 'N' to create a new
+                // If the user has pressed a key, check if it's an 'N' to create a new
                 // game or check if it's 'Esc' to quit the game.
                 switch (KeyPress.Key)
                 {
