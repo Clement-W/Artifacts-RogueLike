@@ -1,4 +1,5 @@
 using RogueLike.Core;
+using RogueLike.Core.Merchants;
 namespace RogueLike.Interfaces
 {
     /// <summary>

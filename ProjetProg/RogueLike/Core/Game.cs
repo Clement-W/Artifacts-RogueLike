@@ -3,6 +3,7 @@ using RLNET;
 using RogueLike.View;
 using RogueLike.Systems;
 using System.Threading;
+using RogueLike.Core.Enemies;
 
 
 namespace RogueLike.Core

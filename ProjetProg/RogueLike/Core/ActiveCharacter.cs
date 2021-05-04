@@ -1,5 +1,6 @@
 using System.Threading;
 using RLNET;
+using RogueLike.Core.Equipments;
 namespace RogueLike.Core
 {
 

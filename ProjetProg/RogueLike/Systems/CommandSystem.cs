@@ -1,4 +1,5 @@
 using RogueLike.Core;
+using RogueLike.Core.Enemies;
 using RogueSharp;
 
 using System;

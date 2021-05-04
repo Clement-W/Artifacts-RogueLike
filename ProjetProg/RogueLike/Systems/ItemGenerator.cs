@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using RogueLike.Core;
+using RogueLike.Core.Items;
 using RogueLike.Interfaces;
 namespace RogueLike.Systems
 {

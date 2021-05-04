@@ -5,6 +5,10 @@ using RogueLike.Interfaces;
 using RogueLike.Core;
 using System.Linq;
 using System.Collections.Generic;
+using RogueLike.Core.Enemies;
+using RogueLike.Core.Merchants;
+using RogueLike.Core.Items;
+using RogueLike.Core.Equipments;
 
 namespace RogueLike.Systems
 {

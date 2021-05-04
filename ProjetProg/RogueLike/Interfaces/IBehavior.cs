@@ -1,5 +1,6 @@
 using RogueLike.Core;
 using RogueLike.Systems;
+using RogueLike.Core.Enemies;
 
 namespace RogueLike.Interfaces
 {

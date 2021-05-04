@@ -7,6 +7,8 @@ using RogueLike.Interfaces;
 using System.Threading;
 using System.Diagnostics;
 using System;
+using RogueLike.Core.Enemies;
+using RogueLike.Core.Merchants;
 namespace RogueLike.Core
 {
 
