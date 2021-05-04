@@ -13,7 +13,7 @@ namespace RogueLike.Core
 {
 
     /// <summary>
-    /// This class represent the the current map where the player is
+    /// This class represent the current map where the player is
     /// It inherit the Map class from RogueSharp. This allows us to use the rogue
     /// sharp method on the map (getCellsInSquare(),ComputeFov(),...)
     /// </summary>

@@ -28,10 +28,10 @@ namespace RogueLike.Core.Enemies
             Name = "Thaadd boss"; 
             MovingTimePeriod = 4;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.boss3Symbol; 
-            DownSymbol = Icons.boss3Symbol;
-            LeftSymbol = Icons.boss3Symbol;
-            RightSymbol = Icons.boss3Symbol;
+            UpSymbol = Symbols.boss3Symbol; 
+            DownSymbol = Symbols.boss3Symbol;
+            LeftSymbol = Symbols.boss3Symbol;
+            RightSymbol = Symbols.boss3Symbol;
             Direction = Direction.Up;
             Symbol = DownSymbol;
 

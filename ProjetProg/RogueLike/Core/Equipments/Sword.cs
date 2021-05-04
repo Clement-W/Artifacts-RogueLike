@@ -20,7 +20,7 @@ namespace RogueLike.Core.Equipments
         private Sword(string name, int attBonus, int cost, RLColor color) : base(name, attBonus, cost)
         {
             AttackRange.Add(1, 3);
-            Symbol = Icons.swordSymbol;
+            Symbol = Symbols.swordSymbol;
             PrintedColor = color;
         }
 

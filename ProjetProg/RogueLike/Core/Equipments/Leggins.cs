@@ -20,7 +20,7 @@ namespace RogueLike.Core.Equipments
 
         private Leggins(string name, int defBonus, int cost, RLColor color) : base(name, defBonus, cost)
         {
-            Symbol = Icons.legginsSymbol;
+            Symbol = Symbols.legginsSymbol;
             PrintedColor = color;
         }
 

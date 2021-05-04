@@ -18,7 +18,7 @@ namespace RogueLike.Core.Equipments
         /// <param name="color">The color of the chestplate</param>
         private Chestplate(string name, int defBonus, int cost, RLColor color) : base(name, defBonus, cost)
         {
-            Symbol = Icons.chestplateSymbol;
+            Symbol = Symbols.chestplateSymbol;
             PrintedColor = color;
         }
 

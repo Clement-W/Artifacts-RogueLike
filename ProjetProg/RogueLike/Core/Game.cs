@@ -8,27 +8,58 @@ using RogueLike.Core.Enemies;
 
 namespace RogueLike.Core
 {
+    /// <summary>
+    /// This class is the game instance. It contains everything about the game except the views (console).
+    /// </summary>
     public class Game
     {
 
 
-
-
+        /// <value>
+        /// The player of the game
+        /// </value>
         public Player Player { get; private set; }
+
+        /// <value>
+        /// The camera system that is used to create a scrolling map
+        /// </value>
         public CameraSystem CameraSystem { get; private set; }
+
+        /// <value>
+        /// The command system that is used to perform actions on the game
+        /// </value>
         public CommandSystem CommandSystem { get; set; }
 
-        public SchedulingSystem SchedulingSystem{get;private set;}
+        /// <value>
+        /// This is the scheduling system that schedule the enemy's actions
+        /// </value>
+        public SchedulingSystem SchedulingSystem { get; private set; }
 
-        public AnimationSystem AnimationSystem{get;private set;}
+        /// <value>
+        /// The animation system animate the animated character periodically
+        /// </value>
+        public AnimationSystem AnimationSystem { get; private set; }
 
+        /// <value>
+        /// The message log is used to give information about the game state to the player
+        /// </value>
         public static MessageLog MessageLog { get; set; }
-
+        
+      
+        /// <value>
+        /// This is the current map where the player is
+        /// </value>
         public CurrentMap Map { get; set; }
 
-        public static int CurrentLevel { get; set; } // the level in the map 
+        /// <value>
+        /// This is the current level in the map (used in the planet's map)
+        /// </value>
+        public static int CurrentLevel { get; set; } 
 
 
+        /// <summary>
+        /// This method is used to start the game
+        /// </summary>
         public void StartGame()
         {
             CurrentLevel = 1;
@@ -41,21 +72,16 @@ namespace RogueLike.Core
             SchedulingSystem = new SchedulingSystem();
             AnimationSystem = new AnimationSystem();
             InitializeMap();
-
-            // créé la map vaisseau
-            // dans le vaisseau il y a les portails, quand on va dans un portail, ça TP dans la map donc ça set l'attribut currentMapType et level
-
-
-            //créé command system, la map,...
-            //créé le player et le passe en paramètre au map generator
         }
 
+        /// <summary>
+        /// Initialize the first map : the spaceship
+        /// </summary>
         private void InitializeMap()
         {
-            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count,MapType.Spaceship);
-           
+            MapGenerator mapGenerator = new MapGenerator(Dimensions.worldWidth, Dimensions.worldHeight, CurrentLevel, Player.ArtifactsCollected.Count, MapType.Spaceship);
+
             Map = mapGenerator.CreateMap(Player);
-            //Spaceship.UpdatePlayerFieldOfView(Player);
         }
 
 

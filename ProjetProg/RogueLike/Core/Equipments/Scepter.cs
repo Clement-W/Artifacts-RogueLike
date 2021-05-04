@@ -15,7 +15,7 @@ namespace RogueLike.Core.Equipments
         {
             AttackRange.Add(1, 1);
             AttackRange.Add(2, 1);
-            Symbol = Icons.scepterSymbol;
+            Symbol = Symbols.scepterSymbol;
         }
     }
 }

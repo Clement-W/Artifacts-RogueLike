@@ -11,7 +11,7 @@ namespace RogueLike.Core.Items
         public Bandage() : base(){
             Name = "Bandage";
             Cost = 20;
-            Symbol = Icons.bandageSymbol;
+            Symbol = Symbols.bandageSymbol;
             HealingValue = 40;
         }
 

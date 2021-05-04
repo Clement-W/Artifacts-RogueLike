@@ -31,10 +31,10 @@ namespace RogueLike.Core.Enemies
             Name = "Damari boss"; 
             MovingTimePeriod = 20;
             RemainingTimePeriodToMove = MovingTimePeriod;
-            UpSymbol = Icons.boss2Symbol; 
-            DownSymbol = Icons.boss2Symbol;
-            LeftSymbol = Icons.boss2Symbol;
-            RightSymbol = Icons.boss2Symbol;
+            UpSymbol = Symbols.boss2Symbol; 
+            DownSymbol = Symbols.boss2Symbol;
+            LeftSymbol = Symbols.boss2Symbol;
+            RightSymbol = Symbols.boss2Symbol;
             Direction = Direction.Up;
             Symbol = DownSymbol;
 

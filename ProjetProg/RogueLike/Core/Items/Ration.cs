@@ -15,7 +15,7 @@ namespace RogueLike.Core.Items
         {
             Name = "Ration";
             Cost = 40;
-            Symbol = Icons.rationSymbol;
+            Symbol = Symbols.rationSymbol;
             HealingValue = 50;
         }
     }

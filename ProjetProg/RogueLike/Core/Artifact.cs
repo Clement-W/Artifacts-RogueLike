@@ -91,9 +91,9 @@ namespace RogueLike.Core
         {
             switch (ComesFrom)
             {
-                case PlanetName.Alleo: Symbol = Icons.artifact1Symbol; break;
-                case PlanetName.Damari: Symbol = Icons.artifact2Symbol; break;
-                case PlanetName.Thaadd: Symbol = Icons.artifact3Symbol; break;
+                case PlanetName.Alleo: Symbol = Symbols.artifact1Symbol; break;
+                case PlanetName.Damari: Symbol = Symbols.artifact2Symbol; break;
+                case PlanetName.Thaadd: Symbol = Symbols.artifact3Symbol; break;
             }
         }
 

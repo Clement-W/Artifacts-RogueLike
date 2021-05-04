@@ -19,7 +19,7 @@ namespace RogueLike.Core.Equipments
         /// <param name="color">The color of the helmet</param>
         private Helmet(string name, int defBonus, int cost, RLColor color) : base(name, defBonus, cost)
         {
-            Symbol = Icons.helmetSymbol;
+            Symbol = Symbols.helmetSymbol;
             PrintedColor = color;
         }
 

@@ -20,7 +20,7 @@ namespace RogueLike.Core.Equipments
         {
             AttackRange.Add(1, 1);
             AttackRange.Add(2, 1);
-            Symbol = Icons.spearSymbol;
+            Symbol = Symbols.spearSymbol;
             PrintedColor = color;
         }
 

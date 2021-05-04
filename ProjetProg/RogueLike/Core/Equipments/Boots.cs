@@ -18,7 +18,7 @@ namespace RogueLike.Core.Equipments
         /// <param name="color">The color of the boots</param>
         private Boots(string name, int defBonus, int cost, RLColor color) : base(name, defBonus, cost)
         {
-            Symbol = Icons.bootsSymbol;
+            Symbol = Symbols.bootsSymbol;
             PrintedColor = color;
         }
 
