@@ -19,7 +19,7 @@ namespace RogueLike.Core.Enemies
             Attack = 2 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 15;
-            PrintedColor = Colors.basicColor; 
+            PrintedColor = Colors.BasicColor;
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 

@@ -56,7 +56,7 @@ namespace RogueLike.Core
             PosY = posY;
             Name = comesFrom.ToString() + "'s Artifact";
             SetArtifactSymbol();
-            PrintedColor = RLColor.White;
+            PrintedColor = Colors.BasicColor;
         }
 
         /// <summary>

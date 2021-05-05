@@ -41,7 +41,7 @@ namespace RogueLike.View
             if (RenderRequired)
             {
                 RootConsole.Clear();
-                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, Colors.Black);
 
 
                 // Compute the center of the screen that will be used later
@@ -52,22 +52,22 @@ namespace RogueLike.View
                 int congratulationY = (int)(RootConsole.Height * 0.3);
                 string congratulation = Symbols.artifact4Symbol + " Congratulation ! " + Symbols.artifact4Symbol;
                 // Print this string on the console
-                RootConsole.Print(centerX - congratulation.Length / 2, congratulationY, congratulation, RLColor.White);
+                RootConsole.Print(centerX - congratulation.Length / 2, congratulationY, congratulation, Colors.BasicColor);
 
                 // The y coordinate of the time string
                 int timeY = congratulationY + 5;
                 string time = $"Time : {gameTime.Hours}h : {gameTime.Minutes}m : {gameTime.Seconds}s";
-                RootConsole.Print(centerX - time.Length / 2, timeY, time, RLColor.Green);
+                RootConsole.Print(centerX - time.Length / 2, timeY, time, Colors.Green);
 
                 
                 string newGame = "Press N to restart";
                 int quarterX = centerX / 2;
                 int newGameY = timeY + 5;
-                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, RLColor.Red);
+                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, Colors.Red);
 
 
                 string quit = "Press Esc to quit";
-                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, RLColor.Red);
+                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, Colors.Red);
 
 
                 RootConsole.Draw(); 
