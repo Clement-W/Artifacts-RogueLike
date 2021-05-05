@@ -1,0 +1,8 @@
+<map id="RogueLike.Core.Enemies.DamariBoss" name="RogueLike.Core.Enemies.DamariBoss">
+<area shape="rect" id="node1" title="This class represents the final boss of the Damari planet" alt="" coords="5,379,272,405"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Enemies_1_1FinalBoss.html" title="This class represent a specific enemy : a final boss. This enemy is different from the others...." alt="" coords="97,304,181,331"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Enemies_1_1Enemy.html" title=" " alt="" coords="105,229,172,256"/>
+<area shape="rect" id="node4" href="$classRogueLike_1_1Core_1_1ActiveCharacter.html" title="This class represents an activeCharacter. The active characters are those who can take actions on the..." alt="" coords="75,155,202,181"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="96,80,181,107"/>
+<area shape="rect" id="node6" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="95,5,183,32"/>
+</map>

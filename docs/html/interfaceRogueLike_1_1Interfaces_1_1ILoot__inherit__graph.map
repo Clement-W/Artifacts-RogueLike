@@ -1,0 +1,26 @@
+<map id="RogueLike.Interfaces.ILoot" name="RogueLike.Interfaces.ILoot">
+<area shape="rect" id="node1" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="5,585,200,611"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Artifact.html" title="This class represents an artifact. It&#39;s not an item because it&#39;s not usable. But it&#39;s drawable and lo..." alt="" coords="265,497,439,523"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Equipments_1_1Equipment.html" title="This class represents an equipment. An equipment is a drawable, is lootable and sellable by a merchan..." alt="" coords="248,548,456,589"/>
+<area shape="rect" id="node17" href="$classRogueLike_1_1Core_1_1Gold.html" title="This class represents the gold. This is not an item because it can&#39;t be used, or sold; It&#39;s lootable ..." alt="" coords="273,614,431,641"/>
+<area shape="rect" id="node18" href="$classRogueLike_1_1Core_1_1Items_1_1Item.html" title="This class represents an item that is drawable, lootable and sellable by a merchant" alt="" coords="253,722,451,749"/>
+<area shape="rect" id="node4" href="$classRogueLike_1_1Core_1_1Equipments_1_1AttackEquipment.html" title="This class represents the equipments designed to make damages" alt="" coords="524,221,732,263"/>
+<area shape="rect" id="node12" href="$classRogueLike_1_1Core_1_1Equipments_1_1DefenseEquipment.html" title="This class represents the equipments designed to protect from damage" alt="" coords="524,548,732,589"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Equipments_1_1DeathScythe.html" title="This is the weapon of the boss from the Thaadd planet : A death Scythe" alt="" coords="827,5,1035,47"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Equipments_1_1Fist.html" title="This class represents the initial attack equipment of the player : the fist" alt="" coords="816,71,1047,98"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1Equipments_1_1Knife.html" title="This class represents a weapon : the knife" alt="" coords="827,123,1035,164"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1Equipments_1_1Scepter.html" title="This is the weapon of the boss from the Damari planet : A Scepter The pattern is the same as the spea..." alt="" coords="827,188,1035,229"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1Equipments_1_1Spear.html" title="This class represents a weapon : the spear" alt="" coords="827,253,1035,295"/>
+<area shape="rect" id="node10" href="$classRogueLike_1_1Core_1_1Equipments_1_1Sword.html" title="This class represents a weapon : the sword" alt="" coords="827,319,1035,360"/>
+<area shape="rect" id="node11" href="$classRogueLike_1_1Core_1_1Equipments_1_1Trident.html" title="This is the weapon of the boss from the Alleo planet : A Trident The pattern is a horizontal T,..." alt="" coords="827,384,1035,425"/>
+<area shape="rect" id="node13" href="$classRogueLike_1_1Core_1_1Equipments_1_1Boots.html" title="This class represents a part of the armor : the boots" alt="" coords="827,449,1035,491"/>
+<area shape="rect" id="node14" href="$classRogueLike_1_1Core_1_1Equipments_1_1Chestplate.html" title="This class represents a part of the armor : the chestplate" alt="" coords="827,515,1035,556"/>
+<area shape="rect" id="node15" href="$classRogueLike_1_1Core_1_1Equipments_1_1Helmet.html" title="This class represents a part of the armor : the helmet" alt="" coords="827,580,1035,621"/>
+<area shape="rect" id="node16" href="$classRogueLike_1_1Core_1_1Equipments_1_1Leggins.html" title="This class represents a part of the armor : the leggins" alt="" coords="827,645,1035,687"/>
+<area shape="rect" id="node19" href="$classRogueLike_1_1Core_1_1Items_1_1HealingItem.html" title="This class represents an item that can heal the player A the moment there&#39;s only healing items." alt="" coords="504,787,752,814"/>
+<area shape="rect" id="node20" href="$classRogueLike_1_1Core_1_1Items_1_1Bandage.html" title="This class represents a bandage : a healing item that can heal the player" alt="" coords="819,711,1044,738"/>
+<area shape="rect" id="node21" href="$classRogueLike_1_1Core_1_1Items_1_1HealthKit.html" title="This class represents a health kit : a healing item that can heal the player" alt="" coords="817,762,1046,789"/>
+<area shape="rect" id="node22" href="$classRogueLike_1_1Core_1_1Items_1_1MedicinalHerb.html" title="This class represents a medicinal herb : a healing item that can heal the player" alt="" coords="800,813,1063,839"/>
+<area shape="rect" id="node23" href="$classRogueLike_1_1Core_1_1Items_1_1OldSandwich.html" title="This class represents a old sandwich : a healing item that can heal the player" alt="" coords="836,864,1027,905"/>
+<area shape="rect" id="node24" href="$classRogueLike_1_1Core_1_1Items_1_1Ration.html" title="This class represents a ration : a healing item that can heal the player" alt="" coords="826,930,1037,957"/>
+</map>

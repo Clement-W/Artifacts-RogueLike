@@ -1,0 +1,5 @@
+<map id="RogueLike.Core.TeleportationPortal" name="RogueLike.Core.TeleportationPortal">
+<area shape="rect" id="node1" title="This class represents a teleportation portable. It&#39;s drawable and animated" alt="" coords="5,80,217,121"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="11,5,99,32"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1IAnimated.html" title="This interface is implemented by every elements that are animated periodically." alt="" coords="124,5,213,32"/>
+</map>

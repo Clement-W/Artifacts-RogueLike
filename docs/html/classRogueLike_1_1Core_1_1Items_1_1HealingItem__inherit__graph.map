@@ -1,0 +1,12 @@
+<map id="RogueLike.Core.Items.HealingItem" name="RogueLike.Core.Items.HealingItem">
+<area shape="rect" id="node1" title="This class represents an item that can heal the player A the moment there&#39;s only healing items." alt="" coords="241,107,489,133"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Items_1_1Bandage.html" title="This class represents a bandage : a healing item that can heal the player" alt="" coords="556,5,781,32"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1Items_1_1HealthKit.html" title="This class represents a health kit : a healing item that can heal the player" alt="" coords="554,56,783,83"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1Items_1_1MedicinalHerb.html" title="This class represents a medicinal herb : a healing item that can heal the player" alt="" coords="537,107,800,133"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1Items_1_1OldSandwich.html" title="This class represents a old sandwich : a healing item that can heal the player" alt="" coords="573,158,764,199"/>
+<area shape="rect" id="node10" href="$classRogueLike_1_1Core_1_1Items_1_1Ration.html" title="This class represents a ration : a healing item that can heal the player" alt="" coords="563,224,774,251"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Items_1_1Item.html" title="This class represents an item that is drawable, lootable and sellable by a merchant" alt="" coords="141,107,193,133"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,56,93,83"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="22,107,77,133"/>
+<area shape="rect" id="node5" href="$interfaceRogueLike_1_1Interfaces_1_1ISellable.html" title="This interface is implemented by every elements that can be sold by a merchant." alt="" coords="10,157,89,184"/>
+</map>

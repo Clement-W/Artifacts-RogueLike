@@ -1,0 +1,4 @@
+<map id="RogueLike.View.GameOverScreen" name="RogueLike.View.GameOverScreen">
+<area shape="rect" id="node1" title="This class is the game over screen when the player dies" alt="" coords="5,80,248,107"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1View_1_1ScreenView.html" title="This class is the parent class of every consoles. It contains the root console that can be used to di..." alt="" coords="77,5,176,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawableGenerator.html" title="This interface is implemented by every classes that generate drawable elements on the map" alt="" coords="5,57,233,98"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Systems_1_1EnemyGenerator.html" title="This class is used to generate random enemies" alt="" coords="281,5,544,32"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Systems_1_1EquipmentGenerator.html" title="This class is used to generate random equipments in the map" alt="" coords="301,57,524,98"/>
+<area shape="rect" id="node4" href="$classRogueLike_1_1Systems_1_1ItemGenerator.html" title="This class is used to generate random item in the map" alt="" coords="289,123,537,149"/>
+</map>

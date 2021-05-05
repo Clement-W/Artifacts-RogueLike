@@ -1,0 +1,4 @@
+<map id="RogueLike.Core.Behaviors.ChasePlayer" name="RogueLike.Core.Behaviors.ChasePlayer">
+<area shape="rect" id="node1" title="This class describes a specific behavior where the enemy will chase the player with A* pathfinding" alt="" coords="5,80,201,121"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1IBehavior.html" title="This interface is implemented by the classes that act as a behavior for some enemies" alt="" coords="61,5,145,32"/>
+</map>
