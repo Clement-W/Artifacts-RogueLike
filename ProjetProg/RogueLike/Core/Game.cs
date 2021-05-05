@@ -28,7 +28,7 @@ namespace RogueLike.Core
         /// <value>
         /// The command system that is used to perform actions on the game
         /// </value>
-        public CommandSystem CommandSystem { get; set; }
+        public CommandSystem CommandSystem { get; private set; }
 
         /// <value>
         /// This is the scheduling system that schedule the enemy's actions

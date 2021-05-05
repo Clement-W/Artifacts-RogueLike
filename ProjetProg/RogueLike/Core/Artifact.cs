@@ -41,7 +41,7 @@ namespace RogueLike.Core
         /// <value>
         /// The planet from where the artifacts comes from
         /// </value>
-        public PlanetName ComesFrom { get; set; }
+        public PlanetName ComesFrom { get; private set; }
 
         /// <summary>
         /// This is the constructor of the artifact class

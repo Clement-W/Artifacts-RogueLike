@@ -23,7 +23,7 @@ namespace RogueLike.Core
         /// <value>
         /// This list contains every animated sprites
         /// </value>
-        public List<IAnimated> AnimatedSprites { get; set; }
+        public List<IAnimated> AnimatedSprites { get; private set; }
 
 
 
@@ -242,7 +242,7 @@ namespace RogueLike.Core
         /// Set the field of view of the player according to it's awareness
         /// </summary>
         /// <param name="player">The player</param>
-        public void UpdatePlayerFieldOfView(Player player)
+        private void UpdatePlayerFieldOfView(Player player)
         {
             int radius;
             // If the location is a boss room or the spaceship, the awareness is equal to the map width (infinite)
@@ -284,7 +284,7 @@ namespace RogueLike.Core
         /// <param name="posX">The x position of the loot</param>
         /// <param name="posY">The y position of the loot</param>
         /// <returns></returns>
-        public bool CheckLootCollectability(Player player, int posX, int posY)
+        private bool CheckLootCollectability(Player player, int posX, int posY)
         {
             // This boolean is used for the items that are on a merchant stall. If The player
             // doesn't have enough money, the player can't walk on the cell. 

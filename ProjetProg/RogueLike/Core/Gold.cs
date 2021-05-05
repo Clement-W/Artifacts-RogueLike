@@ -35,7 +35,7 @@ namespace RogueLike.Core
         /// <value>
         /// The gold amount
         /// </value>
-        public int Amount { get; set; }
+        public int Amount { get; private set; }
 
         /// <value>
         /// The name of the artifact
