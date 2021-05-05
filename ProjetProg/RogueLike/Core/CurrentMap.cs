@@ -83,7 +83,7 @@ namespace RogueLike.Core
             Merchants = new List<Merchant>();
             TeleportationPortals = new List<TeleportationPortal>();
             MapLocation = new Location();
-
+            
         }
 
         /// <summary>

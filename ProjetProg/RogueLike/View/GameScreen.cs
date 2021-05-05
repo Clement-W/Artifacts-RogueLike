@@ -305,10 +305,6 @@ namespace RogueLike.View
                 int absoluteX = mouseX + CameraSystem.viewPortStartX;
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
-                // Get the clicked cell
-                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; 
-
-
                 // Get the difference between the cell and the player position
                 double diffX = Math.Abs(absoluteX - Game.Player.PosX);
                 double diffY = Math.Abs(absoluteY - Game.Player.PosY);
