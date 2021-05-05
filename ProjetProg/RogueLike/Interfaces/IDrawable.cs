@@ -1,5 +1,6 @@
 using RLNET;
 using RogueLike.Core;
+
 namespace RogueLike.Interfaces
 {
 

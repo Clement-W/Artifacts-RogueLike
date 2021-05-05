@@ -1,9 +1,8 @@
-using RLNET;
 using RogueSharp;
-using System;
+
 using System.Collections.Generic;
 using System.Threading;
-using RogueLike.View;
+
 using RogueLike.Core.Enemies;
 
 namespace RogueLike.Core.Equipments

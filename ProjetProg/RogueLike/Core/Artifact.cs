@@ -1,6 +1,6 @@
 using RogueLike.Interfaces;
 using RLNET;
-using RogueSharp;
+
 namespace RogueLike.Core
 {
 

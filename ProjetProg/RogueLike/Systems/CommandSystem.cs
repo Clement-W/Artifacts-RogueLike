@@ -1,11 +1,11 @@
-using RogueLike.Core;
-using RogueLike.Core.Enemies;
+using System.Collections.Generic;
+
 using RogueSharp;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using RogueLike.Interfaces;
+using RogueLike.Core;
+using RogueLike.Core.Enemies;
+
+
 
 
 namespace RogueLike.Systems

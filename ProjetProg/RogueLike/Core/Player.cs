@@ -1,8 +1,9 @@
+using System.Collections.Generic;
+
 using RLNET;
 using RogueSharp;
+
 using RogueLike.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 using RogueLike.Core.Equipments;
 using RogueLike.Core.Items;
 

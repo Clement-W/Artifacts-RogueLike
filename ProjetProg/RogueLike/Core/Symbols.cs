@@ -1,6 +1,4 @@
-﻿using RLNET;
-
-namespace RogueLike.Core
+﻿namespace RogueLike.Core
 {
 
 

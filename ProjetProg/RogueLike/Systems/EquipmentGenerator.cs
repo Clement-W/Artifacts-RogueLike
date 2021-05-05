@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 using RogueLike.Core.Equipments;
 using RogueLike.Interfaces;
 

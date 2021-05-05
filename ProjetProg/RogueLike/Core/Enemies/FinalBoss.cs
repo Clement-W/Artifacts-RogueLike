@@ -1,4 +1,5 @@
 using RogueSharp;
+
 namespace RogueLike.Core.Enemies
 {
     /// <summary>

@@ -1,14 +1,16 @@
-using RogueSharp;
-using RogueSharp.MapCreation;
 using System;
-using RogueLike.Interfaces;
-using RogueLike.Core;
 using System.Linq;
 using System.Collections.Generic;
+
+using RogueSharp;
+using RogueSharp.MapCreation;
+
 using RogueLike.Core.Enemies;
 using RogueLike.Core.Merchants;
 using RogueLike.Core.Items;
 using RogueLike.Core.Equipments;
+using RogueLike.Interfaces;
+using RogueLike.Core;
 
 namespace RogueLike.Systems
 {

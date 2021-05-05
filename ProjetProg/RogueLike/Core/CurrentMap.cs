@@ -1,14 +1,15 @@
-using RLNET;
-using RogueSharp;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+
+using RLNET;
+using RogueSharp;
+
 using RogueLike.Interfaces;
-using System.Threading;
-using System.Diagnostics;
-using System;
 using RogueLike.Core.Enemies;
 using RogueLike.Core.Merchants;
+
 namespace RogueLike.Core
 {
 

@@ -1,7 +1,8 @@
 using RogueLike.Interfaces;
-using RogueLike.Core.Enemies;
-using RogueSharp;
 using RogueLike.Systems;
+using RogueLike.Core.Enemies;
+
+using RogueSharp;
 namespace RogueLike.Core.Behaviors
 {
     /// <summary>

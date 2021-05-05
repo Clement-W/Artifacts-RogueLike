@@ -1,4 +1,3 @@
-using System;
 using RogueLike.Core;
 using RogueLike.View;
 

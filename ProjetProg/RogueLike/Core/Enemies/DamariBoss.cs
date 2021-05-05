@@ -2,6 +2,7 @@ using System;
 using RogueLike.Core.Behaviors;
 using RogueLike.Systems;
 using RogueLike.Core.Equipments;
+
 namespace RogueLike.Core.Enemies
 {
 

@@ -1,7 +1,7 @@
 using RogueLike.Interfaces;
-using RLNET;
-using RogueSharp;
 using RogueLike.Core.Merchants;
+
+using RLNET;
 namespace RogueLike.Core.Equipments
 {
     /// <summary>

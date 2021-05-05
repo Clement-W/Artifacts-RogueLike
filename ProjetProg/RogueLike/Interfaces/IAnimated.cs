@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RogueLike.Interfaces {
+﻿namespace RogueLike.Interfaces {
 
     /// <summary>
     /// This interface is implemented by every elements that are

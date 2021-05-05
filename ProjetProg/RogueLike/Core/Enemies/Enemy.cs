@@ -1,6 +1,5 @@
-using RLNET;
+
 using RogueLike.Systems;
-using RogueLike.Core;
 using RogueLike.Core.Behaviors;
 using RogueLike.Core.Equipments;
 

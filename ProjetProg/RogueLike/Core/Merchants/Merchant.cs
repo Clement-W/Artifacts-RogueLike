@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using RogueLike.Interfaces;
 using RLNET;
-using RogueSharp;
-using System.Linq;
 
 namespace RogueLike.Core.Merchants
 {

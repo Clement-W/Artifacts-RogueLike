@@ -1,7 +1,5 @@
 using RogueLike.Interfaces;
-using RogueLike.Core;
 using RogueLike.Systems;
-using System;
 using RogueLike.Core.Enemies;
 
 using RogueSharp;

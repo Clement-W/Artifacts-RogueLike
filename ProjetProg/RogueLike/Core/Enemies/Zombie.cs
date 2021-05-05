@@ -1,4 +1,5 @@
 using System;
+
 namespace RogueLike.Core.Enemies
 {
     /// <summary>

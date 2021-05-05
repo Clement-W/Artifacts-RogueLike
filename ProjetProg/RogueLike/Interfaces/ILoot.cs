@@ -1,5 +1,3 @@
-using RogueLike.Core;
-
 namespace RogueLike.Interfaces
 {
     /// <summary>
