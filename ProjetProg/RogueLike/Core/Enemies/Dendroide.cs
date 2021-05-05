@@ -11,10 +11,10 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor creates the Dendroide with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapCreation </param>
         public Dendroide(int difficultyLevel){
             Random random = new Random();
-            Attack = 8 * difficultyLevel;
+            Attack = 2 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 20;
             PrintedColor = Colors.basicColor;

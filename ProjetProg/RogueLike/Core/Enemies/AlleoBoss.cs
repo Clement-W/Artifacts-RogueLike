@@ -11,11 +11,11 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor creates the boss with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapCreation </param>
         public AlleoBoss(int difficultyLevel){
             Random random = new Random();
             Attack = 1 * difficultyLevel;
-            Defense = 3*difficultyLevel;
+            Defense = 2*difficultyLevel;
             Awareness = 100;
             PrintedColor = Colors.basicColor; 
             BaseColor = PrintedColor;

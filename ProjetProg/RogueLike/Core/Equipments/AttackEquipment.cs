@@ -217,9 +217,11 @@ namespace RogueLike.Core.Equipments
         /// <param name="defender">The ActiveCharacter who defends</param>
         private void DealDamage(ActiveCharacter attacker, ActiveCharacter defender) // 
         {
+            
             // The attack bonus given by the weapon is automatically added to the base attack 
             // thanks to the ActiveCharacter's Attack property
             int damageValue = attacker.Attack - defender.Defense;
+            System.Console.WriteLine(attacker.Attack + " " + defender.Defense + " " + damageValue) ;
             // Deal at least one damage if damage is negative or nullified
             defender.Health -= (damageValue <= 0) ? 1 : damageValue; 
             if (attacker is Player && damageValue <= 0)

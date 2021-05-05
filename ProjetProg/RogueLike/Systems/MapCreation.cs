@@ -85,6 +85,7 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
+            System.Console.WriteLine("diff: " +difficultyLevel);
         }
 
         /// <summary>
@@ -522,7 +523,7 @@ namespace RogueLike.Systems
         /// <param name="player">The player</param>
         private void CreateStairs(Player player)
         {
-            Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
+            Cell farthestCellFromPlayer = map.FindClosestWalkableCell(player); //TODO: remettre further
             map.Stairs = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 

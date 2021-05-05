@@ -14,7 +14,7 @@ namespace RogueLike.Core.Enemies
         public Zombie(int difficultyLevel)
         {
             Random random = new Random();
-            Attack = 6 * difficultyLevel;
+            Attack = 3 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 10;
             PrintedColor = Colors.Zombie;

@@ -16,8 +16,8 @@ namespace RogueLike.Core.Enemies
         public ThaaddBoss(int difficultyLevel)
         {
             Random random = new Random();
-            Attack = 1 * difficultyLevel;
-            Defense = 3 * difficultyLevel;
+            Attack = 2 * difficultyLevel;
+            Defense = 2 * difficultyLevel;
             Awareness = 100;
             PrintedColor = Colors.basicColor;
             BaseColor = PrintedColor;

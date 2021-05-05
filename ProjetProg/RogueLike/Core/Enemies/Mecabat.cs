@@ -16,7 +16,7 @@ namespace RogueLike.Core.Enemies
         public Mecabat(int difficultyLevel)
         {
             Random random = new Random();
-            Attack = 1 * difficultyLevel;
+            Attack = 2 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 15;
             PrintedColor = Colors.basicColor; 

@@ -20,7 +20,7 @@ namespace RogueLike.Core.Enemies
         {
             Random random = new Random();
             Attack = 10 * difficultyLevel;
-            Defense = 3 * difficultyLevel;
+            Defense = 2 * difficultyLevel;
             Awareness = 100;
             PrintedColor = Colors.basicColor; 
             BaseColor = PrintedColor;
