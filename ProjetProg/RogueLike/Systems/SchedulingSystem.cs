@@ -40,7 +40,7 @@ namespace RogueLike.Systems
                 // Reset the stopwatch
                 schedulingStopWatch.Reset();
                 // Move the enemies
-                game.CommandSystem.MoveEnemies(game); 
+                game.Command.MoveEnemies(game); 
                 // Render the game screen
                 View.GameScreen.RenderRequired = true; 
                 // Restart the stopwatch

@@ -70,7 +70,7 @@ namespace RogueLike.Core
             Attack = 10;
             Defense = 5;
             Awareness = 15;
-            Gold = 100;
+            CarriedGold = 100;
             Health = 100;
             MaxHealth = 100;
             Name = "Adventurer";
@@ -113,7 +113,7 @@ namespace RogueLike.Core
 
             statConsole.Print(1, 2, $"{Symbols.attackSymbol}: {Attack}", Colors.GrayText);
             statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Symbols.defenseSymbol}: {Defense}", Colors.GrayText);
-            statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {Gold}", Colors.Gold);
+            statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {CarriedGold}", Colors.Gold);
         }
 
         /// <summary>
@@ -233,14 +233,14 @@ namespace RogueLike.Core
                 }
                 else
                 {
-                    Game.MessageLog.AddMessage("You're carrying too many items to take that.");
+                    Game.Messages.AddMessage("You're carrying too many items to take that.");
                 }
             }
 
             else if (loot is Gold)
             {
                 Gold goldLoot = loot as Gold;
-                Gold += goldLoot.Amount;
+                CarriedGold += goldLoot.Amount;
                 isLootCollected = true;
             }
 
@@ -271,7 +271,7 @@ namespace RogueLike.Core
                 if (loot is Equipment)
                 {
                     Equipment lootEquipment = loot as Equipment;
-                    Game.MessageLog.AddMessage("You've dropped " + lootEquipment.Name);
+                    Game.Messages.AddMessage("You've dropped " + lootEquipment.Name);
                 }
                 // Add the loot to the map
                 map.AddLoot(loot);

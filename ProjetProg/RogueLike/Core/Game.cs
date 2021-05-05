@@ -19,27 +19,27 @@ namespace RogueLike.Core
         /// <value>
         /// The camera system that is used to create a scrolling map
         /// </value>
-        public CameraSystem CameraSystem { get; private set; }
+        public CameraSystem Camera { get; private set; }
 
         /// <value>
         /// The command system that is used to perform actions on the game
         /// </value>
-        public CommandSystem CommandSystem { get; private set; }
+        public CommandSystem Command { get; private set; }
 
         /// <value>
         /// This is the scheduling system that schedule the enemy's actions
         /// </value>
-        public SchedulingSystem SchedulingSystem { get; private set; }
+        public SchedulingSystem Scheduling { get; private set; }
 
         /// <value>
         /// The animation system animates the animated character periodically
         /// </value>
-        public AnimationSystem AnimationSystem { get; private set; }
+        public AnimationSystem Animation { get; private set; }
 
         /// <value>
         /// The message log is used to give information about the game state to the player
         /// </value>
-        public static MessageLog MessageLog { get; set; }
+        public static MessageLog Messages { get; set; }
         
       
         /// <value>
@@ -61,12 +61,12 @@ namespace RogueLike.Core
             CurrentLevel = 1;
             GameScreen gameScreen = new GameScreen(this);
 
-            CommandSystem = new CommandSystem();
-            CameraSystem = new CameraSystem();
-            MessageLog = new MessageLog();
+            Command = new CommandSystem();
+            Camera = new CameraSystem();
+            Messages = new MessageLog();
             Player = new Player();
-            SchedulingSystem = new SchedulingSystem();
-            AnimationSystem = new AnimationSystem();
+            Scheduling = new SchedulingSystem();
+            Animation = new AnimationSystem();
             InitializeMap();
         }
 

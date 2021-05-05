@@ -28,7 +28,7 @@ namespace RogueLike.Core
         /// <summary>
         /// This is the gold amount that has the character
         /// </summary>
-        public int Gold { get; set; }
+        public int CarriedGold { get; set; }
 
         /// <summary>
         /// This is the current health of character

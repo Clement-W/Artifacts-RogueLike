@@ -21,7 +21,7 @@ namespace RogueLike.Core.Enemies
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold= (int)(difficultyLevel) * random.Next(10,40);
+            CarriedGold= (int)(difficultyLevel) * random.Next(10,40);
             Health = random.Next(50,100) * difficultyLevel;
             MaxHealth = Health;
             Name = "Alleo boss"; 

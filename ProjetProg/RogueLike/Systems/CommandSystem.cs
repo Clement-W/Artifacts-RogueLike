@@ -127,7 +127,7 @@ namespace RogueLike.Systems
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;
-                    enemy.PerformAction(game.Player, game.Map, game.CommandSystem);
+                    enemy.PerformAction(game.Player, game.Map, game.Command);
                 }
                 else
                 {

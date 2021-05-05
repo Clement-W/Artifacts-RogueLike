@@ -15,7 +15,7 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor create the boss with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in MapCreation </param>
         public DamariBoss(int difficultyLevel)
         {
             Random random = new Random();
@@ -26,7 +26,7 @@ namespace RogueLike.Core.Enemies
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold = (int)(difficultyLevel) * random.Next(10, 40);
+            CarriedGold = (int)(difficultyLevel) * random.Next(10, 40);
             Health = random.Next(50, 100) * difficultyLevel;
             MaxHealth = Health;
             Name = "Damari boss"; 

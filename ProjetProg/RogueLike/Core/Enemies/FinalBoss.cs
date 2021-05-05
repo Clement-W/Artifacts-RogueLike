@@ -23,7 +23,7 @@ namespace RogueLike.Core.Enemies
 
             // Drop the artifact
             Cell artifactCell = map.FindClosestWalkableCell(this);
-            map.AddLoot(new Artifact(map.Location.Planet, artifactCell.X, artifactCell.Y));
+            map.AddLoot(new Artifact(map.MapLocation.Planet, artifactCell.X, artifactCell.Y));
 
             // Reveal Teleportation portal to go back to the spaceships
             Cell portalCell = map.FindClosestWalkableCell(this);

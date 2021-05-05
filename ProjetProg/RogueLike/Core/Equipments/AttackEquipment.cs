@@ -195,9 +195,9 @@ namespace RogueLike.Core.Equipments
             // Remove the enemy from the map
             map.RemoveEnemy(enemy); 
             // Add the enemy's gold as a loot on the ground
-            map.AddLoot(new Gold(enemy.Gold, enemy.PosX, enemy.PosY));
+            map.AddLoot(new Gold(enemy.CarriedGold, enemy.PosX, enemy.PosY));
             // Tell the player that the enemy is defeated
-            Game.MessageLog.AddMessage(enemy.Name + " is defeated");
+            Game.Messages.AddMessage(enemy.Name + " is defeated");
 
             // If the enemy is a final boss, use the designed method to
             // drop the artifacts, it's weapon and show the teleporter to the spaceship
@@ -224,7 +224,7 @@ namespace RogueLike.Core.Equipments
             defender.Health -= (damageValue <= 0) ? 1 : damageValue; 
             if (attacker is Player && damageValue <= 0)
             {
-                Game.MessageLog.AddMessage("That wasn't very effective...");
+                Game.Messages.AddMessage("That wasn't very effective...");
             }
 
             // Put the change color method in a thread to let the game continue during the color changement

@@ -98,9 +98,9 @@ namespace RogueLike.Systems
         /// <param name="planet">The planet type (Alleo, Damari,T haad)</param>
         public MapCreation(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
         {
-            map.Location.MapType = mapType;
-            map.Location.Planet = planet;
-            map.Location.InitializeSprites();
+            map.MapLocation.MapType = mapType;
+            map.MapLocation.Planet = planet;
+            map.MapLocation.InitializeSprites();
 
         }
 
@@ -143,15 +143,15 @@ namespace RogueLike.Systems
             // Inform the player
             if (mapLevel == 1)
             {
-                Game.MessageLog.AddMessage("You teleported to " + map.Location.Planet.ToString());
-                Game.MessageLog.AddMessage("at level 1");
+                Game.Messages.AddMessage("You teleported to " + map.MapLocation.Planet.ToString());
+                Game.Messages.AddMessage("at level 1");
             }
             else
             {
-                Game.MessageLog.AddMessage("You arrive to the level " + mapLevel);
-                Game.MessageLog.AddMessage("of the planet " + map.Location.Planet.ToString());
+                Game.Messages.AddMessage("You arrive to the level " + mapLevel);
+                Game.Messages.AddMessage("of the planet " + map.MapLocation.Planet.ToString());
             }
-            Game.MessageLog.AddMessage("Find the stairs!");
+            Game.Messages.AddMessage("Find the stairs!");
 
             return map;
         }
@@ -198,28 +198,28 @@ namespace RogueLike.Systems
         private void CreateBoss(CurrentMap map)
         {
             Enemy finalBoss = null;
-            Game.MessageLog.AddMessage("You enter the boss room");
+            Game.Messages.AddMessage("You enter the boss room");
             // Create the specific boss according to the planet
-            switch (map.Location.Planet)
+            switch (map.MapLocation.Planet)
             {
                 case PlanetName.Alleo:
                     finalBoss = new AlleoBoss(difficultyLevel);
-                    Game.MessageLog.AddMessage("Be careful, with it's trident,");
-                    Game.MessageLog.AddMessage("this boss has a long range!");
+                    Game.Messages.AddMessage("Be careful, with it's trident,");
+                    Game.Messages.AddMessage("this boss has a long range!");
                     break;
 
                 case PlanetName.Damari:
                     finalBoss = new DamariBoss(difficultyLevel);
-                    Game.MessageLog.AddMessage("Be careful, this boss can");
-                    Game.MessageLog.AddMessage("teleport itself and makes");
-                    Game.MessageLog.AddMessage("heavy damages!");
+                    Game.Messages.AddMessage("Be careful, this boss can");
+                    Game.Messages.AddMessage("teleport itself and makes");
+                    Game.Messages.AddMessage("heavy damages!");
                     break;
 
                 case PlanetName.Thaadd:
                     finalBoss = new ThaaddBoss(difficultyLevel);
-                    Game.MessageLog.AddMessage("Be careful, with it's death");
-                    Game.MessageLog.AddMessage("scythe, this boss can attack");
-                    Game.MessageLog.AddMessage("All around itself!");
+                    Game.Messages.AddMessage("Be careful, with it's death");
+                    Game.Messages.AddMessage("scythe, this boss can attack");
+                    Game.Messages.AddMessage("All around itself!");
                     break;
             }
 
@@ -239,8 +239,8 @@ namespace RogueLike.Systems
         /// <returns></returns>
         public CurrentMap CreateMap(Player player)
         {
-            Game.MessageLog = new MessageLog(); //reset the messagelog
-            switch (map.Location.MapType)
+            Game.Messages = new MessageLog(); //reset the messagelog
+            switch (map.MapLocation.MapType)
             {
                 // Create the desired map according to the map type
                 case MapType.Spaceship:
@@ -274,7 +274,7 @@ namespace RogueLike.Systems
             // Get the center coordinates of the map, that will be used to compute other coordinates
             int centerX = mapWidth / 2;
             int centerY = mapHeight / 2;
-            Game.MessageLog.AddMessage("Welcome to your spaceship!");
+            Game.Messages.AddMessage("Welcome to your spaceship!");
 
 
 
@@ -523,7 +523,7 @@ namespace RogueLike.Systems
         private void CreateStairs(Player player)
         {
             Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player);
-            map.Staircase = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
+            map.Stairs = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 
         /// <summary>

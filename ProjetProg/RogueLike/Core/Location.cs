@@ -36,7 +36,7 @@ namespace RogueLike.Core
         public RLColor WallBackgroundColor { get; set; }
 
         /// <value>
-        /// The background color for the walll in Fov of this location
+        /// The background color for the wall in Fov of this location
         /// </value>
         public RLColor WallBackgroundColorInFov { get; set; }
 
