@@ -151,6 +151,7 @@ namespace RogueLike.Systems
                 Game.MessageLog.AddMessage("You arrive to the level " + mapLevel);
                 Game.MessageLog.AddMessage("of the planet " + map.Location.Planet.ToString());
             }
+            Game.MessageLog.AddMessage("Find the stairs!");
 
             return map;
         }
