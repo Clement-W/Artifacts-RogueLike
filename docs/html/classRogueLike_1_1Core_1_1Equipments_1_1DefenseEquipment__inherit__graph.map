@@ -1,0 +1,11 @@
+<map id="RogueLike.Core.Equipments.DefenseEquipment" name="RogueLike.Core.Equipments.DefenseEquipment">
+<area shape="rect" id="node1" title="This class represents the equipments designed to protect from damage" alt="" coords="281,104,489,145"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Equipments_1_1Boots.html" title="This class represents a part of the armor : the boots" alt="" coords="537,5,745,47"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1Equipments_1_1Chestplate.html" title="This class represents a part of the armor : the chestplate" alt="" coords="537,71,745,112"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1Equipments_1_1Helmet.html" title="This class represents a part of the armor : the helmet" alt="" coords="537,136,745,177"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1Equipments_1_1Leggins.html" title="This class represents a part of the armor : the leggins" alt="" coords="537,201,745,243"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Equipments_1_1Equipment.html" title="This class represents an equipment. An equipment is a drawable, is lootable and sellable by a merchan..." alt="" coords="141,111,233,138"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,61,93,87"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="22,111,77,138"/>
+<area shape="rect" id="node5" href="$interfaceRogueLike_1_1Interfaces_1_1ISellable.html" title="This interface is implemented by every elements that can be sold by a merchant." alt="" coords="10,162,89,189"/>
+</map>

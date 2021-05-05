@@ -1,0 +1,19 @@
+<map id="RogueLike.Core.Equipments.Equipment" name="RogueLike.Core.Equipments.Equipment">
+<area shape="rect" id="node1" title="This class represents an equipment. An equipment is a drawable, is lootable and sellable by a merchan..." alt="" coords="141,384,349,425"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Equipments_1_1AttackEquipment.html" title="This class represents the equipments designed to make damages" alt="" coords="397,221,605,263"/>
+<area shape="rect" id="node13" href="$classRogueLike_1_1Core_1_1Equipments_1_1DefenseEquipment.html" title="This class represents the equipments designed to protect from damage" alt="" coords="397,515,605,556"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,341,93,367"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="22,391,77,418"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1ISellable.html" title="This interface is implemented by every elements that can be sold by a merchant." alt="" coords="10,442,89,469"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Equipments_1_1DeathScythe.html" title="This is the weapon of the boss from the Thaadd planet : A death Scythe" alt="" coords="665,5,873,47"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1Equipments_1_1Fist.html" title="This class represents the initial attack equipment of the player : the fist" alt="" coords="653,71,884,98"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1Equipments_1_1Knife.html" title="This class represents a weapon : the knife" alt="" coords="665,123,873,164"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1Equipments_1_1Scepter.html" title="This is the weapon of the boss from the Damari planet : A Scepter The pattern is the same as the spea..." alt="" coords="665,188,873,229"/>
+<area shape="rect" id="node10" href="$classRogueLike_1_1Core_1_1Equipments_1_1Spear.html" title="This class represents a weapon : the spear" alt="" coords="665,253,873,295"/>
+<area shape="rect" id="node11" href="$classRogueLike_1_1Core_1_1Equipments_1_1Sword.html" title="This class represents a weapon : the sword" alt="" coords="665,319,873,360"/>
+<area shape="rect" id="node12" href="$classRogueLike_1_1Core_1_1Equipments_1_1Trident.html" title="This is the weapon of the boss from the Alleo planet : A Trident The pattern is a horizontal T,..." alt="" coords="665,384,873,425"/>
+<area shape="rect" id="node14" href="$classRogueLike_1_1Core_1_1Equipments_1_1Boots.html" title="This class represents a part of the armor : the boots" alt="" coords="665,449,873,491"/>
+<area shape="rect" id="node15" href="$classRogueLike_1_1Core_1_1Equipments_1_1Chestplate.html" title="This class represents a part of the armor : the chestplate" alt="" coords="665,515,873,556"/>
+<area shape="rect" id="node16" href="$classRogueLike_1_1Core_1_1Equipments_1_1Helmet.html" title="This class represents a part of the armor : the helmet" alt="" coords="665,580,873,621"/>
+<area shape="rect" id="node17" href="$classRogueLike_1_1Core_1_1Equipments_1_1Leggins.html" title="This class represents a part of the armor : the leggins" alt="" coords="665,645,873,687"/>
+</map>

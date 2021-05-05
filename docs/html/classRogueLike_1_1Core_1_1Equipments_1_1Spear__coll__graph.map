@@ -1,0 +1,8 @@
+<map id="RogueLike.Core.Equipments.Spear" name="RogueLike.Core.Equipments.Spear">
+<area shape="rect" id="node1" title="This class represents a weapon : the spear" alt="" coords="41,229,249,271"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Equipments_1_1AttackEquipment.html" title="This class represents the equipments designed to make damages" alt="" coords="78,155,213,181"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Equipments_1_1Equipment.html" title="This class represents an equipment. An equipment is a drawable, is lootable and sellable by a merchan..." alt="" coords="99,80,191,107"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,5,93,32"/>
+<area shape="rect" id="node5" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="118,5,173,32"/>
+<area shape="rect" id="node6" href="$interfaceRogueLike_1_1Interfaces_1_1ISellable.html" title="This interface is implemented by every elements that can be sold by a merchant." alt="" coords="197,5,275,32"/>
+</map>

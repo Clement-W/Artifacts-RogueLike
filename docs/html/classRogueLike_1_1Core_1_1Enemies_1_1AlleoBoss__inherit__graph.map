@@ -1,0 +1,8 @@
+<map id="RogueLike.Core.Enemies.AlleoBoss" name="RogueLike.Core.Enemies.AlleoBoss">
+<area shape="rect" id="node1" title="This class represents the final boss of the Alleo planet" alt="" coords="5,379,256,405"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Enemies_1_1FinalBoss.html" title="This class represent a specific enemy : a final boss. This enemy is different from the others...." alt="" coords="89,304,173,331"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Enemies_1_1Enemy.html" title=" " alt="" coords="97,229,164,256"/>
+<area shape="rect" id="node4" href="$classRogueLike_1_1Core_1_1ActiveCharacter.html" title="This class represents an activeCharacter. The active characters are those who can take actions on the..." alt="" coords="67,155,194,181"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="88,80,173,107"/>
+<area shape="rect" id="node6" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="87,5,175,32"/>
+</map>

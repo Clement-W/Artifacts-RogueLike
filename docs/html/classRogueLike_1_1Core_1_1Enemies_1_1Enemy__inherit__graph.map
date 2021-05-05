@@ -1,0 +1,13 @@
+<map id="RogueLike.Core.Enemies.Enemy" name="RogueLike.Core.Enemies.Enemy">
+<area shape="rect" id="node1" title=" " alt="" coords="449,81,681,108"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Enemies_1_1Dendroide.html" title="This class represent an enemy named Dendroide. This enemy is slow but deals more damages" alt="" coords="729,5,984,32"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Enemies_1_1FinalBoss.html" title="This class represent a specific enemy : a final boss. This enemy is different from the others...." alt="" coords="732,56,981,83"/>
+<area shape="rect" id="node10" href="$classRogueLike_1_1Core_1_1Enemies_1_1Mecabat.html" title="This class represent an enemy named Mecabat. This enemy is really fast but deals small damages" alt="" coords="735,107,978,133"/>
+<area shape="rect" id="node11" href="$classRogueLike_1_1Core_1_1Enemies_1_1Zombie.html" title="This class represent an enemy named Zombie. It&#39;s slow and deals low damages" alt="" coords="738,157,975,184"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1ActiveCharacter.html" title="This class represents an activeCharacter. The active characters are those who can take actions on the..." alt="" coords="275,81,401,108"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="141,81,227,108"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,81,93,108"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1Enemies_1_1AlleoBoss.html" title="This class represents the final boss of the Alleo planet" alt="" coords="1040,5,1291,32"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1Enemies_1_1DamariBoss.html" title="This class represents the final boss of the Damari planet" alt="" coords="1032,56,1299,83"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1Enemies_1_1ThaaddBoss.html" title="This class represents the final boss of the Thaadd planet" alt="" coords="1032,107,1299,133"/>
+</map>

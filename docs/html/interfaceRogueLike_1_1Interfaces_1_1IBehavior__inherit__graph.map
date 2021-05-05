@@ -1,0 +1,5 @@
+<map id="RogueLike.Interfaces.IBehavior" name="RogueLike.Interfaces.IBehavior">
+<area shape="rect" id="node1" title="This interface is implemented by the classes that act as a behavior for some enemies" alt="" coords="5,46,229,73"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Behaviors_1_1ChasePlayer.html" title="This class describes a specific behavior where the enemy will chase the player with A* pathfinding" alt="" coords="277,5,473,47"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Behaviors_1_1TeleportFarFromPlayer.html" title="This class describes a specific behavior where the enemy will teleport itself randomly across the map" alt="" coords="277,71,473,112"/>
+</map>

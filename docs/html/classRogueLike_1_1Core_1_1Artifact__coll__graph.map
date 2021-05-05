@@ -1,0 +1,5 @@
+<map id="RogueLike.Core.Artifact" name="RogueLike.Core.Artifact">
+<area shape="rect" id="node1" title="This class represents an artifact. It&#39;s not an item because it&#39;s not usable. But it&#39;s drawable and lo..." alt="" coords="10,80,185,107"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,5,93,32"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="118,5,173,32"/>
+</map>

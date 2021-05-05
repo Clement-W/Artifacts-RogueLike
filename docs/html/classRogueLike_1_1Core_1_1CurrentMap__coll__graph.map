@@ -1,0 +1,4 @@
+<map id="RogueLike.Core.CurrentMap" name="RogueLike.Core.CurrentMap">
+<area shape="rect" id="node1" title="This class represents the current map where the player is It inherits the Map class from RogueSharp...." alt="" coords="5,80,208,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="81,5,132,32"/>
+</map>

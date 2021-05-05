@@ -1,0 +1,4 @@
+<map id="RogueLike.View.WinScreen" name="RogueLike.View.WinScreen">
+<area shape="rect" id="node1" title="This class manages the displayed screen when the player win the game." alt="" coords="5,80,203,107"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1View_1_1ScreenView.html" title="This class is the parent class of every consoles. It contains the root console that can be used to di..." alt="" coords="55,5,153,32"/>
+</map>

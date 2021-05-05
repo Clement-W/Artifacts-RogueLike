@@ -1,0 +1,11 @@
+<map id="RogueLike.Interfaces.IAnimated" name="RogueLike.Interfaces.IAnimated">
+<area shape="rect" id="node1" title="This interface is implemented by every elements that are animated periodically." alt="" coords="5,133,235,159"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Merchants_1_1Merchant.html" title="This class represents a merchant. It&#39;s an animated character." alt="" coords="289,71,488,112"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1TeleportationPortal.html" title="This class represents a teleportation portable. It&#39;s drawable and animated" alt="" coords="283,180,495,221"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Merchants_1_1EquipmentSeller.html" title="This class represents a merchant that only sells equipments" alt="" coords="566,5,765,47"/>
+<area shape="rect" id="node4" href="$classRogueLike_1_1Core_1_1Merchants_1_1ItemSeller.html" title="This class represents a merchant that only sells items" alt="" coords="566,71,765,112"/>
+<area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1PortalToPlanet1.html" title="This class represents the teleportation portal that goes to Alleo" alt="" coords="551,137,779,163"/>
+<area shape="rect" id="node7" href="$classRogueLike_1_1Core_1_1PortalToPlanet2.html" title="This class represent the teleportation portal that goes to Damari" alt="" coords="551,187,779,214"/>
+<area shape="rect" id="node8" href="$classRogueLike_1_1Core_1_1PortalToPlanet3.html" title="This class represents the teleportation portal that goes to Thaad" alt="" coords="551,238,779,265"/>
+<area shape="rect" id="node9" href="$classRogueLike_1_1Core_1_1PortalToSpaceship.html" title="This class represents the teleportation portal that goes to the spaceship" alt="" coords="543,289,788,315"/>
+</map>

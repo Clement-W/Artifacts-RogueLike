@@ -1,0 +1,5 @@
+<map id="RogueLike.Core.Gold" name="RogueLike.Core.Gold">
+<area shape="rect" id="node1" title="This class represents the gold. This is not an item because it can&#39;t be used, or sold; It&#39;s lootable ..." alt="" coords="5,80,163,107"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1ILoot.html" title="This interface is implemented by every elements that can be looted on the map. If a class implements ..." alt="" coords="9,5,63,32"/>
+<area shape="rect" id="node3" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="88,5,176,32"/>
+</map>

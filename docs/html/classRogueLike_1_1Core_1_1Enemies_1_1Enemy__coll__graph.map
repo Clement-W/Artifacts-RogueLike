@@ -1,0 +1,6 @@
+<map id="RogueLike.Core.Enemies.Enemy" name="RogueLike.Core.Enemies.Enemy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,229,237,256"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1ActiveCharacter.html" title="This class represents an activeCharacter. The active characters are those who can take actions on the..." alt="" coords="58,155,185,181"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="79,80,164,107"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="77,5,165,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="RogueLike.Core.Merchants.EquipmentSeller" name="RogueLike.Core.Merchants.EquipmentSeller">
+<area shape="rect" id="node1" title="This class represents a merchant that only sells equipments" alt="" coords="6,229,205,271"/>
+<area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Merchants_1_1Merchant.html" title="This class represents a merchant. It&#39;s an animated character." alt="" coords="64,155,147,181"/>
+<area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="7,80,92,107"/>
+<area shape="rect" id="node4" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawable.html" title="This interface is implemented by every element that are drawable on the map" alt="" coords="5,5,93,32"/>
+<area shape="rect" id="node5" href="$interfaceRogueLike_1_1Interfaces_1_1IAnimated.html" title="This interface is implemented by every elements that are animated periodically." alt="" coords="117,80,206,107"/>
+</map>

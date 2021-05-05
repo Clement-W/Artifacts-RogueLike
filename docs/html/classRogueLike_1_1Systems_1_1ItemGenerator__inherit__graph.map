@@ -1,0 +1,4 @@
+<map id="RogueLike.Systems.ItemGenerator" name="RogueLike.Systems.ItemGenerator">
+<area shape="rect" id="node1" title="This class is used to generate random item in the map" alt="" coords="5,80,253,107"/>
+<area shape="rect" id="node2" href="$interfaceRogueLike_1_1Interfaces_1_1IDrawableGenerator.html" title="This interface is implemented by every classes that generate drawable elements on the map" alt="" coords="53,5,206,32"/>
+</map>
