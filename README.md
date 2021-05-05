@@ -19,7 +19,6 @@ Aide: Tuto pour nimporte quelle partie d'un rogue like : http://www.roguebasin.c
 TODO (pas ordonné) : 
 * Faire une classe Drawable qui contient la métode draw
 * Faire tous les todo dans le code
-
 * CHanger tous les noms de variables égaux à un nom de type
 * musique
 
@@ -40,12 +39,5 @@ TODO bonus :
 * Quand tu cliques sur un escalier : il va dessus et attend 10s pour l'ouvrir et des enemis pop autour, il faut le défendre
 * le drone ouvre les prochains niveaux dans les escaliers (remplace la clé)
 
-
-REMINDER:
-* Faire la doc avec les balises xml de la doc csharp
-
-
-Idées :
-* Pour justifier le fait qu'on va deeper dans la map, on peut dire qu'on va dans des vieux temples pour récuperer les artefacts
 
 
