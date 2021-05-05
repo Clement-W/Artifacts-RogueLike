@@ -54,7 +54,7 @@ namespace RogueLike.Core.Items
         /// </summary>
         public Item()
         {
-            PrintedColor = RLColor.White;
+            PrintedColor = Colors.BasicColor;
             SoldByMerchant = null;
         }
 

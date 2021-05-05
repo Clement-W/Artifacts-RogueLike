@@ -88,7 +88,7 @@ namespace RogueLike.View
             if (RenderRequired)
             {
                 RootConsole.Clear();
-                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, Colors.Black);
 
                 // Animate every elements that can be animated in the map
                 Game.AnimationSystem.AnimateAnimatedElements(Game.Map);

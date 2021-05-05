@@ -48,6 +48,7 @@ namespace RogueLike.Core
 
         public static RLColor TeleportationPortal = Palette.DbLight;
 
+
         public static RLColor FloorBackgroundPlanet1 = Palette.DbDeepWater;
         public static RLColor FloorBackgroundFovPlanet1 = Palette.DbWater; // Différent si c'est dans le champ de vision
         public static RLColor WallBackgroundPlanet1 = Palette.iceWallDark;
@@ -80,8 +81,11 @@ namespace RogueLike.Core
         public static RLColor titaniumColor = Palette.DbOldStone;
 
         // basic :
-        public static RLColor basicColor = RLColor.White;
-
+        public static RLColor BasicColor = RLColor.White;
+        public static RLColor Black = RLColor.Black;
+        public static RLColor Red = RLColor.Red;
+        public static RLColor Green = RLColor.Green;
+        public static RLColor LightGray = RLColor.LightGray;
 
     }
 }

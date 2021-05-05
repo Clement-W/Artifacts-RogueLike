@@ -35,7 +35,7 @@ namespace RogueLike.View
             if (RenderRequired)
             {
                 RootConsole.Clear();
-                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, Colors.Black);
 
                 // Compute the center of the screen that will be used later
                 int centerX = RootConsole.Width / 2;
@@ -46,10 +46,10 @@ namespace RogueLike.View
                 int titleY = (int)(RootConsole.Height * 0.1);
                 string title = "" + Symbols.artifact4Symbol + " Artifacts " + Symbols.artifact4Symbol; //TODO: mettre symbol artefact
                 // Print this string on the console
-                RootConsole.Print(centerX - title.Length / 2, titleY, title, RLColor.White);
+                RootConsole.Print(centerX - title.Length / 2, titleY, title, Colors.BasicColor);
 
                 string artifactsSymbol = "" + Symbols.artifact1Symbol + "   " + Symbols.artifact2Symbol + "   " + Symbols.artifact3Symbol; //TODO: mettre les artefacts
-                RootConsole.Print(centerX - artifactsSymbol.Length / 2, titleY + 1, artifactsSymbol, RLColor.White);
+                RootConsole.Print(centerX - artifactsSymbol.Length / 2, titleY + 1, artifactsSymbol, Colors.BasicColor);
 
                 // The story of the game is called "lore" in RPGs
                 string lore1 = "A dangerous organization is looking for the 3";
@@ -70,20 +70,20 @@ namespace RogueLike.View
                 int lorePart1Y = titleY + 3;
                 for (int i = 0; i < loresPart1.Length; i++)
                 {
-                    RootConsole.Print(centerX - loresPart1[i].Length / 2, lorePart1Y + i, loresPart1[i], RLColor.LightGray);
+                    RootConsole.Print(centerX - loresPart1[i].Length / 2, lorePart1Y + i, loresPart1[i], Colors.LightGray);
                 }
 
                 // The y coordinate of the first lore string (part 2)
                 int lorePart2Y = lorePart1Y + loresPart1.Length + 1;
                 for (int i = 0; i < loresPart2.Length; i++)
                 {
-                    RootConsole.Print(centerX - loresPart2[i].Length / 2, lorePart2Y + i, loresPart2[i], RLColor.LightGray);
+                    RootConsole.Print(centerX - loresPart2[i].Length / 2, lorePart2Y + i, loresPart2[i], Colors.LightGray);
                 }
 
                 // The y coordinate of the command title
                 int commandTitleY = lorePart2Y + loresPart2.Length + 2;
                 string commandsTitle = Symbols.playerDownSymbol+ " Commands "+ Symbols.playerDownSymbol;
-                RootConsole.Print(centerX - commandsTitle.Length / 2, commandTitleY, commandsTitle, RLColor.White);
+                RootConsole.Print(centerX - commandsTitle.Length / 2, commandTitleY, commandsTitle, Colors.BasicColor);
 
                 // The y coordinate of the first command explanation
                 int commandsY = commandTitleY + 1;
@@ -96,17 +96,17 @@ namespace RogueLike.View
                 string[] commands = { command1, command2, command3, command4, command5 };
                 for (int i = 0; i < commands.Length; i++)
                 {
-                    RootConsole.Print(centerX - commands[i].Length / 2, commandsY + i, commands[i], RLColor.LightGray);
+                    RootConsole.Print(centerX - commands[i].Length / 2, commandsY + i, commands[i], Colors.LightGray);
                 }
 
                 string newGame = "Press N to start";
                 int quarterX = centerX / 2;
                 int newGameY = commandsY + commands.Length + 2;
-                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, RLColor.Red);
+                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, Colors.Red);
 
 
                 string quit = "Press Esc to quit";
-                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, RLColor.Red);
+                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, Colors.Red);
 
 
                 RootConsole.Draw();

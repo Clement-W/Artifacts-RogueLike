@@ -37,7 +37,7 @@ namespace RogueLike.View
             if (RenderRequired)
             {
                 RootConsole.Clear();
-                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, RLColor.Black);
+                RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, Colors.Black);
 
                 // Compute the center of the screen that will be used later
                 int centerX = RootConsole.Width / 2;
@@ -47,16 +47,16 @@ namespace RogueLike.View
                 int gameOverY = (int)(RootConsole.Height * 0.3);
                 string gameOver = $"ý Game over ý"; //TODO: mettre symbol artefact
                 // Print this string on the console
-                RootConsole.Print(centerX - gameOver.Length / 2, gameOverY, gameOver, RLColor.White);
+                RootConsole.Print(centerX - gameOver.Length / 2, gameOverY, gameOver, Colors.BasicColor);
 
 
                 string newGame = "Press N to start";
                 int quarterX = centerX / 2;
                 int newGameY = gameOverY + 5;
-                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, RLColor.Red);
+                RootConsole.Print(quarterX - newGame.Length / 2, newGameY, newGame, Colors.Red);
 
                 string quit = "Press Esc to quit";
-                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, RLColor.Red);
+                RootConsole.Print(3 * quarterX - quit.Length / 2, newGameY, quit, Colors.Red);
 
                 RootConsole.Draw();
                 RenderRequired = false;
