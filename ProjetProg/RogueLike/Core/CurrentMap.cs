@@ -1,14 +1,15 @@
-using RLNET;
-using RogueSharp;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+
+using RLNET;
+using RogueSharp;
+
 using RogueLike.Interfaces;
-using System.Threading;
-using System.Diagnostics;
-using System;
 using RogueLike.Core.Enemies;
 using RogueLike.Core.Merchants;
+
 namespace RogueLike.Core
 {
 
@@ -23,7 +24,7 @@ namespace RogueLike.Core
         /// <value>
         /// This list contains every animated sprites
         /// </value>
-        public List<IAnimated> AnimatedSprites { get; set; }
+        public List<IAnimated> AnimatedSprites { get; private set; }
 
 
 
@@ -48,7 +49,7 @@ namespace RogueLike.Core
         /// This is the staircase that can be found on cave maps
         /// The staircase allows to go deeper in the map
         /// </value>
-        public Staircase Staircase { get; set; }
+        public Staircase Stairs { get; set; }
 
         /// <value>
         /// This list contains every teleportation portals
@@ -65,7 +66,7 @@ namespace RogueLike.Core
         /// <value>
         /// The location contains every information on the map : the maptype, the planet, ...
         /// </value>
-        public Location Location { get; set; }
+        public Location MapLocation { get; set; }
 
 
 
@@ -81,7 +82,7 @@ namespace RogueLike.Core
             AttackedCells = new List<ICell>();
             Merchants = new List<Merchant>();
             TeleportationPortals = new List<TeleportationPortal>();
-            Location = new Location();
+            MapLocation = new Location();
 
         }
 
@@ -152,9 +153,9 @@ namespace RogueLike.Core
             }
 
             // Draw the staircase
-            if (Staircase != null)
+            if (Stairs != null)
             {
-                Staircase.Draw(mapConsole, this);
+                Stairs.Draw(mapConsole, this);
             }
 
             // Draw the merchants
@@ -196,11 +197,11 @@ namespace RogueLike.Core
                     // Draw the cell differently if it's walkable or not
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.FloorFov, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
+                        console.Set(cell.X, cell.Y, Colors.FloorFov, MapLocation.FloorBackgroundColorInFov, MapLocation.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
+                        console.Set(cell.X, cell.Y, Colors.WallFov, MapLocation.WallBackgroundColorInFov, MapLocation.WallSymbol);
                     }
 
                 }
@@ -208,11 +209,11 @@ namespace RogueLike.Core
                 {
                     if (cell.IsWalkable)
                     {
-                        console.Set(cell.X, cell.Y, Colors.Floor, Location.FloorBackgroundColor, Location.FloorSymbol);
+                        console.Set(cell.X, cell.Y, Colors.Floor, MapLocation.FloorBackgroundColor, MapLocation.FloorSymbol);
                     }
                     else
                     {
-                        console.Set(cell.X, cell.Y, Colors.Wall, Location.WallBackgroundColor, Location.WallSymbol);
+                        console.Set(cell.X, cell.Y, Colors.Wall, MapLocation.WallBackgroundColor, MapLocation.WallSymbol);
                     }
                 }
             }
@@ -229,11 +230,11 @@ namespace RogueLike.Core
         {
             if (cell.IsWalkable)
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, Location.FloorBackgroundColorInFov, Location.FloorSymbol);
+                mapConsole.Set(cell.X, cell.Y, Colors.AttackedCell, MapLocation.FloorBackgroundColorInFov, MapLocation.FloorSymbol);
             }
             else
             {
-                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, Location.WallBackgroundColorInFov, Location.WallSymbol);
+                mapConsole.Set(cell.X, cell.Y, Colors.WallFov, MapLocation.WallBackgroundColorInFov, MapLocation.WallSymbol);
             }
         }
 
@@ -242,12 +243,12 @@ namespace RogueLike.Core
         /// Set the field of view of the player according to it's awareness
         /// </summary>
         /// <param name="player">The player</param>
-        public void UpdatePlayerFieldOfView(Player player)
+        private void UpdatePlayerFieldOfView(Player player)
         {
             int radius;
             // If the location is a boss room or the spaceship, the awareness is equal to the map width (infinite)
             // Only the walls can block the fov
-            if (Location.MapType == MapType.BossRoom || Location.MapType == MapType.Spaceship)
+            if (MapLocation.MapType == MapType.BossRoom || MapLocation.MapType == MapType.Spaceship)
             {
                 radius = Width;
             }
@@ -284,7 +285,7 @@ namespace RogueLike.Core
         /// <param name="posX">The x position of the loot</param>
         /// <param name="posY">The y position of the loot</param>
         /// <returns></returns>
-        public bool CheckLootCollectability(Player player, int posX, int posY)
+        private bool CheckLootCollectability(Player player, int posX, int posY)
         {
             // This boolean is used for the items that are on a merchant stall. If The player
             // doesn't have enough money, the player can't walk on the cell. 
@@ -302,12 +303,12 @@ namespace RogueLike.Core
                 if (sellable.SoldByMerchant != null)
                 {
                     // if the player have enough money
-                    if (player.Gold >= sellable.Cost)
+                    if (player.CarriedGold >= sellable.Cost)
                     {
                         // collect the item if possible
                         if (CollectLoot(player, posX, posY))
                         {
-                            player.Gold -= sellable.Cost;
+                            player.CarriedGold -= sellable.Cost;
                             sellable.SoldByMerchant.SellItem(sellable);
                         }
                         else
@@ -318,8 +319,8 @@ namespace RogueLike.Core
                     else
                     {
                         // Else, the player don't have enough money, inform them.
-                        Game.MessageLog.AddMessage("You don't have enough gold");
-                        Game.MessageLog.AddMessage($"You need {sellable.Cost - player.Gold} more");
+                        Game.Messages.AddMessage("You don't have enough gold");
+                        Game.Messages.AddMessage($"You need {sellable.Cost - player.CarriedGold} more");
                         // The player can't walk on that item
                         lootCanBeWalkedOn = false;
                     }
@@ -466,9 +467,9 @@ namespace RogueLike.Core
         /// <returns>True if the player is on staircase</returns>
         public bool IsPlayerOnStaircase(Player player)
         {
-            if (Staircase != null)
+            if (Stairs != null)
             {
-                return Staircase.PosX == player.PosX && Staircase.PosY == player.PosY;
+                return Stairs.PosX == player.PosX && Stairs.PosY == player.PosY;
             }
             else
             {
@@ -535,19 +536,19 @@ namespace RogueLike.Core
                 if (loot is Gold)
                 {
                     Gold gold = loot as Gold;
-                    Game.MessageLog.AddMessage("You found " + gold.Amount + " gold");
+                    Game.Messages.AddMessage("You found " + gold.Amount + " gold");
                 }
                 else if (loot is Artifact)
                 {
-                    Game.MessageLog.AddMessage("You've collected " + loot.Name);
+                    Game.Messages.AddMessage("You've collected " + loot.Name);
                 }
                 else if (sellableLoot.SoldByMerchant == null)
                 {
-                    Game.MessageLog.AddMessage("You found " + loot.Name);
+                    Game.Messages.AddMessage("You found " + loot.Name);
                 }
                 else
                 {
-                    Game.MessageLog.AddMessage("You bought " + loot.Name);
+                    Game.Messages.AddMessage("You bought " + loot.Name);
                 }
                 Loots.Remove(loot);
                 return true;

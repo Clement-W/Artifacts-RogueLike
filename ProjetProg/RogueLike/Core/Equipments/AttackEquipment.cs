@@ -1,9 +1,8 @@
-using RLNET;
 using RogueSharp;
-using System;
+
 using System.Collections.Generic;
 using System.Threading;
-using RogueLike.View;
+
 using RogueLike.Core.Enemies;
 
 namespace RogueLike.Core.Equipments
@@ -17,13 +16,13 @@ namespace RogueLike.Core.Equipments
         /// <value>
         /// The attack bonus given to the player with this equipment 
         /// </value>
-        public int AttackBonus { get; set; }
+        public int AttackBonus { get; protected set; }
 
 
 
         /// <value>
         /// This dictionary describes the range of the attack.
-        /// The key correponds to the depth range.
+        /// The key corresponds to the depth range.
         /// The value corresponds to the width range (perpendicular to the attack direction) (odd number)
         /// For example, if the dictionnary is : {<\1,1>,<\2,1>} 
         /// the attack will impact the 2 cells in the attacker direction.
@@ -32,7 +31,7 @@ namespace RogueLike.Core.Equipments
         /// We choose to use a dictionnary even if a list would have worked, to be clearer
         /// than just using the list indexes as depth ranges.
         /// </value>
-        public Dictionary<int, int> AttackRange { get; set; }
+        protected Dictionary<int, int> AttackRange { get; set; }
 
 
         /// <summary>
@@ -117,7 +116,7 @@ namespace RogueLike.Core.Equipments
         /// <param name="player">The player</param>
         /// <param name="targetedCells">The cells that are targeted by the attack</param>
         /// <returns>True if the attack hits an active character</returns>
-        public bool AttackTargetedCells(CurrentMap map, ActiveCharacter attacker, Player player, IEnumerable<ICell> targetedCells)
+        protected bool AttackTargetedCells(CurrentMap map, ActiveCharacter attacker, Player player, IEnumerable<ICell> targetedCells)
         {
             bool isSomeoneHurt = false;
 
@@ -167,7 +166,7 @@ namespace RogueLike.Core.Equipments
         /// </summary>
         /// <param name="cell">The attacked cell</param>
         /// <param name="map"> The map</param>
-        public void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
+        protected void ChangeColorOfAttackedCells(ICell cell, CurrentMap map)
         {
             // Lock the list while we are modifying it to avoid multi-threading errors 
             lock (map.AttackedCells)
@@ -190,14 +189,14 @@ namespace RogueLike.Core.Equipments
         /// </summary>
         /// <param name="enemy">The enemy that is destroyed</param>
         /// <param name="map">The map</param>
-        public void KillEnemy(Enemy enemy, CurrentMap map) 
+        private void KillEnemy(Enemy enemy, CurrentMap map) 
         {
             // Remove the enemy from the map
             map.RemoveEnemy(enemy); 
             // Add the enemy's gold as a loot on the ground
-            map.AddLoot(new Gold(enemy.Gold, enemy.PosX, enemy.PosY));
+            map.AddLoot(new Gold(enemy.CarriedGold, enemy.PosX, enemy.PosY));
             // Tell the player that the enemy is defeated
-            Game.MessageLog.AddMessage(enemy.Name + " is defeated");
+            Game.Messages.AddMessage(enemy.Name + " is defeated");
 
             // If the enemy is a final boss, use the designed method to
             // drop the artifacts, it's weapon and show the teleporter to the spaceship
@@ -215,20 +214,20 @@ namespace RogueLike.Core.Equipments
         /// </summary>
         /// <param name="attacker">The ActiveCharacter who attacks</param>
         /// <param name="defender">The ActiveCharacter who defends</param>
-        public void DealDamage(ActiveCharacter attacker, ActiveCharacter defender) // 
+        private void DealDamage(ActiveCharacter attacker, ActiveCharacter defender) // 
         {
-            // The attackbonux given by the weapon is automatically added to the base attack 
+            // The attack bonus given by the weapon is automatically added to the base attack 
             // thanks to the ActiveCharacter's Attack property
             int damageValue = attacker.Attack - defender.Defense;
             // Deal at least one damage if damage is negative or nullified
             defender.Health -= (damageValue <= 0) ? 1 : damageValue; 
             if (attacker is Player && damageValue <= 0)
             {
-                Game.MessageLog.AddMessage("That wasn't very effective...");
+                Game.Messages.AddMessage("That wasn't very effective...");
             }
 
             // Put the change color method in a thread to let the game continue during the color changement
-            // Without a thread runing in background, the color changement is not visible
+            // Without a thread runing in background, the color change is not visible
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
             FlashThread.Start();
         }

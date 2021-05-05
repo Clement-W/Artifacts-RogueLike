@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using RogueLike.Interfaces;
 using RLNET;
-using RogueSharp;
-using System.Linq;
 
 namespace RogueLike.Core.Merchants
 {
@@ -35,7 +33,7 @@ namespace RogueLike.Core.Merchants
         /// The value of the dictionnary is the sellable, and the key is it's position on the stall
         /// We don't use a list because the index of the element changes according to the list size
         /// </value>
-        public Dictionary<int, ISellable> Stall { get; set; }
+        public Dictionary<int, ISellable> Stall { get; protected set; }
 
         /// <summary>
         /// This is the constructor of the merchant
@@ -105,16 +103,7 @@ namespace RogueLike.Core.Merchants
                 }
             }
 
-
-
         }
-
-
-
-
-
-
-
 
     }
 }

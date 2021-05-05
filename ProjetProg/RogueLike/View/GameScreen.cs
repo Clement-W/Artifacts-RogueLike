@@ -1,11 +1,13 @@
-using RogueLike.Core;
-using RLNET;
-using RogueLike.Systems;
 using System.Diagnostics;
 using System;
+
 using RogueSharp;
-using System.Threading;
-using RogueLike.Interfaces;
+using RLNET;
+
+using RogueLike.Core;
+using RogueLike.Systems;
+
+
 
 
 namespace RogueLike.View
@@ -91,7 +93,7 @@ namespace RogueLike.View
                 RootConsole.SetBackColor(0, 0, RootConsole.Width, RootConsole.Height, Colors.Black);
 
                 // Animate every elements that can be animated in the map
-                Game.AnimationSystem.AnimateAnimatedElements(Game.Map);
+                Game.Animation.AnimateAnimatedElements(Game.Map);
 
                 // Clear every subconsoles
                 mapConsole.Clear();
@@ -106,8 +108,8 @@ namespace RogueLike.View
                 Game.Player.DrawStats(statConsole);
                 Game.Player.DrawEquipmentInventory(equipmentsConsole);
                 Game.Player.DrawItemsInventory(itemsConsole);
-                Core.Game.MessageLog.Draw(messageConsole);
-                Game.CameraSystem.CenterCamera(Game.Player);
+                Core.Game.Messages.Draw(messageConsole);
+                Game.Camera.CenterCamera(Game.Player);
 
 
                 // Blit the sub consoles in the root console
@@ -133,7 +135,7 @@ namespace RogueLike.View
         {
 
             //Check the scheduling system to move the enemies
-            Game.SchedulingSystem.CheckSchedule(Game);
+            Game.Scheduling.CheckSchedule(Game);
 
 
             DidPlayerAct = false;
@@ -143,7 +145,7 @@ namespace RogueLike.View
             if (RootConsole.Mouse.GetLeftClick())
             {
                 UpdateOrientation(); // The player looks toward the click direction
-                Game.CommandSystem.Attack(Game.Map,Game.Player,Game.Player); // Attack the targeted cells
+                Game.Command.Attack(Game.Map,Game.Player,Game.Player); // Attack the targeted cells
                 RenderRequired = true;
             }
 
@@ -155,10 +157,10 @@ namespace RogueLike.View
 
                     case RLKey.Escape: RootConsole.Close(); break;
                     // RLNET works with qwerty keybords
-                    case RLKey.W: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
-                    case RLKey.S: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
-                    case RLKey.A: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
-                    case RLKey.D: DidPlayerAct = Game.CommandSystem.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
+                    case RLKey.W: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
+                    case RLKey.S: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
+                    case RLKey.A: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
+                    case RLKey.D: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Right, Game.Map); break;
                     case RLKey.LControl: // Left control to go through staircases or teleportation portals
                         if (Game.Map.IsPlayerOnStaircase(Game.Player))
                         {
@@ -204,29 +206,29 @@ namespace RogueLike.View
         private void CreateNextStage()
         {
             // While the player doesn't access the second floor, go to the next stage
-            if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
+            if (Game.CurrentLevel < 3)
             {
-                // Create a map generator to generate the corresponding map
+                // Create a mapCreation to generate the corresponding map
                 // Increase game current level with ++Game.CurrentLevel
-                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.Location.MapType, Game.Map.Location.Planet);
+                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, Game.Map.MapLocation.MapType, Game.Map.MapLocation.Planet);
                 // Assign the new map to the current game map
                 Game.Map = mapCreation.CreateMap(Game.Player);
 
 
                 DidPlayerAct = true;
                 // Change the title of the console according to the planet name and the level
-                string planetName = Game.Map.Location.Planet.ToString();
+                string planetName = Game.Map.MapLocation.Planet.ToString();
                 ChangeTitle($"{planetName} - Level {Game.CurrentLevel}");
 
             }
             else
             { // When the palyer wants to access the third floor, create a boss room 
-                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.Location.Planet);
+                MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, ++Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, MapType.BossRoom, Game.Map.MapLocation.Planet);
                 Game.Map = mapCreation.CreateMap(Game.Player);
 
 
                 DidPlayerAct = true;
-                string mapName = Game.Map.Location.Planet.ToString();
+                string mapName = Game.Map.MapLocation.Planet.ToString();
                 ChangeTitle($"{mapName} - Boss Room");
 
             }
@@ -247,14 +249,14 @@ namespace RogueLike.View
                 Game.CurrentLevel = 1; //Set the game level to 1
 
             }
-            // Create a map generator with the portal's destination map type in argument 
+            // Create a map Creation with the portal's destination map type in argument 
             MapCreation mapCreation = new MapCreation(Dimensions.worldWidth, Dimensions.worldHeight, Game.CurrentLevel, Game.Player.ArtifactsCollected.Count, portal.DestinationMap, portal.PlanetDestination);
 
             // Change the game current map
             Game.Map = mapCreation.CreateMap(Game.Player);
             DidPlayerAct = true;
-            string mapType = Game.Map.Location.MapType.ToString();
-            string title = (Game.Map.Location.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.Location.Planet.ToString()} - Level {Game.CurrentLevel}";
+            string mapType = Game.Map.MapLocation.MapType.ToString();
+            string title = (Game.Map.MapLocation.MapType == MapType.Spaceship) ? mapType : $"{Game.Map.MapLocation.Planet.ToString()} - Level {Game.CurrentLevel}";
             ChangeTitle(title);
         }
 
@@ -304,7 +306,7 @@ namespace RogueLike.View
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
                 // Get the clicked cell
-                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; //TODO
+                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; 
 
 
                 // Get the difference between the cell and the player position

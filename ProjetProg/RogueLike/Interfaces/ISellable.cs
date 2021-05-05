@@ -1,4 +1,3 @@
-using RogueLike.Core;
 using RogueLike.Core.Merchants;
 namespace RogueLike.Interfaces
 {
@@ -13,7 +12,7 @@ namespace RogueLike.Interfaces
         int Cost { get; set; }
 
 
-        /// <value> A referance to the merchant that sells the element</value>
+        /// <value> A reference to the merchant that sells the element</value>
         Merchant SoldByMerchant { get; set; }
 
 

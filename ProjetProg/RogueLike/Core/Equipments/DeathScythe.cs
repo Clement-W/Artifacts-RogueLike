@@ -1,6 +1,8 @@
 using RogueSharp;
+
 using System.Collections.Generic;
 using System.Threading;
+
 namespace RogueLike.Core.Equipments
 {
     /// <summary>

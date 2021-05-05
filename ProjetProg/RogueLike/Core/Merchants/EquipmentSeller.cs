@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
+
 using RogueLike.Core.Equipments;
+
 namespace RogueLike.Core.Merchants
 {
 

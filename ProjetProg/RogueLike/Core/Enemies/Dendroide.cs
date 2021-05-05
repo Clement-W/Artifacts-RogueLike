@@ -1,4 +1,5 @@
 using System;
+
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
@@ -16,18 +17,18 @@ namespace RogueLike.Core.Enemies
             Attack = 8 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 20;
-            PrintedColor = Colors.BasicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.BasicColor;
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold= (int)(difficultyLevel) * random.Next(0,5);
+            CarriedGold= (int)(difficultyLevel) * random.Next(0,5);
             Health = random.Next(50,100);
             MaxHealth = Health;
             Name = "Dendroide";
             MovingTimePeriod = 5;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Symbols.dendroidSymbol;
-            DownSymbol = Symbols.dendroidSymbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Symbols.dendroidSymbol; 
             LeftSymbol = Symbols.dendroidSymbol;
             RightSymbol = Symbols.dendroidSymbol;
             Direction = Direction.Up;

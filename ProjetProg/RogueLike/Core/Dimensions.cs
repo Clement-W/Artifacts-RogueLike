@@ -1,5 +1,3 @@
-using RLNET;
-
 namespace RogueLike.Core
 {
     /// <summary>

@@ -1,4 +1,5 @@
 using System;
+
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
@@ -9,7 +10,7 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor create the Zombie with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in MapCreation </param>
         public Zombie(int difficultyLevel)
         {
             Random random = new Random();
@@ -20,7 +21,7 @@ namespace RogueLike.Core.Enemies
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold = (int)(difficultyLevel) * random.Next(0, 5);
+            CarriedGold = (int)(difficultyLevel) * random.Next(0, 5);
             Health = random.Next(0, 30) * difficultyLevel;
             MaxHealth = Health;
             Name = "Zombie";

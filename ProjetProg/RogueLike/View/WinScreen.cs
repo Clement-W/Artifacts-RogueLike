@@ -1,10 +1,6 @@
 using RLNET;
 using RogueLike.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RogueLike.View
 {
@@ -54,7 +50,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the congratulation string
                 int congratulationY = (int)(RootConsole.Height * 0.3);
-                string congratulation = Symbols.artifact4Symbol + " Congratulation ! " + Symbols.artifact4Symbol; //TODO: mettre symbol artefact
+                string congratulation = Symbols.artifact4Symbol + " Congratulation ! " + Symbols.artifact4Symbol;
                 // Print this string on the console
                 RootConsole.Print(centerX - congratulation.Length / 2, congratulationY, congratulation, Colors.BasicColor);
 

@@ -1,4 +1,5 @@
 using System;
+
 namespace RogueLike.Core.Enemies
 {
 
@@ -11,25 +12,25 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor creates the Mecabat with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapGenerator </param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in MapCreation </param>
         public Mecabat(int difficultyLevel)
         {
             Random random = new Random();
             Attack = 1 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 15;
-            PrintedColor = Colors.BasicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.BasicColor;
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
-            Gold = (int)(difficultyLevel) * random.Next(0, 5);
+            CarriedGold = (int)(difficultyLevel) * random.Next(0, 5);
             Health = random.Next(20, 30) * difficultyLevel;
             MaxHealth = Health;
             Name = "Mecabot";
             MovingTimePeriod = 1;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Symbols.mecabatSymbol;
-            DownSymbol = Symbols.mecabatSymbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Symbols.mecabatSymbol; 
             LeftSymbol = Symbols.mecabatSymbol;
             RightSymbol = Symbols.mecabatSymbol;
             Direction = Direction.Up;

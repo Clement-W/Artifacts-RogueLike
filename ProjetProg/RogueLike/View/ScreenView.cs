@@ -18,7 +18,7 @@ namespace RogueLike.View
         public static RLRootConsole RootConsole { get; private set; }
 
         /// <value>The key that is pressed by the user</value>
-        public static RLKeyPress KeyPress { get; set; }
+        public static RLKeyPress KeyPress { get; protected set; }
 
         /// <value>A boolean that indicates if the screen has to update the render </value>
         public static bool RenderRequired { get; set; }
@@ -28,7 +28,7 @@ namespace RogueLike.View
         public bool DidPlayerAct { get; set; }
 
         /// <value>This is the game instance that contains every elements in the game</value>
-        public static Game Game { get; set; }
+        public static Game Game { get; private set; }
 
         /// <summary>
         /// This is the constructor of the screen view. It is called by the subclasses which inherit from this class.

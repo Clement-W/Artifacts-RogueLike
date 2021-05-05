@@ -1,10 +1,4 @@
 ﻿using RLNET;
-using RogueLike.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RogueLike.View
 {
@@ -45,7 +39,7 @@ namespace RogueLike.View
 
                 // The y coordinate of the game over string
                 int gameOverY = (int)(RootConsole.Height * 0.3);
-                string gameOver = $"ý Game over ý"; //TODO: mettre symbol artefact
+                string gameOver = $"ý Game over ý";
                 // Print this string on the console
                 RootConsole.Print(centerX - gameOver.Length / 2, gameOverY, gameOver, Colors.BasicColor);
 

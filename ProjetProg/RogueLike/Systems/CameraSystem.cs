@@ -1,4 +1,5 @@
 using RogueLike.Core;
+
 namespace RogueLike.Systems
 {
 
@@ -28,7 +29,6 @@ namespace RogueLike.Systems
         {
 
             // Adapt the camera view port according to the player position
-            //TODO: faire de meilleurs commentaires
             if (player.PosX < Dimensions.mapConsoleWidth / 2) // If player on the left extremity of the map
             {
                 // Camera x starts at zero to simulate hitting the left border of the console

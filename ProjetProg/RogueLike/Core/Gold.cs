@@ -1,6 +1,5 @@
 using RogueLike.Interfaces;
 using RLNET;
-using RogueSharp;
 
 namespace RogueLike.Core
 {
@@ -35,7 +34,7 @@ namespace RogueLike.Core
         /// <value>
         /// The gold amount
         /// </value>
-        public int Amount { get; set; }
+        public int Amount { get; private set; }
 
         /// <value>
         /// The name of the artifact
@@ -75,12 +74,12 @@ namespace RogueLike.Core
                 if (map.IsInFov(PosX, PosY))
                 {
                     // Draw it with the floor fov background color of the map
-                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColorInFov, Symbol);
+                    console.Set(PosX, PosY, PrintedColor, map.MapLocation.FloorBackgroundColorInFov, Symbol);
                 }
                 else
                 {
                     // Draw it with the floor background and a the floor symbol of the map
-                    console.Set(PosX, PosY, PrintedColor, map.Location.FloorBackgroundColor, map.Location.FloorSymbol);
+                    console.Set(PosX, PosY, PrintedColor, map.MapLocation.FloorBackgroundColor, map.MapLocation.FloorSymbol);
                 }
             }
         }

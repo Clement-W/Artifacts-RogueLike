@@ -1,6 +1,7 @@
 using System.Threading;
 using RLNET;
 using RogueLike.Core.Equipments;
+
 namespace RogueLike.Core
 {
     /// <summary>
@@ -22,12 +23,12 @@ namespace RogueLike.Core
         /// <summary>
         /// This is the awareness of the character. Awareness is used to compute the Fov.
         /// </summary>
-        public int Awareness { get; set; }
+        public int Awareness { get; protected set; }
 
         /// <summary>
         /// This is the gold amount that has the character
         /// </summary>
-        public int Gold { get; set; }
+        public int CarriedGold { get; set; }
 
         /// <summary>
         /// This is the current health of character
@@ -37,7 +38,7 @@ namespace RogueLike.Core
         /// <summary>
         /// This is the maximum health that the character can have
         /// </summary>
-        public int MaxHealth { get; set; }
+        public int MaxHealth { get; protected set; }
 
         /// <value>
         /// This property is used to add the weapon attack to the player attack stat
@@ -48,7 +49,7 @@ namespace RogueLike.Core
             {
                 return attack + Weapon.AttackBonus;
             }
-            set { attack = value; }
+            protected set { attack = value; }
         }
 
 
@@ -67,10 +68,8 @@ namespace RogueLike.Core
                 }
                 return defense;
             }
-            set { defense = value; }
+            protected set { defense = value; }
         }
-
-
 
 
         // The 4 next symbols correspond to the 4 direction sprites of the active character
@@ -80,22 +79,22 @@ namespace RogueLike.Core
         /// <value>
         /// The character's symbol when it's looking downward
         /// </value>
-        public char DownSymbol { get; set; }
+        public char DownSymbol { get; protected set; }
 
         /// <value>
         /// The character's symbol when it's looking upward
         /// </value>
-        public char UpSymbol { get; set; }
+        public char UpSymbol { get; protected set; }
 
         /// <value>
         /// The character's symbol when it's looking on the left
         /// </value>
-        public char LeftSymbol { get; set; }
+        public char LeftSymbol { get; protected set; }
 
         /// <value>
         /// The character's symbol when it's looking on the right
         /// </value>
-        public char RightSymbol { get; set; }
+        public char RightSymbol { get; protected set; }
 
         /// <value>
         /// This corresponds to the direction of the active character
@@ -106,7 +105,7 @@ namespace RogueLike.Core
         /// This is the base color of the character. This color can change when
         /// the active character is hit.
         /// </value>
-        public RLColor BaseColor { get; set; }
+        public RLColor BaseColor { get; protected set; }
 
     
         /// <value>

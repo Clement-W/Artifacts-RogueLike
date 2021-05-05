@@ -1,11 +1,11 @@
-using RogueLike.Core;
-using RogueLike.Core.Enemies;
+using System.Collections.Generic;
+
 using RogueSharp;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using RogueLike.Interfaces;
+using RogueLike.Core;
+using RogueLike.Core.Enemies;
+
+
 
 
 namespace RogueLike.Systems
@@ -127,7 +127,7 @@ namespace RogueLike.Systems
                 if (enemy.RemainingTimePeriodToMove == 0)
                 {
                     enemy.RemainingTimePeriodToMove = enemy.MovingTimePeriod;
-                    enemy.PerformAction(game.Player, game.Map, game.CommandSystem);
+                    enemy.PerformAction(game.Player, game.Map, game.Command);
                 }
                 else
                 {

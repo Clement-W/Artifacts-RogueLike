@@ -1,6 +1,5 @@
-using RLNET;
+
 using RogueLike.Systems;
-using RogueLike.Core;
 using RogueLike.Core.Behaviors;
 using RogueLike.Core.Equipments;
 
@@ -14,7 +13,7 @@ namespace RogueLike.Core.Enemies
 
         // The number of time period needed for the enemy to move
         // A time period is equal to 200ms
-        public int MovingTimePeriod { get; set; }
+        public int MovingTimePeriod { get; protected set; }
 
         // The remaning number of period needed for the enemy to move
         // Desincremented in the update loop, and set to MovingTimePeriod when the enemy has moved
