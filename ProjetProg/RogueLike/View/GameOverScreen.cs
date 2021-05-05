@@ -1,4 +1,5 @@
 ﻿using RLNET;
+using RogueLike.Core;
 
 namespace RogueLike.View
 {
