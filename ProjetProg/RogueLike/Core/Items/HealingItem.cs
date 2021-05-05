@@ -4,7 +4,7 @@ namespace RogueLike.Core.Items
     /// This class represents an item that can heal the player
     /// A the moment there's only healing items.
     /// </summary>
-    public class HealingItem : Item
+    public abstract class HealingItem : Item
     {
         /// <summary>
         /// The healing value is the value added to the player's health if they use the item

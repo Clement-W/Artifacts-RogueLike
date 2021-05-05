@@ -523,7 +523,7 @@ namespace RogueLike.Systems
         /// <param name="player">The player</param>
         private void CreateStairs(Player player)
         {
-            Cell farthestCellFromPlayer = map.FindClosestWalkableCell(player); //TODO: remettre further
+            Cell farthestCellFromPlayer = FindFarthestPointFromPlayer(player); 
             map.Stairs = new Staircase(farthestCellFromPlayer.X, farthestCellFromPlayer.Y);
         }
 
