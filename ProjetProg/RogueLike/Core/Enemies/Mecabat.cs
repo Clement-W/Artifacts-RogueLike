@@ -18,7 +18,7 @@ namespace RogueLike.Core.Enemies
             Attack = 1 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 15;
-            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor; 
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
@@ -29,7 +29,7 @@ namespace RogueLike.Core.Enemies
             MovingTimePeriod = 1;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Symbols.mecabatSymbol;
-            DownSymbol = Symbols.mecabatSymbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Symbols.mecabatSymbol; 
             LeftSymbol = Symbols.mecabatSymbol;
             RightSymbol = Symbols.mecabatSymbol;
             Direction = Direction.Up;

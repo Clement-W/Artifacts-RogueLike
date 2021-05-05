@@ -204,7 +204,7 @@ namespace RogueLike.View
         private void CreateNextStage()
         {
             // While the player doesn't access the second floor, go to the next stage
-            if (Game.CurrentLevel < 1) //TODO: remettre à 3 (le troisième etage est le boss)
+            if (Game.CurrentLevel < 3)
             {
                 // Create a map generator to generate the corresponding map
                 // Increase game current level with ++Game.CurrentLevel
@@ -304,7 +304,7 @@ namespace RogueLike.View
                 int absoluteY = mouseY + CameraSystem.viewPortStartY;
 
                 // Get the clicked cell
-                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; //TODO
+                Cell currentMouseCell = Game.Map.GetCell(absoluteX, absoluteY) as Cell; 
 
 
                 // Get the difference between the cell and the player position

@@ -16,7 +16,7 @@ namespace RogueLike.Core.Enemies
             Attack = 8 * difficultyLevel;
             Defense = difficultyLevel;
             Awareness = 20;
-            PrintedColor = Colors.basicColor; //TODO: changer les couleurs
+            PrintedColor = Colors.basicColor;
             BaseColor = PrintedColor;
             ColorAfterHit = Colors.ZombieHit;
 
@@ -27,7 +27,7 @@ namespace RogueLike.Core.Enemies
             MovingTimePeriod = 5;
             RemainingTimePeriodToMove = MovingTimePeriod;
             UpSymbol = Symbols.dendroidSymbol;
-            DownSymbol = Symbols.dendroidSymbol; // TODO: changer les symbols LE TRUC BLEU
+            DownSymbol = Symbols.dendroidSymbol; 
             LeftSymbol = Symbols.dendroidSymbol;
             RightSymbol = Symbols.dendroidSymbol;
             Direction = Direction.Up;
