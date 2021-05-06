@@ -78,7 +78,7 @@ namespace RogueLike.Core
         public static RLColor polymerColor = Palette.DbLight;
         public static RLColor carbonColor = RLColor.Gray;
         public static RLColor platinumColor = Palette.DbSun;
-        public static RLColor titaniumColor = Palette.DbOldStone;
+        public static RLColor titaniumColor = Palette.purpleTitanium;
 
         // basic :
         public static RLColor BasicColor = RLColor.White;

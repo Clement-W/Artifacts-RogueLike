@@ -51,8 +51,8 @@ namespace RogueLike.View
                 RootConsole.Print(centerX - artifactsSymbol.Length / 2, titleY + 1, artifactsSymbol, Colors.BasicColor);
 
                 // The story of the game is called "lore" in RPGs
-                string lore1 = "A dangerous organization is looking for the 3";
-                string lore2 = "legendary artifacts. Those are hidden in some";
+                string lore1 = "You are a space patroller searching for the 3";
+                string lore2 = "legendary artifacts. They are hidden in some";
                 string lore3 = "forbidden ruins in 3 abandoned planets.";
                 string lore4 = "Try to find them as fast as possible.";
 
