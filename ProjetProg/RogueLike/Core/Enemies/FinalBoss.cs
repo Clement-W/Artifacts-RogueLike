@@ -6,7 +6,7 @@ namespace RogueLike.Core.Enemies
     /// This class represent a specific enemy : a final boss. This enemy is different from the others.
     /// It is unique, stronger and when it dies, it drops it's weapon
     /// </summary>
-    public class FinalBoss : Enemy
+    public abstract class FinalBoss : Enemy
     {
         /// <summary>
         /// This method manages the boss death : It drops it's weapon, the artifact

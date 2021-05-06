@@ -111,8 +111,8 @@ namespace RogueLike.Core
 
             statConsole.Print(((int)(healthBarWidth / 2)), 1, "PV", Colors.Text);
 
-            statConsole.Print(1, 2, $"{Symbols.attackSymbol}: {Attack}", Colors.GrayText);
-            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Symbols.defenseSymbol}: {Defense}", Colors.GrayText);
+            statConsole.Print(1, 2, $"{Symbols.attackSymbol}: {Attack}", Colors.BasicColor);
+            statConsole.Print(1 + (int)(Dimensions.statConsoleWidth / 3), 2, $"{Symbols.defenseSymbol}: {Defense}", Colors.BasicColor);
             statConsole.Print(1 + (int)(2 * Dimensions.statConsoleWidth / 3), 2, $"Gold: {CarriedGold}", Colors.Gold);
         }
 
