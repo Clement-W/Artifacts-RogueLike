@@ -85,7 +85,6 @@ namespace RogueLike.Systems
             difficultyLevel = nbArtifactsCollected + level;
             map = new CurrentMap();
             random = new Random();
-            System.Console.WriteLine("diff: " +difficultyLevel);
         }
 
         /// <summary>
