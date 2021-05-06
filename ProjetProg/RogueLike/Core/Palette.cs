@@ -62,6 +62,7 @@ namespace RogueLike.Core{
         public static RLColor darkestGreen = new RLColor(5, 36, 0);
         public static RLColor iceWall = new RLColor(19, 179, 174);
         public static RLColor iceWallDark = new RLColor(17, 151, 148);
+        public static RLColor purpleTitanium = new RLColor(102, 26, 255);
 
 
     }
