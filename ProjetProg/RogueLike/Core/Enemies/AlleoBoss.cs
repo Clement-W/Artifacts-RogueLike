@@ -11,7 +11,7 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor creates the boss with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapCreation </param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in MapCreation </param>
         public AlleoBoss(int difficultyLevel){
             Random random = new Random();
             Attack = 1 * difficultyLevel;

@@ -15,7 +15,7 @@ namespace RogueLike.Systems
         /// <summary>
         /// Create an enemy among every possibles enemy
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in mapCreation</param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in mapCreation</param>
         /// <param name="posX"> The x position of the enemy</param>
         /// <param name="posY"> The y position of the enemy</param>
         /// <returns>Return the created enemy as a Drawable</returns>

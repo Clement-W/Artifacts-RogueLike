@@ -14,7 +14,7 @@ namespace RogueLike.Systems
         /// <summary>
         /// Create a random equipment among the possible equipments
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in mapCreation</param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in mapCreation</param>
         /// <param name="posX"> The x position of the equipment</param>
         /// <param name="posY"> The y position of the equipment</param>
         /// <returns>Return the created equipment as a drawable</returns>
@@ -25,7 +25,7 @@ namespace RogueLike.Systems
             List<Equipment> possibleEquipments = new List<Equipment>();
 
             // If the difficulty level is high, there's more equipment in the possible equipments, including
-            // the low level equipment, and the added higher level equipement
+            // the low level equipment, and the added higher level equipment
             if (difficultyLevel >=1)
             {
                 possibleEquipments.AddRange(new Equipment[]{Boots.CreatePolymerBoots(),Leggins.CreatePolymerLeggins(),Chestplate.CreatePolymerChestplate(),Helmet.CreatePolymerHelmet()});

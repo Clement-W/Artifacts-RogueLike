@@ -176,7 +176,7 @@ namespace RogueLike.Core.Equipments
 
             // Wait 100ms
             Thread.Sleep(100);
-            // Lock the list while we're modfying it
+            // Lock the list while we're modifying it
             lock (map.AttackedCells)
             {
                 map.AttackedCells.Remove(cell);
@@ -228,7 +228,7 @@ namespace RogueLike.Core.Equipments
                 Game.Messages.AddMessage("That wasn't very effective...");
             }
 
-            // Put the change color method in a thread to let the game continue during the color changement
+            // Put the change color method in a thread to let the game continue during the color change
             // Without a thread runing in background, the color change is not visible
             Thread FlashThread = new Thread(new ThreadStart(defender.ChangeColorAfterHit));
             FlashThread.Start();

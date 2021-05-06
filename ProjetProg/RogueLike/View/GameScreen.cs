@@ -151,12 +151,12 @@ namespace RogueLike.View
 
             if (KeyPress != null)
             {
-                // If the user has pressed a key, switch frorm the possibles keys
+                // If the user has pressed a key, switch from the possibles keys
                 switch (KeyPress.Key)
                 {
 
                     case RLKey.Escape: RootConsole.Close(); break;
-                    // RLNET works with qwerty keybords
+                    // RLNET works with qwerty keyboard
                     case RLKey.W: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Up, Game.Map); break;
                     case RLKey.S: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Down, Game.Map); break;
                     case RLKey.A: DidPlayerAct = Game.Command.MovePlayer(Game.Player, Direction.Left, Game.Map); break;
@@ -310,7 +310,7 @@ namespace RogueLike.View
                 double diffY = Math.Abs(absoluteY - Game.Player.PosY);
 
                 // Compare the cell and the player position to deduce the player orientation
-                // If the clickedd cell x position was greater than the player position, the click was on the right part of the screen
+                // If the clicked cell x position was greater than the player position, the click was on the right part of the screen
                 if (absoluteX > Game.Player.PosX)
                 {
                     // Deduce orientation with clickOnRight = true

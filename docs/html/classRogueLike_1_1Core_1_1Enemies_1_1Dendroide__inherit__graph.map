@@ -1,5 +1,5 @@
 <map id="RogueLike.Core.Enemies.Dendroide" name="RogueLike.Core.Enemies.Dendroide">
-<area shape="rect" id="node1" title="This class represent an enemy named Dendroide. This enemy is slow but deals more damages" alt="" coords="5,304,260,331"/>
+<area shape="rect" id="node1" title="This class represent an enemy named Dendroide. This enemy is very slow but deals more damages" alt="" coords="5,304,260,331"/>
 <area shape="rect" id="node2" href="$classRogueLike_1_1Core_1_1Enemies_1_1Enemy.html" title=" " alt="" coords="99,229,166,256"/>
 <area shape="rect" id="node3" href="$classRogueLike_1_1Core_1_1ActiveCharacter.html" title="This class represents an activeCharacter. The active characters are those who can take actions on the..." alt="" coords="69,155,196,181"/>
 <area shape="rect" id="node4" href="$classRogueLike_1_1Core_1_1Character.html" title="This class represents a character." alt="" coords="90,80,175,107"/>

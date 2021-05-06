@@ -96,7 +96,7 @@ namespace RogueLike.Systems
         /// <param name="level">The map level</param>
         /// <param name="nbArtifactsCollected">The number of artifacts collected by the player</param>
         /// <param name="mapType">The map type (spaceship, boss room, planet)</param>
-        /// <param name="planet">The planet type (Alleo, Damari,T haad)</param>
+        /// <param name="planet">The planet type (Alleo, Damari,Thaad)</param>
         public MapCreation(int width, int height, int level, int nbArtifactsCollected, MapType mapType, PlanetName planet) : this(width, height, level, nbArtifactsCollected)
         {
             map.MapLocation.MapType = mapType;

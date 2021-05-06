@@ -1,6 +1,6 @@
 <map id="RogueLike.Core.Enemies.Enemy" name="RogueLike.Core.Enemies.Enemy">
 <area shape="rect" id="node1" title=" " alt="" coords="449,81,681,108"/>
-<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Enemies_1_1Dendroide.html" title="This class represent an enemy named Dendroide. This enemy is slow but deals more damages" alt="" coords="729,5,984,32"/>
+<area shape="rect" id="node5" href="$classRogueLike_1_1Core_1_1Enemies_1_1Dendroide.html" title="This class represent an enemy named Dendroide. This enemy is very slow but deals more damages" alt="" coords="729,5,984,32"/>
 <area shape="rect" id="node6" href="$classRogueLike_1_1Core_1_1Enemies_1_1FinalBoss.html" title="This class represent a specific enemy : a final boss. This enemy is different from the others...." alt="" coords="732,56,981,83"/>
 <area shape="rect" id="node10" href="$classRogueLike_1_1Core_1_1Enemies_1_1Mecabat.html" title="This class represent an enemy named Mecabat. This enemy is really fast but deals small damages" alt="" coords="735,107,978,133"/>
 <area shape="rect" id="node11" href="$classRogueLike_1_1Core_1_1Enemies_1_1Zombie.html" title="This class represent an enemy named Zombie. It&#39;s slow and deals low damages" alt="" coords="738,157,975,184"/>

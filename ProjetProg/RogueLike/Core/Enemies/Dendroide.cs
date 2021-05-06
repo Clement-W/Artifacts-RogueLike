@@ -3,7 +3,7 @@ using System;
 namespace RogueLike.Core.Enemies
 {
     /// <summary>
-    /// This class represent an enemy named Dendroide. This enemy is verry slow but deals more damages
+    /// This class represent an enemy named Dendroide. This enemy is very slow but deals more damages
     /// </summary>
     public class Dendroide : Enemy
     {
@@ -11,7 +11,7 @@ namespace RogueLike.Core.Enemies
         /// <summary>
         /// The constructor creates the Dendroide with it's stats based on the difficulty level
         /// </summary>
-        /// <param name="difficultyLevel"> The difficluty level of the game that is computed in MapCreation </param>
+        /// <param name="difficultyLevel"> The difficulty level of the game that is computed in MapCreation </param>
         public Dendroide(int difficultyLevel){
             Random random = new Random();
             Attack = 4 * difficultyLevel;

@@ -12,7 +12,7 @@ namespace RogueLike.View
     {
 
         /// <summary>
-        /// This is the time it tooks the player to win the game 
+        /// This is the time it took the player to win the game 
         /// </summary>
         private TimeSpan gameTime;
 
