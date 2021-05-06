@@ -455,7 +455,7 @@ namespace RogueLike.Systems
         {
             EnemyGenerator enemyGenerator = new EnemyGenerator();
             // Compute the max number of enemies
-            int nbMaxEnemy = ((mapWidth * mapHeight) / 200) * (difficultyLevel);
+            int nbMaxEnemy = ((mapWidth * mapHeight) / 200) * ((difficultyLevel<=3) ? difficultyLevel : 3);
 
             for (int i = 0; i < nbMaxEnemy; i++)
             {
