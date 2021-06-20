@@ -4,7 +4,7 @@
     <img src="demo.png" alt="demo" >
 </p>
 
-### Game history :
+### Game story :
 
 You are a space patroller searching for the 3 legendary artifacts. They are hidden in some forbidden ruins in 3 abandoned planets. Try to find them as fast as possible. You've been given a spaceship to accomplish your mission. You can teleport to the planets through the 3 teleporters, and buy items to the merchants. Good luck.
 
