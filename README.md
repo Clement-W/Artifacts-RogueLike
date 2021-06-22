@@ -15,11 +15,25 @@ You are a space patroller searching for the 3 legendary artifacts. They are hidd
 * Press 1,2,3,4 or 5 to use items
 * Press Left Ctrl to go through teleportation portals or stairs.
 
-To install RogueSharp and RLNET with dotnet :
+### Requirements :
+
+* .NET 5.0.
+* RLNET 1.0.6
+* RogueSharp 4.2.0
+* System.Drawing.Common 5.0.2
+
+To install RogueSharp, RLNET and System.Drawing.Common with dotnet :
 ```
 dotnet add package RLNET --version 1.0.6
 dotnet add package RogueSharp --version 4.2.0
 dotnet add package System.Drawing.Common --version 5.0.2
 ```
+
+
+### TODO :
+
+- [ ] Add music
+- [ ] Add scoreboard
+- [ ] ...
 
 
